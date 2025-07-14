@@ -1,5 +1,5 @@
 """
-Calculation to find how many pairs produced
+Calculation to find cross section
 
 Timothy Chew
 14/07/25
@@ -12,7 +12,6 @@ import matplotlib.pyplot as plt
 e = 1.60e-19
 c = 3e8
 m = 9.11e-31    # electron mass
-
 
 def get_cs(theta):
     C = np.cosh(theta)
@@ -40,5 +39,7 @@ plt.plot(theta/np.pi, cs_ll, label = 'parallel')
 plt.plot(theta/np.pi, cs_L, label = 'perpendicular')
 plt.legend()
 plt.show()
+
+print(np.max(cs_L))
 
 
