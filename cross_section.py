@@ -74,7 +74,7 @@ if __name__ == '__main__':
     ax1.set_ylabel('$\\sqrt{s}$(MeV)')
     ax1.set_zlabel('$d\\sigma_{\\gamma\\gamma}/d\\Omega (b)$')
     
-    ax1.plot_surface(theta, root_s, diff_cross_sec, cmap = cm.gnuplot)
+    ax1.plot_surface(theta, root_s, diff_cross_sec, cmap = cm.gnuplot) #pylint: disable = no-member
 
     # total cross section
     #generate values
