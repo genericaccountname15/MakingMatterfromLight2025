@@ -84,6 +84,15 @@ def get_overlap(coords, beam_bounds):
     return n
 
 def get_overlap_coords(coords, beam_bounds):
+    """Get coordinates of overlapping points of x-ray and gamma pulses
+
+    Args:
+        coords (list): Coordinates of x-ray pulse points
+        beam_bounds (list): Boundaries of gamma pulse [xmin, xmax, ymin, ymax]
+
+    Returns:
+        numpy.ndarray: Array of overlapping coordinates
+    """
     overlap_coords = []
     for r in coords:
         if beam_bounds[0] <= r[0] <= beam_bounds[1]:
