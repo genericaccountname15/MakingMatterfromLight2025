@@ -47,6 +47,9 @@ if __name__ == '__main__':
 
     delay = - x0 / 3e8 * 1e12 / 1e3 #in picoseconds
     
+    #save data to a csv file
+    np.savetxt('counter_hitsv3_data.csv', np.array([delay, hits]), delimiter=',')
+
     plt.title('hit count against time delay')
     plt.xlabel('Delay (ps)')
     plt.ylabel('Number of hits')
