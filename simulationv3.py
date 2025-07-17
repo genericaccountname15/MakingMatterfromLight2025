@@ -12,12 +12,12 @@ from matplotlib.widgets import Slider
 from matplotlib.patches import Rectangle
 
 
-def gen_Xray_dist(mean, n_angular_samples = 400, n_samples = 10):
+def gen_Xray_seed(mean, n_angular_samples = 400, n_samples = 10):
     """Generates distribution of X ray pulse in 2D
 
     Args:
         mean (float): mean of distribution, radial position
-        variance (float): spread of distribution
+        n_angular_samples (int, optional): Number of angles to sample. Defaults to 400
         n_samples (int, optional): Number of samples per angle. Defaults to 10.
 
     Returns:
@@ -35,9 +35,6 @@ def gen_Xray_dist(mean, n_angular_samples = 400, n_samples = 10):
     for theta in angles:
         ndist = np.random.normal(mean,variance,n_samples)
 
-        #filtering out negative values
-        ndist = ndist[ndist >= 0]
-
         #rotation matrix
         rot_matrix = np.array(
             [ [np.cos(theta), -np.sin(theta)], 
@@ -46,9 +43,22 @@ def gen_Xray_dist(mean, n_angular_samples = 400, n_samples = 10):
         #append coords
         for k in ndist:
             rotated_coords = np.matmul(rot_matrix, [k, 0])
-            coords.append([rotated_coords[0], rotated_coords[1]])
+            coords.append([rotated_coords[0], rotated_coords[1], theta])
     
     return np.array(coords)
+
+def move_Xrays(coords, t):
+    #iterate through Xray coordinates
+    t *= 1e-9 #mm and picosecond, unit conversion
+    moved_coords = []
+    for r in coords:
+        #calculate distance to move
+        dx = 3e8 * t * np.cos(r[2])
+        dy = 3e8 * t * np.sin(r[2])
+
+        moved_coords.append([r[0] + dx, r[1] + dy, r[2]])
+    
+    return np.array(moved_coords)
 
 def create_gamma_beam(x, dimensions, d):
     """Creates gamma beam axes object and returns bounds of rectangular beam in 2D
@@ -110,6 +120,66 @@ def get_overlap_coords(coords, beam_bounds):
     
     return np.array(overlap_coords)
 
+def find_hits(seed_coords, bounds):
+    """Calculate hits using X-ray seed coordinates
+    Check future position and see if registers a hit
+
+    Args:
+        seed_coords (numpy.ndarray): Initial coordinates of X-ray pulse
+        bounds (list): bounds of gamma beam [xmin, xmax, ymin, ymax]
+    """
+    #unit conversion
+    beam_bounds = np.array(bounds) * 1e-3 #back to mm
+    coords = seed_coords * 1e-3
+
+
+    n = 0 #hit counter
+    overlap_coords = [] #coordinates of hits [time, x, y, theta]
+
+
+    for r in coords:
+        if r[1] > beam_bounds[3]: #check if already above beam
+            pass #skip calculations
+
+        elif r[2] == 0: #check if on axis
+            pass
+
+        #check if already in beam
+        elif beam_bounds[0] <= r[0] <= beam_bounds[1]:
+            if beam_bounds[2] <= r[1] <= beam_bounds[3]:
+                n += 1 
+                overlap_coords.append([0, r[0], r[1], r[2]])
+        
+        else:
+            #calculate time to hit max and min boundaries
+            t_ymin = ( beam_bounds[2] - r[1]) / ( 3e8 * np.sin( r[2] ) )
+            t_ymax = ( beam_bounds[3] - r[1]) / ( 3e8 * np.sin( r[2] ) )
+
+            #calculate x-positions of beam and point r
+            r_f_min, gxmin_f_min, gxmax_f_min = t_ymin * 3e8 * np.cos( r[2] ) + (r[0] , beam_bounds[0], beam_bounds[1])
+            r_f_max, gxmin_f_max, gxmax_f_max = t_ymax * 3e8 * np.cos( r[2] ) + (r[0] , beam_bounds[0], beam_bounds[1])
+
+            if gxmin_f_min <= r_f_min <= gxmax_f_max: #check in gamma
+                n += 1
+                overlap_coords.append([t_ymin, r_f_min, beam_bounds[3], r[2]])
+
+            #check if past beam, it enters beam
+            elif r_f_min > gxmax_f_max and r[2]:
+                if r_f_max < gxmin_f_max:
+                    n += 1
+                    x = r_f_max - (gxmax_f_max - r_f_max)
+                    t = t_ymax - (gxmax_f_max - r_f_max) / 3e8
+                    y = r_f_max + 3e8 * np.sin(r[2])
+                    overlap_coords.append([t, x, y, r[2]])
+
+    #unit conversion
+    overlap_coords = np.array(overlap_coords)
+    overlap_coords *= np.array([1e12, 1e3, 1e3, 1])
+
+    return n, overlap_coords
+            
+            
+
 def plotter(xray_coords, gamma, x0, beam_bounds, bath_vis = False):
     """Plots simulation
 
@@ -157,10 +227,9 @@ def plotter(xray_coords, gamma, x0, beam_bounds, bath_vis = False):
 
     def update(val):
         #note: time is in pico seconds and distance in mm
-        r = time_slider.val * 1e-12 * 3e8 * 1e3#radial distance travelled by shell, r = ct
         x = time_slider.val * 1e-12 * 3e8 * 1e3 + x0 #x_coordinate of gamma beam
 
-        coords = gen_Xray_dist(r)
+        coords = move_Xrays(xray_coords, time_slider.val)
         
         xray_bath.set_xdata(coords[:, 0])
         xray_bath.set_ydata(coords[:, 1])
@@ -190,10 +259,18 @@ def plotter(xray_coords, gamma, x0, beam_bounds, bath_vis = False):
 if __name__ == '__main__':
     FWHM = 40e-12 * 3e8 * 1e3 #FWHM of X-ray bath in mm
 
-    xray_coords = gen_Xray_dist(-FWHM) #start on small edge of distribution
-    beam_length = 45e-15 * 3e8 * 1e3
+    xray_coords = gen_Xray_seed(-FWHM) #start on small edge of distribution
+    beam_length = 45e-15 * 3e8 * 1e3 * 1e3
     beam_height = 44e-6 * 1e3 #44 micrometres FWHM of drive laser, should use 0.6mrad instead
     d = 1
     x0 = -10e-12 * 3e8 * 1e3 
     gamma, bounds = create_gamma_beam(x0, [beam_length,beam_height], 1)
-    plotter(xray_coords, gamma, x0, bounds, bath_vis=False)
+    
+    hit_count, hit_coords = find_hits(xray_coords, bounds)
+
+    plt.title('Angular distribution of collision time')
+    plt.xlabel('Time/ps')
+    plt.ylabel('Angle/rad')
+    plt.plot(hit_coords[:, 0], hit_coords[:, 3], 'x')
+    plt.show()
+    #plotter(xray_coords, gamma, x0, bounds, bath_vis=False)
