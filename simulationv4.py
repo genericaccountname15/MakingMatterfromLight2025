@@ -8,7 +8,7 @@ Timothy Chew
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.widgets import Slider
-from matplotlib.patches import Rectangle
+from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
 def gen_Xray_seed(mean, n_angular_samples = 400, n_samples = 10):
     """Generates distribution of X ray pulse in 3D
@@ -30,7 +30,11 @@ def gen_Xray_seed(mean, n_angular_samples = 400, n_samples = 10):
 
     #rotate distribution 180 degrees
     angles = np.linspace(0,np.pi, n_angular_samples)
-    for phi in angles:
+    angles_azim = np.append(
+        np.linspace(0, np.pi/2, int(n_angular_samples/2)),
+        np.linspace(np.pi/2, int(n_angular_samples/2))
+    )
+    for phi in angles_azim:
         flat_coords = []
         for theta in angles:
             ndist = np.random.normal(mean,variance,n_samples)
@@ -56,40 +60,7 @@ def gen_Xray_seed(mean, n_angular_samples = 400, n_samples = 10):
     
     return np.array(coords)
 
-def create_gamma_beam(x, dimensions, d):
-    """Creates gamma beam axes object and returns bounds of rectangular beam in 2D
 
-    Args:
-        x (float): beam coordinate (bottom-left corner)
-        dimensions (list): [width, height] dimensions of beam
-        d (float): off axis distance
-
-    Returns:
-        matplotlib patches object: Rectangular shape of beam
-        list: Boundaries of beam [xmin, xmax, ymin, ymax]
-    """
-    #gamma beam
-    gamma = Rectangle([x, d], width=dimensions[0], height=dimensions[1], facecolor=(0, 0, 1, 0.5), edgecolor=(1, 0, 0), linewidth = 2, label='gamma beam')
-
-    beam_bounds = [
-        gamma.get_x(), gamma.get_x() + gamma.get_width(),
-        gamma.get_y(), gamma.get_y() + gamma.get_height()
-        ]
-
-    return gamma, beam_bounds
-
-def create_gamma_beam_3d(x, dimensions, d, angles):
-    """Creates many 2D gamma patches for each azimuthal angle
-
-    Args:
-        x (float): beam initial x-coordinate
-        dimensions (list): [length, height, width] dimensions of beam (height, width correspond to semi circular part)
-        d (float): off axis distance
-        phi (float): azimuthal angle
-    """
-    gamma_beams = []
-    for phi in angles:
-        gamma_beams.append(create_gamma_beam(x, dimensions, d))
 
 def move_Xrays(coords, t):
     #iterate through Xray coordinates
@@ -109,8 +80,8 @@ def plotter(xray_coords, bath_vis = True):
     """Plots simulation
 
     Args:
-        xray_coords (numpy.ndarray): coordinates of xray distribution points
-        gamma (matplotlib.patches object): patch object for gamma beam
+        xray_coords (numpy.ndarray): of xray distribution points
+        gamma (_type_): 
         x0 (float): initial x-coordinate
     """
     fig = plt.figure(figsize=plt.figaspect(0.5))
@@ -131,7 +102,8 @@ def plotter(xray_coords, bath_vis = True):
         ax.legend(loc = 'upper right')
     else:
         ax.set_xlim(-4, 4)
-        ax.set_ylim(0,2)  
+        ax.set_ylim(0,2)
+        ax.set_zlim(-4, 4)
         ax.set_aspect('equal')
         ax.legend(loc = 'upper right')
 
@@ -162,9 +134,13 @@ def plotter(xray_coords, bath_vis = True):
 
 if __name__ == '__main__':
     FWHM = 40e-12 * 3e8 * 1e3 #FWHM of X-ray bath in mm
+    beam_length = 45e-15 * 3e8 * 1e3
+    beam_height = 44e-6 * 1e3 #44 micrometres FWHM of drive laser, should use 0.6mrad instead
+    d = 1
+    x0 = -10e-12 * 3e8 * 1e3 
 
     xray_coords = gen_Xray_seed(-FWHM, n_angular_samples=40, n_samples=2) #start on small edge of distribution
-    plotter(xray_coords)
+    plotter(xray_coords, bath_vis=True)
     # print(xray_coords)
     
     # fig = plt.figure()

@@ -4,7 +4,7 @@ Counts number of hits on gamma pulse
 
 import numpy as np
 import matplotlib.pyplot as plt
-import simulationv2_units as sim
+import trash.simulationv2_units as sim
 
 #initial conditions
 beam_width = 45e-15 * 3e8 * 1e3

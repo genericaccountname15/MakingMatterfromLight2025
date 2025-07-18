@@ -127,6 +127,9 @@ def find_hits(seed_coords, bounds):
     Args:
         seed_coords (numpy.ndarray): Initial coordinates of X-ray pulse
         bounds (list): bounds of gamma beam [xmin, xmax, ymin, ymax]
+    
+    Returns:
+        tuple (float, list): (number of ovelaps, coordinates of overlaps [time, x, y, angle])
     """
     #unit conversion
     beam_bounds = np.array(bounds) * 1e-3 #back to mm
@@ -172,9 +175,12 @@ def find_hits(seed_coords, bounds):
                     y = r_f_max + 3e8 * np.sin(r[2])
                     overlap_coords.append([t, x, y, r[2]])
 
-    #unit conversion
-    overlap_coords = np.array(overlap_coords)
-    overlap_coords *= np.array([1e12, 1e3, 1e3, 1])
+    if len(overlap_coords) == 0:
+        return 0, None
+    else:
+        #unit conversion
+        overlap_coords = np.array(overlap_coords)
+        overlap_coords *= np.array([1e12, 1e3, 1e3, 1])
 
     return n, overlap_coords
             
@@ -211,7 +217,7 @@ def plotter(xray_coords, gamma, x0, beam_bounds, bath_vis = False):
         ax.legend(loc = 'upper right')
     else:
         ax.set_xlim(-4, 4)
-        ax.set_ylim(0,2)  
+        ax.set_ylim(0,5)  
         ax.set_aspect('equal')
         ax.legend(loc = 'upper right')
 
@@ -260,17 +266,10 @@ if __name__ == '__main__':
     FWHM = 40e-12 * 3e8 * 1e3 #FWHM of X-ray bath in mm
 
     xray_coords = gen_Xray_seed(-FWHM) #start on small edge of distribution
-    beam_length = 45e-15 * 3e8 * 1e3 * 1e3
-    beam_height = 44e-6 * 1e3 #44 micrometres FWHM of drive laser, should use 0.6mrad instead
+    beam_length = 45e-15 * 3e8 * 1e3
+    beam_height = 3.1 #3.1mm
     d = 1
     x0 = -10e-12 * 3e8 * 1e3 
     gamma, bounds = create_gamma_beam(x0, [beam_length,beam_height], 1)
     
-    hit_count, hit_coords = find_hits(xray_coords, bounds)
-
-    plt.title('Angular distribution of collision time')
-    plt.xlabel('Time/ps')
-    plt.ylabel('Angle/rad')
-    plt.plot(hit_coords[:, 0], hit_coords[:, 3], 'x')
-    plt.show()
-    #plotter(xray_coords, gamma, x0, bounds, bath_vis=False)
+    plotter(xray_coords, gamma, x0, bounds, bath_vis=False)

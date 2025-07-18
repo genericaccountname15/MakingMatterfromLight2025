@@ -38,17 +38,27 @@ def c_BW(root_s):
         s (float): CM energy
     """
     root_s = root_s * e * 1e6 #Convert out of MeV
-    s = root_s**2
-    beta =  np.sqrt( 1 - 4 * m * m * c ** 4 / s )
+    s_list = root_s**2
+    if isinstance(s_list, float):
+        s_list = [s_list]
+    c_BW_list = []
+    for s in s_list:
+        if  1 - 4 * m * m * c ** 4 / s >= 0:
+            beta =  np.sqrt( 1 - 4 * m * m * c ** 4 / s )
 
-    c_BW = np.pi * re * re * ( 1 - beta * beta ) / 2 * (
-        ( 3 - beta ** 4 ) * np.log( ( 1 + beta ) / ( 1 - beta ) )
-        - 2 * beta * ( 2 - beta * beta )
-    )
+            c_BW = np.pi * re * re * ( 1 - beta * beta ) / 2 * (
+                ( 3 - beta ** 4 ) * np.log( ( 1 + beta ) / ( 1 - beta ) )
+                - 2 * beta * ( 2 - beta * beta )
+            )
 
-    c_BW *= 1e28 #conversion to barns
+            c_BW *= 1e28 #conversion to barns
+            c_BW_list.append(c_BW)
+        
+        else:
+            c_BW = 0.0 #reaction doesn't happen
+            c_BW_list.append(c_BW)
 
-    return c_BW
+    return np.array(c_BW_list)
 
 if __name__ == '__main__':
     import matplotlib.pyplot as plt
