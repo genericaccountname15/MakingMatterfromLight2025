@@ -266,6 +266,7 @@ if __name__ == '__main__':
     FWHM = 40e-12 * 3e8 * 1e3 #FWHM of X-ray bath in mm
 
     xray_coords = gen_Xray_seed(-FWHM) #start on small edge of distribution
+    print(xray_coords)
     beam_length = 45e-15 * 3e8 * 1e3
     beam_height = 3.1 #3.1mm
     d = 1
