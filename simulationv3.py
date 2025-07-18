@@ -176,7 +176,7 @@ def find_hits(seed_coords, bounds):
                     overlap_coords.append([t, x, y, r[2]])
 
     if len(overlap_coords) == 0:
-        return 0, None
+        return 0, np.array([0,0,0,0])
     else:
         #unit conversion
         overlap_coords = np.array(overlap_coords)
@@ -217,7 +217,7 @@ def plotter(xray_coords, gamma, x0, beam_bounds, bath_vis = False):
         ax.legend(loc = 'upper right')
     else:
         ax.set_xlim(-4, 4)
-        ax.set_ylim(0,5)  
+        ax.set_ylim(0,2)  
         ax.set_aspect('equal')
         ax.legend(loc = 'upper right')
 

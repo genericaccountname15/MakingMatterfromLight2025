@@ -25,6 +25,7 @@ def simulate_hits(delay, beam_length, beam_radius, d, n_azimuthal_samples=10, n_
 
     Returns:
         int: total number of hits incident on target
+        list: list of numpy arrays
     """
     #delay to distance in mm
     x0 = -delay * 1e-12 * 3e8 * 1e3
@@ -38,9 +39,10 @@ def simulate_hits(delay, beam_length, beam_radius, d, n_azimuthal_samples=10, n_
     total_hit_count = 0
     total_hit_coords = []
 
+
     for phi in angles_azim:
         hit_count = 0
-        hit_coords = []
+        hit_coords = np.array([])
         # use line and circle intersection for length
         xray_coords = sim.gen_Xray_seed(-FWHM, n_angular_samples, n_samples)
         if phi == 0:
@@ -66,10 +68,15 @@ def simulate_hits(delay, beam_length, beam_radius, d, n_azimuthal_samples=10, n_
                 gamma, bounds = sim.create_gamma_beam(x0, [beam_length, dist], d)
 
                 hit_count, hit_coords = sim.find_hits(xray_coords, bounds)
+            
+        
+        if hit_count != 0:
+            total_hit_count += hit_count
+            if len(total_hit_coords) == 0:
+                total_hit_coords = hit_coords
+            else:
+                total_hit_coords = np.append(total_hit_coords, hit_coords, axis=0)
 
-        #check if got hits otherwise ignore
-        total_hit_count += hit_count
-        total_hit_coords.append(hit_coords)
 
     return total_hit_count, total_hit_coords
 
@@ -120,7 +127,8 @@ def npairs(hit_count, angles, n_azimuthal_samples, n_angular_samples, n_samples)
 if __name__ == '__main__':
     #initial conditions
     beam_length = 45e-15 * 3e8 * 1e3
-    beam_radius = 3.1 #3.1mm
+    beam_radius = 44e-6 * 1e3 #44 micrometres FWHM of drive laser, should use 0.6mrad instead
+    # beam_radius = 3.1e-3 #3.1mm from Brendan
     d = 1
     FWHM = 40e-12 * 3e8 * 1e3 #FWHM of X-ray bath in mm
 
@@ -154,14 +162,14 @@ if __name__ == '__main__':
     ax.set_title('Hit count against time delay')
     ax.set_xlabel('Delay (ps)')
     ax.set_ylabel('Number of hits')
-    hits, = ax.plot(delay, hits, '-x', label='Hit count', color='red', alpha=0)
+    hits, = ax.plot(delay, hits, '-x', label='Hit count', color='red')
 
     twin = ax.twinx()
     twin.set_ylabel('Number of positrons/pC incident on CsI')
     positrons, = twin.plot(delay, N_pos[:,0,0], '-o', label='Number of positrons/pC incident on CsI', color='blue')
     fill_band = twin.fill_between(delay, N_pos[:,0,0]-N_pos[:,1,0], N_pos[:,0,0]+N_pos[:,1,0], color='blue', alpha=0.3, label='Uncertainty')
 
-    ax.legend(handles=[positrons, fill_band])
+    ax.legend(handles=[hits, positrons, fill_band])
     ax.grid()
 
     plt.show()
