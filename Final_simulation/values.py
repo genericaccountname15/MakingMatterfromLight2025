@@ -12,6 +12,8 @@ m = 9.11e-31            # electron mass (kg)
 re = 2.8179403205e-15   # classical electron radius (m)
 
 gamma_length = 45e-15 * 3e8 * 1e3  # length of gamma pulse (mm)
+gamma_length_err = 5/45 * gamma_length
+
 gamma_radius = 3.1 # radius of gamma pulse (mm)
 off_axial_dist = 1 # perpendicular distance from gamma pulse to X-ray source (mm)
 source_angle = 40 # angle of x-ray source (degrees)
@@ -26,3 +28,6 @@ gamma_photons_number_err = 1e6
 
 AMS_transmision = 0.25 # transmission efficiency of AMS system (+/-0.05)
 AMS_transmision_err = 0.05
+
+gamma_energy = 230 #MeV minimum energy required
+xray_energy = 1.38e-3 #MeV, one of the peaks in the distribution

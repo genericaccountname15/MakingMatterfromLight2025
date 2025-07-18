@@ -162,7 +162,7 @@ class Gamma:
               facecolor = facecolor ,
               edgecolor = edgecolor ,
               linewidth = linewidth ,
-              label = 'gamma beam')
+              label = 'gamma pulse')
 
     ############ METHODS #####################################################################################
     def get_bounds(self):
@@ -287,12 +287,10 @@ class Simulation:
         """
         seed_coords = self.get_xray_bath().get_xray_coords()
         bounds = self.get_gamma_pulse().get_bounds()
-
-        if eff_d is not None:
-            bounds[2] = bounds[2] + eff_d
-        else:
-            bounds[2] = bounds[2] + self.get_gamma_pulse().get_off_axis_dist()
      
+        if eff_d is not None:
+            bounds[2] += eff_d
+
         if eff_height is not None:
             bounds[3] = bounds[2] + eff_height
 
@@ -308,7 +306,7 @@ class Simulation:
             if r[1] > beam_bounds[3]: #check if already above beam
                 pass #skip calculations
 
-            elif r[1] < 1e-15: #check if on axis (y = 0), account for floating point error
+            elif r[2] == 0: #check if axial, ignore if so (will have to change if moving beam around)
                 pass
 
             #check if already in beam
@@ -322,21 +320,26 @@ class Simulation:
                 t_ymin = ( beam_bounds[2] - r[1]) / ( 3e8 * np.sin( r[2] ) )
                 t_ymax = ( beam_bounds[3] - r[1]) / ( 3e8 * np.sin( r[2] ) )
 
-                #calculate x-positions of beam and point r
-                r_f_min, gxmin_f_min, gxmax_f_min = t_ymin * 3e8 * np.cos( r[2] ) + (r[0] , beam_bounds[0], beam_bounds[1])
-                r_f_max, gxmin_f_max, gxmax_f_max = t_ymax * 3e8 * np.cos( r[2] ) + (r[0] , beam_bounds[0], beam_bounds[1])
+                # future pulse positions
+                gamma_xmin_tmin, gamma_xmax_tmin = t_ymin * 3e8 + (beam_bounds[0], beam_bounds[1])
+                gamma_xmax_tmax = t_ymax * 3e8 + beam_bounds[1]
 
-                if gxmin_f_min <= r_f_min <= gxmax_f_min: #check if inside gamma at ymin beam boundary
+                # future x-ray point position
+                rx_tmin = t_ymin * 3e8 * np.cos( r[2] ) + r[0]
+                rx_tmax = t_ymax * 3e8 * np.cos( r[2] ) + r[0]
+
+                # check inside boundary at t=tmin
+                if gamma_xmin_tmin <= rx_tmin <= gamma_xmax_tmin:
                     n += 1
-                    overlap_coords.append([t_ymin, r_f_min, beam_bounds[3], r[2]])
-
-                #check if past beam, it enters beam
-                elif r_f_min > gxmax_f_max and r[2]:
-                    if r_f_max < gxmin_f_max:
+                    overlap_coords.append([t_ymin, rx_tmin, beam_bounds[3], r[2]])
+                
+                # if past beam, check if enters beam
+                elif rx_tmin > gamma_xmax_tmin:
+                    if rx_tmax < gamma_xmax_tmax:
                         n += 1
-                        x = r_f_max - (gxmax_f_max - r_f_max)
-                        t = t_ymax - (gxmax_f_max - r_f_max) / 3e8
-                        y = r_f_max + 3e8 * np.sin(r[2])
+                        x = gamma_xmax_tmax - (gamma_xmax_tmax - rx_tmax)
+                        t = t_ymax - (gamma_xmax_tmax - rx_tmax) / 3e8
+                        y = beam_bounds[2] + 3e8 * np.sin(r[2]) * (t_ymax - t_ymin)
                         overlap_coords.append([t, x, y, r[2]])
 
         if len(overlap_coords) == 0:
@@ -510,14 +513,18 @@ class Hit_counter(Simulation):
         for phi in angles_azim:
             hit_count = 0
             hit_coords = np.array([])
-            # calculate 'effective gamma pulse height' ##########
+            # calculate 'effective gamma pulse parameters' ##########
             eff_height = self.calc_effective_height(
                 r = self.get_gamma_pulse().get_height(),
                 phi = phi,
                 d = self.get_gamma_pulse().get_off_axis_dist()
             )
 
-            hit_count, hit_coords = self.find_hits(eff_height = eff_height)   
+            eff_d = self.calc_effective_d(
+                phi = phi,
+                d = self.get_gamma_pulse().get_off_axis_dist()
+            )
+            hit_count, hit_coords = self.find_hits(eff_height = eff_height, eff_d = eff_d)   
             
             if hit_count != 0:
                 total_hit_count += hit_count
@@ -563,6 +570,25 @@ class Hit_counter(Simulation):
         
         return dist
     
+    def calc_effective_d(self, phi, d):
+        """Solves geometric problem to calculate effective off-axis
+        displacement when looking at another azimuthal plane paramaterised
+        by phi
+
+        Args:
+            phi (float): azimuthal angle being considered (radians)
+            d (float): off-axial displacement (mm)
+
+        Returns:
+            float: effective off-axis displacement
+        """
+        eff_d = np.sqrt(
+            d ** 2 + 
+            d * np.tan(phi)
+        )
+
+        return eff_d
+    
     def est_npairs(self, angles):
         """Estimates the number of positron pairs produced
         and lands on the CsI detector
@@ -577,7 +603,7 @@ class Hit_counter(Simulation):
         cs_list = []
         for angle in angles:
             #get cross section
-            s = 2 * ( 1 - np.cos(angle + np.pi/2) ) * 300 * 2e-3 #using 300 MeV cuz fk it
+            s = 2 * ( 1 - np.cos(angle) ) * 230 * 1.38e-3
             cs = c_BW(np.sqrt(s)) #get cross sec for 230MeV root s
             cs *= 1e-28 #convert from barns to m^2
             cs_list.append(cs)
@@ -720,8 +746,8 @@ class Test:
 
         gamma = Gamma(
             x_pos = -300,
-            pulse_length = 200,
-            height = 100,
+            pulse_length = 100,
+            height = 50,
             off_axis_dist = 100
         )
 
@@ -752,12 +778,13 @@ class Test:
 
         counter = Hit_counter(
             xray_bath = xray,
-            gamma_pulse = gamma
+            gamma_pulse = gamma,
+            n_samples_azimuthal = 10
         )
 
         counter.plot_hit_count(
             min_delay = -10,
-            max_delay = 5000,
+            max_delay = 500,
             show_exp_value = True
         )
 
@@ -765,7 +792,6 @@ class Test:
         """
         Checks angular distribution
         """
-        import values as values
         xray = Xray(
             FWHM = 10,
             rotation = 0
@@ -788,7 +814,36 @@ class Test:
             delay = 5000
         )
 
+    def test_hit_reg(self):
+        xray = Xray(
+            FWHM = 10,
+            rotation = 0
+        )
+        xray.xray_coords = np.array([[0,0,np.pi/2]])
+
+        gamma = Gamma(
+            x_pos = -300,
+            pulse_length = 200,
+            height = 100,
+            off_axis_dist = 100
+        )
+        
+        vis = Visualiser(
+            xray_bath = xray,
+            gamma_pulse = gamma,
+            bath_vis = True
+        )
+
+        counter = Hit_counter(
+            xray_bath = xray,
+            gamma_pulse = gamma,
+            n_samples_azimuthal=1
+        )
+
+        vis.plot()
+        print(counter.find_hits())
+
 if __name__ == '__main__':
     test = Test()
-    test.check_ang_dist()
-    #test.test_sim()
+    test.test_hit_counter()
+    # test.test_sim()
