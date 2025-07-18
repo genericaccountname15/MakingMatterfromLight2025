@@ -625,6 +625,7 @@ class Hit_counter(Simulation):
         (values.gamma_photons_number_err/values.gamma_photons_number) ** 2
         + (values.xray_number_density_err/values.xray_number_density) ** 2
         + (values.AMS_transmision_err/values.AMS_transmision) ** 2
+        + (values.gamma_length_err / values.gamma_length) ** 2
         ) * N_pos
         
         return np.array([N_pos, uncertainty])
