@@ -12,12 +12,35 @@ import matplotlib.pyplot as plt
 from simulation import Simulation
 
 class Hit_counter(Simulation):
+    """Counts the number of collisions between the X-ray bath
+    and Gamma pulse
+
+    Attributes:
+        n_samples_azimuthal (float): number of azimuthal samples to take for width of Xray pulse
+    
+    Methods:
+        count_hits:
+        calc_effective_height:
+        calc_effective_d:
+        est_npairs:
+        plot_hit_count:
+    """
     def __init__(self, xray_bath, gamma_pulse, n_samples_angular=400, n_samples=10, n_samples_azimuthal = 1):
         super().__init__(xray_bath, gamma_pulse, n_samples_angular, n_samples)
         self.n_samples_azimuthal = n_samples_azimuthal
 
     ############ METHODS #####################################################################################
     def count_hits(self, delay):
+        """Counts the total number of collisions for a given pulse timing
+
+        Args:
+            delay (float): time delay of gamma pulse to x-ray ignition (ps)
+
+        Returns:
+            tuple (float, numpy.ndarray): number of collisions, 
+                                        array of coordinates for each hit (x, y, angles)
+
+        """
         #delay to distance in mm
         x0 = -delay * 1e-12 * 3e8 * 1e3
         self.gamma_pulse.set_x_pos(x0)
@@ -152,6 +175,15 @@ class Hit_counter(Simulation):
         return np.array([N_pos, uncertainty])
 
     def plot_hit_count(self, min_delay, max_delay, samples=50, show_exp_value=False):
+        """Plots the hit count and estimated number of pairs for a
+        range of delays
+
+        Args:
+            min_delay (float): Minumum pulse delay (ps)
+            max_delay (float): Maximum pulse delay (ps)
+            samples (int, optional): Number of delays to check. Defaults to 50.
+            show_exp_value (bool, optional): Whether to plot the delay used in 2018. Defaults to False.
+        """
         # set up figure ############################################
         fig, ax = plt.subplots() #pylint: disable=unused-variable
         ax.set_title('Hit count against time delay')
@@ -208,6 +240,12 @@ class Hit_counter(Simulation):
 
 
     def plot_ang_dist(self, delay):
+        """Plots the angular distribution of hits for
+        a pulse delay
+
+        Args:
+            delay (float): delay between gamma pulse and Xray ignition (ps)
+        """
         _, hit_coords = self.count_hits(delay)
         angles = hit_coords[:,3]
         #angles = self.get_xray_bath().get_xray_coords()[:,2]
@@ -221,4 +259,113 @@ class Hit_counter(Simulation):
 
     ############ ACCESS METHODS ##############################################################################
     def get_n_samples_azimuthal(self):
+        """Access method for n_samples_azimuthal
+
+        Returns:
+            int: number of azimuthal samples to take
+        """
         return self.n_samples_azimuthal
+    
+
+class Test:
+    """
+    For running tests on the hit counter
+    """
+    def __init__(self):
+        pass
+
+    def test_hit_counter(self):
+        """
+        Runs hit counter on experimental values
+        """
+        import values as values
+        from simulation import Xray, Gamma
+        xray = Xray(
+            FWHM = values.xray_FWHM,
+            rotation = 40 * np.pi / 180
+        )
+
+        gamma = Gamma(
+            x_pos = -10e-12 * 3e8 * 1e3,
+            pulse_length = values.gamma_length,
+            height = values.gamma_radius, #44e-6 * 1e3
+            off_axis_dist = values.off_axial_dist
+        )
+
+        counter = Hit_counter(
+            xray_bath = xray,
+            gamma_pulse = gamma,
+            n_samples_azimuthal = 10
+        )
+
+        counter.plot_hit_count(
+            min_delay = -10,
+            max_delay = 500,
+            show_exp_value = True
+        )
+
+    def check_ang_dist(self):
+        """
+        Checks angular distribution
+        """
+        from simulation import Xray, Gamma
+        xray = Xray(
+            FWHM = 10,
+            rotation = 0
+        )
+
+        gamma = Gamma(
+            x_pos = -300,
+            pulse_length = 200,
+            height = 100,
+            off_axis_dist = 100
+        )
+
+        counter = Hit_counter(
+            xray_bath = xray,
+            gamma_pulse = gamma,
+            n_samples_azimuthal=1
+        )
+
+        counter.plot_ang_dist(
+            delay = 5000
+        )
+
+    def test_hit_reg(self):
+        """
+        Checks for an accurate hit registration system
+        using one x-ray point object
+        """
+        from simulation import Xray, Gamma, Visualiser
+        xray = Xray(
+            FWHM = 10,
+            rotation = 0
+        )
+        xray.xray_coords = np.array([[0,0,np.pi/2]])
+
+        gamma = Gamma(
+            x_pos = -300,
+            pulse_length = 200,
+            height = 100,
+            off_axis_dist = 100
+        )
+        
+        vis = Visualiser(
+            xray_bath = xray,
+            gamma_pulse = gamma,
+            bath_vis = True
+        )
+
+        counter = Hit_counter(
+            xray_bath = xray,
+            gamma_pulse = gamma,
+            n_samples_azimuthal=1
+        )
+
+        vis.plot()
+        print(counter.find_hits())
+
+
+if __name__ == '__main__':
+    test = Test()
+    test.test_hit_counter()
