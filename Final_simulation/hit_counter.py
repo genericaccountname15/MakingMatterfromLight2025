@@ -19,11 +19,14 @@ class Hit_counter(Simulation):
         n_samples_azimuthal (float): number of azimuthal samples to take for width of Xray pulse
     
     Methods:
-        count_hits:
-        calc_effective_height:
-        calc_effective_d:
-        est_npairs:
-        plot_hit_count:
+        count_hits: Counts the total number of collisions for a given pulse timing
+        calc_effective_height: Solves a geometric problem to find the new effective height of the 
+                                gamma pulse when looking at an azimuthal plane of the x-ray bath.
+        calc_effective_d: Solves geometric problem to calculate effective off-axis
+                            displacement when looking at another azimuthal plane paramaterised by phi
+        est_npairs: Estimates the number of positron pairs produced and lands on the CsI detector
+        plot_hit_count: Plots the hit count and estimated number of pairs for a range of delays
+                        (with option to save data)
     """
     def __init__(self, xray_bath, gamma_pulse, n_samples_angular=400, n_samples=10, n_samples_azimuthal = 1):
         super().__init__(xray_bath, gamma_pulse, n_samples_angular, n_samples)
@@ -79,7 +82,6 @@ class Hit_counter(Simulation):
 
 
         return total_hit_count, total_hit_coords
-    
 
     def calc_effective_height(self, r, phi, d):
         """
@@ -138,7 +140,7 @@ class Hit_counter(Simulation):
         and lands on the CsI detector
 
         Returns:
-            _type_: _description_
+            angles: list of angles for each hit
         """
         import values as values
         from cross_section import c_BW
@@ -159,7 +161,7 @@ class Hit_counter(Simulation):
         for i, angle in enumerate(angles):
             #get cross section
             # s = 2 * ( 1 - np.cos(angle) ) * 230 * 1.38e-3
-            s = 2 * ( 1 - np.cos(angle) ) * gamma_energy_sample[i] * xray_energy_sample[i]/1000
+            s = 2 * ( 1 - np.cos(angle) ) * gamma_energy_sample[i] * xray_energy_sample[i]/1e6
             cs = c_BW(np.sqrt(s)) #get cross sec for 230MeV root s
             cs *= 1e-28 #convert from barns to m^2
             cs_list.append(cs)
@@ -186,7 +188,7 @@ class Hit_counter(Simulation):
         
         return np.array([N_pos, uncertainty])
 
-    def plot_hit_count(self, min_delay, max_delay, samples=50, show_exp_value=False):
+    def plot_hit_count(self, min_delay, max_delay, samples=50, **kwargs):
         """Plots the hit count and estimated number of pairs for a
         range of delays
 
@@ -194,8 +196,16 @@ class Hit_counter(Simulation):
             min_delay (float): Minumum pulse delay (ps)
             max_delay (float): Maximum pulse delay (ps)
             samples (int, optional): Number of delays to check. Defaults to 50.
-            show_exp_value (bool, optional): Whether to plot the delay used in 2018. Defaults to False.
+            **kwargs: optional
+                show_exp_value (bool, optional): Whether to plot the delay used in 2018. Defaults to False.
+                save_data (bool, optional): Whether to save the plot data to a csv. Defaults to False
+                show_progress_bar (bool, optional): Whether to print the progress bar. Defaults to True
         """
+        # kwaargs ##########################################################
+        show_exp_value = kwargs.get('show_exp_value', False)
+        save_data = kwargs.get('save_data', False)
+        show_progress_bar = kwargs.get('show_progress_bar', True)
+
         # set up figure ############################################
         fig, ax = plt.subplots() #pylint: disable=unused-variable
         ax.set_title('Hit count against time delay')
@@ -213,8 +223,9 @@ class Hit_counter(Simulation):
         hit_count_list = []
 
         # progress bar #########################
-        prog = 0
-        print('#' * prog + '-' * ( len(delay_list) - prog ) + f'{ prog / len(delay_list) * 100 :.1f}%')
+        if show_progress_bar:
+            prog = 0
+            print('#' * prog + '-' * ( len(delay_list) - prog ) + f'{ prog / len(delay_list) * 100 :.1f}%')
 
         for delay in delay_list:
             hit_count, hit_coords = self.count_hits(delay)
@@ -222,10 +233,11 @@ class Hit_counter(Simulation):
             hit_count_list.append(hit_count)
 
             self.xray_bath.resample() #resample x-ray distribution
-
+            
             # progress bar updates #####################################
-            prog += 1
-            print('#' * prog + '-' * ( len(delay_list) - prog ) + f'{ prog / len(delay_list) * 100 :.1f}%')
+            if show_progress_bar:
+                prog += 1
+                print('#' * prog + '-' * ( len(delay_list) - prog ) + f'{ prog / len(delay_list) * 100 :.1f}%')
         N_pos_list = np.array(N_pos_list)
 
         
@@ -247,6 +259,19 @@ class Hit_counter(Simulation):
         else:
             ax.legend(handles=[hits, positrons, fill_band])
         ax.grid()
+
+
+        if save_data:
+            import pickle
+            data = {
+                'delay' : delay_list,
+                'hit_count': hit_count_list,
+                'Npos_CsI': N_pos_list[:,0,0],
+                'Npos_CsI_err': N_pos_list[:,1,0]
+            }
+
+            with open('Npos_plot_data.pickle', 'wb') as f:
+                pickle.dump(data, f)
 
         plt.show()
 
@@ -300,7 +325,7 @@ class Test:
         gamma = Gamma(
             x_pos = -10e-12 * 3e8 * 1e3,
             pulse_length = values.gamma_length,
-            height = values.gamma_radius, #44e-6 * 1e3
+            height = values.gamma_radius, 
             off_axis_dist = values.off_axial_dist
         )
 
@@ -313,7 +338,9 @@ class Test:
         counter.plot_hit_count(
             min_delay = -10,
             max_delay = 500,
-            show_exp_value = True
+            samples = 100,
+            show_exp_value = True,
+            save_data = True
         )
 
     def check_ang_dist(self):

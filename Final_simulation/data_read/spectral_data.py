@@ -11,6 +11,22 @@ import matplotlib.pyplot as plt
 import os
 
 class gamma_spectra:
+    """Gamma spectra data set
+    Args:
+        mat_fname (string): filename of the gamma spectrum matlab file (filename.mat)
+    
+    Attributes:
+        _matfile (dict): loaded matlab file containing dataset
+        _gamma_energy (list): energy of gamma photon (MeV)
+        _sim_Nph_A_mean, _sim_Nph_A_sigma (list): mean and standard deviation of simulated optimal beam performance
+        _sim_Nph_B_mean, _sim_Nph_B_sigma (list): mean and standard deviation of simulated commissioned beam performance
+        _exp_Nph_A_mean, _exp_Nph_A_sigma (list): mean and standard deviation of experimental optimal beam performance
+        _exp_Nph_B_mean, _exp_Nph_B_sigma (list): mean and standard deviation of experimental commissioned beam performance
+    
+    Methods:
+        replicate_plot: replicates plots from the literature for sanity check
+        sample_pdf: returns list of sampled energies from the gamma energy probability distribution
+    """
     def __init__(self, mat_fname):
         self._matfile = loadmat(mat_fname)
         self._gamma_energy = self.matfile()['GammaEnergy_MeV'][0]
@@ -30,6 +46,8 @@ class gamma_spectra:
         self._exp_Nph_B_sigma = self.matfile()['ExpNph_Sigma_B'][0]
 
     def replicate_plot(self):
+        """Replicates the plot displayed in the paper for sanity checks
+        """
         fig, ax = plt.subplots() #pylint: disable=unused-variable
         ax.set_title('Gamma Spectrum')
         ax.set_xlabel('Gamma Photon Energy (MeV)')
@@ -125,6 +143,28 @@ class gamma_spectra:
         return self._exp_Nph_B_sigma
 
 class xray_spectra:
+    """Xray spectra data set
+    Args:
+        file_dir (string): file directory address containing the xray spectra files in pickle format (.pickle)
+        resolution (float, optional): resolution of xray energy bins for averaging over data sets. Defaults to 0.5eV.
+    Attributes:
+        file_dir (string): file directory address containing the xray spectra files in pickle format (.pickle)
+        file_list (list): list of filenames within the directory specified
+        resolution (float): resolution of xray energy bins for averaging over data sets (eV)
+        _Energy (list): all energy values from all datafiles
+        _Nph (list): all values of number of photons/eV/J/srad from all data files, corresponds to energy value
+        _Nph_err (list): standard deviation of number of photons/eV/J/srad from all data files
+        _avg_Energy (list): bin energies (centre of bin values)
+        _avg_Nph (list): bin-average photon count
+        _avg_Nph_err (list): bin-summed photon count standard deviation
+
+    Methods:
+        get_data: Combines data from all 47 datasets
+        bin_data: Bins data into energy bins and averages within the bins
+        replicate_plot: Replicates the plot from literature as a sanity check
+        filter_energies: Filters out energies and isolates a range of energies
+        sample_pdf: Samples energergies from xray energy spectrum probability distribution
+    """
     def __init__(self, file_dir, resolution=0.5):
         self._file_dir = file_dir
         self._file_list = os.listdir(file_dir)
@@ -137,6 +177,11 @@ class xray_spectra:
 
     
     def get_data(self):
+        """Obtains and combines data from all datasets
+
+        Returns:
+            tuple: compiled data for (energy, number of photons, Nph error)
+        """
         Energy = np.array([])
         Nph = np.array([])
         Nph_err = np.array([])
@@ -186,6 +231,8 @@ class xray_spectra:
         return bin_centers, binned_y
     
     def replicate_plot(self):
+        """Replicates plot from the 2018 paper for sanity check
+        """
         fig, ax = plt.subplots() #pylint: disable=unused-variable
         ax.set_title('Xray Spectrum')
         ax.set_xlabel('Xray Energy (eV)')
