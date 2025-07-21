@@ -8,8 +8,8 @@ Timothy Chew
 
 import numpy as np
 import matplotlib.pyplot as plt
-import simulationv3 as sim
-from cross_section import c_BW
+import trash.simulationv3 as sim
+from trash.cross_section import c_BW
 
 def simulate_hits(delay, beam_length, beam_radius, d, n_azimuthal_samples=10, n_angular_samples = 400, n_samples = 10):
     """Counts number of hits between the gamma pulse and the X-ray bath
