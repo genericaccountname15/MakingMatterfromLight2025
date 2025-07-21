@@ -141,7 +141,7 @@ class Hit_counter(Simulation):
             _type_: _description_
         """
         import values as values
-        from trash.cross_section import c_BW
+        from cross_section import c_BW
         from data_read.spectral_data import xray_spectra, gamma_spectra
         
         # calculate cross section of each hit and sum #####################################
