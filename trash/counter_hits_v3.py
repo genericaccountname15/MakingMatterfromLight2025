@@ -7,7 +7,7 @@ Timothy Chew
 
 import numpy as np
 import matplotlib.pyplot as plt
-import simulationv3 as sim
+import trash.simulationv3 as sim
 
 #initial conditions
 beam_width = 45e-15 * 3e8 * 1e3

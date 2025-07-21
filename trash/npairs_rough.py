@@ -7,8 +7,8 @@ Timothy Chew
 """
 
 import numpy as np
-from counter_hits_v4 import simulate_hits
-from cross_section import c_BW
+from trash.counter_hits_v4 import simulate_hits
+from trash.cross_section import c_BW
 
 # experimental conditions
 nx = 1.4e21 #m^-3 photon number density of X-ray beam 1mm from target (+/-0.5)
