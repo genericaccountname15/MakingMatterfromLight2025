@@ -31,3 +31,6 @@ AMS_transmision_err = 0.05
 
 gamma_energy = 230 #MeV minimum energy required
 xray_energy = 1.38e-3 #MeV, one of the peaks in the distribution
+
+xray_spectra_min = 1300 #eV minimum x-ray spectra value as measured by the xray CCD 
+xray_spectra_max = 1550 #eV minimum x-ray spectra value as measured by the xray CCD 

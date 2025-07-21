@@ -142,12 +142,24 @@ class Hit_counter(Simulation):
         """
         import values as values
         from cross_section import c_BW
+        from data_read.spectral_data import xray_spectra, gamma_spectra
         
         # calculate cross section of each hit and sum #####################################
+        xray_data = xray_spectra('Final_simulation\\data_read\\data\\XrayBath\\XraySpectra\\', resolution=0.5)
+        gamma_data = gamma_spectra('Final_simulation/data_read/data/GammaSpectra/Fig4b_GammaSpecLineouts.mat')
+        xray_energy_sample = xray_data.sample_pdf(
+            min_energy = values.xray_spectra_min,
+            max_energy = values.xray_spectra_max,
+            n = len(angles)
+        )
+
+        gamma_energy_sample = gamma_data.sample_pdf(n_samples = len(angles))
+
         cs_list = []
-        for angle in angles:
+        for i, angle in enumerate(angles):
             #get cross section
-            s = 2 * ( 1 - np.cos(angle) ) * 230 * 1.38e-3
+            # s = 2 * ( 1 - np.cos(angle) ) * 230 * 1.38e-3
+            s = 2 * ( 1 - np.cos(angle) ) * gamma_energy_sample[i] * xray_energy_sample[i]/1000
             cs = c_BW(np.sqrt(s)) #get cross sec for 230MeV root s
             cs *= 1e-28 #convert from barns to m^2
             cs_list.append(cs)

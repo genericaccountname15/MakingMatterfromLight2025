@@ -71,6 +71,7 @@ class gamma_spectra:
         ax.set_ylim(230, 5e6)
         ax.set_xlim(0, 800)
 
+        ax.set_axisbelow(True)
         ax.grid()
         ax.legend()
 
@@ -277,17 +278,16 @@ class Test:
     def __init__(self):
         pass
 
-    def test_gamma_replicate_plot():
-        gamma_data = gamma_spectra('data_read/data/GammaSpectra/Fig4b_GammaSpecLineouts.mat')
+    def test_gamma_replicate_plot(self):
+        gamma_data = gamma_spectra('Final_simulation/data_read/data/GammaSpectra/Fig4b_GammaSpecLineouts.mat')
         gamma_data.replicate_plot()
     
-    def test_xray_replicate_plot():
-        xray_data = xray_spectra('data_read\\data\\XrayBath\\XraySpectra\\', resolution=0.5)
-        xray_data.filter_energies(min_energy=1300, max_energy=1550)
+    def test_xray_replicate_plot(self):
+        xray_data = xray_spectra('Final_simulation\\data_read\\data\\XrayBath\\XraySpectra\\', resolution=0.5)
         xray_data.replicate_plot()
 
-    def test_xray_sampling():
-        xray_data = xray_spectra('data_read\\data\\XrayBath\\XraySpectra\\', resolution=0.5)
+    def test_xray_sampling(self):
+        xray_data = xray_spectra('Final_simulation\\data_read\\data\\XrayBath\\XraySpectra\\', resolution=0.5)
         sampling = xray_data.sample_pdf(min_energy=1300, max_energy=1500, n=1000)
         plt.title('Sampled x-ray distribution')
         plt.ylabel('N')
@@ -295,8 +295,8 @@ class Test:
         plt.hist(sampling, bins=100)
         plt.show()
 
-    def test_gammma_sampling():
-        gamma_data = gamma_spectra('data_read/data/GammaSpectra/Fig4b_GammaSpecLineouts.mat')
+    def test_gammma_sampling(self):
+        gamma_data = gamma_spectra('Final_simulation/data_read/data/GammaSpectra/Fig4b_GammaSpecLineouts.mat')
         sampling = gamma_data.sample_pdf(1000)
         plt.title('Sampled gamma distribution')
         plt.ylabel('N')
@@ -305,6 +305,6 @@ class Test:
         plt.show()
 
 if __name__ == '__main__':
-    test = Test
-    test.test_gammma_sampling()
+    test = Test()
+    test.test_xray_replicate_plot()
 
