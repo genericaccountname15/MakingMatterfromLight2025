@@ -549,5 +549,4 @@ class Test:
 
 if __name__ == '__main__':
     test = Test()
-    test.test_hit_counter()
     # test.test_sim()
