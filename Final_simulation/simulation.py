@@ -549,4 +549,4 @@ class Test:
 
 if __name__ == '__main__':
     test = Test()
-    # test.test_sim()
+    test.test_sim()
