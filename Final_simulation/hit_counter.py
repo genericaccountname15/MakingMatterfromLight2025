@@ -128,9 +128,8 @@ class Hit_counter(Simulation):
         Returns:
             float: effective off-axis displacement
         """
-        eff_d = np.sqrt(
-            d ** 2 + 
-            d * np.tan(phi)
+        eff_d = d * np.sqrt(
+            1 + np.tan(phi)
         )
 
         return eff_d
@@ -319,7 +318,7 @@ class Test:
         from simulation import Xray, Gamma
         xray = Xray(
             FWHM = values.xray_FWHM,
-            rotation = 90 * np.pi / 180
+            rotation = 40 * np.pi / 180
         )
 
         gamma = Gamma(
