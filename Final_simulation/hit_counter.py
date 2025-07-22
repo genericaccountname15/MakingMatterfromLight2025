@@ -182,7 +182,6 @@ class Hit_counter(Simulation):
         uncertainty = np.sqrt(
         (values.gamma_photons_number_err/values.gamma_photons_number) ** 2
         + (values.xray_number_density_err/values.xray_number_density) ** 2
-        + (values.AMS_transmision_err/values.AMS_transmision) ** 2
         + (values.gamma_length_err / values.gamma_length) ** 2
         ) * N_pos
         
@@ -204,6 +203,7 @@ class Hit_counter(Simulation):
         # kwaargs ##########################################################
         show_exp_value = kwargs.get('show_exp_value', False)
         save_data = kwargs.get('save_data', False)
+        save_data_filename = kwargs.get('save_data_filename', 'Npos_plot_data')
         show_progress_bar = kwargs.get('show_progress_bar', True)
 
         # set up figure ############################################
@@ -270,7 +270,7 @@ class Hit_counter(Simulation):
                 'Npos_CsI_err': N_pos_list[:,1,0]
             }
 
-            with open('Npos_plot_data.pickle', 'wb') as f:
+            with open(f'{save_data_filename}.pickle', 'wb') as f:
                 pickle.dump(data, f)
 
         plt.show()
@@ -338,7 +338,7 @@ class Test:
         counter.plot_hit_count(
             min_delay = -10,
             max_delay = 500,
-            samples = 100,
+            samples = 20,
             show_exp_value = True,
             save_data = True
         )
