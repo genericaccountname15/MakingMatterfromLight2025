@@ -7,12 +7,6 @@ Basically how 'non-semicircle' it becomes
 Timothy Chew
 22/07/25
 """
-"""
-Check simulation over different input angles and see for differences in maximum yield
-
-Timothy Chew
-22/07/25
-"""
 
 import numpy as np
 import matplotlib.pyplot as plt
