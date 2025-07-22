@@ -319,7 +319,7 @@ class Test:
         from simulation import Xray, Gamma
         xray = Xray(
             FWHM = values.xray_FWHM,
-            rotation = 40 * np.pi / 180
+            rotation = 90 * np.pi / 180
         )
 
         gamma = Gamma(
@@ -338,7 +338,7 @@ class Test:
         counter.plot_hit_count(
             min_delay = -10,
             max_delay = 500,
-            samples = 20,
+            samples = 100,
             show_exp_value = True,
             save_data = True
         )

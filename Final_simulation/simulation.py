@@ -418,7 +418,7 @@ class Visualiser(Simulation):
             ax.set_ylim(0,500)
             t_max = 1000
         else:
-            ax.set_xlim(-4, 4)
+            ax.set_xlim(-30, 30)
             ax.set_ylim(0,6)  
             t_max = 20
 
@@ -504,11 +504,12 @@ class Test:
         """
         import values as values
         xray = Xray(
-            FWHM = values.xray_FWHM
+            FWHM = values.xray_FWHM,
+            rotation=40 * np.pi / 180
         )
 
         gamma = Gamma(
-            x_pos = -10e-12 * 3e8 * 1e3,
+            x_pos = -values.delay_experiment * 1e-12 * values.c * 1e3,
             pulse_length = values.gamma_length,
             height = values.gamma_radius,
             off_axis_dist = values.off_axial_dist
@@ -549,4 +550,4 @@ class Test:
 
 if __name__ == '__main__':
     test = Test()
-    test.test_sim()
+    test.test_values()
