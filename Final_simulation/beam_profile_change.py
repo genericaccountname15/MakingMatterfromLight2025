@@ -68,6 +68,7 @@ class Hit_counter(Simulation):
                 d = self.get_gamma_pulse().get_off_axis_dist(),
                 f = self.get_f()
             )
+            print(eff_height)
 
             eff_d = self.calc_effective_d(
                 r = self.get_gamma_pulse().get_height(),
@@ -346,7 +347,7 @@ class Test:
         counter = Hit_counter(
             xray_bath = xray,
             gamma_pulse = gamma,
-            f = -2,
+            f = 0,
             n_samples_angular = 400,
             n_samples = 20,
             n_samples_azimuthal = 50

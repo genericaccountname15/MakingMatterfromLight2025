@@ -11,7 +11,7 @@ Timothy Chew
 import numpy as np
 import matplotlib.pyplot as plt
 
-data = np.loadtxt('f_optimise.csv', delimiter=',', skiprows=1)
+data = np.loadtxt('f_optimisation\\f_optimise.csv', delimiter=',', skiprows=1)
 
 f = data[:,0]
 npos = data[:,1]
