@@ -75,7 +75,8 @@ class Hit_counter(Simulation):
                 d = self.get_gamma_pulse().get_off_axis_dist(),
                 f = self.get_f()
             )
-            hit_count, hit_coords = self.find_hits(eff_height = eff_height, eff_d = eff_d)   
+
+            hit_count, hit_coords = self.find_hits(eff_height = eff_height, eff_d = eff_d)
             
             if hit_count != 0:
                 total_hit_count += hit_count
@@ -101,16 +102,21 @@ class Hit_counter(Simulation):
                 x1 = ( d + np.sqrt( d * d 
                                         - ( 1 + m * m) * ( d * d - r * r ))
                                         ) / ( 1 + m * m )
-                y1 = m * x1
+
 
                 x2 = ( d - np.sqrt( d * d 
                                         - ( 1 + m * m) * ( d * d - r * r ))
                                         ) / ( 1 + m * m )
-                if x2 < d_prime:
-                    x2 = d_prime
-                else:
-                    d_prime = x2
 
+                # check dprime
+                if x2 > d_prime:
+                    x2 = d_prime
+
+                if x1 < d_prime:
+                    x1 = d_prime
+                    x2 = d_prime
+
+                y1 = m * x1
                 y2 = m * x2
 
                 dist = np.sqrt( ( x1 - x2 ) ** 2 + ( y1 - y2 ) ** 2 )
@@ -228,7 +234,12 @@ class Hit_counter(Simulation):
 
         for delay in delay_list:
             hit_count, hit_coords = self.count_hits(delay)
-            N_pos_list.append( self.est_npairs(angles = hit_coords[:, 3]) )
+
+            if hit_count == 0:
+                N_pos_list.append(np.array([[0],[0]]))
+            else:
+                N_pos_list.append( self.est_npairs(angles = hit_coords[:, 3]) )
+
             hit_count_list.append(hit_count)
 
             self.xray_bath.resample() #resample x-ray distribution
@@ -237,6 +248,7 @@ class Hit_counter(Simulation):
             if show_progress_bar:
                 prog += 1
                 print('#' * prog + '-' * ( len(delay_list) - prog ) + f'{ prog / len(delay_list) * 100 :.1f}%')
+
         N_pos_list = np.array(N_pos_list)
 
         
@@ -334,7 +346,7 @@ class Test:
         counter = Hit_counter(
             xray_bath = xray,
             gamma_pulse = gamma,
-            f = 0.6,
+            f = -values.gamma_radius,
             n_samples_azimuthal = 10
         )
 
