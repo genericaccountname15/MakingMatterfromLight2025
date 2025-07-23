@@ -331,7 +331,9 @@ class Test:
         counter = Hit_counter(
             xray_bath = xray,
             gamma_pulse = gamma,
-            n_samples_azimuthal = 10
+            n_samples_angular = 400,
+            n_samples = 20,
+            n_samples_azimuthal = 50
         )
 
         counter.plot_hit_count(

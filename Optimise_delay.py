@@ -29,10 +29,11 @@ def avg_data(simdata_dir):
     Npos_CsI_compiled = np.array([])
     peak_delay = []
     for file in file_list:
-        data = np.load(simdata_dir + file, allow_pickle=True)
-        delay_compiled = np.append(delay_compiled, data['delay'], axis=0)
-        Npos_CsI_compiled = np.append(Npos_CsI_compiled, data['Npos_CsI'], axis=0)
-        peak_delay.append(data['delay'][np.argmax(data['Npos_CsI'])])
+        if file.endswith('.pickle'):
+            data = np.load(simdata_dir + file, allow_pickle=True)
+            delay_compiled = np.append(delay_compiled, data['delay'], axis=0)
+            Npos_CsI_compiled = np.append(Npos_CsI_compiled, data['Npos_CsI'], axis=0)
+            peak_delay.append(data['delay'][np.argmax(data['Npos_CsI'])])
     
     compiled_data = np.column_stack((delay_compiled, Npos_CsI_compiled))
     
@@ -114,7 +115,7 @@ def plot_data(delay, Npos, Npos_err, peak_delay):
     print(f'Expect a yield gain of {yield_gain} +/- {yield_gain_err} % when using optimal delay')
     
     yield_npos, yield_npos_err = find_yield(delay, Npos, peak_delay[0], peak_delay[1])
-    print(f'Expect a yield of {yield_npos} +/- {yield_npos_err} when using optimal delay')
+    print(f'Expect a yield of {yield_npos} +/- {yield_npos_err} positrons/pC when using optimal delay')
 
     plt.show()
 
@@ -135,6 +136,6 @@ def find_yield(delay, npos, peak_delay, peak_delay_err):
     return pos_max, abs(pos_max - pos_max_sigma)
 
 if __name__ == '__main__':
-    data_sim, optimal_delay = avg_data(simdata_dir = 'sim_datafiles_f6\\')
+    data_sim, optimal_delay = avg_data(simdata_dir = 'delay_optimisation\\')
     plot_data(data_sim[:,0], data_sim[:,1], data_sim[:,2], optimal_delay)
     
