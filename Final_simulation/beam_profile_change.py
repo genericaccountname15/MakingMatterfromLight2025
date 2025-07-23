@@ -109,7 +109,7 @@ class Hit_counter(Simulation):
                                         ) / ( 1 + m * m )
 
                 # check dprime
-                if x2 > d_prime:
+                if x2 < d_prime:
                     x2 = d_prime
 
                 if x1 < d_prime:
