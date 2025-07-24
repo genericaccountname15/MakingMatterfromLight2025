@@ -325,21 +325,21 @@ class Test:
             x_pos = -10e-12 * 3e8 * 1e3,
             pulse_length = values.gamma_length,
             height = values.gamma_radius, 
-            off_axis_dist = 0
+            off_axis_dist = 3.0
         )
 
         counter = Hit_counter(
             xray_bath = xray,
             gamma_pulse = gamma,
             n_samples_angular = 400,
-            n_samples = 10,
-            n_samples_azimuthal = 10
+            n_samples = 20,
+            n_samples_azimuthal = 50
         )
 
         counter.plot_hit_count(
             min_delay = -10,
             max_delay = 500,
-            samples = 50,
+            samples = 100,
             show_exp_value = True,
             save_data = True
         )

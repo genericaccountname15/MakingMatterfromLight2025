@@ -8,7 +8,7 @@ Timothy Chew
 import numpy as np
 import matplotlib.pyplot as plt
 
-data = np.loadtxt('optimise_d.csv', delimiter=',', skiprows=1)
+data = np.loadtxt('d_optimisation\\optimise_d.csv', delimiter=',', skiprows=1)
 
 d = data[:,0]
 npos = data[:,1]
