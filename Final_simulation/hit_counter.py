@@ -325,7 +325,7 @@ class Test:
             x_pos = -10e-12 * 3e8 * 1e3,
             pulse_length = values.gamma_length,
             height = values.gamma_radius, 
-            off_axis_dist = values.off_axial_dist
+            off_axis_dist = 1.5
         )
 
         counter = Hit_counter(
