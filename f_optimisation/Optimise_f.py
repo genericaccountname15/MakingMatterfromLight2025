@@ -14,8 +14,8 @@ import matplotlib.pyplot as plt
 data = np.loadtxt('f_optimisation\\f_optimise.csv', delimiter=',', skiprows=1)
 
 f = data[:,0]
-npos = data[:,1]
-npos_err = data[:,2]
+npos = data[:,1] * 2
+npos_err = data[:,2] * 2
 
 fig, ax = plt.subplots() #pylint: disable=unused-variable
 ax.set_title('Positron count vs shielding')

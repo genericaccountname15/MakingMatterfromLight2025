@@ -11,8 +11,9 @@ import matplotlib.pyplot as plt
 data = np.loadtxt('angle_optimisation\\angle_optimise.csv', delimiter=',', skiprows=1)
 
 angle = data[:,0]
-npos = data[:,1]
-npos_err = data[:,2]
+npos = data[:,1] * 2
+npos_err = data[:,2] * 2
+# times two due to error in code when the simulations were done
 
 fig, ax = plt.subplots() #pylint: disable=unused-variable
 ax.set_title('Positron count vs kapton tape angle')
@@ -39,7 +40,7 @@ ax.axvline(x = 40,
     ymin = 0, ymax = 1,
     label = 'Angle used in 2018', color = 'orange')
 
-ax.set_ylim(2e-5, 4e-5)
+ax.set_ylim(4e-5, 8e-5)
 
 ax.set_axisbelow(True)
 ax.grid()
