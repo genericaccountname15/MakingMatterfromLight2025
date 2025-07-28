@@ -28,8 +28,8 @@ class Hit_counter(Simulation):
         plot_hit_count: Plots the hit count and estimated number of pairs for a range of delays
                         (with option to save data)
     """
-    def __init__(self, xray_bath, gamma_pulse, n_samples_angular=400, n_samples=10, n_samples_azimuthal = 1):
-        super().__init__(xray_bath, gamma_pulse, n_samples_angular, n_samples)
+    def __init__(self, xray_bath, gamma_pulse, n_samples_azimuthal = 1):
+        super().__init__(xray_bath, gamma_pulse)
         self.n_samples_azimuthal = n_samples_azimuthal
 
     ############ METHODS #####################################################################################
@@ -173,8 +173,8 @@ class Hit_counter(Simulation):
         N_pos = ( values.xray_number_density * values.gamma_photons_number
                   * values.AMS_transmision * sum(cs_list) 
                   / self.get_n_samples_azimuthal()
-                  / self.get_n_samples_angular()
-                  / self.get_n_samples()
+                  / self.get_xray_bath().get_n_samples_angular()
+                  / self.get_xray_bath().get_n_samples()
                   * ( max_angle / np.pi ) )
         
         # estimate uncertainty ##########################################################
@@ -318,7 +318,9 @@ class Test:
         from simulation import Xray, Gamma
         xray = Xray(
             FWHM = values.xray_FWHM,
-            rotation = 40 * np.pi / 180
+            rotation = 40 * np.pi / 180,
+            n_samples_angular = 400,
+            n_samples = 10
         )
 
         gamma = Gamma(
@@ -331,8 +333,6 @@ class Test:
         counter = Hit_counter(
             xray_bath = xray,
             gamma_pulse = gamma,
-            n_samples_angular = 400,
-            n_samples = 10,
             n_samples_azimuthal = 10
         )
 

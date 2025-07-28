@@ -244,16 +244,13 @@ class Simulation:
     Attributes:
         xray_bath (Xray): Xray object instance
         gamma_pulse (Gamma): Gamma object instance
-        n_samples_angular (int, optional): Number of angles to sample from 0-pi. Defaults to 400
-        n_samples (int, optional): Number of samples per angle. Defaults to 10.
-        xray_bath_coords (numpy.ndarray): coordinates of generated Xray bath points
     """
-    def __init__(self, xray_bath, gamma_pulse, n_samples_angular = 400, n_samples = 10): #classes
+    def __init__(self, xray_bath, gamma_pulse): #classes
         self.xray_bath = xray_bath
         self.gamma_pulse = gamma_pulse
 
-        self.n_samples_angular = n_samples_angular
-        self.n_samples = n_samples
+        self.n_samples_angular = xray_bath.get_n_samples_angular()
+        self.n_samples = xray_bath.get_n_samples()
     
     ############ METHODS #####################################################################################
     def get_overlap_coords(self, coords, beam_bounds):
@@ -397,8 +394,8 @@ class Visualiser(Simulation):
     Methods:
         plot: Plots out the simulation with a time step slider
     """
-    def __init__(self, xray_bath, gamma_pulse, n_samples_angular=400, n_samples=10, bath_vis=False):
-        super().__init__(xray_bath, gamma_pulse, n_samples_angular, n_samples)
+    def __init__(self, xray_bath, gamma_pulse, bath_vis=False):
+        super().__init__(xray_bath, gamma_pulse)
         self.bath_vis = bath_vis
 
     ############ METHODS #####################################################################################

@@ -57,19 +57,13 @@ class Xray_line(Xray):
         return self.line_length
     
 class Hit_counter_line(Hit_counter):
-    def __init__(self, xray_bath, gamma_pulse, n_samples_angular=400, n_samples=10, n_samples_azimuthal=1):
-        super().__init__(xray_bath, gamma_pulse, n_samples_angular, n_samples, n_samples_azimuthal)
-        self.n_line_samples = xray_bath.get_n_line_samples()
+    def __init__(self, xray_bath, gamma_pulse, n_samples_azimuthal=1):
+        super().__init__(xray_bath, gamma_pulse, n_samples_azimuthal)
     
     def est_npairs(self, angles):
         Npos = super().est_npairs(angles)
-        print(Npos)
-        Npos /= self.get_n_line_samples()
-        print(Npos)
+        Npos /= self.get_xray_bath().get_n_line_samples()
         return Npos
-
-    def get_n_line_samples(self):
-        return self.n_line_samples
 
 
 class Test:
@@ -112,7 +106,9 @@ class Test:
             FWHM = values.xray_FWHM,
             line_length = 0.8,
             rotation= 0 * np.pi / 180,
-            n_line_samples = 5
+            n_line_samples = 5,
+            n_samples_angular = 400,
+            n_samples = 10,
         )
 
         gamma = Gamma(
@@ -125,8 +121,6 @@ class Test:
         counter = Hit_counter_line(
             xray_bath = xray,
             gamma_pulse = gamma,
-            n_samples_angular = 400,
-            n_samples = 10,
             n_samples_azimuthal = 5
         )
 
