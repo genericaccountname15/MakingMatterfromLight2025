@@ -120,6 +120,17 @@ def plot_data(delay, Npos, Npos_err, peak_delay):
     plt.show()
 
 def find_yield_gain(delay, npos, peak_delay, peak_delay_err):
+    """returns the yield gain (%) compared to the 2018 experiment
+
+    Args:
+        delay (list): pulse delay values (ps)
+        npos (list): number of positrons incident on CsI/pC
+        peak_delay (float): mean value of the optimal delay (ps)
+        peak_delay_err (float): standard deviation in the optimal delay (ps)
+
+    Returns:
+        tuple: yield gain, yield gain error (%)
+    """
     pos_exp = npos[np.argmin(abs(delay - 40))]
     pos_max = npos[np.argmin(abs(delay - peak_delay))]
     pos_max_sigma = max([npos[np.argmin(abs(delay - peak_delay + peak_delay_err))],
@@ -128,6 +139,17 @@ def find_yield_gain(delay, npos, peak_delay, peak_delay_err):
     return pos_max/ pos_exp * 100, abs(pos_max - pos_max_sigma) / pos_exp * 100
 
 def find_yield(delay, npos, peak_delay, peak_delay_err):
+    """returns the maximal positron yield
+
+    Args:
+        delay (list): pulse delay values (ps)
+        npos (list): number of positrons incident on CsI/pC
+        peak_delay (float): mean value of the optimal delay (ps)
+        peak_delay_err (float): standard deviation in the optimal delay (ps)
+
+    Returns:
+        tuple: maximal positron yield, maximal positron yield error
+    """
     pos_max = npos[np.argmin(abs(delay - peak_delay))]
     pos_max_sigma = max([npos[np.argmin(abs(delay - peak_delay + peak_delay_err))],
                       npos[np.argmin(abs(delay - peak_delay - peak_delay_err))]])
