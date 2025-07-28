@@ -266,7 +266,10 @@ class Hit_counter(Simulation):
                 'delay' : delay_list,
                 'hit_count': hit_count_list,
                 'Npos_CsI': N_pos_list[:,0,0],
-                'Npos_CsI_err': N_pos_list[:,1,0]
+                'Npos_CsI_err': N_pos_list[:,1,0],
+                'n_angular_samples': self.get_xray_bath().get_n_samples_angular(),
+                'n_samples': self.get_xray_bath().get_n_samples(),
+                'n_samples_azimuthal': self.get_n_samples_azimuthal()
             }
 
             with open(f'{save_data_filename}.pickle', 'wb') as f:
