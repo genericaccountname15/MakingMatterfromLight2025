@@ -18,7 +18,7 @@ gamma_radius = 3.1 # radius of gamma pulse (mm)
 off_axial_dist = 1 # perpendicular distance from gamma pulse to X-ray source (mm)
 source_angle = 40 # angle of x-ray source (degrees)
 
-xray_FWHM = 40e-12 * 3e8 * 1e3 # FWHM of xray bath (mm)
+xray_FWHM = 40e-12 * c * 1e3 # FWHM of xray bath (mm)
 delay_experiment = 40 # pulse delay used in experiment (ps)
 
 xray_number_density = 1.4e21 # xray photon number density measured at 1mm from target (m^-3) (+/-0.5e21)

@@ -43,6 +43,12 @@ class Xray_line(Xray):
                 coords = np.append(coords, gen_coords, axis=0)
 
         return coords
+    
+    def resample(self):
+        """Resamples x-ray distribution
+        """
+        self.xray_coords = self.gen_Xray_seed_line()
+
 
     def get_n_line_samples(self):
         return self.n_line_samples
@@ -51,13 +57,15 @@ class Xray_line(Xray):
         return self.line_length
     
 class Hit_counter_line(Hit_counter):
-    def __init__(self, xray_bath, gamma_pulse, n_samples_angular=400, n_samples=10, n_samples_azimuthal=1, n_line_samples=10):
+    def __init__(self, xray_bath, gamma_pulse, n_samples_angular=400, n_samples=10, n_samples_azimuthal=1):
         super().__init__(xray_bath, gamma_pulse, n_samples_angular, n_samples, n_samples_azimuthal)
-        self.n_line_samples = n_line_samples
+        self.n_line_samples = xray_bath.get_n_line_samples()
     
     def est_npairs(self, angles):
         Npos = super().est_npairs(angles)
+        print(Npos)
         Npos /= self.get_n_line_samples()
+        print(Npos)
         return Npos
 
     def get_n_line_samples(self):
@@ -73,8 +81,9 @@ class Test:
         from simulation import Gamma, Visualiser
         xray = Xray_line(
             FWHM = values.xray_FWHM,
-            line_length = 300,
-            rotation= 40 * np.pi / 180
+            line_length = 0.8,
+            rotation= 0 * np.pi / 180,
+            n_line_samples = 1
         )
 
 
@@ -88,7 +97,7 @@ class Test:
         vis = Visualiser(
             xray_bath = xray,
             gamma_pulse = gamma,
-            bath_vis = True
+            bath_vis = False
         )
 
         vis.plot()
@@ -102,7 +111,8 @@ class Test:
         xray = Xray_line(
             FWHM = values.xray_FWHM,
             line_length = 0.8,
-            rotation= 0 * np.pi / 180
+            rotation= 0 * np.pi / 180,
+            n_line_samples = 5
         )
 
         gamma = Gamma(
@@ -116,14 +126,14 @@ class Test:
             xray_bath = xray,
             gamma_pulse = gamma,
             n_samples_angular = 400,
-            n_samples = 20,
-            n_samples_azimuthal = 50
+            n_samples = 10,
+            n_samples_azimuthal = 5
         )
 
         counter.plot_hit_count(
             min_delay = -10,
             max_delay = 500,
-            samples = 100,
+            samples = 50,
             show_exp_value = True,
             save_data = True
         )
