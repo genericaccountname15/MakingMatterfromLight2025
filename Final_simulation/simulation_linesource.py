@@ -104,7 +104,7 @@ class Test:
         from simulation import Gamma
         xray = Xray_line(
             FWHM = values.xray_FWHM,
-            line_length = 0.8,
+            line_length = 10.0,
             rotation= 0 * np.pi / 180,
             n_line_samples = 5,
             n_samples_angular = 400,
