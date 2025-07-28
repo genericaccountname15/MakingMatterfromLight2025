@@ -1,8 +1,10 @@
 """
-Check simulation over different input angles and see for differences in maximum yield
+Check simulation using a line source
+and changing the length of the line,
+compare maximal positron yields
 
 Timothy Chew
-22/07/25
+28/07/25
 """
 
 import numpy as np
