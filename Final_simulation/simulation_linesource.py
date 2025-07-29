@@ -104,10 +104,10 @@ class Test:
         from simulation import Gamma
         xray = Xray_line(
             FWHM = values.xray_FWHM,
-            line_length = 10.0,
+            line_length = 4.0,
             rotation= 0 * np.pi / 180,
-            n_line_samples = 5,
-            n_samples_angular = 400,
+            n_line_samples = 20,
+            n_samples_angular = 100,
             n_samples = 10,
         )
 
@@ -115,24 +115,28 @@ class Test:
             x_pos = -10e-12 * 3e8 * 1e3,
             pulse_length = values.gamma_length,
             height = values.gamma_radius, 
-            off_axis_dist = 3.0
+            off_axis_dist = values.off_axial_dist
         )
 
         counter = Hit_counter_line(
             xray_bath = xray,
             gamma_pulse = gamma,
-            n_samples_azimuthal = 5
+            n_samples_azimuthal = 20
         )
 
         counter.plot_hit_count(
             min_delay = -10,
             max_delay = 500,
-            samples = 50,
+            samples = 100,
             show_exp_value = True,
-            save_data = True
+            save_data = True,
+            plot_wait = 3
         )
 
 if __name__ == '__main__':
+    import os
     test = Test()
-    test.test_hit_counter()
+    for i in range(1, 4):
+        test.test_hit_counter()
+        os.rename('Npos_plot_data.pickle', f'Npos_plot_data{i}.pickle')
 
