@@ -198,15 +198,17 @@ class Hit_counter(Simulation):
                 show_exp_value (bool, optional): Whether to plot the delay used in 2018. Defaults to False.
                 save_data (bool, optional): Whether to save the plot data to a csv. Defaults to False
                 show_progress_bar (bool, optional): Whether to print the progress bar. Defaults to True
+                plot_wait (float, optional): Time to leave plot open. Defaults to None
         """
         # kwaargs ##########################################################
         show_exp_value = kwargs.get('show_exp_value', False)
         save_data = kwargs.get('save_data', False)
         save_data_filename = kwargs.get('save_data_filename', 'Npos_plot_data')
         show_progress_bar = kwargs.get('show_progress_bar', True)
+        plot_wait = kwargs.get('plot_wait', None)
 
         # set up figure ############################################
-        fig, ax = plt.subplots() #pylint: disable=unused-variable
+        fig, ax = plt.subplots()
         ax.set_title('Hit count against time delay')
         ax.set_xlabel('Delay (ps)')
         ax.set_ylabel('Number of hits')
@@ -275,7 +277,13 @@ class Hit_counter(Simulation):
             with open(f'{save_data_filename}.pickle', 'wb') as f:
                 pickle.dump(data, f)
 
-        plt.show()
+        plt.show(block=False)
+
+        if plot_wait is not None:
+            import time
+            time.sleep(plot_wait)
+            plt.close(fig)
+            time.sleep(plot_wait)
 
 
     def plot_ang_dist(self, delay):
@@ -317,13 +325,13 @@ class Test:
         """
         Runs hit counter on experimental values
         """
-        import values as values
+        import values
         from simulation import Xray, Gamma
         xray = Xray(
-            FWHM = values.xray_FWHM,
+            FWHM = values.xray_FWHM ,
             rotation = 40 * np.pi / 180,
             n_samples_angular = 400,
-            n_samples = 10
+            n_samples = 20
         )
 
         gamma = Gamma(
@@ -336,7 +344,7 @@ class Test:
         counter = Hit_counter(
             xray_bath = xray,
             gamma_pulse = gamma,
-            n_samples_azimuthal = 10
+            n_samples_azimuthal = 50
         )
 
         counter.plot_hit_count(
@@ -344,7 +352,8 @@ class Test:
             max_delay = 500,
             samples = 100,
             show_exp_value = True,
-            save_data = True
+            save_data = True,
+            plot_wait = 3
         )
 
     def check_ang_dist(self):
@@ -410,5 +419,9 @@ class Test:
 
 
 if __name__ == '__main__':
+    import os
     test = Test()
-    test.test_hit_counter()
+    for i in range(1, 4):
+        test.test_hit_counter()
+        os.rename('Npos_plot_data.pickle', f'Npos_plot_data{i}.pickle')
+    
