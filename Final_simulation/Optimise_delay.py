@@ -7,10 +7,11 @@ Timothy Chew
 21/07/25
 """
 
+import os
 import numpy as np
 import matplotlib.pyplot as plt
-import os
-import Final_simulation.values as values
+import pandas as pd
+import values
 
 def avg_data(simdata_dir):
     """Averages the simulation data saved in pickle files in a specified directory
@@ -156,7 +157,41 @@ def find_yield(delay, npos, peak_delay, peak_delay_err):
 
     return pos_max, abs(pos_max - pos_max_sigma)
 
+def write_data_csv(variable_name, variable_list, datadir, csvname):
+    """Auto scans data and generates a csv for it
+    Gets the positron yield dependence on the data
+
+    Args:
+        variable_name (string): Name of the variable (csv column)
+        variable_list (list of variables): in the variable name column
+        datadir (string): name of directory containing all simulation runs data
+        csvname (string): name of csv to be saved to
+    """
+    npos_yield_arr = []
+    npos_err_yield_arr = []
+    data_dir_list = os.listdir(datadir)
+    for simdata_dir in data_dir_list:
+        data_sim, optimal_delay = avg_data(f"{datadir}\\{simdata_dir}\\")
+        yield_npos, yield_npos_err = find_yield(data_sim[:,0], data_sim[:,1], optimal_delay[0], optimal_delay[1])
+        npos_yield_arr.append(yield_npos)
+        npos_err_yield_arr.append(yield_npos_err)
+    
+    data = {
+        variable_name: variable_list,
+        "positron yield / pC": npos_yield_arr,
+        "positron yield error / pC": npos_err_yield_arr
+    }
+    df = pd.DataFrame(data)
+    df.to_csv(csvname, index=False)
+    
+
 if __name__ == '__main__':
-    data_sim, optimal_delay = avg_data(simdata_dir = 'sim_datafiles_50deg\\')
-    plot_data(data_sim[:,0], data_sim[:,1], data_sim[:,2], optimal_delay)
+    # data_sim, optimal_delay = avg_data(simdata_dir = 'sim_datafiles_d1\\')
+    # plot_data(data_sim[:,0], data_sim[:,1], data_sim[:,2], optimal_delay)
+    write_data_csv(
+        variable_name = 'd (mm)',
+        variable_list = [0.1, 0.5, 1, 1.5, 2.0, 3.0],
+        datadir = 'd_optimisation_lambert',
+        csvname = 'optimise_d.csv'
+    )
     
