@@ -137,7 +137,7 @@ class Test:
         import values
         xray = Xray_lambertian(
             FWHM = values.xray_FWHM,
-            rotation= 0 * np.pi / 180,
+            rotation= 40 * np.pi / 180,
             n_samples_angular = 400,
             n_samples = 20,
         )
@@ -152,7 +152,7 @@ class Test:
         counter = Hit_counter_lambertian(
             xray_bath = xray,
             gamma_pulse = gamma,
-            n_samples_azimuthal = 20
+            n_samples_azimuthal = 5
         )
 
         counter.plot_hit_count(
@@ -160,10 +160,14 @@ class Test:
             max_delay = 500,
             samples = 100,
             show_exp_value = True,
-            save_data = True
+            save_data = True,
+            plot_wait = 0.5
         )
 
 
 if __name__ == '__main__':
+    import os
     test = Test()
-    test.test_hit_counter()
+    for i in range(1, 4):
+        test.test_hit_counter()
+        os.rename('Npos_plot_data.pickle', f'Npos_plot_data{i}.pickle')
