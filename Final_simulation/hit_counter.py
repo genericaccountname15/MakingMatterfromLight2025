@@ -198,14 +198,12 @@ class Hit_counter(Simulation):
             **kwargs: optional
                 show_exp_value (bool, optional): Whether to plot the delay used in 2018. Defaults to False.
                 save_data (bool, optional): Whether to save the plot data to a csv. Defaults to False
-                show_progress_bar (bool, optional): Whether to print the progress bar. Defaults to True
                 plot_wait (float, optional): Time to leave plot open. Defaults to None
         """
         # kwaargs ##########################################################
         show_exp_value = kwargs.get('show_exp_value', False)
         save_data = kwargs.get('save_data', False)
         save_data_filename = kwargs.get('save_data_filename', 'Npos_plot_data')
-        show_progress_bar = kwargs.get('show_progress_bar', True)
         plot_wait = kwargs.get('plot_wait', None)
 
         # set up figure ############################################
@@ -224,7 +222,7 @@ class Hit_counter(Simulation):
         N_pos_list = []
         hit_count_list = []
 
-        for delay in tqdm(delay_list, desc='Simulation'):
+        for delay in tqdm(delay_list, desc='Simulation', leave=False):
             hit_count, hit_coords = self.count_hits(delay)
             N_pos_list.append( self.est_npairs(angles = hit_coords[:, 3]) )
             hit_count_list.append(hit_count)

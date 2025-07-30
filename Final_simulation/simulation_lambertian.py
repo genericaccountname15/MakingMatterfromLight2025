@@ -7,7 +7,6 @@ Timothy Chew
 """
 
 import numpy as np
-import matplotlib.pyplot as plt
 from simulation import Xray, Gamma, Visualiser
 from hit_counter import Hit_counter
 
@@ -146,13 +145,13 @@ class Test:
             x_pos = -10e-12 * 3e8 * 1e3,
             pulse_length = values.gamma_length,
             height = values.gamma_radius, 
-            off_axis_dist = VAR #VARIABLE BEING CONSIDERED REMEMBER TO CHANGE
+            off_axis_dist = VAR #VALUE BEING VARIED BE SURE TO CHANGE
         )
 
         counter = Hit_counter_lambertian(
             xray_bath = xray,
             gamma_pulse = gamma,
-            n_samples_azimuthal = 5
+            n_samples_azimuthal = 10
         )
 
         counter.plot_hit_count(
@@ -167,11 +166,46 @@ class Test:
 
 if __name__ == '__main__':
     import os
+    from tqdm import tqdm
+    from Optimise_delay import write_data_csv
+    from plot_optimised_data import plot_optimised_data
+
+    # INPUT PARAMETERS ######################################################################################
+    variables = [0.1, 0.3, 0.5, 1.0, 1.5, 1.8, 1.9, 2.0, 2.1, 2.2, 2.5, 3.0] #variable list
+    variable_file_name = np.array(variables)*10 #what to label each individual file
+    variable_name = 'd' # no spaces
+    units = 'mm'
+    old_value = 1 #value in 2018
+
     test = Test()
-    variables = [0.1, 0.5, 1, 1.5, 2.0, 3.0] #variable list
-    for var in variables:
-        dir_name = f'sim_datafiles_d{int(var*10)}' # directory name
+    print('-'*20 + 'BEGINNING DATA COLLECTION' + '-'*20)
+
+    datadir = f'{variable_name}_optimisation_lambert'
+    os.makedirs(datadir)
+
+
+    for i, var in enumerate(tqdm(variables, desc = 'Data collection progress')):
+        dir_name = f'{datadir}/sim_datafiles_{variable_name}_{variable_file_name[i]}_{units}' # directory name
         os.makedirs(dir_name)
-        for i in range(1, 4): #repeat simulation 3 times
+        for i in tqdm(range(1, 4), desc = 'Repeating simulations', leave = False): #repeat simulation 3 times
             test.test_hit_counter(var)
             os.rename('Npos_plot_data.pickle', f'{dir_name}/Npos_plot_data{i}.pickle')
+    
+    print('-'*20 + 'DATA COLLECTION COMPLETE!' + '-'*20)
+
+  # WRITING DATA TO CSV ########################################################################################  
+    write_data_csv(
+        variable_name = f'{variable_name} ({units})',
+        variable_list = variables,
+        datadir = f'{variable_name}_optimisation_lambert',
+        csvname = f'{datadir}/optimise_{variable_name}.csv'
+    )
+
+    plot_optimised_data(
+        filename = f'{datadir}/optimise_{variable_name}.csv',
+        variable_name = variable_name,
+        xlabel = f'{variable_name} ({units})',
+        old_value = old_value,
+        save_fig = True,
+        fig_location = f'{datadir}'
+    )
