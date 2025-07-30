@@ -277,12 +277,14 @@ class Hit_counter(Simulation):
             with open(f'{save_data_filename}.pickle', 'wb') as f:
                 pickle.dump(data, f)
 
-        plt.show(block=False)
-
         if plot_wait is not None:
+            plt.show(block=False)
             import time
             time.sleep(plot_wait)
             plt.close(fig)
+        
+        else:
+            plt.show()
 
 
     def plot_ang_dist(self, delay):

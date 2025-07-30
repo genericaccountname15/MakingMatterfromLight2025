@@ -61,7 +61,7 @@ class Xray_lambertian(Xray):
         else:
             return np.array(coords)
     
-    def get_n_samples_lambert(self):
+    def get_n_lambert(self):
         return self.n_samples_lambert
     
 
@@ -127,7 +127,6 @@ class Test:
             gamma_pulse = gamma,
             bath_vis = True
         )
-        print(xray.get_n_samples_lambert())
 
         vis.plot()
 
@@ -139,8 +138,8 @@ class Test:
         xray = Xray_lambertian(
             FWHM = values.xray_FWHM,
             rotation= 0 * np.pi / 180,
-            n_samples_angular = 100,
-            n_samples = 10,
+            n_samples_angular = 400,
+            n_samples = 20,
         )
 
         gamma = Gamma(
@@ -161,8 +160,7 @@ class Test:
             max_delay = 500,
             samples = 100,
             show_exp_value = True,
-            save_data = True,
-            plot_wait = 3
+            save_data = True
         )
 
 
