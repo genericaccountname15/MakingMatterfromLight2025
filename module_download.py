@@ -11,13 +11,13 @@ def install_modules():
     """installs python modules
     Note: HPC uses pip3
     """
-    subprocess.run(["pip3", "install", "numpy"], check=True)
+    subprocess.run(["pip3", "install", "--user", "numpy"], check=True)
 
-    subprocess.run(["pip3", "install", "matplotlib"], check=True)
+    subprocess.run(["pip3", "install", "--user", "matplotlib"], check=True)
 
-    subprocess.run(["pip3", "install", "tqdm"], check=True)
+    subprocess.run(["pip3", "install", "--user", "tqdm"], check=True)
 
-    subprocess.run(["pip3", "install", "pandas"], check=True)
+    subprocess.run(["pip3", "install", "--user", "pandas"], check=True)
 
 def git_config(email: str, name: str):
     """Setup git config for pushing
