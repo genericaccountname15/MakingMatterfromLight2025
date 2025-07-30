@@ -283,7 +283,6 @@ class Hit_counter(Simulation):
             import time
             time.sleep(plot_wait)
             plt.close(fig)
-            time.sleep(plot_wait)
 
 
     def plot_ang_dist(self, delay):

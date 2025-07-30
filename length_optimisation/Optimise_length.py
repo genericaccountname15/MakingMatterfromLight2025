@@ -41,7 +41,7 @@ ax.axvline(x = 0.8,
     ymin = 0, ymax = 1,
     label = 'Length used in 2018', color = 'orange')
 
-# ax.set_ylim(2e-5, 4e-5)
+ax.set_ylim(4e-5, 8e-5)
 
 ax.set_axisbelow(True)
 ax.grid()

@@ -157,6 +157,6 @@ def find_yield(delay, npos, peak_delay, peak_delay_err):
     return pos_max, abs(pos_max - pos_max_sigma)
 
 if __name__ == '__main__':
-    data_sim, optimal_delay = avg_data(simdata_dir = 'sim_datafiles_l30\\')
+    data_sim, optimal_delay = avg_data(simdata_dir = 'sim_datafiles_l100\\')
     plot_data(data_sim[:,0], data_sim[:,1], data_sim[:,2], optimal_delay)
     
