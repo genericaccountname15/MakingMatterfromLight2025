@@ -130,7 +130,7 @@ class Test:
 
         vis.plot()
 
-    def test_hit_counter(self):
+    def test_hit_counter(self, VAR):
         """
         Runs hit counter on experimental values
         """
@@ -146,7 +146,7 @@ class Test:
             x_pos = -10e-12 * 3e8 * 1e3,
             pulse_length = values.gamma_length,
             height = values.gamma_radius, 
-            off_axis_dist = values.off_axial_dist
+            off_axis_dist = VAR #VARIABLE BEING CONSIDERED REMEMBER TO CHANGE
         )
 
         counter = Hit_counter_lambertian(
@@ -168,6 +168,10 @@ class Test:
 if __name__ == '__main__':
     import os
     test = Test()
-    for i in range(1, 4):
-        test.test_hit_counter()
-        os.rename('Npos_plot_data.pickle', f'Npos_plot_data{i}.pickle')
+    variables = [0.1, 0.5, 1, 1.5, 2.0, 3.0] #variable list
+    for var in variables:
+        dir_name = f'sim_datafiles_d{int(var*10)}' # directory name
+        os.makedirs(dir_name)
+        for i in range(1, 4): #repeat simulation 3 times
+            test.test_hit_counter(var)
+            os.rename('Npos_plot_data.pickle', f'{dir_name}/Npos_plot_data{i}.pickle')
