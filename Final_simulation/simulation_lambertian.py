@@ -171,8 +171,8 @@ if __name__ == '__main__':
     from plot_optimised_data import plot_optimised_data
 
     # INPUT PARAMETERS ######################################################################################
-    variables = [0.1, 0.3, 0.5, 1.0, 1.5, 1.8, 1.9, 2.0, 2.1, 2.2, 2.5, 3.0] #variable list
-    variable_file_name = np.array(variables)*10 #what to label each individual file
+    variables = np.linspace(2.0, 3.0, 20) #variable list
+    variable_file_name = variables #what to label each individual file
     variable_name = 'd' # no spaces
     units = 'mm'
     old_value = 1 #value in 2018
