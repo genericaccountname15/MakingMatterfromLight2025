@@ -171,7 +171,7 @@ def write_data_csv(variable_name, variable_list, datadir, csvname):
     npos_err_yield_arr = []
     data_dir_list = os.listdir(datadir)
     for simdata_dir in data_dir_list:
-        data_sim, optimal_delay = avg_data(f"{datadir}\\{simdata_dir}\\")
+        data_sim, optimal_delay = avg_data(f"{datadir}/{simdata_dir}/")
         yield_npos, yield_npos_err = find_yield(data_sim[:,0], data_sim[:,1], optimal_delay[0], optimal_delay[1])
         npos_yield_arr.append(yield_npos)
         npos_err_yield_arr.append(yield_npos_err)
@@ -186,7 +186,7 @@ def write_data_csv(variable_name, variable_list, datadir, csvname):
     
 
 if __name__ == '__main__':
-    # data_sim, optimal_delay = avg_data(simdata_dir = 'sim_datafiles_d1\\')
+    # data_sim, optimal_delay = avg_data(simdata_dir = 'sim_datafiles_d1/')
     # plot_data(data_sim[:,0], data_sim[:,1], data_sim[:,2], optimal_delay)
     write_data_csv(
         variable_name = 'd (mm)',

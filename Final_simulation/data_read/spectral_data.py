@@ -330,11 +330,11 @@ class Test:
         gamma_data.replicate_plot()
     
     def test_xray_replicate_plot(self):
-        xray_data = xray_spectra('Final_simulation\\data_read\\data\\XrayBath\\XraySpectra\\', resolution=0.5)
+        xray_data = xray_spectra('Final_simulation/data_read/data/XrayBath/XraySpectra/', resolution=0.5)
         xray_data.replicate_plot()
 
     def test_xray_sampling(self):
-        xray_data = xray_spectra('Final_simulation\\data_read\\data\\XrayBath\\XraySpectra\\', resolution=0.5)
+        xray_data = xray_spectra('Final_simulation/data_read/data/XrayBath/XraySpectra/', resolution=0.5)
         sampling = xray_data.sample_pdf(min_energy=1300, max_energy=1500, n=1000)
         plt.title('Sampled x-ray distribution')
         plt.ylabel('N')
