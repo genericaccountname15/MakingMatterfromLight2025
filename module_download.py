@@ -19,6 +19,8 @@ def install_modules():
 
     subprocess.run(["pip3", "install", "--user", "pandas"], check=True)
 
+    subprocess.run(["pip3", "install", "--user", "scipy"], check = True)
+
 def git_config(email: str, name: str):
     """Setup git config for pushing
 
