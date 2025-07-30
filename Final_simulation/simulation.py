@@ -86,7 +86,7 @@ class Xray:
         
         return np.array(moved_coords)
     
-    def resample(self):
+    def resample(self, phi):
         """Resamples x-ray distribution
         """
         self.xray_coords = self.gen_Xray_seed(

@@ -79,17 +79,9 @@ class Xray_lambertian(Xray):
             n_samples_angular = self.get_n_samples_angular(),
             n_samples = n_samples
         )
-
-    def get_n_lambert(self):
-        return self.n_samples_lambert
     
-
-class Hit_counter_lambertian(Hit_counter):
-    def est_npairs(self, angles):
-        Npos = super().est_npairs(angles)
-        Npos *= self.get_xray_bath().get_n_samples_angular() + self.get_xray_bath().get_n_samples()
-        Npos /= self.get_xray_bath().get_n_lambert()
-        return Npos
+    def get_n_samples_total(self):
+        return self.n_samples_lambert
 
 
 class Test:
@@ -168,7 +160,7 @@ class Test:
             off_axis_dist = VAR #VALUE BEING VARIED BE SURE TO CHANGE
         )
 
-        counter = Hit_counter_lambertian(
+        counter = Hit_counter(
             xray_bath = xray,
             gamma_pulse = gamma,
             n_samples_azimuthal = 10
@@ -177,10 +169,9 @@ class Test:
         counter.plot_hit_count(
             min_delay = -10,
             max_delay = 500,
-            samples = 100,
+            samples = 50,
             show_exp_value = True,
-            save_data = True,
-            plot_wait = 0.5
+            save_data = True
         )
 
 

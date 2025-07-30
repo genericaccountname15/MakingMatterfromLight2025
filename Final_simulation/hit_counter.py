@@ -65,7 +65,7 @@ class Hit_counter(Simulation):
             hit_coords = np.array([])
 
             # resample xray distribution ###########################
-            self.xray_bath.resample()
+            self.xray_bath.resample(phi = phi)
 
             # calculate 'effective gamma pulse parameters' ##########
             eff_height = self.calc_effective_height(

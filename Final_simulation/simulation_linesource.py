@@ -57,10 +57,8 @@ class Xray_line(Xray_lambertian):
         return self.line_length
     
 class Hit_counter_line(Hit_counter):
-    def est_npairs(self, angles):
-        Npos = super().est_npairs(angles)
-        Npos /= self.get_xray_bath().get_n_line_samples()
-        return Npos
+    def est_npairs(self, angles, samples):
+        return super().est_npairs(angles, samples) / self.get_xray_bath().get_n_line_samples()
 
 
 class Test:
