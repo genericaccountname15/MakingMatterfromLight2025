@@ -9,6 +9,7 @@ Timothy Chew
 
 import numpy as np
 import matplotlib.pyplot as plt
+from tqdm import tqdm
 from simulation import Simulation
 
 class Hit_counter(Simulation):
@@ -223,22 +224,13 @@ class Hit_counter(Simulation):
         N_pos_list = []
         hit_count_list = []
 
-        # progress bar #########################
-        if show_progress_bar:
-            prog = 0
-            print('#' * prog + '-' * ( len(delay_list) - prog ) + f'{ prog / len(delay_list) * 100 :.1f}%')
-
-        for delay in delay_list:
+        for delay in tqdm(delay_list, desc='Simulation'):
             hit_count, hit_coords = self.count_hits(delay)
             N_pos_list.append( self.est_npairs(angles = hit_coords[:, 3]) )
             hit_count_list.append(hit_count)
 
             self.xray_bath.resample() #resample x-ray distribution
             
-            # progress bar updates #####################################
-            if show_progress_bar:
-                prog += 1
-                print('#' * prog + '-' * ( len(delay_list) - prog ) + f'{ prog / len(delay_list) * 100 :.1f}%')
         N_pos_list = np.array(N_pos_list)
 
         
@@ -422,7 +414,8 @@ class Test:
 if __name__ == '__main__':
     import os
     test = Test()
-    for i in range(1, 4):
-        test.test_hit_counter()
-        os.rename('Npos_plot_data.pickle', f'Npos_plot_data{i}.pickle')
+    test.test_hit_counter()
+    # for i in range(1, 4):
+    #     test.test_hit_counter()
+    #     os.rename('Npos_plot_data.pickle', f'Npos_plot_data{i}.pickle')
     
