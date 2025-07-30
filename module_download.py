@@ -11,28 +11,25 @@ def install_modules():
     """installs python modules
     Note: HPC uses pip3
     """
-    subprocess.run('pip3 install numpy', check=True)
+    subprocess.run(["pip3", "install", "numpy"], check=True)
 
-    subprocess.run('pip3 install matplotlib', check=True)
+    subprocess.run(["pip3", "install", "matplotlib"], check=True)
 
-    subprocess.run('pip3 install tqdm', check=True)
+    subprocess.run(["pip3", "install", "tqdm"], check=True)
 
-    subprocess.run('pip3 install pandas', check=True)
+    subprocess.run(["pip3", "install", "pandas"], check=True)
 
-def git_config(email, name):
+def git_config(email: str, name: str):
     """Setup git config for pushing
 
     Args:
         email (string): email address of pusher
         name (name): name of pusher
     """
-    subprocess.run(f'git config --global user.email {email}', check=True)
-
-    subprocess.run(f'git config --global user.name {name}', check=True)
+    subprocess.run(["git", "config", "--global", "user.email", email], check=True)
+    subprocess.run(["git", "config", "--global", "user.name", name], check=True)
 
 if __name__=='__main__':
     install_modules()
-
-    email = 'timothy.chew22@imperial.ac.uk'
-    name = 'Timothy'
-    git_config(email, name)
+    git_config(email = 'timothy.chew22@imperial.ac.uk', 
+               name = 'Timothy')
