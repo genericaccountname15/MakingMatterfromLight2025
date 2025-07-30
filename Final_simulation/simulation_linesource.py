@@ -7,10 +7,10 @@ Timothy Chew
 
 import numpy as np
 import matplotlib.pyplot as plt
-from simulation import Xray
+from simulation_lambertian import Xray_lambertian
 from hit_counter import Hit_counter
 
-class Xray_line(Xray):
+class Xray_line(Xray_lambertian):
     def __init__(self, FWHM, line_length,rotation=0, n_samples_angular=400, n_samples=10, n_line_samples=10):
         super().__init__(FWHM, rotation, n_samples_angular, n_samples)
         self.n_line_samples = n_line_samples

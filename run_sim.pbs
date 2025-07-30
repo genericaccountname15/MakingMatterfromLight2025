@@ -1,0 +1,9 @@
+#!/bin/bash
+#PBS -N xray_gamma_simulation
+#PBS -l select=1:ncpus=1:mem=1gb
+#PBS -l walltime=02:00:00
+
+cd $PBS_O_WORKDIR
+
+python3 module_download.py
+python3 Final_simulation/simulation_lambertian.py
