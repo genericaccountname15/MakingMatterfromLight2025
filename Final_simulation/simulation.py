@@ -97,6 +97,14 @@ class Xray:
             n_samples = self.get_n_samples()
         )
 
+    def get_n_samples_total(self):
+        """Get total number of samples
+
+        Returns:
+            int: total number of distribution samples
+        """
+        return self.get_n_samples() * self.get_n_samples_angular()
+
     ############ ACCESS METHODS ##############################################################################
     def get_FWHM(self):
         """Access method for FWHM
@@ -286,7 +294,7 @@ class Simulation:
         bounds = self.get_gamma_pulse().get_bounds()
      
         if eff_d is not None:
-            bounds[2] += eff_d
+            bounds[2] = eff_d
 
         if eff_height is not None:
             bounds[3] = bounds[2] + eff_height

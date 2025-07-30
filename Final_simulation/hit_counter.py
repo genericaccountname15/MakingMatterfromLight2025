@@ -33,6 +33,7 @@ class Hit_counter(Simulation):
         super().__init__(xray_bath, gamma_pulse)
         self.n_samples_azimuthal = n_samples_azimuthal
 
+
     ############ METHODS #####################################################################################
     def count_hits(self, delay):
         """Counts the total number of collisions for a given pulse timing
@@ -56,11 +57,16 @@ class Hit_counter(Simulation):
 
         total_hit_count = 0
         total_hit_coords = []
+        samples = 0
 
 
         for phi in angles_azim:
             hit_count = 0
             hit_coords = np.array([])
+
+            # resample xray distribution ###########################
+            self.xray_bath.resample()
+
             # calculate 'effective gamma pulse parameters' ##########
             eff_height = self.calc_effective_height(
                 r = self.get_gamma_pulse().get_height(),
@@ -80,9 +86,11 @@ class Hit_counter(Simulation):
                     total_hit_coords = hit_coords
                 else:
                     total_hit_coords = np.append(total_hit_coords, hit_coords, axis=0)
+            
+            samples += self.get_xray_bath().get_n_samples_total()
 
 
-        return total_hit_count, total_hit_coords
+        return total_hit_count, total_hit_coords, samples
 
     def calc_effective_height(self, r, phi, d):
         """
@@ -135,7 +143,7 @@ class Hit_counter(Simulation):
 
         return eff_d
     
-    def est_npairs(self, angles):
+    def est_npairs(self, angles, samples):
         """Estimates the number of positron pairs produced
         and lands on the CsI detector
 
@@ -173,11 +181,9 @@ class Hit_counter(Simulation):
         # estimate number of positrons #################################################
         N_pos = ( values.xray_number_density * values.gamma_photons_number
                   * values.AMS_transmision * sum(cs_list) 
-                  / self.get_n_samples_azimuthal()
-                  / self.get_xray_bath().get_n_samples_angular()
-                  / self.get_xray_bath().get_n_samples()
+                  / samples
                   * ( max_angle / np.pi ) )
-        
+
         # estimate uncertainty ##########################################################
         uncertainty = np.sqrt(
         (values.gamma_photons_number_err/values.gamma_photons_number) ** 2
@@ -223,8 +229,8 @@ class Hit_counter(Simulation):
         hit_count_list = []
 
         for delay in tqdm(delay_list, desc='Simulation', leave=False):
-            hit_count, hit_coords = self.count_hits(delay)
-            N_pos_list.append( self.est_npairs(angles = hit_coords[:, 3]) )
+            hit_count, hit_coords, samples = self.count_hits(delay)
+            N_pos_list.append( self.est_npairs(angles = hit_coords[:, 3], samples = samples) )
             hit_count_list.append(hit_count)
 
             self.xray_bath.resample() #resample x-ray distribution
@@ -284,7 +290,7 @@ class Hit_counter(Simulation):
         Args:
             delay (float): delay between gamma pulse and Xray ignition (ps)
         """
-        _, hit_coords = self.count_hits(delay)
+        _, hit_coords, _ = self.count_hits(delay)
         angles = hit_coords[:,3]
         #angles = self.get_xray_bath().get_xray_coords()[:,2]
 
@@ -322,7 +328,7 @@ class Test:
             FWHM = values.xray_FWHM ,
             rotation = 40 * np.pi / 180,
             n_samples_angular = 400,
-            n_samples = 20
+            n_samples = 10
         )
 
         gamma = Gamma(
@@ -335,16 +341,15 @@ class Test:
         counter = Hit_counter(
             xray_bath = xray,
             gamma_pulse = gamma,
-            n_samples_azimuthal = 50
+            n_samples_azimuthal = 5
         )
 
         counter.plot_hit_count(
             min_delay = -10,
             max_delay = 500,
-            samples = 100,
+            samples = 50,
             show_exp_value = True,
-            save_data = True,
-            plot_wait = 3
+            save_data = True
         )
 
     def check_ang_dist(self):
@@ -410,9 +415,9 @@ class Test:
 
 
 if __name__ == '__main__':
-    import os
     test = Test()
     test.test_hit_counter()
+    # import os
     # for i in range(1, 4):
     #     test.test_hit_counter()
     #     os.rename('Npos_plot_data.pickle', f'Npos_plot_data{i}.pickle')

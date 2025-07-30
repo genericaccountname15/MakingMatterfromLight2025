@@ -59,7 +59,27 @@ class Xray_lambertian(Xray):
             return np.array(coords), n_lambert     
         else:
             return np.array(coords)
-    
+
+    def resample(self, phi=np.pi/2):
+        """Resamples xray distribution depending
+        on azimuthal angle
+
+        Args:
+            phi (_type_): _description_
+        """
+        if phi == np.pi/2:
+            n_samples = self.get_n_samples()
+        else:
+            n_samples = round( self.get_n_samples() * np.cos( phi - np.pi/2 ) )
+
+        self.xray_coords = self.gen_Xray_seed(
+            mean = -self.get_FWHM(),
+            variance = self.get_variance(),
+            rotation = self.get_rotation(),
+            n_samples_angular = self.get_n_samples_angular(),
+            n_samples = n_samples
+        )
+
     def get_n_lambert(self):
         return self.n_samples_lambert
     
@@ -164,7 +184,8 @@ class Test:
         )
 
 
-if __name__ == '__main__':
+#####################################################################################################################
+def run_data_collection():
     import os
     from tqdm import tqdm
     from Optimise_delay import write_data_csv
@@ -216,3 +237,7 @@ if __name__ == '__main__':
     subprocess.run(["git", "commit", "-m", f"{variable_name} optimisation data files"], check=True)
     subprocess.run(["git", "push"], check=True)
     print("Changes pushed to GitHub.")
+
+if __name__ == '__main__':
+    test = Test()
+    test.test_hit_counter(1)

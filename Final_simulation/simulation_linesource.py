@@ -57,9 +57,6 @@ class Xray_line(Xray_lambertian):
         return self.line_length
     
 class Hit_counter_line(Hit_counter):
-    def __init__(self, xray_bath, gamma_pulse, n_samples_azimuthal=1):
-        super().__init__(xray_bath, gamma_pulse, n_samples_azimuthal)
-    
     def est_npairs(self, angles):
         Npos = super().est_npairs(angles)
         Npos /= self.get_xray_bath().get_n_line_samples()
@@ -133,7 +130,7 @@ class Test:
             plot_wait = 3
         )
 
-if __name__ == '__main__':
+def run_data_collection():
     import os
     from tqdm import tqdm
     from Optimise_delay import write_data_csv
@@ -184,5 +181,8 @@ if __name__ == '__main__':
     subprocess.run(["git", "add", "."], check=True)
     subprocess.run(["git", "commit", "-m", f"{variable_name} optimisation data files"], check=True)
     subprocess.run(["git", "push"], check=True)
-    print("Changes pushed to GitHub.")
+    print("Changes pushed to GitHub.") 
+
+if __name__ == '__main__':
+    run_data_collection()
 
