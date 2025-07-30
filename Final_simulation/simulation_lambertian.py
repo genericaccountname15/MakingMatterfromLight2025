@@ -209,3 +209,10 @@ if __name__ == '__main__':
         save_fig = True,
         fig_location = f'{datadir}'
     )
+
+    # PUSH DATA TO GITHUB ######################################################################################
+    import subprocess
+    subprocess.run(["git", "add", "."], check=True)
+    subprocess.run(["git", "commit", "-m", f"{variable_name} optimisation data files"], check=True)
+    subprocess.run(["git", "push"], check=True)
+    print("Changes pushed to GitHub.")
