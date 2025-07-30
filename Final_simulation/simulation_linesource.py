@@ -96,15 +96,15 @@ class Test:
 
         vis.plot()
     
-    def test_hit_counter(self):
+    def test_hit_counter(self, VAR):
         """
         Runs hit counter on experimental values
         """
-        import values as values
+        import values
         from simulation import Gamma
         xray = Xray_line(
             FWHM = values.xray_FWHM,
-            line_length = 10.0,
+            line_length = VAR, # VARIABLE WE CHANGING, REMEMBER TO MOVE
             rotation= 0 * np.pi / 180,
             n_line_samples = 20,
             n_samples_angular = 100,
@@ -135,8 +135,54 @@ class Test:
 
 if __name__ == '__main__':
     import os
+    from tqdm import tqdm
+    from Optimise_delay import write_data_csv
+    from plot_optimised_data import plot_optimised_data
+
+    # INPUT PARAMETERS ######################################################################################
+    variables = np.linspace(0.8, 5.0, 20) #variable list
+    variable_file_name = variables #what to label each individual file
+    variable_name = 'line_source_length' # no spaces
+    units = 'mm'
+    old_value = 0.8 #value in 2018
+
     test = Test()
-    for i in range(1, 4):
-        test.test_hit_counter()
-        os.rename('Npos_plot_data.pickle', f'Npos_plot_data{i}.pickle')
+    print('-'*20 + 'BEGINNING DATA COLLECTION' + '-'*20)
+
+    datadir = f'{variable_name}_optimisation'
+    os.makedirs(datadir)
+
+
+    for i, var in enumerate(tqdm(variables, desc = 'Data collection progress')):
+        dir_name = f'{datadir}/sim_datafiles_{variable_name}_{variable_file_name[i]}_{units}' # directory name
+        os.makedirs(dir_name)
+        for i in tqdm(range(1, 4), desc = 'Repeating simulations', leave = False): #repeat simulation 3 times
+            test.test_hit_counter(var)
+            os.rename('Npos_plot_data.pickle', f'{dir_name}/Npos_plot_data{i}.pickle')
+    
+    print('-'*20 + 'DATA COLLECTION COMPLETE!' + '-'*20)
+
+  # WRITING DATA TO CSV ########################################################################################  
+    write_data_csv(
+        variable_name = f'{variable_name} ({units})',
+        variable_list = variables,
+        datadir = f'{variable_name}_optimisation_lambert',
+        csvname = f'{datadir}/optimise_{variable_name}.csv'
+    )
+
+    plot_optimised_data(
+        filename = f'{datadir}/optimise_{variable_name}.csv',
+        variable_name = variable_name,
+        xlabel = f'{variable_name} ({units})',
+        old_value = old_value,
+        save_fig = True,
+        fig_location = f'{datadir}'
+    )
+
+    # PUSH DATA TO GITHUB ######################################################################################
+    import subprocess
+    subprocess.run(["git", "add", "."], check=True)
+    subprocess.run(["git", "commit", "-m", f"{variable_name} optimisation data files"], check=True)
+    subprocess.run(["git", "push"], check=True)
+    print("Changes pushed to GitHub.")
 
