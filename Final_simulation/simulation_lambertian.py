@@ -225,7 +225,9 @@ class Test:
             max_delay = 500,
             samples = 100,
             show_exp_value = True,
-            save_data = True
+            save_data = True,
+            save_params = True,
+            plot_wait = 0.5
         )
 
 
@@ -256,6 +258,7 @@ def run_data_collection():
         for i in tqdm(range(1, 4), desc = 'Repeating simulations', leave = False):
             test.collect_data(var)
             os.rename('Npos_plot_data.pickle', f'{dir_name}/Npos_plot_data{i}.pickle')
+        os.rename('Simulation_parameters.csv', f'{dir_name}/Simulation_parameters.csv')
 
     print('-'*20 + 'DATA COLLECTION COMPLETE!' + '-'*20)
 
@@ -264,7 +267,7 @@ def run_data_collection():
         variable_name = f'{variable_name} ({units})',
         variable_list = variables,
         datadir = f'{variable_name}_optimisation_lambert',
-        csvname = f'{datadir}/optimise_{variable_name}.csv'
+        csvname = f'{datadir}/optimise_{variable_name}'
     )
 
     plot_optimised_data(
@@ -277,5 +280,4 @@ def run_data_collection():
     )
 
 if __name__ == '__main__':
-    test = Test()
-    test.test_hit_counter()
+    run_data_collection()

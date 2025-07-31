@@ -185,7 +185,7 @@ def write_data_csv(variable_name, variable_list, datadir, csvname):
         "positron yield error / pC": npos_err_yield_arr
     }
     df = pd.DataFrame(data)
-    df.to_csv(csvname, index=False)
+    df.to_csv(f'{csvname}.csv', index=False)
 
 
 if __name__ == '__main__':

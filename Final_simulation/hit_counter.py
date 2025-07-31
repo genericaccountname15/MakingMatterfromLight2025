@@ -11,6 +11,7 @@ import time
 import pickle
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 from tqdm import tqdm
 
 from simulation import Simulation, Xray, Gamma, Visualiser
@@ -211,17 +212,21 @@ class HitCounter(Simulation):
             Defaults to 50.
             **kwargs: optional
                 show_exp_value (bool, optional): Whether to plot the delay used in 2018.
-                Defaults to False.
+                                                Defaults to False.
                 save_data (bool, optional): Whether to save the plot data to a csv.
-                Defaults to False
+                                            Defaults to False
                 plot_wait (float, optional): Time to leave plot open.
-                Defaults to None
+                                            Defaults to None
+                save_params (bool, optional): Whether to save parameters for Xray and Gamma objects.
+                                            Defaults to False
         """
         # kwaargs ##########################################################
         show_exp_value = kwargs.get('show_exp_value', False)
         save_data = kwargs.get('save_data', False)
         save_data_filename = kwargs.get('save_data_filename', 'Npos_plot_data')
         plot_wait = kwargs.get('plot_wait', None)
+        save_params = kwargs.get('save_params', False)
+        save_params_filename = kwargs.get('save_params_fname', 'Simulation_parameters')
 
         # set up figure ############################################
         fig, ax = plt.subplots()
@@ -284,6 +289,10 @@ class HitCounter(Simulation):
 
             with open(f'{save_data_filename}.pickle', 'wb') as f:
                 pickle.dump(data, f)
+        
+        if save_params:
+            df = pd.DataFrame(self.get_params())
+            df.to_csv(f'{save_params_filename}.csv',index=False)
 
         if plot_wait is not None:
             plt.show(block=False)
@@ -292,6 +301,19 @@ class HitCounter(Simulation):
 
         else:
             plt.show()
+        
+    
+    def get_params(self):
+        params = {
+            'FWHM': self.get_xray_bath().get_fwhm(),
+            'rotation': self.get_xray_bath().get_rotation(),
+            'n_samples_angular': self.get_xray_bath().get_n_samples_angular(),
+            'n_samples': self.get_n_samples(),
+            'gamma_height': self.get_gamma_pulse().get_height(),
+            'gamma_pulse_length': self.get_gamma_pulse().get_pulse_length()
+        }
+        
+        return params
 
 
     def plot_ang_dist(self, delay):
