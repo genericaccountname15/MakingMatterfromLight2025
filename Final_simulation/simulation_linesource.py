@@ -230,7 +230,7 @@ def run_data_collection():
     """
     # INPUT PARAMETERS #############################################################################
     variables = np.linspace(0.4, 5.0, 20) #variable list
-    variable_file_name = variables #what to label each individual file
+    variable_file_name = np.around(variables, 2) #what to label each individual file
     variable_name = 'line_source_length' # no spaces
     units = 'mm'
     old_value = 0.4 #value in 2018

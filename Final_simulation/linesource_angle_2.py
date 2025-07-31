@@ -230,7 +230,7 @@ def run_data_collection():
     """
     # INPUT PARAMETERS #############################################################################
     variables = np.linspace(0, 90, 18) #variable list
-    variable_file_name = variables #what to label each individual file
+    variable_file_name = np.around(variables, 2) #what to label each individual file
     variable_name = 'angle' # no spaces
     units = 'degrees'
     old_value = 40 #value in 2018
