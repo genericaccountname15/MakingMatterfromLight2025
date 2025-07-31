@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -N xray_gamma_simulation
+#PBS -N linesouce_simulation
 #PBS -l select=1:ncpus=1:mem=1gb
 #PBS -l walltime=05:00:00
 

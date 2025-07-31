@@ -229,11 +229,11 @@ def run_data_collection():
     """Runs the data collection process for HPC systems
     """
     # INPUT PARAMETERS #############################################################################
-    variables = np.linspace(0.8, 5.0, 20) #variable list
+    variables = np.linspace(0.4, 5.0, 20) #variable list
     variable_file_name = variables #what to label each individual file
     variable_name = 'line_source_length' # no spaces
     units = 'mm'
-    old_value = 0.8 #value in 2018
+    old_value = 0.4 #value in 2018
 
     test = Test()
     print('-'*20 + 'BEGINNING DATA COLLECTION' + '-'*20)

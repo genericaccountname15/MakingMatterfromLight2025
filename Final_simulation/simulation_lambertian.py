@@ -202,7 +202,7 @@ class Test:
         """
         xray = XrayLambertian(
             FWHM = values.xray_FWHM,
-            rotation= 40 * np.pi / 180,
+            rotation= values.source_angle * np.pi / 180,
             n_samples_angular = 400,
             n_samples = 20,
         )
@@ -237,7 +237,7 @@ def run_data_collection():
     """Runs a data collection algorithm for HPC runs
     """
     # INPUT PARAMETERS #############################################################################
-    variables = np.linspace(2.0, 3.0, 3) #variable list
+    variables = np.linspace(0.1, 3.0, 20) #variable list
     variable_file_name = np.around(variables, 2) #what to label each individual file
     variable_name = 'd' # no spaces
     units = 'mm'
