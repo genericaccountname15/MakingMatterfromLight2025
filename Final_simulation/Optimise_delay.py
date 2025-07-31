@@ -24,20 +24,20 @@ def avg_data(simdata_dir):
                             [optimal delay, uncertainty]
     """
     file_list = os.listdir(simdata_dir)
-    
+
     compiled_data = np.array([])
     delay_compiled = np.array([])
-    Npos_CsI_compiled = np.array([])
+    npos_csi_compiled = np.array([])
     peak_delay = []
     for file in file_list:
         if file.endswith('.pickle'):
             data = np.load(simdata_dir + file, allow_pickle=True)
             delay_compiled = np.append(delay_compiled, data['delay'], axis=0)
-            Npos_CsI_compiled = np.append(Npos_CsI_compiled, data['Npos_CsI'], axis=0)
+            npos_csi_compiled = np.append(npos_csi_compiled, data['Npos_CsI'], axis=0)
             peak_delay.append(data['delay'][np.argmax(data['Npos_CsI'])])
-    
-    compiled_data = np.column_stack((delay_compiled, Npos_CsI_compiled))
-    
+
+    compiled_data = np.column_stack((delay_compiled, npos_csi_compiled))
+
     #sort data
     compiled_data = compiled_data[compiled_data[:, 0].argsort()]
 
@@ -54,38 +54,38 @@ def avg_data(simdata_dir):
         npos_sigma = np.std(npos_data)
 
         data_avg.append([delay, npos_avg, npos_sigma])
-    
+
     # find peak delay
     peak_delay_mean = np.mean(peak_delay)
     peak_delay_err = np.std(peak_delay)
-    
+
     return np.array(data_avg), [peak_delay_mean, peak_delay_err]
 
-def plot_data(delay, Npos, Npos_err, peak_delay):
+def plot_data(delay, npos, npos_err, peak_delay):
     """Plots the averaged simulation data
 
     Args:
         delay (list): Delay between pulse and xray ignition (ps)
-        Npos (list): Number of positrons/pC incident on the CsI detector
-        Npos_err (list): Standard deviation in the number of positrons
+        npos (list): Number of positrons/pC incident on the CsI detector
+        npos_err (list): Standard deviation in the number of positrons
         peak_delay (list): [Delay value which gives greatest positron yield, uncertainty]
     """
-    
-    fig, ax = plt.subplots() #pylint: disable=unused-variable
+
+    _, ax = plt.subplots()
     ax.set_title('Simulation averaged positron count')
     ax.set_xlabel('Delay (ps)')
     ax.set_ylabel('Number of positrons/pC incident on CsI')
 
     ax.plot(
-        delay, Npos,
+        delay, npos,
         label = 'Positrons',
         color = 'blue'
     )
 
     ax.fill_between(
         x = delay,
-        y1 = Npos - Npos_err,
-        y2 = Npos + Npos_err,
+        y1 = npos - npos_err,
+        y2 = npos + npos_err,
         label = 'Uncertainty',
         color = 'blue',
         alpha = 0.3
@@ -112,11 +112,13 @@ def plot_data(delay, Npos, Npos_err, peak_delay):
 
     print(f'Optimum delay is {peak_delay[0]} +/- {peak_delay[1]} ps')
 
-    yield_gain, yield_gain_err = find_yield_gain(delay, Npos, peak_delay[0], peak_delay[1])
+    yield_gain, yield_gain_err = find_yield_gain(delay, npos, peak_delay[0], peak_delay[1])
     print(f'Expect a yield gain of {yield_gain} +/- {yield_gain_err} % when using optimal delay')
-    
-    yield_npos, yield_npos_err = find_yield(delay, Npos, peak_delay[0], peak_delay[1])
-    print(f'Expect a yield of {yield_npos} +/- {yield_npos_err} positrons/pC when using optimal delay')
+
+    yield_npos, yield_npos_err = find_yield(delay, npos, peak_delay[0], peak_delay[1])
+    print(
+        f'Expect a yield of {yield_npos} +/- {yield_npos_err} positrons/pC when using optimal delay'
+        )
 
     plt.show()
 
@@ -172,10 +174,11 @@ def write_data_csv(variable_name, variable_list, datadir, csvname):
     data_dir_list = os.listdir(datadir)
     for simdata_dir in data_dir_list:
         data_sim, optimal_delay = avg_data(f"{datadir}/{simdata_dir}/")
-        yield_npos, yield_npos_err = find_yield(data_sim[:,0], data_sim[:,1], optimal_delay[0], optimal_delay[1])
+        yield_npos, yield_npos_err = find_yield(data_sim[:,0], data_sim[:,1],
+                                                optimal_delay[0], optimal_delay[1])
         npos_yield_arr.append(yield_npos)
         npos_err_yield_arr.append(yield_npos_err)
-    
+
     data = {
         variable_name: variable_list,
         "positron yield / pC": npos_yield_arr,
@@ -183,7 +186,7 @@ def write_data_csv(variable_name, variable_list, datadir, csvname):
     }
     df = pd.DataFrame(data)
     df.to_csv(csvname, index=False)
-    
+
 
 if __name__ == '__main__':
     # data_sim, optimal_delay = avg_data(simdata_dir = 'sim_datafiles_d1/')
@@ -194,4 +197,3 @@ if __name__ == '__main__':
         datadir = 'd_optimisation_lambert',
         csvname = 'optimise_d.csv'
     )
-    

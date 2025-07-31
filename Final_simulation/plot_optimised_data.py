@@ -8,7 +8,8 @@ Timothy Chew
 import numpy as np
 import matplotlib.pyplot as plt
 
-def plot_optimised_data(filename, variable_name, xlabel, old_value, ylims = None, save_fig = False, fig_location = None):
+def plot_optimised_data(filename, variable_name, xlabel, old_value,
+                        ylims = None, save_fig = False, fig_location = None):
     """Plots the optimise data with option to save the figure generated
 
     Args:
@@ -26,7 +27,7 @@ def plot_optimised_data(filename, variable_name, xlabel, old_value, ylims = None
     npos_err = data[:,2] * 2
     #due to coding error
 
-    fig, ax = plt.subplots() #pylint: disable=unused-variable
+    _, ax = plt.subplots()
     ax.set_title(f'Positron count vs {variable_name}')
     ax.set_xlabel(xlabel)
     ax.set_ylabel('Maximum number of positrons/pC incident on CsI')

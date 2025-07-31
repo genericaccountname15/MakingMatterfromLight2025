@@ -6,16 +6,31 @@ Timothy Chew
 30/07/25
 """
 
+import os
 import numpy as np
+import values
 from simulation import Xray, Gamma, Visualiser
-from hit_counter import Hit_counter
+from hit_counter import HitCounter
 
-class Xray_lambertian(Xray):
+from tqdm import tqdm
+from optimise_delay import write_data_csv
+from plot_optimised_data import plot_optimised_data
+
+
+class XrayLambertian(Xray):
+    """Coordinates and distribution of the X-ray bath
+    Inherits from the Xray bath class
+    Uses a lambertian distribution for points instead
+
+    Redefined methods:
+        gen_xray_seed, resample, get_n_samples_total: 
+                    redefined appropriately for a lambertian distribution
+    """
     def __init__(self, FWHM, rotation=0, n_samples_angular=400, n_samples=10):
         super().__init__(FWHM, rotation, n_samples_angular, n_samples)
 
-        self.xray_coords, self.n_samples_lambert = self.gen_Xray_seed(
-            mean = -self.get_FWHM(),
+        self.xray_coords, self.n_samples_lambert = self.gen_xray_seed(
+            mean = -self.get_fwhm(),
             variance = self.get_variance(),
             rotation=rotation,
             n_samples_angular = n_samples_angular,
@@ -23,7 +38,8 @@ class Xray_lambertian(Xray):
             get_n_lambert = True
         )
 
-    def gen_Xray_seed(self, mean, variance, rotation=0, n_samples_angular = 400, n_samples = 10, get_n_lambert = False):
+    def gen_xray_seed(self, mean, variance, rotation=0,
+                      n_samples_angular = 400, n_samples = 10, get_n_lambert = False):
         """Generates a lambertian distribution of X ray pulse in 2D
 
         Args:
@@ -41,12 +57,14 @@ class Xray_lambertian(Xray):
         #rotate distribution 180 degrees
         angles = np.linspace(0 + rotation, np.pi + rotation, n_samples_angular)
         for theta in angles:
-            lambert_samples = round(n_samples * np.cos( np.pi/2 - theta + rotation )) # estimated lambert distribution
-            ndist = np.random.normal(mean, variance, lambert_samples) # random distribution centred at 0
+            # estimated lambert distribution
+            lambert_samples = round(n_samples * np.cos( np.pi/2 - theta + rotation ))
+            # random distribution centred at 0
+            ndist = np.random.normal(mean, variance, lambert_samples)
 
             #rotation matrix
             rot_matrix = np.array(
-                [ [np.cos(theta), -np.sin(theta)], 
+                [ [np.cos(theta), -np.sin(theta)],
                 [np.sin(theta), np.cos(theta)] ])
 
             #append coords
@@ -54,9 +72,9 @@ class Xray_lambertian(Xray):
                 rotated_coords = np.matmul(rot_matrix, [k, 0])
                 coords.append([rotated_coords[0], rotated_coords[1], theta])
             n_lambert += lambert_samples
-        
+
         if get_n_lambert:
-            return np.array(coords), n_lambert     
+            return np.array(coords), n_lambert
         else:
             return np.array(coords)
 
@@ -72,14 +90,15 @@ class Xray_lambertian(Xray):
         else:
             n_samples = round( self.get_n_samples() * np.cos( phi ) )
 
-        self.xray_coords = self.gen_Xray_seed(
-            mean = -self.get_FWHM(),
+        self.xray_coords, self.n_samples_lambert = self.gen_xray_seed(
+            mean = -self.get_fwhm(),
             variance = self.get_variance(),
             rotation = self.get_rotation(),
             n_samples_angular = self.get_n_samples_angular(),
-            n_samples = n_samples
+            n_samples = n_samples,
+            get_n_lambert = True
         )
-    
+
     def get_n_samples_total(self):
         return self.n_samples_lambert
 
@@ -91,13 +110,12 @@ class Test:
     def __init__(self):
         pass
 
-    ############ METHODS #####################################################################################
+    ############ METHODS ###########################################################################
     def test_values(self):
         """
         Runs the simulation using experiment accurate values
         """
-        import values
-        xray = Xray_lambertian(
+        xray = XrayLambertian(
             FWHM = values.xray_FWHM,
             rotation=40 * np.pi / 180
         )
@@ -116,12 +134,12 @@ class Test:
         )
 
         vis.plot()
-    
+
     def test_sim(self):
         """
         Runs the simulation using more visually appealing values
         """
-        xray = Xray_lambertian(
+        xray = XrayLambertian(
             FWHM = 10,
             rotation = 40 * np.pi / 180
         )
@@ -141,12 +159,11 @@ class Test:
 
         vis.plot()
 
-    def test_hit_counter(self, VAR):
+    def test_hit_counter(self, var):
         """
         Runs hit counter on experimental values
         """
-        import values
-        xray = Xray_lambertian(
+        xray = XrayLambertian(
             FWHM = values.xray_FWHM,
             rotation= 40 * np.pi / 180,
             n_samples_angular = 400,
@@ -156,11 +173,11 @@ class Test:
         gamma = Gamma(
             x_pos = -10e-12 * 3e8 * 1e3,
             pulse_length = values.gamma_length,
-            height = values.gamma_radius, 
-            off_axis_dist = VAR #VALUE BEING VARIED BE SURE TO CHANGE
+            height = values.gamma_radius,
+            off_axis_dist = var #VALUE BEING VARIED BE SURE TO CHANGE
         )
 
-        counter = Hit_counter(
+        counter = HitCounter(
             xray_bath = xray,
             gamma_pulse = gamma,
             n_samples_azimuthal = 10
@@ -175,21 +192,18 @@ class Test:
         )
 
 
-#####################################################################################################################
+###################################################################################################
 def run_data_collection():
-    import os
-    from tqdm import tqdm
-    from Optimise_delay import write_data_csv
-    from plot_optimised_data import plot_optimised_data
-
-    # INPUT PARAMETERS ######################################################################################
+    """Runs a data collection algorithm for HPC runs
+    """
+    # INPUT PARAMETERS #############################################################################
     variables = np.linspace(2.0, 3.0, 20) #variable list
     variable_file_name = variables #what to label each individual file
     variable_name = 'd' # no spaces
     units = 'mm'
     old_value = 1 #value in 2018
 
-    test = Test()
+    test = Test() #pylint: disable=redefined-outer-name
     print('-'*20 + 'BEGINNING DATA COLLECTION' + '-'*20)
 
     datadir = f'{variable_name}_optimisation_lambert'
@@ -197,15 +211,17 @@ def run_data_collection():
 
 
     for i, var in enumerate(tqdm(variables, desc = 'Data collection progress')):
-        dir_name = f'{datadir}/sim_datafiles_{variable_name}_{variable_file_name[i]}_{units}' # directory name
+        # directory name
+        dir_name = f'{datadir}/sim_datafiles_{variable_name}_{variable_file_name[i]}_{units}'
         os.makedirs(dir_name)
-        for i in tqdm(range(1, 4), desc = 'Repeating simulations', leave = False): #repeat simulation 3 times
+        #repeat simulation 3 times
+        for i in tqdm(range(1, 4), desc = 'Repeating simulations', leave = False):
             test.test_hit_counter(var)
             os.rename('Npos_plot_data.pickle', f'{dir_name}/Npos_plot_data{i}.pickle')
-    
+
     print('-'*20 + 'DATA COLLECTION COMPLETE!' + '-'*20)
 
-  # WRITING DATA TO CSV ########################################################################################  
+  # WRITING DATA TO CSV #####################################################################
     write_data_csv(
         variable_name = f'{variable_name} ({units})',
         variable_list = variables,
@@ -221,13 +237,6 @@ def run_data_collection():
         save_fig = True,
         fig_location = f'{datadir}'
     )
-
-    # PUSH DATA TO GITHUB ######################################################################################
-    import subprocess
-    subprocess.run(["git", "add", "."], check=True)
-    subprocess.run(["git", "commit", "-m", f"{variable_name} optimisation data files"], check=True)
-    subprocess.run(["git", "push"], check=True)
-    print("Changes pushed to GitHub.")
 
 if __name__ == '__main__':
     test = Test()

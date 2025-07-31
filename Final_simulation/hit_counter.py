@@ -7,12 +7,18 @@ Timothy Chew
 21/07/25
 """
 
+import time
+import pickle
 import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
-from simulation import Simulation
 
-class Hit_counter(Simulation):
+from simulation import Simulation, Xray, Gamma, Visualiser
+import values
+from cross_section import c_BW
+from data_read.spectral_data import xray_spectra, gamma_spectra
+
+class HitCounter(Simulation):
     """Counts the number of collisions between the X-ray bath
     and Gamma pulse
 
@@ -24,7 +30,7 @@ class Hit_counter(Simulation):
         calc_effective_height: Solves a geometric problem to find the new effective height of the 
                                 gamma pulse when looking at an azimuthal plane of the x-ray bath.
         calc_effective_d: Solves geometric problem to calculate effective off-axis
-                            displacement when looking at another azimuthal plane paramaterised by phi
+                        displacement when looking at another azimuthal plane paramaterised by phi
         est_npairs: Estimates the number of positron pairs produced and lands on the CsI detector
         plot_hit_count: Plots the hit count and estimated number of pairs for a range of delays
                         (with option to save data)
@@ -34,7 +40,7 @@ class Hit_counter(Simulation):
         self.n_samples_azimuthal = n_samples_azimuthal
 
 
-    ############ METHODS #####################################################################################
+    ############ METHODS ######################################################################
     def count_hits(self, delay):
         """Counts the total number of collisions for a given pulse timing
 
@@ -51,7 +57,7 @@ class Hit_counter(Simulation):
         self.gamma_pulse.set_x_pos(x0)
 
         #azimuthal angles to sweep
-        max_angle = np.arctan( self.get_gamma_pulse().get_height() / 
+        max_angle = np.arctan( self.get_gamma_pulse().get_height() /
                               self.get_gamma_pulse().get_off_axis_dist() )
         angles_azim = np.linspace(-max_angle, max_angle, self.get_n_samples_azimuthal())
 
@@ -79,15 +85,15 @@ class Hit_counter(Simulation):
                 phi = phi,
                 d = self.get_gamma_pulse().get_off_axis_dist()
             )
-            hit_count, hit_coords = self.find_hits(eff_height = eff_height, eff_d = eff_d)   
-            
+            hit_count, hit_coords = self.find_hits(eff_height = eff_height, eff_d = eff_d)
+
             if hit_count != 0:
                 total_hit_count += hit_count
                 if len(total_hit_coords) == 0:
                     total_hit_coords = hit_coords
                 else:
                     total_hit_coords = np.append(total_hit_coords, hit_coords, axis=0)
-            
+
             samples += self.get_xray_bath().get_n_samples_total()
 
 
@@ -114,7 +120,7 @@ class Hit_counter(Simulation):
             if d * d - ( 1 + m * m) * ( d * d - r * r ) < 0:
                 pass # ignore not intersecting
             else:
-                x1 = ( d + np.sqrt( d * d 
+                x1 = ( d + np.sqrt( d * d
                                         - ( 1 + m * m) * ( d * d - r * r ))
                                         ) / ( 1 + m * m )
                 y1 = m * x1
@@ -123,9 +129,9 @@ class Hit_counter(Simulation):
                 y2 = m * d
 
                 dist = np.sqrt( ( x1 - x2 ) ** 2 + ( y1 - y2 ) ** 2 )
-        
+
         return dist
-    
+
     def calc_effective_d(self, phi, d):
         """Solves geometric problem to calculate effective off-axis
         displacement when looking at another azimuthal plane paramaterised
@@ -143,7 +149,7 @@ class Hit_counter(Simulation):
         )
 
         return eff_d
-    
+
     def est_npairs(self, angles, samples):
         """Estimates the number of positron pairs produced
         and lands on the CsI detector
@@ -151,13 +157,13 @@ class Hit_counter(Simulation):
         Returns:
             angles: list of angles for each hit
         """
-        import values as values
-        from cross_section import c_BW
-        from data_read.spectral_data import xray_spectra, gamma_spectra
-        
+
         # calculate cross section of each hit and sum #####################################
-        xray_data = xray_spectra('Final_simulation/data_read/data/XrayBath/XraySpectra/', resolution=0.5)
-        gamma_data = gamma_spectra('Final_simulation/data_read/data/GammaSpectra/Fig4b_GammaSpecLineouts.mat')
+        xray_data = xray_spectra('Final_simulation/data_read/data/XrayBath/XraySpectra/',
+                                 resolution=0.5)
+        gamma_data = gamma_spectra(
+            'Final_simulation/data_read/data/GammaSpectra/Fig4b_GammaSpecLineouts.mat')
+
         xray_energy_sample = xray_data.sample_pdf(
             min_energy = values.xray_spectra_min,
             max_energy = values.xray_spectra_max,
@@ -176,12 +182,12 @@ class Hit_counter(Simulation):
             cs_list.append(cs)
 
         # get maximum azimuthal angle we calculate ######################################
-        max_angle = np.arctan( self.get_gamma_pulse().get_height() / 
+        max_angle = np.arctan( self.get_gamma_pulse().get_height() /
                         self.get_gamma_pulse().get_off_axis_dist() )
-        
+
         # estimate number of positrons #################################################
-        N_pos = ( values.xray_number_density * values.gamma_photons_number
-                  * values.AMS_transmision * sum(cs_list) 
+        n_pos = ( values.xray_number_density * values.gamma_photons_number
+                  * values.AMS_transmision * sum(cs_list)
                   / samples
                   * ( max_angle / np.pi ) )
 
@@ -190,9 +196,9 @@ class Hit_counter(Simulation):
         (values.gamma_photons_number_err/values.gamma_photons_number) ** 2
         + (values.xray_number_density_err/values.xray_number_density) ** 2
         + (values.gamma_length_err / values.gamma_length) ** 2
-        ) * N_pos
-        
-        return np.array([N_pos, uncertainty])
+        ) * n_pos
+
+        return np.array([n_pos, uncertainty])
 
     def plot_hit_count(self, min_delay, max_delay, samples=50, **kwargs):
         """Plots the hit count and estimated number of pairs for a
@@ -201,11 +207,15 @@ class Hit_counter(Simulation):
         Args:
             min_delay (float): Minumum pulse delay (ps)
             max_delay (float): Maximum pulse delay (ps)
-            samples (int, optional): Number of delays to check. Defaults to 50.
+            samples (int, optional): Number of delays to check.
+            Defaults to 50.
             **kwargs: optional
-                show_exp_value (bool, optional): Whether to plot the delay used in 2018. Defaults to False.
-                save_data (bool, optional): Whether to save the plot data to a csv. Defaults to False
-                plot_wait (float, optional): Time to leave plot open. Defaults to None
+                show_exp_value (bool, optional): Whether to plot the delay used in 2018.
+                Defaults to False.
+                save_data (bool, optional): Whether to save the plot data to a csv.
+                Defaults to False
+                plot_wait (float, optional): Time to leave plot open.
+                Defaults to None
         """
         # kwaargs ##########################################################
         show_exp_value = kwargs.get('show_exp_value', False)
@@ -226,30 +236,30 @@ class Hit_counter(Simulation):
         # generate values #########################################
         delay_list = np.linspace(min_delay, max_delay, samples)
 
-        N_pos_list = []
+        n_pos_list = []
         hit_count_list = []
 
         for delay in tqdm(delay_list, desc='Simulation', leave=False):
             hit_count, hit_coords, samples = self.count_hits(delay)
-            N_pos_list.append( self.est_npairs(angles = hit_coords[:, 3], samples = samples) )
+            n_pos_list.append( self.est_npairs(angles = hit_coords[:, 3], samples = samples) )
             hit_count_list.append(hit_count)
 
             self.xray_bath.resample() #resample x-ray distribution
-            
-        N_pos_list = np.array(N_pos_list)
 
-        
+        n_pos_list = np.array(n_pos_list)
+
+
         # plot values ##################################################
-        hits, = ax.plot(delay_list, hit_count_list, '-x', 
+        hits, = ax.plot(delay_list, hit_count_list, '-x',
                         label='Hit count', color='red')
 
-        positrons, = twin.plot(delay_list, N_pos_list[:,0,0], '-o', 
+        positrons, = twin.plot(delay_list, n_pos_list[:,0,0], '-o',
                                label='Number of positrons/pC incident on CsI', color='blue')
-        fill_band = twin.fill_between(delay_list, N_pos_list[:,0,0] - N_pos_list[:,1,0], N_pos_list[:,0,0] + N_pos_list[:,1,0], 
+        fill_band = twin.fill_between(delay_list, n_pos_list[:,0,0] - n_pos_list[:,1,0],
+                                      n_pos_list[:,0,0] + n_pos_list[:,1,0],
                                       color='blue', alpha=0.3, label='Uncertainty')
 
         if show_exp_value:
-            import values as values
             exp_value = ax.axvline(x = values.delay_experiment,
                                     ymin = 0, ymax = 1,
                                     label = 'Delay used in 2018', color = 'orange')
@@ -260,15 +270,12 @@ class Hit_counter(Simulation):
 
 
         if save_data:
-            import pickle
             data = {
                 'delay' : delay_list,
                 'hit_count': hit_count_list,
-                'Npos_CsI': N_pos_list[:,0,0],
-                'Npos_CsI_err': N_pos_list[:,1,0],
-                'n_angular_samples': self.get_xray_bath().get_n_samples_angular(),
-                'n_samples': self.get_xray_bath().get_n_samples(),
-                'n_samples_azimuthal': self.get_n_samples_azimuthal()
+                'Npos_CsI': n_pos_list[:,0,0],
+                'Npos_CsI_err': n_pos_list[:,1,0],
+                'n_samples': samples
             }
 
             with open(f'{save_data_filename}.pickle', 'wb') as f:
@@ -276,10 +283,9 @@ class Hit_counter(Simulation):
 
         if plot_wait is not None:
             plt.show(block=False)
-            import time
             time.sleep(plot_wait)
             plt.close(fig)
-        
+
         else:
             plt.show()
 
@@ -300,9 +306,9 @@ class Hit_counter(Simulation):
         plt.ylabel('Quantity')
         plt.hist(angles, bins=50)
         plt.show()
-        
 
-    ############ ACCESS METHODS ##############################################################################
+
+    ############ ACCESS METHODS ############################################################
     def get_n_samples_azimuthal(self):
         """Access method for n_samples_azimuthal
 
@@ -310,7 +316,7 @@ class Hit_counter(Simulation):
             int: number of azimuthal samples to take
         """
         return self.n_samples_azimuthal
-    
+
 
 class Test:
     """
@@ -323,8 +329,6 @@ class Test:
         """
         Runs hit counter on experimental values
         """
-        import values
-        from simulation import Xray, Gamma
         xray = Xray(
             FWHM = values.xray_FWHM ,
             rotation = 40 * np.pi / 180,
@@ -335,11 +339,11 @@ class Test:
         gamma = Gamma(
             x_pos = -10e-12 * 3e8 * 1e3,
             pulse_length = values.gamma_length,
-            height = values.gamma_radius, 
+            height = values.gamma_radius,
             off_axis_dist = values.off_axial_dist
         )
 
-        counter = Hit_counter(
+        counter = HitCounter(
             xray_bath = xray,
             gamma_pulse = gamma,
             n_samples_azimuthal = 5
@@ -357,7 +361,6 @@ class Test:
         """
         Checks angular distribution
         """
-        from simulation import Xray, Gamma
         xray = Xray(
             FWHM = 10,
             rotation = 0
@@ -370,7 +373,7 @@ class Test:
             off_axis_dist = 100
         )
 
-        counter = Hit_counter(
+        counter = HitCounter(
             xray_bath = xray,
             gamma_pulse = gamma,
             n_samples_azimuthal=1
@@ -385,7 +388,6 @@ class Test:
         Checks for an accurate hit registration system
         using one x-ray point object
         """
-        from simulation import Xray, Gamma, Visualiser
         xray = Xray(
             FWHM = 10,
             rotation = 0
@@ -398,14 +400,14 @@ class Test:
             height = 100,
             off_axis_dist = 100
         )
-        
+
         vis = Visualiser(
             xray_bath = xray,
             gamma_pulse = gamma,
             bath_vis = True
         )
 
-        counter = Hit_counter(
+        counter = HitCounter(
             xray_bath = xray,
             gamma_pulse = gamma,
             n_samples_azimuthal=1
@@ -422,4 +424,3 @@ if __name__ == '__main__':
     # for i in range(1, 4):
     #     test.test_hit_counter()
     #     os.rename('Npos_plot_data.pickle', f'Npos_plot_data{i}.pickle')
-    
