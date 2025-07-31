@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -N lambertian_simulation_d
+#PBS -N lambertian_simulation_angle
 #PBS -l select=1:ncpus=1:mem=1gb
 #PBS -l walltime=03:00:00
 
