@@ -5,10 +5,10 @@ Timothy Chew
 21/07/25
 """
 
+import os
 from scipy.io import loadmat
 import numpy as np
 import matplotlib.pyplot as plt
-import os
 
 class gamma_spectra:
     """Gamma spectra data set
@@ -48,7 +48,7 @@ class gamma_spectra:
     def replicate_plot(self):
         """Replicates the plot displayed in the paper for sanity checks
         """
-        fig, ax = plt.subplots() #pylint: disable=unused-variable
+        _, ax = plt.subplots()
         ax.set_title('Gamma Spectrum')
         ax.set_xlabel('Gamma Photon Energy (MeV)')
         ax.set_ylabel('Photons/MeV')

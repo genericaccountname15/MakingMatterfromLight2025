@@ -289,7 +289,7 @@ class HitCounter(Simulation):
 
             with open(f'{save_data_filename}.pickle', 'wb') as f:
                 pickle.dump(data, f)
-        
+
         if save_params:
             df = pd.DataFrame([self.get_params()])
             df.to_csv(f'{save_params_filename}.csv',index=False)
@@ -301,9 +301,14 @@ class HitCounter(Simulation):
 
         else:
             plt.show()
-        
-    
+
+
     def get_params(self):
+        """Get parameters of Xray and Gamma objects
+
+        Returns:
+            dict: parameters of objects
+        """
         params = {
             'FWHM (mm)': self.get_xray_bath().get_fwhm(),
             'Rotation (rad)': self.get_xray_bath().get_rotation(),
@@ -313,7 +318,7 @@ class HitCounter(Simulation):
             'Length of gamma pulse (mm)': self.get_gamma_pulse().get_pulse_length(),
             'Off axial distance (mm)': self.get_gamma_pulse().get_off_axis_dist()
         }
-        
+
         return params
 
 

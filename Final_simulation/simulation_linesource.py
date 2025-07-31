@@ -106,6 +106,11 @@ class XrayLine(XrayLambertian):
 
 
 class HitCounterLine(HitCounter):
+    """Counts the number of collisions between the X-ray bath
+    and Gamma pulse for a line source
+
+    Changed methods: get_params
+    """
     def get_params(self):
         params = {
             'FWHM (mm)': self.get_xray_bath().get_fwhm(),
@@ -118,7 +123,7 @@ class HitCounterLine(HitCounter):
             'Length of gamma pulse (mm)': self.get_gamma_pulse().get_pulse_length(),
             'Off axial distance (mm)': self.get_gamma_pulse().get_off_axis_dist()
         }
-        
+
         return params
 
 class Test:
