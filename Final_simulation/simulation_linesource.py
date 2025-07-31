@@ -5,30 +5,57 @@ Timothy Chew
 28/07/25
 """
 
+import os
+from tqdm import tqdm
 import numpy as np
-import matplotlib.pyplot as plt
-from simulation_lambertian import Xray_lambertian
-from hit_counter import Hit_counter
 
-class Xray_line(Xray_lambertian):
-    def __init__(self, FWHM, line_length,rotation=0, n_samples_angular=400, n_samples=10, n_line_samples=10):
+from simulation_lambertian import XrayLambertian
+from hit_counter import HitCounter
+import values
+from simulation import Gamma, Visualiser
+from optimise_delay import write_data_csv
+from plot_optimised_data import plot_optimised_data
+
+class XrayLine(XrayLambertian):
+    """Generates a line source by setting up an
+    array of lambertian point sources
+
+    Redefined methods:
+
+    New methods:
+    """
+    def __init__(self, FWHM, line_length,rotation=0,
+                 n_samples_angular=400, n_samples=10, n_line_samples=10):
         super().__init__(FWHM, rotation, n_samples_angular, n_samples)
         self.n_line_samples = n_line_samples
         self.line_length = line_length
 
-        self.xray_coords = self.gen_Xray_seed_line()
-    
-    def gen_Xray_seed_line(self):
+        self.xray_coords, self.n_samples_total = self.gen_xray_seed_line( get_total_samples = True )
+
+    def gen_xray_seed_line(self, phi = 0, get_total_samples=False):
+        """Generates xray coordinates for a line source
+
+        Returns:
+            np.ndarray: array of line source generated xray coordinates
+        """
         coords = []
+        n_samples_total = 0
+
+        if phi == 0:
+            n_samples = self.get_n_samples()
+        else:
+            n_samples = round( self.get_n_samples() * np.cos( phi ) )
         
+
         for i in range(self.get_n_line_samples()):
             # generate point source coordinates
-            gen_coords = self.gen_Xray_seed(
-                mean = -self.get_FWHM(),
+            gen_coords, n_samples_lambert = self.gen_xray_seed(
+                mean = -self.get_fwhm(),
                 variance = self.get_variance(),
                 rotation=self.get_rotation(),
                 n_samples_angular = self.get_n_samples_angular(),
-                n_samples = self.get_n_samples()
+                n_samples = n_samples,
+                get_n_lambert = True
             )
 
             #shift point source coordinates
@@ -38,27 +65,44 @@ class Xray_line(Xray_lambertian):
 
             # append to coords
             if len(coords) == 0:
-                coords = gen_coords
+                coords = np.array(gen_coords)
             else:
                 coords = np.append(coords, gen_coords, axis=0)
 
-        return coords
-    
-    def resample(self):
+            n_samples_total += n_samples_lambert
+
+        if get_total_samples:
+            return coords, n_samples_total
+        else:
+            return coords
+
+    def resample(self, phi=None):
         """Resamples x-ray distribution
         """
-        self.xray_coords = self.gen_Xray_seed_line()
+        if phi is None:
+            self.xray_coords = self.gen_xray_seed_line(phi=0)
+        else:
+            self.xray_coords = self.gen_xray_seed_line(phi)
+    
+    def get_n_samples_total(self):
+        return self.n_samples_total
 
 
     def get_n_line_samples(self):
+        """Access method for number of line samples
+
+        Returns:
+            int: number of line samples
+        """
         return self.n_line_samples
-    
+
     def get_line_length(self):
+        """Access method for line_length
+
+        Returns:
+            float: length of line source
+        """
         return self.line_length
-    
-class Hit_counter_line(Hit_counter):
-    def est_npairs(self, angles, samples):
-        return super().est_npairs(angles, samples) / self.get_xray_bath().get_n_line_samples()
 
 
 class Test:
@@ -66,9 +110,7 @@ class Test:
         pass
 
     def test_bath_vis(self):
-        import values
-        from simulation import Gamma, Visualiser
-        xray = Xray_line(
+        xray = XrayLine(
             FWHM = values.xray_FWHM,
             line_length = 0.8,
             rotation= 0 * np.pi / 180,
@@ -90,51 +132,43 @@ class Test:
         )
 
         vis.plot()
-    
-    def test_hit_counter(self, VAR):
+
+    def test_hit_counter(self, var):
         """
         Runs hit counter on experimental values
         """
-        import values
-        from simulation import Gamma
-        xray = Xray_line(
+        xray = XrayLine(
             FWHM = values.xray_FWHM,
-            line_length = VAR, # VARIABLE WE CHANGING, REMEMBER TO MOVE
+            line_length = var, # VARIABLE WE CHANGING, REMEMBER TO MOVE
             rotation= 0 * np.pi / 180,
-            n_line_samples = 20,
+            n_line_samples = 5,
             n_samples_angular = 100,
-            n_samples = 10,
+            n_samples = 5,
         )
 
         gamma = Gamma(
             x_pos = -10e-12 * 3e8 * 1e3,
             pulse_length = values.gamma_length,
-            height = values.gamma_radius, 
+            height = values.gamma_radius,
             off_axis_dist = values.off_axial_dist
         )
 
-        counter = Hit_counter_line(
+        counter = HitCounter(
             xray_bath = xray,
             gamma_pulse = gamma,
-            n_samples_azimuthal = 20
+            n_samples_azimuthal = 5
         )
 
         counter.plot_hit_count(
             min_delay = -10,
             max_delay = 500,
-            samples = 100,
+            samples = 50,
             show_exp_value = True,
-            save_data = True,
-            plot_wait = 3
+            save_data = True
         )
 
 def run_data_collection():
-    import os
-    from tqdm import tqdm
-    from Optimise_delay import write_data_csv
-    from plot_optimised_data import plot_optimised_data
-
-    # INPUT PARAMETERS ######################################################################################
+    # INPUT PARAMETERS #############################################################################
     variables = np.linspace(0.8, 5.0, 20) #variable list
     variable_file_name = variables #what to label each individual file
     variable_name = 'line_source_length' # no spaces
@@ -149,15 +183,17 @@ def run_data_collection():
 
 
     for i, var in enumerate(tqdm(variables, desc = 'Data collection progress')):
-        dir_name = f'{datadir}/sim_datafiles_{variable_name}_{variable_file_name[i]}_{units}' # directory name
+        # directory name
+        dir_name = f'{datadir}/sim_datafiles_{variable_name}_{variable_file_name[i]}_{units}'
         os.makedirs(dir_name)
-        for i in tqdm(range(1, 4), desc = 'Repeating simulations', leave = False): #repeat simulation 3 times
+        #repeat simulation 3 times
+        for i in tqdm(range(1, 4), desc = 'Repeating simulations', leave = False):
             test.test_hit_counter(var)
             os.rename('Npos_plot_data.pickle', f'{dir_name}/Npos_plot_data{i}.pickle')
-    
+
     print('-'*20 + 'DATA COLLECTION COMPLETE!' + '-'*20)
 
-  # WRITING DATA TO CSV ########################################################################################  
+    # WRITING DATA TO CSV ########################################################################
     write_data_csv(
         variable_name = f'{variable_name} ({units})',
         variable_list = variables,
@@ -174,13 +210,5 @@ def run_data_collection():
         fig_location = f'{datadir}'
     )
 
-    # PUSH DATA TO GITHUB ######################################################################################
-    import subprocess
-    subprocess.run(["git", "add", "."], check=True)
-    subprocess.run(["git", "commit", "-m", f"{variable_name} optimisation data files"], check=True)
-    subprocess.run(["git", "push"], check=True)
-    print("Changes pushed to GitHub.") 
-
 if __name__ == '__main__':
     run_data_collection()
-

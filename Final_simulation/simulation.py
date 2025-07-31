@@ -88,11 +88,9 @@ class Xray:
 
         return np.array(moved_coords)
 
-    def resample(self, phi=None):
+    def resample(self, phi): #pylint: disable=unused-argument
         """Resamples x-ray distribution
         """
-        if phi is not None:
-            raise NotImplementedError("Phi variable has no effect on uniform distributions")
         self.xray_coords = self.gen_xray_seed(
             mean = -self.get_fwhm(),
             variance = self.get_variance(),

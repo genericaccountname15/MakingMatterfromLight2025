@@ -243,12 +243,12 @@ class HitCounter(Simulation):
             hit_count, hit_coords, samples = self.count_hits(delay)
             #avoid numpy [:,3] splitting error when no hits are counted
             if hit_count == 0:
-                n_pos_list.append(0)
+                n_pos_list.append(np.array([[0], [0]]))
             else:
                 n_pos_list.append( self.est_npairs(angles = hit_coords[:, 3], samples = samples) )
             hit_count_list.append(hit_count)
 
-            self.xray_bath.resample() #resample x-ray distribution
+            self.xray_bath.resample(phi = 0) #resample x-ray distribution
 
         n_pos_list = np.array(n_pos_list)
 

@@ -78,14 +78,14 @@ class XrayLambertian(Xray):
         else:
             return np.array(coords)
 
-    def resample(self, phi=np.pi/2):
+    def resample(self, phi=0):
         """Resamples xray distribution depending
         on azimuthal angle
 
         Args:
             phi (_type_): _description_
         """
-        if phi == np.pi/2:
+        if phi == 0:
             n_samples = self.get_n_samples()
         else:
             n_samples = round( self.get_n_samples() * np.cos( phi ) )
