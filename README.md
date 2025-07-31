@@ -108,7 +108,7 @@ classDiagram
         +plot_ang_dist(delays)
     }
     class HitCounterLine{
-        get_params()
+        +get_params()
     }
 ```
 
