@@ -220,7 +220,7 @@ class Test:
         counter.plot_hit_count(
             min_delay = -10,
             max_delay = 500,
-            samples = 50,
+            samples = 100,
             show_exp_value = True,
             save_data = True
         )
