@@ -241,7 +241,11 @@ class HitCounter(Simulation):
 
         for delay in tqdm(delay_list, desc='Simulation', leave=False):
             hit_count, hit_coords, samples = self.count_hits(delay)
-            n_pos_list.append( self.est_npairs(angles = hit_coords[:, 3], samples = samples) )
+            #avoid numpy [:,3] splitting error when no hits are counted
+            if hit_count == 0:
+                n_pos_list.append(0)
+            else:
+                n_pos_list.append( self.est_npairs(angles = hit_coords[:, 3], samples = samples) )
             hit_count_list.append(hit_count)
 
             self.xray_bath.resample() #resample x-ray distribution
@@ -330,7 +334,7 @@ class Test:
         Runs hit counter on experimental values
         """
         xray = Xray(
-            FWHM = values.xray_FWHM ,
+            fwhm = values.xray_FWHM ,
             rotation = 40 * np.pi / 180,
             n_samples_angular = 400,
             n_samples = 10
@@ -362,7 +366,7 @@ class Test:
         Checks angular distribution
         """
         xray = Xray(
-            FWHM = 10,
+            fwhm = 10,
             rotation = 0
         )
 
@@ -389,7 +393,7 @@ class Test:
         using one x-ray point object
         """
         xray = Xray(
-            FWHM = 10,
+            fwhm = 10,
             rotation = 0
         )
         xray.xray_coords = np.array([[0,0,np.pi/2]])
