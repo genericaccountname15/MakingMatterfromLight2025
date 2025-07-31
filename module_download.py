@@ -21,17 +21,5 @@ def install_modules():
 
     subprocess.run(["pip3", "install", "--user", "scipy"], check = True)
 
-def git_config(email: str, name: str):
-    """Setup git config for pushing
-
-    Args:
-        email (string): email address of pusher
-        name (name): name of pusher
-    """
-    subprocess.run(["git", "config", "--global", "user.email", email], check=True)
-    subprocess.run(["git", "config", "--global", "user.name", name], check=True)
-
 if __name__=='__main__':
     install_modules()
-    git_config(email = 'timothy.chew22@imperial.ac.uk', 
-               name = 'Timothy')
