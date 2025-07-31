@@ -105,6 +105,22 @@ class XrayLine(XrayLambertian):
         return self.line_length
 
 
+class HitCounterLine(HitCounter):
+    def get_params(self):
+        params = {
+            'FWHM (mm)': self.get_xray_bath().get_fwhm(),
+            'Rotation (rad)': self.get_xray_bath().get_rotation(),
+            'Length of Xray source (mm)': self.get_xray_bath().get_line_length(),
+            'Number of samples on line': self.get_xray_bath().get_n_line_samples(),
+            'Number of sampled angles': self.get_xray_bath().get_n_samples_angular(),
+            'Number of samples per angle': self.get_n_samples(),
+            'Height of gamma pulse (mm)': self.get_gamma_pulse().get_height(),
+            'Length of gamma pulse (mm)': self.get_gamma_pulse().get_pulse_length(),
+            'Off axial distance (mm)': self.get_gamma_pulse().get_off_axis_dist()
+        }
+        
+        return params
+
 class Test:
     """Class for testing module
     And also collecting data
