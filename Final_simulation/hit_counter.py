@@ -329,38 +329,6 @@ class Test:
     def __init__(self):
         pass
 
-    def test_hit_counter(self):
-        """
-        Runs hit counter on experimental values
-        """
-        xray = Xray(
-            fwhm = values.xray_FWHM ,
-            rotation = 40 * np.pi / 180,
-            n_samples_angular = 400,
-            n_samples = 10
-        )
-
-        gamma = Gamma(
-            x_pos = -10e-12 * 3e8 * 1e3,
-            pulse_length = values.gamma_length,
-            height = values.gamma_radius,
-            off_axis_dist = values.off_axial_dist
-        )
-
-        counter = HitCounter(
-            xray_bath = xray,
-            gamma_pulse = gamma,
-            n_samples_azimuthal = 5
-        )
-
-        counter.plot_hit_count(
-            min_delay = -10,
-            max_delay = 500,
-            samples = 50,
-            show_exp_value = True,
-            save_data = True
-        )
-
     def check_ang_dist(self):
         """
         Checks angular distribution
@@ -419,6 +387,71 @@ class Test:
 
         vis.plot()
         print(counter.find_hits())
+
+    def test_hit_counter(self):
+        """
+        Runs hit counter on experimental values
+        """
+        xray = Xray(
+            fwhm = values.xray_FWHM ,
+            rotation = 40 * np.pi / 180,
+            n_samples_angular = 400,
+            n_samples = 10
+        )
+
+        gamma = Gamma(
+            x_pos = -10e-12 * 3e8 * 1e3,
+            pulse_length = values.gamma_length,
+            height = values.gamma_radius,
+            off_axis_dist = values.off_axial_dist
+        )
+
+        counter = HitCounter(
+            xray_bath = xray,
+            gamma_pulse = gamma,
+            n_samples_azimuthal = 5
+        )
+
+        counter.plot_hit_count(
+            min_delay = -10,
+            max_delay = 500,
+            samples = 50,
+            show_exp_value = True,
+            save_data = True
+        )
+
+    def collect_data(self):
+        """
+        Runs hit counter on experimental values
+        More samples taken for data collection
+        """
+        xray = Xray(
+            fwhm = values.xray_FWHM ,
+            rotation = 40 * np.pi / 180,
+            n_samples_angular = 400,
+            n_samples = 20
+        )
+
+        gamma = Gamma(
+            x_pos = -10e-12 * 3e8 * 1e3,
+            pulse_length = values.gamma_length,
+            height = values.gamma_radius,
+            off_axis_dist = values.off_axial_dist
+        )
+
+        counter = HitCounter(
+            xray_bath = xray,
+            gamma_pulse = gamma,
+            n_samples_azimuthal = 50
+        )
+
+        counter.plot_hit_count(
+            min_delay = -10,
+            max_delay = 500,
+            samples = 100,
+            show_exp_value = True,
+            save_data = True
+        )
 
 
 if __name__ == '__main__':

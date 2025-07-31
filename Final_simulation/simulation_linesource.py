@@ -45,7 +45,7 @@ class XrayLine(XrayLambertian):
             n_samples = self.get_n_samples()
         else:
             n_samples = round( self.get_n_samples() * np.cos( phi ) )
-        
+
 
         for i in range(self.get_n_line_samples()):
             # generate point source coordinates
@@ -83,7 +83,7 @@ class XrayLine(XrayLambertian):
             self.xray_coords = self.gen_xray_seed_line(phi=0)
         else:
             self.xray_coords = self.gen_xray_seed_line(phi)
-    
+
     def get_n_samples_total(self):
         return self.n_samples_total
 
@@ -106,10 +106,15 @@ class XrayLine(XrayLambertian):
 
 
 class Test:
+    """Class for testing module
+    And also collecting data
+    """
     def __init__(self):
         pass
 
     def test_bath_vis(self):
+        """Opens the visualiser for the experiment
+        """
         xray = XrayLine(
             FWHM = values.xray_FWHM,
             line_length = 0.8,
@@ -133,13 +138,13 @@ class Test:
 
         vis.plot()
 
-    def test_hit_counter(self, var):
+    def test_hit_counter(self):
         """
         Runs hit counter on experimental values
         """
         xray = XrayLine(
             FWHM = values.xray_FWHM,
-            line_length = var, # VARIABLE WE CHANGING, REMEMBER TO MOVE
+            line_length = 1,
             rotation= 0 * np.pi / 180,
             n_line_samples = 5,
             n_samples_angular = 100,
@@ -163,11 +168,50 @@ class Test:
             min_delay = -10,
             max_delay = 500,
             samples = 50,
+            show_exp_value = True
+        )
+
+    def collect_data(self, var):
+        """Runs hit counter on experimental values
+        Saves and plots data for analysis
+
+        Args:
+            var (list): variable we are changing
+            Edit class definition params for this purpose
+        """
+        xray = XrayLine(
+            FWHM = values.xray_FWHM,
+            line_length = var, # VARIABLE WE CHANGING, REMEMBER TO MOVE
+            rotation= 0 * np.pi / 180,
+            n_line_samples = 10,
+            n_samples_angular = 100,
+            n_samples = 10,
+        )
+
+        gamma = Gamma(
+            x_pos = -10e-12 * 3e8 * 1e3,
+            pulse_length = values.gamma_length,
+            height = values.gamma_radius,
+            off_axis_dist = values.off_axial_dist
+        )
+
+        counter = HitCounter(
+            xray_bath = xray,
+            gamma_pulse = gamma,
+            n_samples_azimuthal = 50
+        )
+
+        counter.plot_hit_count(
+            min_delay = -10,
+            max_delay = 500,
+            samples = 50,
             show_exp_value = True,
             save_data = True
         )
 
 def run_data_collection():
+    """Runs the data collection process for HPC systems
+    """
     # INPUT PARAMETERS #############################################################################
     variables = np.linspace(0.8, 5.0, 20) #variable list
     variable_file_name = variables #what to label each individual file
@@ -188,7 +232,7 @@ def run_data_collection():
         os.makedirs(dir_name)
         #repeat simulation 3 times
         for i in tqdm(range(1, 4), desc = 'Repeating simulations', leave = False):
-            test.test_hit_counter(var)
+            test.collect_data(var)
             os.rename('Npos_plot_data.pickle', f'{dir_name}/Npos_plot_data{i}.pickle')
 
     print('-'*20 + 'DATA COLLECTION COMPLETE!' + '-'*20)

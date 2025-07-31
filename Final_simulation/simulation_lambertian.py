@@ -159,9 +159,46 @@ class Test:
 
         vis.plot()
 
-    def test_hit_counter(self, var):
+    def test_hit_counter(self):
         """
         Runs hit counter on experimental values
+        """
+        xray = XrayLambertian(
+            FWHM = values.xray_FWHM,
+            rotation= 40 * np.pi / 180,
+            n_samples_angular = 400,
+            n_samples = 20,
+        )
+
+        gamma = Gamma(
+            x_pos = -10e-12 * 3e8 * 1e3,
+            pulse_length = values.gamma_length,
+            height = values.gamma_radius,
+            off_axis_dist = values.off_axial_dist
+        )
+
+        counter = HitCounter(
+            xray_bath = xray,
+            gamma_pulse = gamma,
+            n_samples_azimuthal = 10
+        )
+
+        counter.plot_hit_count(
+            min_delay = -10,
+            max_delay = 500,
+            samples = 50,
+            show_exp_value = True,
+            save_data = True
+        )
+
+
+    def collect_data(self, var):
+        """Runs hit counter on experimental values
+        Saves and plots data for analysis
+
+        Args:
+            var (list): variable we are changing
+            Edit class definition params for this purpose
         """
         xray = XrayLambertian(
             FWHM = values.xray_FWHM,
@@ -180,16 +217,17 @@ class Test:
         counter = HitCounter(
             xray_bath = xray,
             gamma_pulse = gamma,
-            n_samples_azimuthal = 10
+            n_samples_azimuthal = 50
         )
 
         counter.plot_hit_count(
             min_delay = -10,
             max_delay = 500,
-            samples = 50,
+            samples = 100,
             show_exp_value = True,
             save_data = True
         )
+
 
 
 ###################################################################################################
@@ -216,7 +254,7 @@ def run_data_collection():
         os.makedirs(dir_name)
         #repeat simulation 3 times
         for i in tqdm(range(1, 4), desc = 'Repeating simulations', leave = False):
-            test.test_hit_counter(var)
+            test.collect_data(var)
             os.rename('Npos_plot_data.pickle', f'{dir_name}/Npos_plot_data{i}.pickle')
 
     print('-'*20 + 'DATA COLLECTION COMPLETE!' + '-'*20)
@@ -240,4 +278,4 @@ def run_data_collection():
 
 if __name__ == '__main__':
     test = Test()
-    test.test_hit_counter(1)
+    test.test_hit_counter()
