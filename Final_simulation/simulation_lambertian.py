@@ -70,7 +70,7 @@ class Xray_lambertian(Xray):
         if phi == np.pi/2:
             n_samples = self.get_n_samples()
         else:
-            n_samples = round( self.get_n_samples() * np.cos( phi - np.pi/2 ) )
+            n_samples = round( self.get_n_samples() * np.cos( phi ) )
 
         self.xray_coords = self.gen_Xray_seed(
             mean = -self.get_FWHM(),

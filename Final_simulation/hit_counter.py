@@ -53,11 +53,12 @@ class Hit_counter(Simulation):
         #azimuthal angles to sweep
         max_angle = np.arctan( self.get_gamma_pulse().get_height() / 
                               self.get_gamma_pulse().get_off_axis_dist() )
-        angles_azim = np.linspace(0, max_angle, self.get_n_samples_azimuthal())
+        angles_azim = np.linspace(-max_angle, max_angle, self.get_n_samples_azimuthal())
 
         total_hit_count = 0
         total_hit_coords = []
         samples = 0
+
 
 
         for phi in angles_azim:
@@ -138,7 +139,7 @@ class Hit_counter(Simulation):
             float: effective off-axis displacement
         """
         eff_d = d * np.sqrt(
-            1 + np.tan(phi)
+            1 + np.tan(phi) ** 2
         )
 
         return eff_d
