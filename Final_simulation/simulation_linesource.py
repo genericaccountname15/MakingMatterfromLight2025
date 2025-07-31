@@ -238,7 +238,7 @@ def run_data_collection():
     test = Test()
     print('-'*20 + 'BEGINNING DATA COLLECTION' + '-'*20)
 
-    datadir = f'{variable_name}_optimisation'
+    datadir = f'{variable_name}_optimisation_attempt2'
     os.makedirs(datadir)
 
 
