@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -N angle_simulation
+#PBS -N linesource_simulation
 #PBS -l select=1:ncpus=1:mem=1gb
 #PBS -l walltime=20:00:00
 
