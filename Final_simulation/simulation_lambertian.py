@@ -204,7 +204,7 @@ class Test:
             FWHM = values.xray_FWHM,
             rotation= 40 * np.pi / 180,
             n_samples_angular = 400,
-            n_samples = 20,
+            n_samples = 10,
         )
 
         gamma = Gamma(
@@ -217,13 +217,13 @@ class Test:
         counter = HitCounter(
             xray_bath = xray,
             gamma_pulse = gamma,
-            n_samples_azimuthal = 50
+            n_samples_azimuthal = 10
         )
 
         counter.plot_hit_count(
             min_delay = -10,
             max_delay = 500,
-            samples = 100,
+            samples = 50,
             show_exp_value = True,
             save_data = True,
             save_params = True,
@@ -237,8 +237,8 @@ def run_data_collection():
     """Runs a data collection algorithm for HPC runs
     """
     # INPUT PARAMETERS #############################################################################
-    variables = np.linspace(2.0, 3.0, 20) #variable list
-    variable_file_name = variables #what to label each individual file
+    variables = np.linspace(2.0, 3.0, 3) #variable list
+    variable_file_name = np.around(variables, 2) #what to label each individual file
     variable_name = 'd' # no spaces
     units = 'mm'
     old_value = 1 #value in 2018

@@ -291,7 +291,7 @@ class HitCounter(Simulation):
                 pickle.dump(data, f)
         
         if save_params:
-            df = pd.DataFrame(self.get_params())
+            df = pd.DataFrame([self.get_params()])
             df.to_csv(f'{save_params_filename}.csv',index=False)
 
         if plot_wait is not None:
@@ -305,12 +305,13 @@ class HitCounter(Simulation):
     
     def get_params(self):
         params = {
-            'FWHM': self.get_xray_bath().get_fwhm(),
-            'rotation': self.get_xray_bath().get_rotation(),
-            'n_samples_angular': self.get_xray_bath().get_n_samples_angular(),
-            'n_samples': self.get_n_samples(),
-            'gamma_height': self.get_gamma_pulse().get_height(),
-            'gamma_pulse_length': self.get_gamma_pulse().get_pulse_length()
+            'FWHM (mm)': self.get_xray_bath().get_fwhm(),
+            'Rotation (rad)': self.get_xray_bath().get_rotation(),
+            'Number of sampled angles': self.get_xray_bath().get_n_samples_angular(),
+            'Number of samples per angle': self.get_n_samples(),
+            'Height of gamma pulse (mm)': self.get_gamma_pulse().get_height(),
+            'Length of gamma pulse (mm)': self.get_gamma_pulse().get_pulse_length(),
+            'Off axial distance (mm)': self.get_gamma_pulse().get_off_axis_dist()
         }
         
         return params
