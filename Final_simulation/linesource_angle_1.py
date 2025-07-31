@@ -229,7 +229,7 @@ def run_data_collection():
     """Runs the data collection process for HPC systems
     """
     # INPUT PARAMETERS #############################################################################
-    variables = np.linspace(0, 90, 18) #variable list
+    variables = np.linspace(0, 90, 9) #variable list
     variable_file_name = np.around(variables, 2) #what to label each individual file
     variable_name = 'angle' # no spaces
     units = 'degrees'
