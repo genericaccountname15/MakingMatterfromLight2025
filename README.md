@@ -82,6 +82,44 @@ classDiagram
         +resample(azimuthal angle)
         +get_n_samples_total()
     }
+
+classDiagram
+    Simulation <|-- Visualiser
+    Simulation <|-- HitCounter
+    HitCounter <|-- HitCounterLine
+    Simulation : +Xray xray_bath
+    Simulation : +Gamma gamma_pulse
+    Simulation : +get_overlap_coords(xray and gamma coordinates)
+    Simulation : +find_hits(effective height and off axial distance)
+    class Visualiser {
+        +bool bath_vis
+        +plot
+    }
+    class HitCounter{
+        +int n_samples_azimuthal
+        +count_hits(delay)
+        +calc_effective_height(azimuthal angle)
+        +calc_effective_d(azimuthal angle)
+        +est_npairs(angle, number of samples)
+        +plot_hit_count(min and max delay)
+        +get_params()
+        +plot_ang_dist(delays)
+    }
+    class HitCounterLine{
+        get_params()
+    }
+
+classDiagram
+    Gamma : +float x_pos
+    Gamma : +float pulse_length
+    Gamma : +float height
+    Gamma : +float off_axis_dist
+    Gamma : +matplotlib.patches gamma_axes_obj
+    Gamma : +get_bounds()
+    Gamma : +move()
+    Gamma : +set_x_pos()
+    Gamma : +set_height()
+
 ```
 
 
