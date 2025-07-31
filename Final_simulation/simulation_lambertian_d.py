@@ -237,7 +237,7 @@ def run_data_collection():
     """Runs a data collection algorithm for HPC runs
     """
     # INPUT PARAMETERS #############################################################################
-    variables = np.linspace(0.1, 3.0, 20) #variable list
+    variables = np.linspace(0.1, 3.0, 10) #variable list
     variable_file_name = np.around(variables, 2) #what to label each individual file
     variable_name = 'd' # no spaces
     units = 'mm'
