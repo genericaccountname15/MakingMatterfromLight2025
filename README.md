@@ -82,7 +82,9 @@ classDiagram
         +resample(azimuthal angle)
         +get_n_samples_total()
     }
+```
 
+```mermaid
 classDiagram
     Simulation <|-- Visualiser
     Simulation <|-- HitCounter
@@ -108,7 +110,9 @@ classDiagram
     class HitCounterLine{
         get_params()
     }
+```
 
+```mermaid
 classDiagram
     Gamma : +float x_pos
     Gamma : +float pulse_length
@@ -119,7 +123,6 @@ classDiagram
     Gamma : +move()
     Gamma : +set_x_pos()
     Gamma : +set_height()
-
 ```
 
 
