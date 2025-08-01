@@ -6,4 +6,4 @@
 cd $PBS_O_WORKDIR
 
 python3 module_download.py
-python3 python3 simulation_restructure/run_sim_lambertian_d.py
+python3 simulation_restructure/run_sim_lambertian_d.py
