@@ -192,8 +192,8 @@ if __name__ == '__main__':
     # data_sim, optimal_delay = avg_data(simdata_dir = 'sim_datafiles_d1/')
     # plot_data(data_sim[:,0], data_sim[:,1], data_sim[:,2], optimal_delay)
     write_data_csv(
-        variable_name = 'd (mm)',
-        variable_list = [0.1, 0.5, 1, 1.5, 2.0, 3.0],
-        datadir = 'd_optimisation_lambert',
-        csvname = 'optimise_d.csv'
+        variable_name = 'angle (degrees)',
+        variable_list = np.linspace(0,90,9),
+        datadir = 'Final_simulation/line_source_length_optimisation',
+        csvname = 'optimise_angle_3mm'
     )
