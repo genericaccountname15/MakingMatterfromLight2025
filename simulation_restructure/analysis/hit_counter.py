@@ -176,10 +176,10 @@ class HitCounter(Simulation):
         """
 
         # calculate cross section of each hit and sum #####################################
-        xray_data = XraySpectra('Final_simulation/data_read/data/XrayBath/XraySpectra/',
+        xray_data = XraySpectra('simulation_restructure/theory/energy_spectra/data/XrayBath/XraySpectra/',
                                  resolution=0.5)
         gamma_data = GammaSpectra(
-            'Final_simulation/data_read/data/GammaSpectra/Fig4b_GammaSpecLineouts.mat')
+            'simulation_restructure/theory/energy_spectra/data/GammaSpectra/Fig4b_GammaSpecLineouts.mat')
 
         xray_energy_sample = xray_data.sample_pdf(
             min_energy = values.xray_spectra_min,
