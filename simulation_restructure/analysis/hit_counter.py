@@ -53,7 +53,7 @@ class HitCounter(Simulation):
 
 
     ############ METHODS ######################################################################
-    def count_hits(self, delay: float) -> tuple[float, np.ndarray]:
+    def count_hits(self, delay: float) -> tuple[float, list[float]]:
         """Counts the total number of collisions for a given pulse timing
 
         Args:
@@ -162,7 +162,7 @@ class HitCounter(Simulation):
 
         return eff_d
 
-    def est_npairs(self, angles: list[float], samples: int)-> np.ndarray[float,float]:
+    def est_npairs(self, angles: list[float], samples: int)-> list[float,float]:
         """Estimates the number of positron pairs produced
         and lands on the CsI detector
 
@@ -171,7 +171,7 @@ class HitCounter(Simulation):
             samples (int): number of Xray coordinates generated
 
         Returns:
-            np.ndarray[float,float]: array containing:
+            list[float,float]: array containing:
                 [estimated number of positrons, uncertainty]
         """
 

@@ -21,7 +21,7 @@ class XrayLine(XrayLambertian):
     Attributes:
         line_length (float): Total physical length of the X-ray line source (mm).
         n_line_samples (int): Number of discrete Lambertian emitters along the line.
-        xray_coords (np.ndarray): 2D array of sampled ray coordinates (overridden).
+        xray_coords (list): 2D array of sampled ray coordinates (overridden).
         n_samples_total (int): Total number of Xray photons generated (overridden).
     
     Overridden Methods:
@@ -29,7 +29,7 @@ class XrayLine(XrayLambertian):
         - get_n_samples_total() -> int: Returns total number of Xrays photons generated.
 
     New Methods:
-        - gen_xray_seed_line(azimuthal_angle: float) -> np.ndarray, int:
+        - gen_xray_seed_line(azimuthal_angle: float) -> list, int:
             Initializes the Xray coordinates by seeding each point source along the line.
     """
     def __init__(
@@ -48,11 +48,11 @@ class XrayLine(XrayLambertian):
         self.xray_coords, self.n_samples_total = self.gen_xray_seed_line( get_total_samples = True )
 
     def gen_xray_seed_line(self, phi = 0, get_total_samples=False
-                           ) -> Union[np.ndarray, tuple[np.ndarray, int]]:
+                           ) -> Union[list, tuple[list, int]]:
         """Generates xray coordinates for a line source
 
         Returns:
-            np.ndarray: array of line source generated xray coordinates
+            list: array of line source generated xray coordinates
         """
         coords = []
         n_samples_total = 0

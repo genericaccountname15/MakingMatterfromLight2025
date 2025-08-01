@@ -50,7 +50,7 @@ class Xray:
         )
 
     ############ METHODS ##########################################################################
-    def gen_xray_seed(self, mean, variance, **kwargs) -> np.ndarray[list[float]]:
+    def gen_xray_seed(self, mean, variance, **kwargs) -> list[list[float]]:
         """Generates distribution of X ray pulse in 2D
 
         Args:
@@ -146,7 +146,7 @@ class Xray:
         """
         return self.variance
 
-    def get_xray_coords(self) -> np.ndarray:
+    def get_xray_coords(self) -> list:
         """Access method for Xray coordinates
 
         Returns:

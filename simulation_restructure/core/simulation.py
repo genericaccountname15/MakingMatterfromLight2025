@@ -41,7 +41,7 @@ class Simulation:
         self.n_samples = xray_bath.get_n_samples()
 
     ############ METHODS ###########################################################################
-    def get_overlap_coords(self, coords: list, beam_bounds: list) -> np.ndarray[float]:
+    def get_overlap_coords(self, coords: list, beam_bounds: list) -> list[float]:
         """Get coordinates of overlapping points of x-ray and gamma pulses
 
         Args:
@@ -49,7 +49,7 @@ class Simulation:
             beam_bounds (list): Boundaries of gamma pulse [xmin, xmax, ymin, ymax]
 
         Returns:
-            np.ndarray[float]: Array of overlapping coordinates [x, y]
+            list[float]: Array of overlapping coordinates [x, y]
         """
         overlap_coords = []
         for r in coords:
@@ -60,7 +60,7 @@ class Simulation:
         return np.array(overlap_coords)
 
     def find_hits(self, eff_height: float = None, eff_d: float = None
-                  ) -> tuple[int, np.ndarray[list[float]]]:
+                  ) -> tuple[int, list[list[float]]]:
         """Calculate hits using X-ray seed coordinates
         Check future position and see if registers a hit
 
@@ -70,7 +70,7 @@ class Simulation:
             eff_d (float, optional): effective off-axis displacement. Defaults to None
         
         Returns:
-            tuple (float, nu[list[float]]): Tuple containing:
+            tuple (float, list[list[float]]): Tuple containing:
                 - number of ovelaps
                 - coordinates of overlaps in the form [time, x, y, angle]
         """

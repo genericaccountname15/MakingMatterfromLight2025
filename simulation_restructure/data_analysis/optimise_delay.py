@@ -18,14 +18,14 @@ import pandas as pd
 
 from theory import values       #pylint: disable=import-error
 
-def avg_data(simdata_dir: str) -> tuple[np.ndarray[float], list[float]]:
+def avg_data(simdata_dir: str) -> tuple[list[float], list[float]]:
     """Averages the simulation data saved in pickle files in a specified directory
 
     Args:
         simdata_dir (string): Directory where the datafiles are located
 
     Returns:
-        tuple (np.ndarray[float], list[float]): Tuple containing
+        tuple (list[float], list[float]): Tuple containing
             - The averaged dataset in the form [delay, npos, npos_uncertainty]
             - The optimal delay which maximises Npos in the form [optimal delay, uncertainty]
     """
