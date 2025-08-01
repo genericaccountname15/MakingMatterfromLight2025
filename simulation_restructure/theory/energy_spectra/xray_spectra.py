@@ -212,7 +212,7 @@ class XraySpectra:
         """
         return self.file_dir
 
-    def get_file_list(self) -> list[str]:
+    def get_file_list(self) -> list:
         """Access method for file_list
 
         Returns:
