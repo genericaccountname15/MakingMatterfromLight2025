@@ -12,67 +12,33 @@ from core.xray_lambertian import XrayLambertian     #pylint: disable=import-erro
 from core.xray_line import XrayLine                 #pylint: disable=import-error
 from analysis.hit_counter import HitCounter         #pylint: disable=import-error
 from analysis.hit_counter_line import HitCounterLine    #pylint: disable=import-error
-from examples.example_sim import accurate    #pylint: disable=import-error
+from data_collection.data_params import accurate, quick, quick_line #pylint: disable=import-error
 
-# example parameters ##############################################################################
-quick = {
-    'angle samples': 200,
-    'samples per angle': 10,
-    'azimuthal samples': 5,
-    'delay samples': 50
-}
-
-quick_line = {
-    'angle samples': 100,
-    'samples per angle': 5,
-    'azimuthal samples': 5,
-    'line samples': 5,
-    'delay samples': 50
-}
-
-deep = {
-    'angle samples': 400,
-    'samples per angle': 20,
-    'azimuthal samples': 50,
-    'delay samples': 100
-}
-
-deep_line = {
-    'angle samples': 100,
-    'samples per angle': 10,
-    'azimuthal samples': 50,
-    'line samples': 10,
-    'delay samples': 100
-}
-
-params = accurate
-
-# Example hit counting ############################################################################
 def example_hit_counter(xray_type: str = 'uniform'):
     """
     Runs hit counter on experimental values
     """
     if xray_type == 'uniform':
         xray = Xray(
-            fwhm = params['fwhm'],
-            rotation = params['rotation'],
+            fwhm = accurate['fwhm'],
+            rotation = accurate['rotation'],
             n_samples_angular = quick['angle samples'],
             n_samples = quick['samples per angle']
         )
     
     elif xray_type == 'lambertian':
         xray = XrayLambertian(
-            fwhm = params['fwhm'],
-            rotation = params['rotation'],
+            fwhm = accurate['fwhm'],
+            rotation = accurate['rotation'],
             n_samples_angular = quick['angle samples'],
             n_samples = quick['samples per angle']
         )
     
     elif xray_type == 'line':
         xray = XrayLine(
-            fwhm = params['fwhm'],
-            rotation = params['rotation'],
-            line_length=params['line length'],
+            fwhm = accurate['fwhm'],
+            rotation = accurate['rotation'],
+            line_length=accurate['line length'],
             n_samples_angular = quick_line['angle samples'],
             n_samples = quick_line['samples per angle'],
             n_line_samples = quick_line['line samples']
@@ -83,10 +49,10 @@ def example_hit_counter(xray_type: str = 'uniform'):
 
 
     gamma = Gamma(
-        x_pos = params['x pos'],
-        pulse_length = params['pulse length'],
-        height = params['pulse height'],
-        off_axis_dist = params['off axis dist']
+        x_pos = accurate['x pos'],
+        pulse_length = accurate['pulse length'],
+        height = accurate['pulse height'],
+        off_axis_dist = accurate['off axis dist']
     )
 
     if xray_type == 'line':

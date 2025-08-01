@@ -1,9 +1,9 @@
 #!/bin/bash
 #PBS -N lambertian_angle_simulation
 #PBS -l select=1:ncpus=1:mem=1gb
-#PBS -l walltime=10:00:00
+#PBS -l walltime=30:00:00
 
 cd $PBS_O_WORKDIR
 
 python3 module_download.py
-python3 Final_simulation/simulation_lambertian_d.py
+python3 simulation_restructure/run_sim_lambertian_angle.py

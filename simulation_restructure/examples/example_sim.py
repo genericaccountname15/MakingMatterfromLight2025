@@ -6,39 +6,14 @@ Runs some example simulations on the simulation module
 Timothy Chew
 1/8/25
 """
-import numpy as np
-
-from theory import values       #pylint: disable=import-error
 from core.gamma import Gamma    #pylint: disable=import-error
 from core.xray import Xray      #pylint: disable=import-error
 from core.xray_lambertian import XrayLambertian     #pylint: disable=import-error
 from core.xray_line import XrayLine                 #pylint: disable=import-error
 from visualisation.visualisation import Visualiser  #pylint: disable=import-error
+from data_collection.data_params import accurate, visual    #pylint: disable=import-error
 
-# example parameters ##############################################################################
-accurate = {
-    'fwhm': values.xray_FWHM,
-    'rotation': values.source_angle * np.pi / 180,
-    'x pos': -values.delay_experiment * 1e-12 * values.c * 1e3,
-    'pulse length': values.gamma_length,
-    'pulse height': values.gamma_radius,
-    'off axis dist': values.off_axial_dist,
-    'bath vis': False,
-    'line length': 1
-}
 
-visual = {
-    'fwhm': 10,
-    'rotation': 0,
-    'x pos': -300,
-    'pulse length': 100,
-    'pulse height': 50,
-    'off axis dist': 100,
-    'bath vis': True,
-    'line length': 100
-}
-
-# example simulation function #####################################################################
 def example_sim(xray_type: str = 'uniform',sim_type: str = 'visual'):
     """Example run of the simulation
 
