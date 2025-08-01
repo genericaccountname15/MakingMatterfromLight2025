@@ -202,7 +202,7 @@ class Test:
         """
         xray = XrayLambertian(
             FWHM = values.xray_FWHM,
-            rotation= var * np.pi / 180, #VALUE BEING VARIED BE SURE TO CHANGE
+            rotation= values.source_angle * np.pi / 180,
             n_samples_angular = 400,
             n_samples = 20,
         )
@@ -211,7 +211,7 @@ class Test:
             x_pos = -10e-12 * 3e8 * 1e3,
             pulse_length = values.gamma_length,
             height = values.gamma_radius,
-            off_axis_dist = values.off_axial_dist
+            off_axis_dist = var  #VALUE BEING VARIED BE SURE TO CHANGE
         )
 
         counter = HitCounter(
@@ -237,11 +237,11 @@ def run_data_collection():
     """Runs a data collection algorithm for HPC runs
     """
     # INPUT PARAMETERS #############################################################################
-    variables = np.linspace(0, 90, 10) #variable list
+    variables = np.linspace(0.1, 3.0, 10) #variable list
     variable_file_name = np.around(variables, 2) #what to label each individual file
-    variable_name = 'angle' # no spaces
-    units = 'degrees'
-    old_value = 40 #value in 2018
+    variable_name = 'd' # no spaces
+    units = 'mm'
+    old_value = 1 #value in 2018
 
     test = Test() #pylint: disable=redefined-outer-name
     print('-'*20 + 'BEGINNING DATA COLLECTION' + '-'*20)
