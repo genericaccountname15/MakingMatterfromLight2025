@@ -107,7 +107,7 @@ class GammaSpectra:
 
         plt.show()
 
-    def sample_pdf(self, n_samples: int) -> list[float]:
+    def sample_pdf(self, n_samples: int) -> list:
         """Samples the gamma spectral distribution
 
         Args:
@@ -132,7 +132,7 @@ class GammaSpectra:
         """
         return self.matfile
     
-    def get_gamma_energy(self) -> list[float]:
+    def get_gamma_energy(self) -> list:
         """Access method for gamma_energy
 
         Returns:
@@ -140,7 +140,7 @@ class GammaSpectra:
         """
         return self.gamma_energy
     
-    def get_sim_nph_a_mean(self) -> list[float]:
+    def get_sim_nph_a_mean(self) -> list:
         """Access method for sim_nph_a_mean
 
         Returns:
@@ -148,7 +148,7 @@ class GammaSpectra:
         """
         return self.sim_nph_a_mean
     
-    def get_sim_nph_b_mean(self) -> list[float]:
+    def get_sim_nph_b_mean(self) -> list:
         """Access method for sim_nph_b_mean
 
         Returns:
@@ -156,7 +156,7 @@ class GammaSpectra:
         """
         return self.sim_nph_b_mean
     
-    def get_sim_nph_a_sigma(self) -> list[float]:
+    def get_sim_nph_a_sigma(self) -> list:
         """Access method for sim_nph_a_sigma
 
         Returns:
@@ -165,7 +165,7 @@ class GammaSpectra:
         """
         return self.sim_nph_a_sigma
     
-    def get_sim_nph_b_sigma(self) -> list[float]:
+    def get_sim_nph_b_sigma(self) -> list:
         """Access method for sim_nph_b_sigma
 
         Returns:
@@ -174,7 +174,7 @@ class GammaSpectra:
         """
         return self.sim_nph_b_sigma
     
-    def get_exp_nph_a_mean(self) -> list[float]:
+    def get_exp_nph_a_mean(self) -> list:
         """Access method for exp_nph_a_mean
 
         Returns:
@@ -182,7 +182,7 @@ class GammaSpectra:
         """
         return self.exp_nph_a_mean
     
-    def get_exp_nph_a_sigma(self) -> list[float]:
+    def get_exp_nph_a_sigma(self) -> list:
         """Access method for exp_nph_a_sigma
 
         Returns:
@@ -191,7 +191,7 @@ class GammaSpectra:
         """
         return self.exp_nph_a_sigma
     
-    def get_exp_nph_b_mean(self) -> list[float]:
+    def get_exp_nph_b_mean(self) -> list:
         """Access method for exp_nph_mean
 
         Returns:
@@ -199,7 +199,7 @@ class GammaSpectra:
         """
         return self.exp_nph_b_mean
     
-    def get_exp_nph_b_sigma(self) -> list[float]:
+    def get_exp_nph_b_sigma(self) -> list:
         """Access method for exp_nph_b_sigma
 
         Returns:
