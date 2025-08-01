@@ -74,7 +74,7 @@ class Gamma:
 
         return bounds
 
-    def move(self, dx):
+    def move(self, dx: float):
         """Moves gamma pulse object
 
         Args:
@@ -82,7 +82,7 @@ class Gamma:
         """
         self.gamma_axes_obj.set_x(self.get_x_pos() + dx)
 
-    def set_x_pos(self, new_x_pos):
+    def set_x_pos(self, new_x_pos: float):
         """Sets the gamma pulse to a new defined x coordinate
 
         Args:
@@ -91,7 +91,7 @@ class Gamma:
         self.x_pos = new_x_pos
         self.gamma_axes_obj.set_x(new_x_pos)
 
-    def set_height(self, new_height):
+    def set_height(self, new_height: float):
         """change the height of the gamma pulse
 
         Args:
@@ -100,7 +100,7 @@ class Gamma:
         self.height = new_height
 
     ############ ACCESS METHODS ####################################################################
-    def get_x_pos(self):
+    def get_x_pos(self) -> float:
         """Access method for initial x position
 
         Returns:
@@ -108,7 +108,7 @@ class Gamma:
         """
         return self.x_pos
 
-    def get_pulse_length(self):
+    def get_pulse_length(self) -> float:
         """Access method for pulse length
 
         Returns:
@@ -116,7 +116,7 @@ class Gamma:
         """
         return self.pulse_length
 
-    def get_height(self):
+    def get_height(self) -> float:
         """Access method for pulse height
 
         Returns:
@@ -124,7 +124,7 @@ class Gamma:
         """
         return self.height
 
-    def get_off_axis_dist(self):
+    def get_off_axis_dist(self) -> float:
         """Access method for the axial displacement
 
         Returns:
@@ -132,14 +132,10 @@ class Gamma:
         """
         return self.off_axis_dist
 
-    def get_gamma_axes_obj(self):
+    def get_gamma_axes_obj(self) -> float:
         """Access method for the gamma axes object
 
         Returns:
             matplotlib.patches.Rectangle: Axes object for gamma pulse
         """
         return self.gamma_axes_obj
-
-
-
-

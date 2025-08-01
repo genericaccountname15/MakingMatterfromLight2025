@@ -41,7 +41,7 @@ class Simulation:
         self.n_samples = xray_bath.get_n_samples()
 
     ############ METHODS ###########################################################################
-    def get_overlap_coords(self, coords: list, beam_bounds: list):
+    def get_overlap_coords(self, coords: list, beam_bounds: list) -> np.ndarray[float]:
         """Get coordinates of overlapping points of x-ray and gamma pulses
 
         Args:
@@ -49,7 +49,7 @@ class Simulation:
             beam_bounds (list): Boundaries of gamma pulse [xmin, xmax, ymin, ymax]
 
         Returns:
-            numpy.ndarray: Array of overlapping coordinates
+            np.ndarray[float]: Array of overlapping coordinates [x, y]
         """
         overlap_coords = []
         for r in coords:
@@ -59,7 +59,8 @@ class Simulation:
 
         return np.array(overlap_coords)
 
-    def find_hits(self, eff_height: float = None, eff_d: float = None):
+    def find_hits(self, eff_height: float = None, eff_d: float = None
+                  ) -> tuple[int, np.ndarray[list[float]]]:
         """Calculate hits using X-ray seed coordinates
         Check future position and see if registers a hit
 
@@ -69,7 +70,7 @@ class Simulation:
             eff_d (float, optional): effective off-axis displacement. Defaults to None
         
         Returns:
-            tuple (float, list[list[float]]): Tuple containing:
+            tuple (float, nu[list[float]]): Tuple containing:
                 - number of ovelaps
                 - coordinates of overlaps in the form [time, x, y, angle]
         """
@@ -130,17 +131,18 @@ class Simulation:
                         y = beam_bounds[2] + 3e8 * np.sin(r[2]) * (t_ymax - t_ymin)
                         overlap_coords.append([t, x, y, r[2]])
 
+        # in the case of no hits
         if len(overlap_coords) == 0:
             return 0, np.array([0,0,0,0])
-        else:
-            #unit conversion
-            overlap_coords = np.array(overlap_coords)
-            overlap_coords *= np.array([1e12, 1e3, 1e3, 1])
+
+        #unit conversion
+        overlap_coords = np.array(overlap_coords)
+        overlap_coords *= np.array([1e12, 1e3, 1e3, 1])
 
         return n, overlap_coords
 
     ############ ACCESS METHODS ####################################################################
-    def get_gamma_pulse(self):
+    def get_gamma_pulse(self) -> Gamma:
         """Access method for the gamma pulse
 
         Returns:
@@ -148,7 +150,7 @@ class Simulation:
         """
         return self.gamma_pulse
 
-    def get_xray_bath(self):
+    def get_xray_bath(self) -> Xray:
         """Access method for the x ray path
 
         Returns:
@@ -156,7 +158,7 @@ class Simulation:
         """
         return self.xray_bath
 
-    def get_n_samples_angular(self):
+    def get_n_samples_angular(self) -> int:
         """Access method for the number of angular samples
 
         Returns:
@@ -164,7 +166,7 @@ class Simulation:
         """
         return self.n_samples_angular
 
-    def get_n_samples(self):
+    def get_n_samples(self) -> int:
         """Access method for number of samples
 
         Returns:

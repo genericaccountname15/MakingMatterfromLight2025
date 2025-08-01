@@ -16,37 +16,62 @@ import matplotlib.pyplot as plt
 class XraySpectra:
     """Xray spectra data set
     Args:
-        file_dir (string): file directory address containing the xray spectra files in pickle format (.pickle)
-        resolution (float, optional): resolution of xray energy bins for averaging over data sets. Defaults to 0.5eV.
+        file_dir (string): file directory address containing the xray spectra files.
+            Stored in pickled dicts.
+        resolution (float, optional): resolution of xray energy bins for
+            averaging over data sets. Defaults to 0.5eV.
+
     Attributes:
-        file_dir (string): file directory address containing the xray spectra files in pickle format (.pickle)
-        file_list (list): list of filenames within the directory specified
+        file_dir (string): file directory address containing the pickled xray spectra files.
+        file_list (list[str]): list of filenames within the directory specified.
         resolution (float): resolution of xray energy bins for averaging over data sets (eV)
         energy (list[float]): all energy values from all datafiles
-        nph (list[float]): all values of number of photons/eV/J/srad from all data files, corresponds to energy value
+        nph (list[float]): all values of number of photons/eV/J/srad from all data files,
+            corresponds to energy value
         nph_err (list[float]): standard deviation of number of photons/eV/J/srad from all data files
         avg_energy (list[float]): bin energies (centre of bin values)
         avg_nph (list[float]): bin-average photon count
         avg_nph_err (list[float]): bin-summed photon count standard deviation
 
     Methods:
-        get_data() -> tuple(list[float], list[float], list[float]): Combines data from all 47 datasets
-        bin_data: Bins data into energy bins and averages within the bins
-        replicate_plot: Replicates the plot from literature as a sanity check
-        filter_energies: Filters out energies and isolates a range of energies
-        sample_pdf: Samples energergies from xray energy spectrum probability distribution
+        get_data() -> tuple(list[float], list[float], list[float]):
+            Combines data from all 47 datasets
+        bin_data(x: list[float], y: list[float], bin_width=0.5, err=False)
+             -> tuple(list[float], list[float]):
+                Bins data into energy bins and averages within the bins.
+                Returns bin heights and bin centres in tuple
+        replicate_plot(): Replicates the plot from literature as a sanity check
+        filter_energies(min_energy: float, max_energy: float): 
+            Filters out and isolates a range of energies.
+            Removes data points from outside the range from attributes
+        sample_pdf(min_energy: float, max_energy: float, n: int) -> np.ndarray: 
+            Samples energies from xray energy spectrum probability distribution
+            Returns an array of the sampled energy values.
     """
-    def __init__(self, file_dir, resolution=0.5):
+    def __init__(
+            self,
+            file_dir: str,
+            resolution=0.5
+        ):
         self.file_dir = file_dir
         self.file_list = os.listdir(file_dir)
         self.resolution = resolution
 
         self.energy, self.nph, self.nph_err = self.get_data()
 
-        self.avg_energy, self.avg_nph = self.bin_data(self.get_energy(), self.get_nph(), bin_width=self.resolution())
-        _, self.avg_nph_err = self.bin_data(self.get_energy(), self.get_nph_err(), bin_width=self.resolution(), err=True)
+        self.avg_energy, self.avg_nph = self.bin_data(
+            x = self.get_energy(),
+            y = self.get_nph(),
+            bin_width = self.get_resolution()
+            )
+        _, self.avg_nph_err = self.bin_data(
+            x = self.get_energy(),
+            y = self.get_nph_err(),
+            bin_width=self.get_resolution(),
+            err=True
+            )
 
-    
+    ##### METHODS #################################################################################
     def get_data(self):
         """Obtains and combines data from all datasets
 
@@ -56,30 +81,45 @@ class XraySpectra:
         energy_list = np.array([])
         nph_list = np.array([])
         nph_err_list = np.array([])
-        for file in self.file_list():
+        for file in self.get_file_list():
             if file.endswith('.pickle'):
-                data = np.load(self.file_dir() + file, allow_pickle=True)
+                data = np.load(self.get_file_dir() + file, allow_pickle=True)
                 energy_list = np.append(energy_list, data['E'][:][0], axis = 0)
                 laser_energy = data['laser_energy']
 
                 #normalise number of photons
-                nph_list = np.append(nph_list, data['normalised_number']/laser_energy/np.pi/2, axis = 0)
-                nph_err_list = np.append(nph_err_list, data['normalised_number_sem']/laser_energy/np.pi/2, axis = 0)
+                nph_list = np.append(
+                    nph_list,
+                    data['normalised_number']/laser_energy/np.pi/2,
+                    axis = 0
+                    )
+                nph_err_list = np.append(
+                    nph_err_list,
+                    data['normalised_number_sem']/laser_energy/np.pi/2,
+                    axis = 0
+                    )
         
         return energy_list, nph_list, nph_err_list
             
-    def bin_data(self, x, y, bin_width=0.5, err=False):
+    def bin_data(
+            self,
+            x: list[float],
+            y: list[float],
+            bin_width=0.5,
+            err=False
+        ) -> tuple[list[float], list[float]]:
         """Bins arrays of x and y data points and averages
         y values in bins
         Generated by ChatGPT
 
         Args:
-            x (list): list of x data points
-            y (list): list of y data points
+            x (list[float]): list of x data points
+            y (list[float]): list of y data points
             bin_width (float, optional): resolution of bins. Defaults to 0.5.
+            err (bool, optional): True if handling uncertainties. Defaults to False
 
         Returns:
-            tuple (list, list): bin centre coordinates, height of bins
+            tuple (list[float], list[float]): bin centre coordinates, height of bins
         """
         # Define bin edges (uniform or custom spacing)
         bins = np.arange(x.min(), x.max() + bin_width, bin_width)
@@ -104,7 +144,7 @@ class XraySpectra:
     def replicate_plot(self):
         """Replicates plot from the 2018 paper for sanity check
         """
-        fig, ax = plt.subplots() #pylint: disable=unused-variable
+        _, ax = plt.subplots()
         ax.set_title('Xray Spectrum')
         ax.set_xlabel('Xray Energy (eV)')
         ax.set_ylabel('Photons/eV/J/srad')
@@ -130,7 +170,7 @@ class XraySpectra:
 
         plt.show()
 
-    def filter_energies(self, min_energy, max_energy):
+    def filter_energies(self, min_energy: float, max_energy: float):
         """Filters energies between the 1.3-1.5keV energy range
 
         Args:
@@ -142,16 +182,18 @@ class XraySpectra:
         self.avg_nph = self.get_avg_nph()[mask]
         self.avg_nph_err = self.get_avg_nph_err()[mask]
 
-    def sample_pdf(self, min_energy, max_energy, n):
+    def sample_pdf(self, min_energy: float, max_energy: float, n: int
+                   ) -> tuple[list[float], list[float]]:
         """Generates discrete probability distribution
         and returns a sample of energies
 
         Args:
             min_energy (float): minimum xray energy (eV)
             max_energy (float): maximum xray energy (eV)
+            n (int): number of samples to take
 
         Returns:
-            tuple (list, list): xray energies, probability per energy
+            tuple (list[float], list[float]): xray energies, probability per energy
         """
         self.filter_energies(min_energy, max_energy)
         prob = self.get_avg_nph()
@@ -162,29 +204,75 @@ class XraySpectra:
         return samples
 
     # ACCESS METHODS #########################################################
-    def get_file_dir(self):
+    def get_file_dir(self) -> str:
+        """Access method for file_dir
+
+        Returns:
+            str: file directory address containing the pickled xray spectra files
+        """
         return self.file_dir
 
-    def get_file_list(self):
+    def get_file_list(self) -> list[str]:
+        """Access method for file_list
+
+        Returns:
+            list[str]: list of filenames within the directory specified
+        """
         return self.file_list
     
-    def get_resolution(self):
+    def get_resolution(self) -> float:
+        """Access method for file_list
+
+        Returns:
+            float: resolution of xray energy bins for averaging over data sets (eV)
+        """
         return self.resolution
     
-    def get_energy(self):
+    def get_energy(self) -> list[float]:
+        """Access method for energy
+
+        Returns:
+            list[float]: all energy values from all datafiles
+        """
         return self.energy
     
-    def get_nph(self):
+    def get_nph(self) -> list[float]:
+        """Access method for nph
+
+        Returns:
+            list[float]: all values of number of photons/eV/J/srad from all data files,
+            corresponds to energy value
+        """
         return self.nph
     
-    def get_nph_err(self):
+    def get_nph_err(self) -> list[float]:
+        """Access method for nph_err
+
+        Returns:
+            list[float]: standard deviation of number of photons/eV/J/srad from all data files
+        """
         return self.nph_err
     
-    def get_avg_energy(self):
+    def get_avg_energy(self) -> list[float]:
+        """Access method for avg_energy
+
+        Returns:
+            list[float]: bin energies (centre of bin values)
+        """
         return self.avg_energy
     
-    def get_avg_nph(self):
+    def get_avg_nph(self) -> list[float]:
+        """Access method for avg_nph
+
+        Returns:
+            list[float]: bin-average photon count
+        """
         return self.avg_nph
     
-    def get_avg_nph_err(self):
+    def get_avg_nph_err(self) -> list[float]:
+        """Access method for avg_nph_err
+
+        Returns:
+            list[float]: bin-summed photon count standard deviation
+        """
         return self.avg_nph_err

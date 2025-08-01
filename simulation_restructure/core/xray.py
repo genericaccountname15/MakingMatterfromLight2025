@@ -49,22 +49,30 @@ class Xray:
             n_samples = n_samples
         )
 
-    ############ METHODS ###########################################################################
-    def gen_xray_seed(self, mean, variance, rotation=0, n_samples_angular = 400, n_samples = 10):
+    ############ METHODS ##########################################################################
+    def gen_xray_seed(self, mean, variance, **kwargs) -> np.ndarray[list[float]]:
         """Generates distribution of X ray pulse in 2D
 
         Args:
             mean (float): mean of distribution, radial position (m)
             variance (float): variance of x-ray distribution (mm^2)
-            n_samples_angular (int, optional): Number of angles to sample. Defaults to 400
-            n_samples (int, optional): Number of samples per angle. Defaults to 10.
+            **kwargs: optional
+                rotation (float, optional): rotation of the Xray source
+                    or the kapton tape angle (rad). Defaults to 0
+                n_samples_angular (int, optional): Number of angles to sample. Defaults to 400
+                n_samples (int, optional): Number of samples per angle. Defaults to 10.
 
         Returns:
             numpy.ndarray[list[float]]: coordinates for distribution points in form
             [x, y, angle] | the angle is to the x-axis in the plane of the gamma pulse's motion
         """
-        coords = []
+        # kwargs ##################################################################################
+        rotation = kwargs.get('rotation', 0)
+        n_samples_angular = kwargs.get('n_samples_angular', 400)
+        n_samples = kwargs.get('n_samples', 10)
 
+
+        coords = []
         #rotate distribution 180 degrees
         angles = np.linspace(0 + rotation, np.pi + rotation, n_samples_angular)
         for theta in angles:
@@ -113,7 +121,7 @@ class Xray:
             n_samples = self.get_n_samples()
         )
 
-    def get_n_samples_total(self):
+    def get_n_samples_total(self) -> int:
         """Get total number of samples
 
         Returns:
@@ -122,7 +130,7 @@ class Xray:
         return self.get_n_samples() * self.get_n_samples_angular()
 
     ############ ACCESS METHODS ####################################################################
-    def get_fwhm(self):
+    def get_fwhm(self) -> float:
         """Access method for fwhm
 
         Returns:
@@ -130,7 +138,7 @@ class Xray:
         """
         return self.fwhm
 
-    def get_variance(self):
+    def get_variance(self) -> float:
         """Access method for variance
 
         Returns:
@@ -138,7 +146,7 @@ class Xray:
         """
         return self.variance
 
-    def get_xray_coords(self):
+    def get_xray_coords(self) -> np.ndarray:
         """Access method for Xray coordinates
 
         Returns:
@@ -146,7 +154,7 @@ class Xray:
         """
         return self.xray_coords
 
-    def get_n_samples_angular(self):
+    def get_n_samples_angular(self) -> int:
         """Access method for n_samples_angular
 
         Returns:
@@ -154,7 +162,7 @@ class Xray:
         """
         return self.n_samples_angular
 
-    def get_n_samples(self):
+    def get_n_samples(self) -> int:
         """Access method for n_samples
 
         Returns:
@@ -162,7 +170,7 @@ class Xray:
         """
         return self.n_samples
 
-    def get_rotation(self):
+    def get_rotation(self) -> float:
         """Access method for rotation
 
         Returns:

@@ -17,11 +17,13 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from tqdm import tqdm
 
-from core.simulation import Simulation, Xray, Gamma                 #pylint: disable=import-error
-from visualisation.visualisation import Visualiser                  #pylint: disable=import-error
-import theory.values as values                                      #pylint: disable=import-error
+from core.simulation import Simulation                              #pylint: disable=import-error
+from core.xray import Xray                                          #pylint: disable=import-error
+from core.gamma import Gamma                                        #pylint: disable=import-error
+from theory import values                                           #pylint: disable=import-error
 from theory.cross_section import c_bw                               #pylint: disable=import-error
-from theory.energy_spectra.spectral_data import xray_spectra, gamma_spectra     #pylint: disable=import-error
+from theory.energy_spectra.xray_spectra import XraySpectra          #pylint: disable=import-error
+from theory.energy_spectra.gamma_spectra import GammaSpectra        #pylint: disable=import-error
 
 class HitCounter(Simulation):
     """Counts the number of collisions between the X-ray bath
@@ -40,13 +42,18 @@ class HitCounter(Simulation):
         plot_hit_count: Plots the hit count and estimated number of pairs for a range of delays
                         (with option to save data)
     """
-    def __init__(self, xray_bath, gamma_pulse, n_samples_azimuthal = 1):
+    def __init__(
+            self,
+            xray_bath: Xray,
+            gamma_pulse: Gamma,
+            n_samples_azimuthal = 1
+        ):
         super().__init__(xray_bath, gamma_pulse)
         self.n_samples_azimuthal = n_samples_azimuthal
 
 
     ############ METHODS ######################################################################
-    def count_hits(self, delay):
+    def count_hits(self, delay: float) -> tuple[float, np.ndarray]:
         """Counts the total number of collisions for a given pulse timing
 
         Args:
@@ -104,7 +111,7 @@ class HitCounter(Simulation):
 
         return total_hit_count, total_hit_coords, samples
 
-    def calc_effective_height(self, r, phi, d):
+    def calc_effective_height(self, r: float, phi: float, d: float) -> float:
         """
         Solves a geometric problem to find the new effective height of the 
         gamma pulse when looking at an azimuthal plane of the x-ray bath.
@@ -137,7 +144,7 @@ class HitCounter(Simulation):
 
         return dist
 
-    def calc_effective_d(self, phi, d):
+    def calc_effective_d(self, phi: float, d: float) -> float:
         """Solves geometric problem to calculate effective off-axis
         displacement when looking at another azimuthal plane paramaterised
         by phi
@@ -155,18 +162,23 @@ class HitCounter(Simulation):
 
         return eff_d
 
-    def est_npairs(self, angles, samples):
+    def est_npairs(self, angles: list[float], samples: int)-> np.ndarray[float,float]:
         """Estimates the number of positron pairs produced
         and lands on the CsI detector
 
+        Args:
+            angles (list[float]): list of angle coordinates for each detected hit
+            samples (int): number of Xray coordinates generated
+
         Returns:
-            angles: list of angles for each hit
+            np.ndarray[float,float]: array containing:
+                [estimated number of positrons, uncertainty]
         """
 
         # calculate cross section of each hit and sum #####################################
-        xray_data = xray_spectra('Final_simulation/data_read/data/XrayBath/XraySpectra/',
+        xray_data = XraySpectra('Final_simulation/data_read/data/XrayBath/XraySpectra/',
                                  resolution=0.5)
-        gamma_data = gamma_spectra(
+        gamma_data = GammaSpectra(
             'Final_simulation/data_read/data/GammaSpectra/Fig4b_GammaSpecLineouts.mat')
 
         xray_energy_sample = xray_data.sample_pdf(
@@ -205,7 +217,7 @@ class HitCounter(Simulation):
 
         return np.array([n_pos, uncertainty])
 
-    def plot_hit_count(self, min_delay, max_delay, samples=50, **kwargs):
+    def plot_hit_count(self, min_delay: float, max_delay: float, samples=50, **kwargs):
         """Plots the hit count and estimated number of pairs for a
         range of delays
 
@@ -298,7 +310,11 @@ class HitCounter(Simulation):
             df = pd.DataFrame([self.get_params()])
             df.to_csv(f'{save_params_filename}.csv',index=False)
 
-        if plot_wait is not None:
+        
+        if plot_wait == 0:
+            plt.close(fig)
+
+        elif plot_wait is not None:
             plt.show(block=False)
             time.sleep(plot_wait)
             plt.close(fig)
@@ -307,7 +323,7 @@ class HitCounter(Simulation):
             plt.show()
 
 
-    def get_params(self):
+    def get_params(self) -> dict:
         """Get parameters of Xray and Gamma objects
 
         Returns:
@@ -326,7 +342,7 @@ class HitCounter(Simulation):
         return params
 
 
-    def plot_ang_dist(self, delay):
+    def plot_ang_dist(self, delay: float):
         """Plots the angular distribution of hits for
         a pulse delay
 
@@ -345,142 +361,10 @@ class HitCounter(Simulation):
 
 
     ############ ACCESS METHODS ############################################################
-    def get_n_samples_azimuthal(self):
+    def get_n_samples_azimuthal(self) -> int:
         """Access method for n_samples_azimuthal
 
         Returns:
             int: number of azimuthal samples to take
         """
         return self.n_samples_azimuthal
-
-
-class Test:
-    """
-    For running tests on the hit counter
-    """
-    def __init__(self):
-        pass
-
-    def check_ang_dist(self):
-        """
-        Checks angular distribution
-        """
-        xray = Xray(
-            fwhm = 10,
-            rotation = 0
-        )
-
-        gamma = Gamma(
-            x_pos = -300,
-            pulse_length = 200,
-            height = 100,
-            off_axis_dist = 100
-        )
-
-        counter = HitCounter(
-            xray_bath = xray,
-            gamma_pulse = gamma,
-            n_samples_azimuthal=1
-        )
-
-        counter.plot_ang_dist(
-            delay = 5000
-        )
-
-    def test_hit_reg(self):
-        """
-        Checks for an accurate hit registration system
-        using one x-ray point object
-        """
-        xray = Xray(
-            fwhm = 10,
-            rotation = 0
-        )
-        xray.xray_coords = np.array([[0,0,np.pi/2]])
-
-        gamma = Gamma(
-            x_pos = -300,
-            pulse_length = 200,
-            height = 100,
-            off_axis_dist = 100
-        )
-
-        vis = Visualiser(
-            xray_bath = xray,
-            gamma_pulse = gamma,
-            bath_vis = True
-        )
-
-        counter = HitCounter(
-            xray_bath = xray,
-            gamma_pulse = gamma,
-            n_samples_azimuthal=1
-        )
-
-        vis.plot()
-        print(counter.find_hits())
-
-    def test_hit_counter(self):
-        """
-        Runs hit counter on experimental values
-        """
-        xray = Xray(
-            fwhm = values.xray_FWHM ,
-            rotation = 40 * np.pi / 180,
-            n_samples_angular = 400,
-            n_samples = 10
-        )
-
-        gamma = Gamma(
-            x_pos = -10e-12 * 3e8 * 1e3,
-            pulse_length = values.gamma_length,
-            height = values.gamma_radius,
-            off_axis_dist = values.off_axial_dist
-        )
-
-        counter = HitCounter(
-            xray_bath = xray,
-            gamma_pulse = gamma,
-            n_samples_azimuthal = 5
-        )
-
-        counter.plot_hit_count(
-            min_delay = -10,
-            max_delay = 500,
-            samples = 50,
-            show_exp_value = True,
-            save_data = True
-        )
-
-    def collect_data(self):
-        """
-        Runs hit counter on experimental values
-        More samples taken for data collection
-        """
-        xray = Xray(
-            fwhm = values.xray_FWHM ,
-            rotation = 40 * np.pi / 180,
-            n_samples_angular = 400,
-            n_samples = 20
-        )
-
-        gamma = Gamma(
-            x_pos = -10e-12 * 3e8 * 1e3,
-            pulse_length = values.gamma_length,
-            height = values.gamma_radius,
-            off_axis_dist = values.off_axial_dist
-        )
-
-        counter = HitCounter(
-            xray_bath = xray,
-            gamma_pulse = gamma,
-            n_samples_azimuthal = 50
-        )
-
-        counter.plot_hit_count(
-            min_delay = -10,
-            max_delay = 500,
-            samples = 100,
-            show_exp_value = True,
-            save_data = True
-        )

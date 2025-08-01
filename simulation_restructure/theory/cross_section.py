@@ -14,9 +14,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import cm
 
-import theory.values as values        #pylint: disable=import-error
+from theory import values     #pylint: disable=import-error
 
-def dc_bw(root_s: np.ndarray[float], theta: np.ndarray[float]):
+def dc_bw(root_s: np.ndarray[float], theta: np.ndarray[float]) -> np.ndarray[float]:
     """Breit Wheeler differential cross section
     We get invalid values into the square root sometimes
     Supposed to set the value of d_cs to 0
@@ -42,7 +42,7 @@ def dc_bw(root_s: np.ndarray[float], theta: np.ndarray[float]):
 
     return d_cs
 
-def c_bw(root_s: np.ndarray[float]):
+def c_bw(root_s: np.ndarray[float]) -> np.ndarray[float]:
     """Breit Wheeler total cross section
 
     Args:

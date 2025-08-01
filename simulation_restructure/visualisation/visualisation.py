@@ -11,6 +11,8 @@ import matplotlib.pyplot as plt
 from matplotlib.widgets import Slider
 
 from core.simulation import Simulation      #pylint: disable=import-error
+from core.simulation import Xray            #pylint: disable=import-error
+from core.simulation import Gamma           #pylint: disable=import-error
 
 class Visualiser(Simulation):
     """Visualiser for simulation
@@ -25,7 +27,12 @@ class Visualiser(Simulation):
     Methods:
         plot: Plots out the simulation with a time step slider
     """
-    def __init__(self, xray_bath, gamma_pulse, bath_vis=False):
+    def __init__(
+            self,
+            xray_bath: Xray,
+            gamma_pulse: Gamma,
+            bath_vis=False
+        ):
         super().__init__(xray_bath, gamma_pulse)
         self.bath_vis = bath_vis
 
@@ -97,7 +104,6 @@ class Visualiser(Simulation):
             if len(overlap_coords) != 0:
                 overlap.set_xdata(overlap_coords[:, 0])
                 overlap.set_ydata(overlap_coords[:, 1])
-                print('overlap')
             else:
                 overlap.set_xdata([0])
                 overlap.set_ydata([-10])
@@ -110,7 +116,7 @@ class Visualiser(Simulation):
         plt.show()
 
     ############ ACCESS METHODS ####################################################################
-    def get_bath_vis(self):
+    def get_bath_vis(self) -> bool:
         """Access method for bath visualiser boolean
 
         Returns:

@@ -8,6 +8,7 @@ point-Lambertian sources along its length.
 Timothy Chew
 1/8/25
 """
+from typing import Union
 import numpy as np
 
 from core.xray_lambertian import XrayLambertian     #pylint: disable=import-error
@@ -46,7 +47,8 @@ class XrayLine(XrayLambertian):
 
         self.xray_coords, self.n_samples_total = self.gen_xray_seed_line( get_total_samples = True )
 
-    def gen_xray_seed_line(self, phi = 0, get_total_samples=False):
+    def gen_xray_seed_line(self, phi = 0, get_total_samples=False
+                           ) -> Union[np.ndarray, tuple[np.ndarray, int]]:
         """Generates xray coordinates for a line source
 
         Returns:
@@ -87,8 +89,7 @@ class XrayLine(XrayLambertian):
 
         if get_total_samples:
             return coords, n_samples_total
-        else:
-            return coords
+        return coords
 
     def resample(self, phi=None):
         """Resamples x-ray distribution
@@ -98,11 +99,16 @@ class XrayLine(XrayLambertian):
         else:
             self.xray_coords = self.gen_xray_seed_line(phi)
 
-    def get_n_samples_total(self):
+    def get_n_samples_total(self) -> int:
+        """Access method for total n_samples_total
+
+        Returns:
+            int: Number of Xray coordinates generated
+        """
         return self.n_samples_total
 
 
-    def get_n_line_samples(self):
+    def get_n_line_samples(self) -> int:
         """Access method for number of line samples
 
         Returns:
@@ -110,7 +116,7 @@ class XrayLine(XrayLambertian):
         """
         return self.n_line_samples
 
-    def get_line_length(self):
+    def get_line_length(self) -> float:
         """Access method for line_length
 
         Returns:
