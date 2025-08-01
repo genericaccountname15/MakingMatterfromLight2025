@@ -53,7 +53,7 @@ class HitCounter(Simulation):
 
 
     ############ METHODS ######################################################################
-    def count_hits(self, delay: float) -> tuple[float, list[float]]:
+    def count_hits(self, delay: float) -> tuple:
         """Counts the total number of collisions for a given pulse timing
 
         Args:
@@ -162,7 +162,7 @@ class HitCounter(Simulation):
 
         return eff_d
 
-    def est_npairs(self, angles: list[float], samples: int)-> list[float,float]:
+    def est_npairs(self, angles: list, samples: int)-> list:
         """Estimates the number of positron pairs produced
         and lands on the CsI detector
 

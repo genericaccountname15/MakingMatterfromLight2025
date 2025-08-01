@@ -18,7 +18,7 @@ import pandas as pd
 
 from theory import values       #pylint: disable=import-error
 
-def avg_data(simdata_dir: str) -> tuple[list[float], list[float]]:
+def avg_data(simdata_dir: str) -> tuple:
     """Averages the simulation data saved in pickle files in a specified directory
 
     Args:
@@ -68,10 +68,10 @@ def avg_data(simdata_dir: str) -> tuple[list[float], list[float]]:
     return np.array(data_avg), [peak_delay_mean, peak_delay_err]
 
 def plot_data(
-        delay: list[float],
-        npos: list[float],
-        npos_err: list[float],
-        peak_delay: list[float]
+        delay: list,
+        npos: list,
+        npos_err: list,
+        peak_delay: list
         ):
     """Plots the averaged simulation data
 
@@ -135,11 +135,11 @@ def plot_data(
     plt.show()
 
 def find_yield_gain(
-        delay: list[float],
-        npos: list[float],
+        delay: list,
+        npos: list,
         peak_delay: float,
         peak_delay_err: float
-        ) -> tuple[float, float]:
+        ) -> tuple:
     """returns the yield gain (%) compared to the 2018 experiment
 
     Args:
@@ -161,11 +161,11 @@ def find_yield_gain(
     return pos_max/ pos_exp * 100, abs(pos_max - pos_max_sigma) / pos_exp * 100
 
 def find_yield(
-        delay: list[float],
-        npos: list[float],
+        delay: list,
+        npos: list,
         peak_delay: float,
         peak_delay_err: float
-        ) -> tuple[float, float]:
+        ) -> tuple:
     """returns the maximal positron yield
 
     Args:
@@ -187,7 +187,7 @@ def find_yield(
 
 def write_data_csv(
         variable_name: str,
-        variable_list: list[float],
+        variable_list: list,
         datadir: str,
         csvname: str
         ):

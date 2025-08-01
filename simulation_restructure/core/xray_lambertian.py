@@ -9,7 +9,6 @@ obtaining the total number of samples taken.
 Timothy Chew
 1/8/25
 """
-from typing import Union
 import numpy as np
 
 from core.xray import Xray      #pylint: disable=import-error
@@ -48,7 +47,7 @@ class XrayLambertian(Xray):
             mean: float,
             variance: float,
             **kwargs
-        ) -> Union[np.ndarray, tuple[np.ndarray, int]]:
+        ):
         """Generates a lambertian distribution of X ray pulse in 2D
 
         Args:

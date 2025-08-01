@@ -50,7 +50,7 @@ class Xray:
         )
 
     ############ METHODS ##########################################################################
-    def gen_xray_seed(self, mean, variance, **kwargs) -> list[list[float]]:
+    def gen_xray_seed(self, mean, variance, **kwargs) -> list:
         """Generates distribution of X ray pulse in 2D
 
         Args:

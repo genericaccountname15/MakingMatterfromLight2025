@@ -103,7 +103,7 @@ def run_hit_counter_var(
 
 
 def run_data_collection(
-        variables: list[float],
+        variables: list,
         variable_name: str,
         variable_parameter_name: str,
         units: str,

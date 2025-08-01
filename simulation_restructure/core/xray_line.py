@@ -8,7 +8,6 @@ point-Lambertian sources along its length.
 Timothy Chew
 1/8/25
 """
-from typing import Union
 import numpy as np
 
 from core.xray_lambertian import XrayLambertian     #pylint: disable=import-error
@@ -47,8 +46,7 @@ class XrayLine(XrayLambertian):
 
         self.xray_coords, self.n_samples_total = self.gen_xray_seed_line( get_total_samples = True )
 
-    def gen_xray_seed_line(self, phi = 0, get_total_samples=False
-                           ) -> Union[list, tuple[list, int]]:
+    def gen_xray_seed_line(self, phi = 0, get_total_samples=False):
         """Generates xray coordinates for a line source
 
         Returns:
