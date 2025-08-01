@@ -266,7 +266,7 @@ def run_data_collection():
     write_data_csv(
         variable_name = f'{variable_name} ({units})',
         variable_list = variables,
-        datadir = f'{variable_name}_optimisation_lambert',
+        datadir = f'{variable_name}_optimisation_lambert_attempt2',
         csvname = f'{datadir}/optimise_{variable_name}'
     )
 
