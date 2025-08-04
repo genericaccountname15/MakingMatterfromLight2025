@@ -10,7 +10,7 @@ from theory import values   #pylint: disable=import-error
 run_data_collection(
     variables = np.linspace(0.1, 3.0, 10),
     variable_name = 'd',
-    variable_parameter_name = 'off_axis_dist',
+    variable_parameter_name = 'off axis dist',
     units = 'mm',
     old_value = values.off_axial_dist,
     xray_type = 'lambertian',
