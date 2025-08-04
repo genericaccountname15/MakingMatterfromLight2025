@@ -69,9 +69,9 @@ def plot_optimised_data(filename, variable_name, xlabel, old_value,
 
 if __name__ == '__main__':
     plot_optimised_data(
-        filename = 'optimise_d.csv',
-        variable_name = 'off axis displacement',
-        xlabel = 'd (mm)',
-        old_value = 1,
+        filename = 'optimise_line_source_length.csv',
+        variable_name = 'line source length',
+        xlabel = 'line source length (mm)',
+        old_value = 0.4,
         save_fig=True
     )

@@ -192,8 +192,8 @@ if __name__ == '__main__':
     # data_sim, optimal_delay = avg_data(simdata_dir = 'sim_datafiles_angle_1.57_radians/')
     # plot_data(data_sim[:,0], data_sim[:,1], data_sim[:,2], optimal_delay)
     write_data_csv(
-        variable_name = 'd (mm)',
-        variable_list = np.linspace(0.1, 3.0, 10),
-        datadir = 'd_optimisation_lambertian_4Aug',
-        csvname = 'optimise_d'
+        variable_name = 'line length (mm)',
+        variable_list = np.linspace(0.4, 5.0, 10),
+        datadir = 'line_source_length_optimisation_line_4Aug',
+        csvname = 'optimise_line_source_length'
     )

@@ -2,6 +2,6 @@
 main module needs no explanation sigma sigma sigma
 """
 
-import numpy as np
-from data_analysis.optimise_delay import write_data_csv #pylint: disable=fuck-off
+from examples import example_data_collection as ex     #pylint: disable=import-error
 
+ex.example_data_collection_line()
