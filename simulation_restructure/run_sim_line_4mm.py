@@ -16,7 +16,7 @@ run_data_collection(
     old_value = values.source_angle * np.pi / 180,
     xray_type = 'line',
     repeat = 3,
-    additional_label = '4Aug',
+    additional_label = '4mm_4Aug',
     sim_params = accurate_line_4mm,
     sample_params = deep
     )
