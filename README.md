@@ -60,6 +60,8 @@ Pickled object is a python dict
 ```mermaid
 classDiagram
     Xray <|-- XrayLambertian
+    Xray <|-- XrayLambertianGe
+    Xray <|-- XrayLambertianPd
     XrayLambertian <|-- XrayLine
     Xray : +float FWHM
     Xray : +float rotation
@@ -71,6 +73,16 @@ classDiagram
     Xray : +resample()
     Xray : +get_n_samples_total()
     class XrayLambertian {
+        +gen_xray_seed()
+        +resample(azimuthal angle)
+        +get_n_samples_total()
+    }
+    class XrayLambertianGe {
+        +gen_xray_seed()
+        +resample(azimuthal angle)
+        +get_n_samples_total()
+    }
+    class XrayLambertianPd {
         +gen_xray_seed()
         +resample(azimuthal angle)
         +get_n_samples_total()
