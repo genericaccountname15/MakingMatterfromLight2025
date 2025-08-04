@@ -85,28 +85,28 @@ class HitCounter(Simulation):
 
             # resample xray distribution ###########################
             self.xray_bath.resample(phi = phi)
+            if len(self.get_xray_bath().get_xray_coords()) != 0:
+                # calculate 'effective gamma pulse parameters' ##########
+                eff_height = self.calc_effective_height(
+                    r = self.get_gamma_pulse().get_height(),
+                    phi = phi,
+                    d = self.get_gamma_pulse().get_off_axis_dist()
+                )
 
-            # calculate 'effective gamma pulse parameters' ##########
-            eff_height = self.calc_effective_height(
-                r = self.get_gamma_pulse().get_height(),
-                phi = phi,
-                d = self.get_gamma_pulse().get_off_axis_dist()
-            )
+                eff_d = self.calc_effective_d(
+                    phi = phi,
+                    d = self.get_gamma_pulse().get_off_axis_dist()
+                )
+                hit_count, hit_coords = self.find_hits(eff_height = eff_height, eff_d = eff_d)
 
-            eff_d = self.calc_effective_d(
-                phi = phi,
-                d = self.get_gamma_pulse().get_off_axis_dist()
-            )
-            hit_count, hit_coords = self.find_hits(eff_height = eff_height, eff_d = eff_d)
+                if hit_count != 0:
+                    total_hit_count += hit_count
+                    if len(total_hit_coords) == 0:
+                        total_hit_coords = hit_coords
+                    else:
+                        total_hit_coords = np.append(total_hit_coords, hit_coords, axis=0)
 
-            if hit_count != 0:
-                total_hit_count += hit_count
-                if len(total_hit_coords) == 0:
-                    total_hit_coords = hit_coords
-                else:
-                    total_hit_coords = np.append(total_hit_coords, hit_coords, axis=0)
-
-            samples += self.get_xray_bath().get_n_samples_total()
+                samples += self.get_xray_bath().get_n_samples_total()
 
 
         return total_hit_count, total_hit_coords, samples

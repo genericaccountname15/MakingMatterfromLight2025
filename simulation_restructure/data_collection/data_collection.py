@@ -131,14 +131,21 @@ def run_data_collection(
             Defaults to accurate.
         sample_params (dict, optional): sampling parameters (e.g.: n_samples).
             Defaults to deep.
+    
+    Raises:
+        KeyError: if variable_parameter_name isn't a valid parameter name
     """
+    ### Check variable parameter name is valid
+    if variable_parameter_name not in accurate:
+        raise KeyError(f"'{variable_parameter_name}' not found in parameter dictionary keys: {list(accurate.keys())}")
+
     variable_file_name = np.around(variables, 2)
     print('-'*20 + 'BEGINNING DATA COLLECTION' + '-'*20)
 
     datadir = f'{variable_name}_optimisation_{xray_type}'
     if additional_label is not None:
         datadir = f'{variable_name}_optimisation_{xray_type}_{additional_label}'
-    os.makedirs(datadir)
+    os.makedirs(datadir, exist_ok=True)
 
     for i, var in enumerate(tqdm(variables, desc = 'Data collection progress')):
         # directory name
