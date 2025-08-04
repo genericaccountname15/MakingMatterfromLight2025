@@ -15,7 +15,7 @@ run_data_collection(
     old_value = values.off_axial_dist,
     xray_type = 'lambertian',
     repeat = 3,
-    additional_label = '1Aug',
+    additional_label = '4Aug',
     sim_params = accurate,
     sample_params = deep
 )
