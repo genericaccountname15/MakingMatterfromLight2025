@@ -15,7 +15,7 @@ run_data_collection(
     old_value = 0.4,
     xray_type = 'line',
     repeat = 3,
-    additional_label = '1Aug',
+    additional_label = '4Aug',
     sim_params = accurate,
     sample_params = deep_line
 )
