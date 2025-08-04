@@ -202,6 +202,8 @@ def write_data_csv(
     """
     npos_yield_arr = []
     npos_err_yield_arr = []
+    optimal_delay_list = []
+    optimal_delay_err_list = []
     data_dir_list = os.listdir(datadir)
     for simdata_dir in data_dir_list:
         data_sim, optimal_delay = avg_data(f"{datadir}/{simdata_dir}/")
@@ -209,11 +211,15 @@ def write_data_csv(
                                                 optimal_delay[0], optimal_delay[1])
         npos_yield_arr.append(yield_npos)
         npos_err_yield_arr.append(yield_npos_err)
+        optimal_delay_list.append(optimal_delay[0])
+        optimal_delay_err_list.append(optimal_delay[1])
 
     data = {
         variable_name: variable_list,
         "positron yield / pC": npos_yield_arr,
-        "positron yield error / pC": npos_err_yield_arr
+        "positron yield error / pC": npos_err_yield_arr,
+        "optimal delay / ps": optimal_delay_list,
+        "optimal delay error / ps": optimal_delay_err_list
     }
     df = pd.DataFrame(data)
     df.to_csv(f'{csvname}.csv', index=False)

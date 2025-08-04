@@ -25,7 +25,8 @@ def run_hit_counter_var(
         var: dict,
         params: dict = accurate,
         sampling: dict = deep,
-        xray_type: str = 'uniform'
+        xray_type: str = 'uniform',
+        second_fixed_param: dict = None
         ):
     """Runs hit counter while changing variable var
 
@@ -33,7 +34,7 @@ def run_hit_counter_var(
         var (dict): variable to vary {'name': float}
         params (dict): parameters of experiment. Defaults to accurate.
         sampling (dict): sampling parameters. Defaults to deep.
-        xray_type (str, optional): _description_. Defaults to 'uniform'.
+        xray_type (str, optional): Type of xray source use e.g. 'lambertian'. Defaults to 'uniform'.
 
     Raises:
         ValueError: When calling for an unsupported Xray source type
