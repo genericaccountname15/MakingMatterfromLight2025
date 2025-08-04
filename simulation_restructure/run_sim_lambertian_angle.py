@@ -9,14 +9,14 @@ from theory import values   #pylint: disable=import-error
 
 
 run_data_collection(
-    variables = np.linspace(0, 90, 10),
+    variables = np.linspace(0, 90, 10) * np.pi / 180,
     variable_name = 'angle',
     variable_parameter_name = 'rotation',
-    units = 'degrees',
+    units = 'radians',
     old_value = values.source_angle,
     xray_type = 'lambertian',
     repeat = 3,
-    additional_label = '1Aug',
+    additional_label = '4Aug',
     sim_params = accurate,
     sample_params = deep
     )
