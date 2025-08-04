@@ -1,12 +1,11 @@
 """
-data_collection.py
-
-Runs the simulation multiple times and finds the maximum positron
-yield variation with a specified independent variable.
+Modified data collection script
+so its more modular and easier to use
 
 Timothy Chew
-1/8/25
+4/8/25
 """
+
 import os
 from tqdm import tqdm
 import numpy as np
@@ -102,13 +101,78 @@ def run_hit_counter_var(
     )
 
 
-def run_data_collection(
+def repeat_sim(
+        dir_name: str,
+        variable_parameter_name: str,
+        variable_value: float,
+        xray_type: str,
+        repeat: int = 3,
+        sim_params: dict = accurate,
+        sample_params: dict = deep
+    ):
+    """Repeats the simulation and saves to a folder
+
+    Args:
+        dir_name (str): Directory to save simulation data to
+        variable_parameter_name (str): _description_
+        variable_value (float): value of the parameter to repeat
+        xray_type (str): _description_
+        repeat (int, optional): _description_. Defaults to 3.
+        sim_params (dict, optional): _description_. Defaults to accurate.
+        sample_params (dict, optional): _description_. Defaults to deep.
+    """
+    for i in tqdm(range(1, 1 + repeat), desc = 'Repeating simulations', leave = False):
+        var_dict = {variable_parameter_name: variable_value}
+        run_hit_counter_var(
+            var = var_dict,
+            params = sim_params,
+            sampling = sample_params,
+            xray_type = xray_type
+        )
+        os.rename('Npos_plot_data.pickle', f'{dir_name}/Npos_plot_data{i}.pickle')
+    os.rename('Simulation_parameters.csv', f'{dir_name}/Simulation_parameters.csv')
+
+def compile_data(
+        data_dir: str,
+        variables: list,
+        variable_name: str,
+        units: str,
+        old_value: float,
+    ):
+    """Makes a csv containing all the simulation
+    data and plots the relavent data
+
+    Args:
+        data_dir (str): Where the data is being kept
+        variables (list): _description_
+        variable_name (str): _description_
+        units (str): _description_
+        old_value (float): _description_
+    """
+    write_data_csv(
+        variable_name = f'{variable_name} ({units})',
+        variable_list = variables,
+        datadir = data_dir,
+        csvname = f'{data_dir}/optimise_{variable_name}'
+    )
+
+    plot_optimised_data(
+        filename = f'{data_dir}/optimise_{variable_name}.csv',
+        variable_name = variable_name,
+        xlabel = f'{variable_name} ({units})',
+        old_value = old_value,
+        save_fig = True,
+        fig_location = f'{data_dir}'
+    )
+
+
+def auto_data_collection(
         variables: list,
         variable_name: str,
         variable_parameter_name: str,
         units: str,
         old_value: float,
-        xray_type: float,
+        xray_type: str,
         repeat: int = 3,
         additional_label: str = None,
         sim_params: dict = accurate,
@@ -151,33 +215,22 @@ def run_data_collection(
         # directory name
         dir_name = f'{datadir}/sim_datafiles_{variable_name}_{variable_file_name[i]}_{units}'
         os.makedirs(dir_name, exist_ok=True)
-        #repeat simulation
-        for i in tqdm(range(1, 1 + repeat), desc = 'Repeating simulations', leave = False):
-            var_dict = {variable_parameter_name: var}
-            run_hit_counter_var(
-                var = var_dict,
-                params = sim_params,
-                sampling = sample_params,
-                xray_type = xray_type
-            )
-            os.rename('Npos_plot_data.pickle', f'{dir_name}/Npos_plot_data{i}.pickle')
-        os.rename('Simulation_parameters.csv', f'{dir_name}/Simulation_parameters.csv')
+        repeat_sim(
+            dir_name = dir_name,
+            variable_parameter_name = variable_parameter_name,
+            variable_value = var,
+            xray_type = xray_type,
+            repeat = 3,
+            sim_params = sim_params,
+            sample_params = sample_params
+        )
 
     print('-'*20 + 'DATA COLLECTION COMPLETE!' + '-'*20)
 
-  # WRITING DATA TO CSV #####################################################################
-    write_data_csv(
-        variable_name = f'{variable_name} ({units})',
-        variable_list = variables,
-        datadir = datadir,
-        csvname = f'{datadir}/optimise_{variable_name}'
-    )
-
-    plot_optimised_data(
-        filename = f'{datadir}/optimise_{variable_name}.csv',
+    compile_data(
+        data_dir = datadir,
+        variables = variables,
         variable_name = variable_name,
-        xlabel = f'{variable_name} ({units})',
-        old_value = old_value,
-        save_fig = True,
-        fig_location = f'{datadir}'
+        units = units,
+        old_value = old_value
     )
