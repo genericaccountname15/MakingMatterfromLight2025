@@ -13,6 +13,8 @@ import numpy as np
 
 from core.xray import Xray      #pylint: disable=import-error
 from core.xray_lambertian import XrayLambertian #pylint: disable=import-error
+from core.xray_lambertian_Ge import XrayLambertianGe #pylint: disable=import-error
+from core.xray_lambertian_Pd import XrayLambertianPd #pylint: disable=import-error
 from core.xray_line import XrayLine         #pylint: disable=import-error
 from core.gamma import Gamma    #pylint: disable=import-error
 from analysis.hit_counter import HitCounter #pylint: disable=import-error
@@ -49,6 +51,22 @@ def run_hit_counter_var(
 
     elif xray_type == 'lambertian':
         xray = XrayLambertian(
+            fwhm = varied_params['fwhm'],
+            rotation = varied_params['rotation'],
+            n_samples_angular = sampling['angle samples'],
+            n_samples = sampling['samples per angle']
+        )
+    
+    elif xray_type == 'lambertian_Ge':
+        xray = XrayLambertianGe(
+            fwhm = varied_params['fwhm'],
+            rotation = varied_params['rotation'],
+            n_samples_angular = sampling['angle samples'],
+            n_samples = sampling['samples per angle']
+        )
+
+    elif xray_type == 'lambertian_Pd':
+        xray = XrayLambertianPd(
             fwhm = varied_params['fwhm'],
             rotation = varied_params['rotation'],
             n_samples_angular = sampling['angle samples'],
