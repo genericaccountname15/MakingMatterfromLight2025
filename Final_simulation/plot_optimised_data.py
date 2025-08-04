@@ -69,9 +69,9 @@ def plot_optimised_data(filename, variable_name, xlabel, old_value,
 
 if __name__ == '__main__':
     plot_optimised_data(
-        filename = 'optimise_angle_3mm.csv',
-        variable_name = 'kapton tape angle',
-        xlabel = 'angle (degrees)',
-        old_value = 40,
+        filename = 'optimise_d.csv',
+        variable_name = 'off axis displacement',
+        xlabel = 'd (mm)',
+        old_value = 1,
         save_fig=True
     )

@@ -25,8 +25,7 @@ def run_hit_counter_var(
         var: dict,
         params: dict = accurate,
         sampling: dict = deep,
-        xray_type: str = 'uniform',
-        second_fixed_param: dict = None
+        xray_type: str = 'uniform'
         ):
     """Runs hit counter while changing variable var
 
@@ -166,7 +165,7 @@ def run_data_collection(
 
     print('-'*20 + 'DATA COLLECTION COMPLETE!' + '-'*20)
 
-  # WRITING DATA TO CSV #####################################################################
+    # WRITING DATA TO CSV #####################################################################
     write_data_csv(
         variable_name = f'{variable_name} ({units})',
         variable_list = variables,
