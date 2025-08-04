@@ -60,3 +60,11 @@ visual = {
     'bath vis': True,
     'line length': 100
 }
+
+accurate_line_4mm = {
+    **accurate, **{'line length': 4}
+}
+
+accurate_line_5mm = {
+    **accurate, **{'line length': 5}
+}
