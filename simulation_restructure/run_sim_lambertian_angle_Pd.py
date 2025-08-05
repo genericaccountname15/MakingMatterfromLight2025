@@ -16,7 +16,7 @@ run_data_collection(
     old_value = values.source_angle * np.pi / 180,
     xray_type = 'lambertian_Pd',
     repeat = 3,
-    additional_label = 'Pd_4Aug',
+    additional_label = 'Pd_4Aug_part2',
     sim_params = accurate,
     sample_params = deep
     )
