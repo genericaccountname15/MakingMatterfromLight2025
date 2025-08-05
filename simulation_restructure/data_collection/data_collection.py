@@ -16,6 +16,7 @@ from core.xray_lambertian import XrayLambertian #pylint: disable=import-error
 from core.xray_lambertian_Ge import XrayLambertianGe #pylint: disable=import-error
 from core.xray_lambertian_Pd import XrayLambertianPd #pylint: disable=import-error
 from core.xray_line import XrayLine         #pylint: disable=import-error
+from core.xray_line_twave import XrayTwave  #pylint: disable=import-error
 from core.gamma import Gamma    #pylint: disable=import-error
 from analysis.hit_counter import HitCounter #pylint: disable=import-error
 from analysis.hit_counter_line import HitCounterLine #pylint: disable=import-error
@@ -80,6 +81,19 @@ def run_hit_counter_var(
             fwhm = varied_params['fwhm'],
             rotation = varied_params['rotation'],
             line_length=varied_params['line length'],
+            n_samples_angular = sampling['angle samples'],
+            n_samples = sampling['samples per angle'],
+            n_line_samples = sampling['line samples']
+        )
+
+    elif xray_type == 'line':
+        if sampling == deep:
+            sampling = deep_line
+        xray = XrayTwave(
+            fwhm = varied_params['fwhm'],
+            rotation = varied_params['rotation'],
+            line_length = varied_params['line length'],
+            wave_speed = varied_params['wave speed'],
             n_samples_angular = sampling['angle samples'],
             n_samples = sampling['samples per angle'],
             n_line_samples = sampling['line samples']
