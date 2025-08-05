@@ -9,7 +9,7 @@ from theory import values   #pylint: disable=import-error
 
 
 run_data_collection(
-    variables = np.linspace(0, 90, 10) * np.pi / 180,
+    variables = [1.22173048, 1.3962634, 1.57079633],
     variable_name = 'angle',
     variable_parameter_name = 'rotation',
     units = 'radians',
