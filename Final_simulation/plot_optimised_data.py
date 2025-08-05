@@ -69,9 +69,9 @@ def plot_optimised_data(filename, variable_name, xlabel, old_value,
 
 if __name__ == '__main__':
     plot_optimised_data(
-        filename = 'optimise_line_source_length.csv',
-        variable_name = 'line source length',
-        xlabel = 'line source length (mm)',
-        old_value = 0.4,
+        filename = 'optimise_angle.csv',
+        variable_name = 'Kapton tape angle',
+        xlabel = 'Angle (radians)',
+        old_value = 40 * np.pi / 180,
         save_fig=True
     )

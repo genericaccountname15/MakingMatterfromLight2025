@@ -193,7 +193,7 @@ if __name__ == '__main__':
     # plot_data(data_sim[:,0], data_sim[:,1], data_sim[:,2], optimal_delay)
     write_data_csv(
         variable_name = 'line length (mm)',
-        variable_list = np.linspace(0.4, 5.0, 10),
-        datadir = 'line_source_length_optimisation_line_4Aug',
-        csvname = 'optimise_line_source_length'
+        variable_list = np.linspace(0, 90, 10) * np.pi / 180,
+        datadir = 'angle_optimisation_line_5mm_4Aug',
+        csvname = 'optimise_angle'
     )
