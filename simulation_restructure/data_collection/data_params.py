@@ -47,7 +47,8 @@ accurate = {
     'pulse height': values.gamma_radius,
     'off axis dist': values.off_axial_dist,
     'bath vis': False,
-    'line length': 1
+    'line length': 1,
+    'wave speed': values.c
 }
 
 visual = {
@@ -58,7 +59,8 @@ visual = {
     'pulse height': 50,
     'off axis dist': 100,
     'bath vis': True,
-    'line length': 100
+    'line length': 100,
+    'wave speed': values.c/2
 }
 
 accurate_line_4mm = {

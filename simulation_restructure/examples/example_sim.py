@@ -9,9 +9,10 @@ Timothy Chew
 from core.gamma import Gamma    #pylint: disable=import-error
 from core.xray import Xray      #pylint: disable=import-error
 from core.xray_lambertian import XrayLambertian     #pylint: disable=import-error
+from core.xray_line_twave import XrayTwave          #pylint: disable=import-error
 from core.xray_line import XrayLine                 #pylint: disable=import-error
 from visualisation.visualisation import Visualiser  #pylint: disable=import-error
-from data_collection.data_params import accurate, visual    #pylint: disable=import-error
+from data_collection.data_params import accurate, visual, quick_line, deep_line    #pylint: disable=import-error
 
 
 def example_sim(xray_type: str = 'uniform',sim_type: str = 'visual'):
@@ -23,27 +24,47 @@ def example_sim(xray_type: str = 'uniform',sim_type: str = 'visual'):
     """
     if sim_type == 'visual':
         sim_dict = visual
+        sample_dict = quick_line
     elif sim_type == 'accurate':
         sim_dict = accurate
+        sample_dict = deep_line
     else:
         raise ValueError(f'Invalid simulation type: {sim_type}. Expected "visual" or "accurate".')
     
     if xray_type == 'uniform':
         xray = Xray(
             fwhm = sim_dict['fwhm'],
-            rotation = sim_dict['rotation']
+            rotation = sim_dict['rotation'],
+            n_samples = sample_dict['samples per angle'],
+            n_samples_angular = sample_dict['angle samples']
         )
     elif xray_type == 'lambertian':
         xray = XrayLambertian(
             fwhm = sim_dict['fwhm'],
-            rotation = sim_dict['rotation']
+            rotation = sim_dict['rotation'],
+            n_samples = sample_dict['samples per angle'],
+            n_samples_angular = sample_dict['angle samples']
         )
     
     elif xray_type == 'line':
         xray = XrayLine(
             fwhm = sim_dict['fwhm'],
             rotation = sim_dict['rotation'],
-            line_length = sim_dict['line length']
+            line_length = sim_dict['line length'],
+            n_samples = sample_dict['samples per angle'],
+            n_samples_angular = sample_dict['angle samples'],
+            n_line_samples = sample_dict['line samples']
+        )
+
+    elif xray_type == 'twave':
+        xray = XrayTwave(
+            fwhm = sim_dict['fwhm'],
+            rotation = sim_dict['rotation'],
+            line_length = sim_dict['line length'],
+            wave_speed = sim_dict['wave speed'],
+            n_samples = sample_dict['samples per angle'],
+            n_samples_angular = sample_dict['angle samples'],
+            n_line_samples = sample_dict['line samples']
         )
     
     else:
