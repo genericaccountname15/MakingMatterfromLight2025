@@ -20,6 +20,7 @@ from core.xray_line_twave import XrayTwave  #pylint: disable=import-error
 from core.gamma import Gamma    #pylint: disable=import-error
 from analysis.hit_counter import HitCounter #pylint: disable=import-error
 from analysis.hit_counter_line import HitCounterLine #pylint: disable=import-error
+from analysis.hit_counter_twave import HitCounterTwave  #pylint: disable=import-error
 from data_collection.data_params import deep, deep_line, accurate   #pylint: disable=import-error
 from data_analysis.optimise_delay import write_data_csv #pylint: disable=import-error
 from data_analysis.plot_optimise_data import plot_optimised_data    #pylint: disable=import-error
@@ -112,6 +113,12 @@ def run_hit_counter_var(
 
     if xray_type == 'line':
         counter = HitCounterLine(
+            xray_bath = xray,
+            gamma_pulse = gamma,
+            n_samples_azimuthal = sampling['azimuthal samples']
+        )
+    elif xray_type == 'twave':
+        counter = HitCounterTwave(
             xray_bath = xray,
             gamma_pulse = gamma,
             n_samples_azimuthal = sampling['azimuthal samples']

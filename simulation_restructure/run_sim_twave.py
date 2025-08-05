@@ -1,5 +1,5 @@
 """
-runs the 4mm line source simulation while changing the angle
+runs a travelling wave simulation
 """
 import numpy as np
 from data_collection.data_collection import run_data_collection #pylint: disable=import-error
@@ -8,7 +8,7 @@ from data_collection.data_params import deep, accurate_line_5mm #pylint: disable
 
 
 run_data_collection(
-    variables = np.linspace(0.5, 10, 10) * np.pi / 180,
+    variables = np.linspace(0.5, 10, 10),
     variable_name = 'travelling_wave_speed',
     variable_parameter_name = 'wave speed',
     units = 'c',
