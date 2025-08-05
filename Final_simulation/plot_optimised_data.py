@@ -23,9 +23,8 @@ def plot_optimised_data(filename, variable_name, xlabel, old_value,
     data = np.loadtxt(filename, delimiter=',', skiprows=1)
 
     d = data[:,0]
-    npos = data[:,1] * 2
-    npos_err = data[:,2] * 2
-    #due to coding error
+    npos = data[:,1]
+    npos_err = data[:,2]
 
     _, ax = plt.subplots()
     ax.set_title(f'Positron count vs {variable_name}')
@@ -69,9 +68,9 @@ def plot_optimised_data(filename, variable_name, xlabel, old_value,
 
 if __name__ == '__main__':
     plot_optimised_data(
-        filename = 'optimise_angle.csv',
-        variable_name = 'Kapton tape angle',
-        xlabel = 'Angle (radians)',
-        old_value = 40 * np.pi / 180,
+        filename = 'optimise_line_source_length.csv',
+        variable_name = 'Line source length',
+        xlabel = 'Line source length (mm)',
+        old_value = 0.4,
         save_fig=True
     )
