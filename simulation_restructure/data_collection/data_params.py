@@ -46,6 +46,16 @@ accurate = {
     'pulse length': values.gamma_length,
     'pulse height': values.gamma_radius,
     'off axis dist': values.off_axial_dist,
+    'bath vis': False
+}
+
+accurate_line = {
+    'fwhm': values.xray_FWHM,
+    'rotation': 0,
+    'x pos': -values.delay_experiment * 1e-12 * values.c * 1e3,
+    'pulse length': values.gamma_length,
+    'pulse height': values.gamma_radius,
+    'off axis dist': values.off_axial_dist,
     'bath vis': False,
     'line length': 1,
     'wave speed': values.c
@@ -63,10 +73,22 @@ visual = {
     'wave speed': values.c/2
 }
 
+accurate_line_1mm = {
+    **accurate_line, **{'line length': 1}
+}
+
+accurate_line_2mm = {
+    **accurate_line, **{'line length': 2}
+}
+
+accurate_line_3mm = {
+    **accurate_line, **{'line length': 3}
+}
+
 accurate_line_4mm = {
-    **accurate, **{'line length': 4}
+    **accurate_line, **{'line length': 4}
 }
 
 accurate_line_5mm = {
-    **accurate, **{'line length': 5}
+    **accurate_line, **{'line length': 5}
 }

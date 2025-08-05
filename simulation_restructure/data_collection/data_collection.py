@@ -80,13 +80,13 @@ def run_hit_counter_var(
         xray = XrayLine(
             fwhm = varied_params['fwhm'],
             rotation = varied_params['rotation'],
-            line_length=varied_params['line length'],
+            line_length = varied_params['line length'],
             n_samples_angular = sampling['angle samples'],
             n_samples = sampling['samples per angle'],
             n_line_samples = sampling['line samples']
         )
 
-    elif xray_type == 'line':
+    elif xray_type == 'twave':
         if sampling == deep:
             sampling = deep_line
         xray = XrayTwave(
@@ -168,7 +168,7 @@ def run_data_collection(
         KeyError: if variable_parameter_name isn't a valid parameter name
     """
     ### Check variable parameter name is valid
-    if variable_parameter_name not in accurate:
+    if variable_parameter_name not in sim_params:
         raise KeyError(f"'{variable_parameter_name}' not found in parameter dictionary keys: {list(accurate.keys())}")
 
     variable_file_name = np.around(variables, 2)
