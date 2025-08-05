@@ -72,5 +72,6 @@ if __name__ == '__main__':
         variable_name = 'Line source length',
         xlabel = 'Line source length (mm)',
         old_value = 0.4,
+        ylims=(2.5e-5, 4.5e-5),
         save_fig=True
     )
