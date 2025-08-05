@@ -51,7 +51,7 @@ class XrayTwave(XrayLine):
             # generate point source coordinates
             gen_coords, n_samples_lambert = self.gen_xray_seed(
                 mean = -self.get_fwhm() - (
-                    self.get_line_length() * i / self.get_n_line_samples() * 1 / self.get_wave_speed() ),
+                    self.get_line_length() * (self.get_n_line_samples() - i) / self.get_n_line_samples() * 1 / self.get_wave_speed() ),
                 variance = self.get_variance(),
                 rotation=self.get_rotation(),
                 n_samples_angular = self.get_n_samples_angular(),
