@@ -58,7 +58,7 @@ accurate_line = {
     'off axis dist': values.off_axial_dist,
     'bath vis': False,
     'line length': 1,
-    'wave speed': values.c
+    'wave speed': 1
 }
 
 visual = {
@@ -70,7 +70,7 @@ visual = {
     'off axis dist': 100,
     'bath vis': True,
     'line length': 100,
-    'wave speed': values.c/2
+    'wave speed': 0.5
 }
 
 accurate_line_1mm = {

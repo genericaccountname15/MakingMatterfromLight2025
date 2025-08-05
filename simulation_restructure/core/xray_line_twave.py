@@ -20,12 +20,15 @@ class XrayTwave(XrayLine):
     ignited by a travelling wave
 
     This class extends 'Xrayline'
+    Attributes:
+        - wave_speed (float, optional): speed of the travelling wave igniting the xray source
+                (natural units). Defaults to 1.
     Overridden Methods:
         - gen_xray_seed_line(azimuthal_angle: float) -> list, int:
             Initializes the Xray coordinates by seeding each point source along the line
             and displacing their mean to for a travelling wave with velocity c.
     """
-    def __init__(self, fwhm, line_length, rotation=0, n_samples_angular=400, n_samples=10, n_line_samples=10, wave_speed = values.c):
+    def __init__(self, fwhm, line_length, rotation=0, n_samples_angular=400, n_samples=10, n_line_samples=10, wave_speed = 1):
         self.wave_speed = wave_speed
         super().__init__(fwhm, line_length, rotation, n_samples_angular, n_samples, n_line_samples)
 
@@ -48,7 +51,7 @@ class XrayTwave(XrayLine):
             # generate point source coordinates
             gen_coords, n_samples_lambert = self.gen_xray_seed(
                 mean = -self.get_fwhm() - (
-                    self.get_line_length() * i / self.get_n_line_samples() * values.c/self.get_wave_speed() ),
+                    self.get_line_length() * i / self.get_n_line_samples() * 1 / self.get_wave_speed() ),
                 variance = self.get_variance(),
                 rotation=self.get_rotation(),
                 n_samples_angular = self.get_n_samples_angular(),
