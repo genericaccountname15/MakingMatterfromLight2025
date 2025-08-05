@@ -35,9 +35,8 @@ def plot_optimised_data(filename: str, variable_name: str, xlabel: str, **kwargs
     data = np.loadtxt(filename, delimiter=',', skiprows=1)
 
     d = data[:,0]
-    npos = data[:,1] * 2
-    npos_err = data[:,2] * 2
-    #due to coding error
+    npos = data[:,1]
+    npos_err = data[:,2]
 
     _, ax = plt.subplots()
     ax.set_title(f'Positron count vs {variable_name}')
