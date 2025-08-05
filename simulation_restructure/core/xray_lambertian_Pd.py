@@ -31,7 +31,6 @@ class XrayLambertianPd(Xray):
             n_samples=10
         ):
         super().__init__(fwhm, rotation, n_samples_angular, n_samples)
-
         self.xray_coords, self.n_samples_lambert = self.gen_xray_seed(
             mean = -self.get_fwhm(),
             variance = self.get_variance(),
@@ -70,14 +69,17 @@ class XrayLambertianPd(Xray):
         n_samples = kwargs.get('n_samples', 10)
         get_n_lambert = kwargs.get('get_n_lambert', False)
 
-
         coords = []
         n_lambert = 0
         #rotate distribution 180 degrees
         angles = np.linspace(0 + rotation, np.pi + rotation, n_samples_angular)
         for theta in angles:
             # estimated lambert distribution
-            lambert_samples = round(n_samples * np.cos( np.pi/2 - theta + rotation ) ** 0.4)
+            #print(n_samples * np.cos( np.pi/2 - theta + rotation ) ** 0.4)
+            try:
+                lambert_samples = round(n_samples * np.cos( np.pi/2 - theta + rotation ) ** 0.4)
+            except:
+                lambert_samples = 0
             # random distribution centred at 0
             ndist = np.random.normal(mean, variance, lambert_samples)
 

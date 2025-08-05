@@ -77,7 +77,10 @@ class XrayLambertianGe(Xray):
         angles = np.linspace(0 + rotation, np.pi + rotation, n_samples_angular)
         for theta in angles:
             # estimated lambert distribution
-            lambert_samples = round(n_samples * np.cos( np.pi/2 - theta + rotation ) ** 0.59)
+            try:
+                lambert_samples = round(n_samples * np.cos( np.pi/2 - theta + rotation ) ** 0.59)
+            except:
+                lambert_samples = 0
             # random distribution centred at 0
             ndist = np.random.normal(mean, variance, lambert_samples)
 
