@@ -189,11 +189,71 @@ def write_data_csv(variable_name, variable_list, datadir, csvname):
 
 
 if __name__ == '__main__':
-    # data_sim1, optimal_delay1 = avg_data(simdata_dir = 'Default spectra/')
-    # plot_data(data_sim[:,0], data_sim[:,1], data_sim[:,2], optimal_delay)
-    write_data_csv(
-        variable_name = 'Travelling wave speed / c',
-        variable_list = np.linspace(0.4, 5.0, 10),
-        datadir = 'travelling_wave_speed_optimisation_twave_5Aug',
-        csvname = 'optimise_travelling_wave_speed'
+    data_sim1, optimal_delay1 = avg_data(simdata_dir = 'Default spectra/')
+    data_sim2, optimal_delay2 = avg_data(simdata_dir = 'Germanium spectra/')
+
+    _, ax = plt.subplots()
+    ax.set_title('Simulation averaged positron count')
+    ax.set_xlabel('Delay (ps)')
+    ax.set_ylabel('Number of positrons/pC incident on CsI')
+    delay = data_sim1[:,0]
+    delay2 = data_sim2[:,0]
+    npos = data_sim1[:,1]
+    npos_err = data_sim1[:,2]
+    npos2 = data_sim2[:,1]
+    npos_err2 = data_sim2[:,2]
+
+    data = {
+        'delay default / ps': delay,
+        "positron yield default / pC": npos,
+        "positron yield error default / pC": npos_err,
+        'delay new / ps': delay2,
+        'positron yield new / pC': npos2,
+        'positron yield error new / pC': npos_err2
+    }
+    df = pd.DataFrame(data)
+    df.to_csv('changingspectra.csv', index=False)
+
+
+    ax.plot(
+        delay, npos,
+        label = 'Default spectra',
+        color = 'blue'
     )
+
+    ax.fill_between(
+        x = delay,
+        y1 = npos - npos_err,
+        y2 = npos + npos_err,
+        color = 'blue',
+        alpha = 0.3
+    )
+
+    ax.plot(
+        delay2, npos2,
+        label = 'Updated Ge spectra',
+        color = 'red'
+    )
+
+    ax.fill_between(
+        x = delay2,
+        y1 = npos2 - npos_err2,
+        y2 = npos2 + npos_err2,
+        color = 'red',
+        alpha = 0.3
+    )
+
+    ax.set_axisbelow(True)
+    ax.grid()
+    ax.legend()
+
+    plt.savefig('changingspectra')
+
+    plt.show()
+    # plot_data(data_sim[:,0], data_sim[:,1], data_sim[:,2], optimal_delay)
+    # write_data_csv(
+    #     variable_name = 'Travelling wave speed / c',
+    #     variable_list = np.linspace(0.4, 5.0, 10),
+    #     datadir = 'travelling_wave_speed_optimisation_twave_5Aug',
+    #     csvname = 'optimise_travelling_wave_speed'
+    # )

@@ -44,8 +44,8 @@ from data_collection.delay_optimise_collection import run_optimise_delay #pylint
 
 
 run_optimise_delay(
-    dir_name = 'Default spectra',
+    dir_name = 'Germanium spectra',
     xray_type = 'lambertian',
     repeat = 5,
-    spectra_type = 'default'
+    spectra_type = 'Ge'
 )

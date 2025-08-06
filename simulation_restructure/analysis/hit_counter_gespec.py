@@ -49,7 +49,8 @@ class HitCounterGe(HitCounter):
                         self.get_gamma_pulse().get_off_axis_dist() )
 
         # estimate number of positrons #################################################
-        n_pos = ( values.xray_number_density * values.gamma_photons_number
+        n_pos = ( values.xray_number_density * xray_data.normalise_nph()
+                 * values.gamma_photons_number
                   * values.AMS_transmision * sum(cs_list)
                   / samples
                   * ( max_angle / np.pi ) )

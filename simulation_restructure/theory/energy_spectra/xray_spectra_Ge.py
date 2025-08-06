@@ -11,6 +11,7 @@ Timothy Chew
 
 import numpy as np
 import matplotlib.pyplot as plt
+from theory import values   #pylint: disable=import-error
 
 class XraySpectraGe():
     def __init__(
@@ -58,6 +59,21 @@ class XraySpectraGe():
         samples = np.random.choice(self.get_energy(), size = n, p = prob)
 
         return samples
+
+    def normalise_nph(self):
+        """Get ratio of whole spectra / 2018 spectra
+
+        Returns:
+            _type_: _description_
+        """
+        flux = np.average(self.get_flux(), axis=1)
+        mask = (self.get_energy() >= values.xray_spectra_min/1000) & (self.get_energy() <= values.xray_spectra_max/1000)
+        flux_filtered = flux[mask]
+        normalise = sum(flux) / sum(flux_filtered)
+
+        return normalise
+
+
 
     
     def get_datafile(self):
