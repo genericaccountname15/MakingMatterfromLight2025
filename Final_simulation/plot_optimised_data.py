@@ -68,9 +68,9 @@ def plot_optimised_data(filename, variable_name, xlabel, old_value,
 
 if __name__ == '__main__':
     plot_optimised_data(
-        filename = 'optimise_line_source_length.csv',
-        variable_name = 'Line source length',
-        xlabel = 'Line source length (mm)',
+        filename = 'optimise_travelling_wave_speed.csv',
+        variable_name = 'travelling wave speed',
+        xlabel = 'Travelling wave speed / c',
         old_value = 0.4,
         ylims=(2.5e-5, 4.5e-5),
         save_fig=True

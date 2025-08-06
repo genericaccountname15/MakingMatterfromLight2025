@@ -193,7 +193,7 @@ class XraySpectra:
             n (int): number of samples to take
 
         Returns:
-            tuple (list[float], list[float]): xray energies, probability per energy
+            list[float]: sampled xray energies
         """
         self.filter_energies(min_energy, max_energy)
         prob = self.get_avg_nph()
