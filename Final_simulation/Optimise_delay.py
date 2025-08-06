@@ -189,7 +189,7 @@ def write_data_csv(variable_name, variable_list, datadir, csvname):
 
 
 if __name__ == '__main__':
-    # data_sim, optimal_delay = avg_data(simdata_dir = 'sim_datafiles_angle_1.57_radians/')
+    # data_sim1, optimal_delay1 = avg_data(simdata_dir = 'Default spectra/')
     # plot_data(data_sim[:,0], data_sim[:,1], data_sim[:,2], optimal_delay)
     write_data_csv(
         variable_name = 'Travelling wave speed / c',

@@ -39,7 +39,7 @@ class HitCounterGe(HitCounter):
         for i, angle in enumerate(angles):
             #get cross section
             # s = 2 * ( 1 - np.cos(angle) ) * 230 * 1.38e-3
-            s = 2 * ( 1 - np.cos(angle) ) * gamma_energy_sample[i] * xray_energy_sample[i]/1e6
+            s = 2 * ( 1 - np.cos(angle) ) * gamma_energy_sample[i] * xray_energy_sample[i]/1e3
             cs = c_bw(np.sqrt(s)) #get cross sec for 230MeV root s
             cs *= 1e-28 #convert from barns to m^2
             cs_list.append(cs)
