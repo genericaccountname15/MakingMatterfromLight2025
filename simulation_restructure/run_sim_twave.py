@@ -15,7 +15,7 @@ run_data_collection(
     old_value = 1,
     xray_type = 'twave',
     repeat = 3,
-    additional_label = '6Aug_fwhm1',
-    sim_params = {**accurate_line_5mm, 'fwhm': 1},
+    additional_label = '6Aug_fwhm2',
+    sim_params = {**accurate_line_5mm, 'fwhm': 2},
     sample_params = deep
     )
