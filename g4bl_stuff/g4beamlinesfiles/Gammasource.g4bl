@@ -1,0 +1,16 @@
+# The "default" physics list is QGSP_BERT
+physics QGSP
+
+beam gaussian particle=gamma z=0 meanMomentum=300 sigmaP=2 sigmaXp=0.0023 sigmaYp=0.0023 nEvents=100
+
+#the tungsten half block
+param block_height=50 block_width=20 block_length=50
+box tungsten_block material=W height=$block_height width=$block_width length=$block_length
+place tungsten_block x=0 y=$block_height/2 z=85+$block_length/2
+
+#the talantum collimator
+cylinder talantum_col material=W innerRadius=2 outerRadius=20 length=100
+place talantum_col x=0 y=0 z=85+50+45+50
+
+virtualdetector Det height=150 width=150 length=0.001 color=0,1,0,0.3
+place Det x=0 y=0 z=85+50+45+100+25+400+160

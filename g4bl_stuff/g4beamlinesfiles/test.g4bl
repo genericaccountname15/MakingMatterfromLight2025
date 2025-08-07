@@ -6,6 +6,8 @@ beam gaussian particle=gamma z=0 meanMomentum=300 sigmaP=2 sigmaXp=0.0023 sigmaY
 box BeamVis width=100.0 height=100.0 length=0.1 material=Vacuum color=1,0,0
 place BeamVis z=0
 
+box collimator width=10
+
 box kapton_tape width=1 length=10 height=0.075 color=0.8,0.8,0.8 material=KAPTON
 place kapton_tape x=0 y=-1 z=150 rotation=x-40
 
