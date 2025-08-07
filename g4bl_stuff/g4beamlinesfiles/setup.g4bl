@@ -1,7 +1,7 @@
 # The "default" physics list is QGSP_BERT
 physics QGSP
 
-beam gaussian particle=gamma z=0 meanMomentum=300 sigmaP=2 nEvents=10000
+beam gaussian particle=gamma z=0 meanMomentum=300 sigmaXp=0.0023 sigmaYp=0.0023 sigmaP=2 nEvents=10000
 
 #the tungsten half block
 param block_height=50 block_width=20 block_length=50

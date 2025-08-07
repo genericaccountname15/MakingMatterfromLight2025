@@ -1,3 +1,12 @@
+"""
+Plots the hit map to characterise
+the gamma profile that comes from the collimator.
+Attempt to replicate the plot from 2018
+
+Timothy Chew
+7/8/25
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 
