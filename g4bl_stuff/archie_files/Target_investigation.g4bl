@@ -1,0 +1,130 @@
+physics QGSP
+
+
+beam gaussian particle=e- nEvents=15030 beamZ=0.0 weight=100 \
+    sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
+    meanMomentum=200.00 sigmaP=30.00 meanXp=0.00 meanYp=0.00 \
+    meanT=0.0 sigmaT=0.0
+    
+beam gaussian particle=e- nEvents=15030 beamZ=0.0 weight=100 \
+    sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
+    meanMomentum=240.00 sigmaP=30.00 meanXp=0.00 meanYp=0.00 \
+    meanT=0.0 sigmaT=0.0
+    
+beam gaussian particle=e- nEvents=15030 beamZ=0.0 weight=100 \
+    sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
+    meanMomentum=280.00 sigmaP=30.00 meanXp=0.00 meanYp=0.00 \
+    meanT=0.0 sigmaT=0.0
+    
+beam gaussian particle=e- nEvents=15030 beamZ=0.0 weight=100 \
+    sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
+    meanMomentum=320.00 sigmaP=30.00 meanXp=0.00 meanYp=0.00 \
+    meanT=0.0 sigmaT=0.0
+    
+beam gaussian particle=e- nEvents=15030 beamZ=0.0 weight=100 \
+    sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
+    meanMomentum=360.00 sigmaP=30.00 meanXp=0.00 meanYp=0.00 \
+    meanT=0.0 sigmaT=0.0
+    
+beam gaussian particle=e- nEvents=15030 beamZ=0.0 weight=100 \
+    sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
+    meanMomentum=400.00 sigmaP=30.00 meanXp=0.00 meanYp=0.00 \
+    meanT=0.0 sigmaT=0.0
+    
+beam gaussian particle=e- nEvents=15030 beamZ=0.0 weight=100 \
+    sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
+    meanMomentum=440.00 sigmaP=30.00 meanXp=0.00 meanYp=0.00 \
+    meanT=0.0 sigmaT=0.0
+    
+beam gaussian particle=e- nEvents=15030 beamZ=0.0 weight=100 \
+    sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
+    meanMomentum=480.00 sigmaP=30.00 meanXp=0.00 meanYp=0.00 \
+    meanT=0.0 sigmaT=0.0
+    
+beam gaussian particle=e- nEvents=15030 beamZ=0.0 weight=100 \
+    sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
+    meanMomentum=520.00 sigmaP=30.00 meanXp=0.00 meanYp=0.00 \
+    meanT=0.0 sigmaT=0.0
+    
+beam gaussian particle=e- nEvents=15030 beamZ=0.0 weight=100 \
+    sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
+    meanMomentum=560.00 sigmaP=30.00 meanXp=0.00 meanYp=0.00 \
+    meanT=0.0 sigmaT=0.0
+    
+beam gaussian particle=e- nEvents=15030 beamZ=0.0 weight=100 \
+    sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
+    meanMomentum=600.00 sigmaP=30.00 meanXp=0.00 meanYp=0.00 \
+    meanT=0.0 sigmaT=0.0
+    
+beam gaussian particle=e- nEvents=15020 beamZ=0.0 weight=100 \
+    sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
+    meanMomentum=640.00 sigmaP=30.00 meanXp=0.00 meanYp=0.00 \
+    meanT=0.0 sigmaT=0.0
+    
+beam gaussian particle=e- nEvents=14913 beamZ=0.0 weight=100 \
+    sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
+    meanMomentum=680.00 sigmaP=30.00 meanXp=0.00 meanYp=0.00 \
+    meanT=0.0 sigmaT=0.0
+    
+beam gaussian particle=e- nEvents=214238 beamZ=0.0 weight=100 \
+    sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
+    meanMomentum=720.00 sigmaP=30.00 meanXp=0.00 meanYp=0.00 \
+    meanT=0.0 sigmaT=0.0
+    
+beam gaussian particle=e- nEvents=11925 beamZ=0.0 weight=100 \
+    sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
+    meanMomentum=760.00 sigmaP=30.00 meanXp=0.00 meanYp=0.00 \
+    meanT=0.0 sigmaT=0.0
+    
+beam gaussian particle=e- nEvents=7623 beamZ=0.0 weight=100 \
+    sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
+    meanMomentum=800.00 sigmaP=30.00 meanXp=0.00 meanYp=0.00 \
+    meanT=0.0 sigmaT=0.0
+    
+beam gaussian particle=e- nEvents=3263 beamZ=0.0 weight=100 \
+    sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
+    meanMomentum=840.00 sigmaP=30.00 meanXp=0.00 meanYp=0.00 \
+    meanT=0.0 sigmaT=0.0
+    
+beam gaussian particle=e- nEvents=853 beamZ=0.0 weight=100 \
+    sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
+    meanMomentum=880.00 sigmaP=30.00 meanXp=0.00 meanYp=0.00 \
+    meanT=0.0 sigmaT=0.0
+    
+beam gaussian particle=e- nEvents=128 beamZ=0.0 weight=100 \
+    sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
+    meanMomentum=920.00 sigmaP=30.00 meanXp=0.00 meanYp=0.00 \
+    meanT=0.0 sigmaT=0.0
+    
+beam gaussian particle=e- nEvents=10 beamZ=0.0 weight=100 \
+    sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
+    meanMomentum=960.00 sigmaP=30.00 meanXp=0.00 meanYp=0.00 \
+    meanT=0.0 sigmaT=0.0
+    
+beam gaussian particle=e- nEvents=3 beamZ=0.0 weight=100 \
+    sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
+    meanMomentum=1000.00 sigmaP=30.00 meanXp=0.00 meanYp=0.00 \
+    meanT=0.0 sigmaT=0.0
+
+
+#BeamVis just shows where the beam comes from
+box BeamVis width=4 height=4.0 length=17.5 material=Vacuum color=1,0,0
+place BeamVis z=-8.75
+
+#Target
+box Target material=$targetMaterial width=8 height=8 length=$targetThickness color=1,0.84,0
+place Target z=177.5
+
+#Dump Tape
+box DTape material=KAPTON width=25 height=8 length=0.025 color=1,0.5,0
+place DTape z=88.75
+
+#Collimator
+tubs TungstenCollimator material=Vacuum innerRadius=1 outerRadius=10 length=100 color=0.4,0.4,0.4
+place TungstenCollimator z=407.5 kill=1
+
+#Detector
+virtualdetector VDet width=2 height=2 length=0.1 color=0,1,0 filename=vd2_coll format=ascii
+place VDet z=457.55
+
+

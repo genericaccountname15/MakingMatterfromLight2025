@@ -4,7 +4,7 @@ G4ENSDFSTATEDATA=C:\Geant4Data/G4ENSDFSTATE2.3
 G4PARTICLEXSDATA=C:\Geant4Data/G4PARTICLEXS4.0
 G4LEVELGAMMADATA=C:\Geant4Data/PhotonEvaporation5.7
 G4RADIOACTIVEDATA=C:\Geant4Data/RadioactiveDecay5.6
-G4beamline Process ID 2672
+G4beamline Process ID 25384
 
 *************************************************************
  g4beamline version: 3.08                        (Oct  8 2022)
@@ -31,45 +31,68 @@ physics      FTFP_BERT     disable= inactivate= deactivate= doStochastics=1
                            fluct=1 minRangeCut=1 list=0 gammaToMuPair=0
                            spinTracking=0 synchrotronRadiation=0
                            synchrotronRadiationMuon=0 maxTime=1e+06
-beam    GAUSSIAN particle=gamma nEvents=10000 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
+do steps=1,10,1
+(do steps=1)
+beam    GAUSSIAN particle=gamma nEvents=10 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
+		meanMomentum=100.0 weight=1.000000 
+		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00230 sigmaYp=0.00230 
+		sigmaP=2.0 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
+(do steps=2)
+beam    GAUSSIAN particle=gamma nEvents=10 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
+		meanMomentum=200.0 weight=1.000000 
+		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00230 sigmaYp=0.00230 
+		sigmaP=2.0 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
+(do steps=3)
+beam    GAUSSIAN particle=gamma nEvents=10 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
 		meanMomentum=300.0 weight=1.000000 
 		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00230 sigmaYp=0.00230 
 		sigmaP=2.0 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-param        block_height  50
-param        block_length  50
-param        block_width   20
-box          tungsten_block height=50 width=20 length=50 maxStep=100
-                           material=W color=1,1,1 kill=0
-place   tungsten_block copies=1 x=0.0 y=25.0 z=110.0 
-param        tantalum_inner_rad 1
-param        tantalum_length 100
-param        tantalum_outer_rad 10
-tubs         tantalum_col  innerRadius=1 outerRadius=10 initialPhi=0
-                           finalPhi=360 length=100 maxStep=100 material=W
-                           color=1,1,1 kill=0 radius=10
-place   tantalum_col copies=1 x=0.0 y=0.0 z=230.0 
-param        magnet_length 400
-param        magnet_strength 3
-genericbend  magnet        fieldWidth=100 fieldHeight=200 fieldLength=400
-                           ironWidth=0 ironHeight=0 ironLength=0 By=3
-                           maxStep=100 fieldMaterial=Vacuum
-                           fieldColor=1,0,0,0.3 ironMaterial=Fe
-                           ironColor=1,1,1 kill=0 fringe= fringeFactor=1
-                           openAperture=0
-place   magnet  copies=1 x=0.0 y=0.0 z=505.0 
-virtualdetector gamma_profile_Det radius=0 innerRadius=0 height=150 width=150
+(do steps=4)
+beam    GAUSSIAN particle=gamma nEvents=10 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
+		meanMomentum=400.0 weight=1.000000 
+		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00230 sigmaYp=0.00230 
+		sigmaP=2.0 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
+(do steps=5)
+beam    GAUSSIAN particle=gamma nEvents=10 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
+		meanMomentum=500.0 weight=1.000000 
+		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00230 sigmaYp=0.00230 
+		sigmaP=2.0 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
+(do steps=6)
+beam    GAUSSIAN particle=gamma nEvents=10 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
+		meanMomentum=600.0 weight=1.000000 
+		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00230 sigmaYp=0.00230 
+		sigmaP=2.0 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
+(do steps=7)
+beam    GAUSSIAN particle=gamma nEvents=10 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
+		meanMomentum=700.0 weight=1.000000 
+		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00230 sigmaYp=0.00230 
+		sigmaP=2.0 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
+(do steps=8)
+beam    GAUSSIAN particle=gamma nEvents=10 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
+		meanMomentum=800.0 weight=1.000000 
+		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00230 sigmaYp=0.00230 
+		sigmaP=2.0 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
+(do steps=9)
+beam    GAUSSIAN particle=gamma nEvents=10 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
+		meanMomentum=900.0 weight=1.000000 
+		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00230 sigmaYp=0.00230 
+		sigmaP=2.0 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
+(do steps=10)
+beam    GAUSSIAN particle=gamma nEvents=10 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
+		meanMomentum=1000.0 weight=1.000000 
+		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00230 sigmaYp=0.00230 
+		sigmaP=2.0 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
+enddo
+virtualdetector Det        radius=0 innerRadius=0 height=150 width=150
                            length=0.001 maxStep=100 material= color=0,1,0,0.3
                            noSingles=0 format= filename= file= require=
                            referenceParticle=0 coordinates=Centerline kill=0
-place   gamma_profile_Det copies=1 x=0.0 y=0.0 z=865.0 
+place   Det     copies=1 x=0.0 y=0.0 z=200.0 
 
-World size (before incrementing by 201.357 mm): 150.0 H  150.0 W  1730.0 L
+World size (before incrementing by 201.357 mm): 150.0 H  150.0 W  400.0 L
 
 PARAMETERS:
-            Zcl=865
-   block_height=50
-   block_length=50
-    block_width=20
+            Zcl=200
      deltaChord=3.0
 deltaIntersection=0.1
    deltaOneStep=0.01
@@ -79,30 +102,17 @@ deltaIntersection=0.1
     fieldVoxels=200,200,200
       histoFile=g4beamline
     histoUpdate=0
-  magnet_length=400
-magnet_strength=3
         maxStep=100.0
         minStep=0.01
  steppingFormat=N GLOBAL CL KE STEP VOL PROCESS
 steppingVerbose=0
-tantalum_inner_rad=1
-tantalum_length=100
-tantalum_outer_rad=10
+          steps=10
          viewer=none
  wallClockLimit=-1
   worldMaterial=Vacuum
      zTolerance=2.0
-Checking overlaps for volume tungsten_block:0 (G4Box) ... OK! 
-BLCMDbox::Construct tungsten_block parent= relZ=110.0 globZ=110.0
-	zmin=85.0 zmax=135.0
-Checking overlaps for volume tantalum_col:0 (G4Tubs) ... OK! 
-BLCMDtubs::Construct tantalum_col parent= relZ=230.0 globZ=230.0
-	zmin=180.0 zmax=280.0 kill=0
-Checking overlaps for volume magnet:0 (G4Box) ... OK! 
-BLCMDgenericbend::Construct magnet parent= relZ=505.0 globZ=505.0
-	zmin=305.0 zmax=705.0
-Checking overlaps for volume gamma_profile_Det:0 (G4Box) ... OK! 
-BLCMDvirtualdetector::Construct gamma_profile_Det parent= relZ=865.0 globZ=865.0
+Checking overlaps for volume Det:0 (G4Box) ... OK! 
+BLCMDvirtualdetector::Construct Det parent= relZ=200.0 globZ=200.0
 ### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
 
 Geometry test nPoints=100 tolerance=0.002 mm:
@@ -112,13 +122,6 @@ Total geometry errors = 0  0 seconds
 ================== Prepare Tracking Beam ==================
 Stochastic processes are enabled.
 ================== Begin Tracking Beam ===============
-**************************************************************************
-*** G4Exception: EM Field Extends Outside World
-***    severity: Warning
-***   issued by: BLGlobalField
-*** description: May give inaccurate tracking near world boundary.
-***     EventID: 1     TrackID: 1001   e+  KE=39.56 MeV
-**************************************************************************
 Event 1 Completed  1 events  realTime=1 sec  1.0 ev/sec
 Event 2 Completed  2 events  realTime=1 sec  2.0 ev/sec
 Event 3 Completed  3 events  realTime=1 sec  3.0 ev/sec
@@ -138,27 +141,8 @@ Event 70 Completed  70 events  realTime=1 sec  70.0 ev/sec
 Event 80 Completed  80 events  realTime=1 sec  80.0 ev/sec
 Event 90 Completed  90 events  realTime=1 sec  90.0 ev/sec
 Event 100 Completed  100 events  realTime=1 sec  100.0 ev/sec
-Event 200 Completed  200 events  realTime=1 sec  200.0 ev/sec
-Event 300 Completed  300 events  realTime=2 sec  150.0 ev/sec
-Event 400 Completed  400 events  realTime=2 sec  200.0 ev/sec
-Event 500 Completed  500 events  realTime=2 sec  250.0 ev/sec
-Event 600 Completed  600 events  realTime=3 sec  200.0 ev/sec
-Event 700 Completed  700 events  realTime=3 sec  233.3 ev/sec
-Event 800 Completed  800 events  realTime=3 sec  266.7 ev/sec
-Event 900 Completed  900 events  realTime=4 sec  225.0 ev/sec
-Event 1000 Completed  1000 events  realTime=4 sec  250.0 ev/sec
-Event 2000 Completed  2000 events  realTime=8 sec  250.0 ev/sec
-Event 3000 Completed  3000 events  realTime=13 sec  230.8 ev/sec
-Event 4000 Completed  4000 events  realTime=17 sec  235.3 ev/sec
-Event 5000 Completed  5000 events  realTime=21 sec  238.1 ev/sec
-Event 6000 Completed  6000 events  realTime=26 sec  230.8 ev/sec
-Event 7000 Completed  7000 events  realTime=29 sec  241.4 ev/sec
-Event 8000 Completed  8000 events  realTime=34 sec  235.3 ev/sec
-Event 9000 Completed  9000 events  realTime=38 sec  236.8 ev/sec
-Event 10000 Completed  10000 events  realTime=42 sec  238.1 ev/sec
-Run complete  10000 Events  42 seconds
-NTuple gamma_profile_Det     7716 entries
+Run complete  100 Events  1 seconds
+NTuple Det                  100 entries
 
-Exceptions: 0 Fatal, 0 Events Aborted, 0 Stuck Tracks (stopped), 1 Warnings
-      1 times: EM Field Extends Outside World
+Exceptions: 0 Fatal, 0 Events Aborted, 0 Stuck Tracks (stopped), 0 Warnings
 g4beamline: simulation complete
