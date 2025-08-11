@@ -1,12 +1,15 @@
 #!/bin/bash
 #PBS -N g4beamline_d_analysis
 #PBS -l select=1:ncpus=1:mem=1gb
-#PBS -l walltime=12:00:00
+#PBS -l walltime=2:00:00
 
 cd $PBS_O_WORKDIR
 
 module load gcc/11.2.0
 module load root/6.26
+
+echo $PATH >> env.log
+echo $LD_LIBRARY_PATH >> env.log
 
 which g++ > compile_check.log
 g++ --version >> compile_check.log
