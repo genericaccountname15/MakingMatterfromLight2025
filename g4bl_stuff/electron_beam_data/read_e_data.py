@@ -176,4 +176,4 @@ electronspec = ElectronSpectra(
     dataset_a_dir='g4bl_stuff/electron_beam_data/ElectronBeams/Dataset A/',
     dataset_b_dir='g4bl_stuff/electron_beam_data/ElectronBeams/Dataset B/'
 )
-electronspec.gen_beam_objects(10, 10000)
+electronspec.gen_beam_objects(10, 100000000)

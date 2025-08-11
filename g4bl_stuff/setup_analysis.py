@@ -12,6 +12,7 @@ import subprocess
 import numpy as np
 import pandas as pd
 
+
 # DICTS #######################################################
 files = {
     'g4bl path': 'C:/Program Files/Muons, Inc/G4beamline/bin/',
@@ -58,7 +59,7 @@ def run_d_analysis(
                         f'{save_dir}/g4bl_sim_d_{np.round(d, 2)}/Det{i+1}.txt')
                 
             else:
-                df = pd.read_csv(files['output fname'], sep="\s+", header=1)
+                df = pd.read_csv(files['output fname'], sep=r"\s+", header=1)
                 filtered_df = df[df['PDGid'] == -11]
                 filtered_df.to_csv(f'{save_dir}/g4bl_sim_d_{np.round(d, 2)}/Det{i+1}.txt', index=False)
     
@@ -93,5 +94,5 @@ def run_g4blsim(g4bl_file: str, d=1, theta=40):
 
 if __name__ == '__main__':
     # run_g4blsim('g4bl_stuff/g4beamlinesfiles/setup_redo.g4bl')
-    run_d_analysis('g4bl_stuff/g4beamlinesfiles/setup_redo.g4bl',
-                   'test', save_all=True)
+    run_d_analysis('g4bl_stuff/g4beamlinesfiles/data_collection.g4bl',
+                   'd_noise_data_11Aug', save_all=False, repeat=1)
