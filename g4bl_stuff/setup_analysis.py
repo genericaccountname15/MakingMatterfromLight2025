@@ -86,7 +86,7 @@ def run_g4blsim(g4bl_file: str, d=1, theta=40):
         f'cos={np.cos(theta)}'
     ]
 
-    status = subprocess.run(command)
+    status = subprocess.run(command, check=True, cwd=files['workspace dir'])
     if status.returncode != 0:
         print(f"Command failed with status {status.returncode}")
     print(os.getcwd())
