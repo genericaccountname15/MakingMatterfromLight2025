@@ -8,5 +8,8 @@ cd $PBS_O_WORKDIR
 module load gcc/11.2.0
 module load root/6.26
 
+which g++ > compile_check.log
+g++ --version >> compile_check.log
+
 python3 module_download.py
 python3 g4bl_stuff/setup_analysis.py
