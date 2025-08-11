@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -N Ge_lambertian_angle_simulation
+#PBS -N g4beamline_d_analysis
 #PBS -l select=1:ncpus=1:mem=1gb
 #PBS -l walltime=12:00:00
 
