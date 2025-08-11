@@ -89,6 +89,7 @@ def run_g4blsim(g4bl_file: str, d=1, theta=40):
     status = subprocess.run(command)
     if status.returncode != 0:
         print(f"Command failed with status {status.returncode}")
+    print(os.getcwd())
 
 
 if __name__ == '__main__':
