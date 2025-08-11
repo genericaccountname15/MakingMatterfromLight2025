@@ -13,7 +13,7 @@ import numpy as np
 import pandas as pd
 
 # DICTS #######################################################
-files_local = {
+files = {
     'g4bl path': 'C:/Program Files/Muons, Inc/G4beamline/bin/',
     'workspace dir': 'C:/Users/Timothy Chew/Desktop/UROP2025/MakingMatterfromLight2025/',
     'output fname': 'noise_measure_Det.txt'
@@ -77,7 +77,6 @@ def run_g4blsim(g4bl_file: str, d=1, theta=40):
     """
     # command string
     theta = theta * np.pi / 180
-    print(os.getcwd())
     command = [
         files['g4bl path'] + 'g4bl',
         files['workspace dir'] + g4bl_file,
@@ -89,7 +88,6 @@ def run_g4blsim(g4bl_file: str, d=1, theta=40):
     status = subprocess.run(command, check=True, cwd=files['workspace dir'])
     if status.returncode != 0:
         print(f"Command failed with status {status.returncode}")
-    print(os.getcwd())
 
 
 if __name__ == '__main__':
