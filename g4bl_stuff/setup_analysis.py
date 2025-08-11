@@ -85,7 +85,9 @@ def run_g4blsim(g4bl_file: str, d=1, theta=40):
         f'cos={np.cos(theta)}'
     ]
 
-    subprocess.run(command, check=True)
+    status = subprocess.run(command)
+    if status.returncode != 0:
+        print(f"Command failed with status {status.returncode}")
 
 
 if __name__ == '__main__':
