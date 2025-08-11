@@ -8,11 +8,10 @@ cd $PBS_O_WORKDIR
 module load gcc/11.2.0
 module load root/6.26
 
-echo $PATH >> env.log
-echo $LD_LIBRARY_PATH >> env.log
-
-which g++ > compile_check.log
-g++ --version >> compile_check.log
+export CC=/apps/gcc/11.2.0/bin/gcc
+export CXX=/apps/gcc/11.2.0/bin/g++
+export PATH=/apps/gcc/11.2.0/bin:$PATH
+export LD_LIBRARY_PATH=/apps/gcc/11.2.0/lib64:/apps/gcc/11.2.0/lib:$LD_LIBRARY_PATH
 
 python3 module_download.py
 python3 g4bl_stuff/setup_analysis.py
