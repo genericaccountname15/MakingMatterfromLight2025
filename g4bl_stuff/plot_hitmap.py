@@ -10,7 +10,7 @@ Timothy Chew
 import numpy as np
 import matplotlib.pyplot as plt
 
-data = np.loadtxt('g4bl_stuff/g4beamlinesfiles/gamma_profile_Det.txt', skiprows=1)
+data = np.loadtxt('g4bl_stuff/g4beamlinesfiles/noise_measure_Det.txt', skiprows=1)
 
 x = np.arctan2(data[:,1],85+50+45+100+25+400+160) * 1000
 y = np.arctan2(data[:,0],85+50+45+100+25+400+160) * 1000
