@@ -21,5 +21,7 @@ def install_modules():
 
     subprocess.run(["pip3", "install", "--user", "scipy"], check = True)
 
+    subprocess.run(["pip3", "install", "--user", "uproot"], check = True)
+
 if __name__=='__main__':
     install_modules()
