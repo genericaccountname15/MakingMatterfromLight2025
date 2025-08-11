@@ -92,4 +92,4 @@ def run_g4blsim(g4bl_file: str, d=1, theta=40):
 
 if __name__ == '__main__':
     run_d_analysis('g4bl_stuff/g4beamlinesfiles/setup_redo.g4bl',
-                   'test', save_all=False)
+                   'test', save_all=True)
