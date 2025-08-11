@@ -13,9 +13,15 @@ import numpy as np
 import pandas as pd
 
 # DICTS #######################################################
+files_local = {
+    'g4bl path': 'C:/Program Files/Muons, Inc/G4beamline/bin/',
+    'workspace dir': 'C:/Users/Timothy Chew/Desktop/UROP2025/MakingMatterfromLight2025/',
+    'output fname': 'noise_measure_Det.txt'
+}
+
 files = {
-    'g4bl path': 'G4beamline-3.08/bin/',
-    'workspace dir': 'MakingMatterfromLight2025/',
+    'g4bl path': '/rds/general/user/ttc22/home/G4beamline-3.08',
+    'workspace dir': '/rds/general/user/ttc22/home/MakingMatterfromLight2025/',
     'output fname': 'noise_measure_Det.txt'
 }
 
