@@ -5,5 +5,8 @@
 
 cd $PBS_O_WORKDIR
 
+module load gcc 
+module load root
+
 python3 module_download.py
 python3 g4bl_stuff/setup_analysis.py
