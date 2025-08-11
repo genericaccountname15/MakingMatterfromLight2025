@@ -72,7 +72,7 @@ place bismuth_converter z=194
 #the tungsten half block
 param block_height=50 block_width=20 block_length=50
 box tungsten_block material=W height=$block_height width=$block_width length=$block_length
-place tungsten_block x=0 y=$block_height/2 z=85+$block_length/2+195+85 kill=1
+place tungsten_block x=0 y=-$block_height/2 z=85+$block_length/2+195+85 kill=1
 
 #the tantalum collimator
 param tantalum_outer_rad=10 tantalum_inner_rad=1 tantalum_length=100
