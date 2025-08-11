@@ -9,6 +9,7 @@ Timothy Chew
 
 import os
 import subprocess
+import uproot
 import numpy as np
 import pandas as pd
 
@@ -88,9 +89,15 @@ def run_g4blsim(g4bl_file: str, d=1, theta=40):
     status = subprocess.run(command, check=True, cwd=files['workspace dir'])
     if status.returncode != 0:
         print(f"Command failed with status {status.returncode}")
+    
+    #HPC saves files in .root format
+    file = uproot.open("g4beamline.root")
+    tree = file["VirtualDetector/noise_measure_Det;1"]  # usually the tree inside
+    df = tree.arrays(library="pd")
+    df.to_csv("noise_measure_Det.txt", sep="\t", index=False)
 
 
 if __name__ == '__main__':
-    run_g4blsim('g4bl_stuff/g4beamlinesfiles/setup_redo.g4bl')
-    # run_d_analysis('g4bl_stuff/g4beamlinesfiles/setup_redo.g4bl',
-    #                'test', save_all=True)
+    #run_g4blsim('g4bl_stuff/g4beamlinesfiles/setup_redo.g4bl')
+    run_d_analysis('g4bl_stuff/g4beamlinesfiles/setup_redo.g4bl',
+                   'test', save_all=True)
