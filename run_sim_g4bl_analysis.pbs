@@ -5,8 +5,12 @@
 
 cd $PBS_O_WORKDIR
 
-module load gcc/9.3.0
+module load gcc/11.2.0
 module load root/6.26
+
+which g++
+g++ --version
+root -b -q
 
 export CC=/apps/gcc/11.2.0/bin/gcc
 export CXX=/apps/gcc/11.2.0/bin/g++
