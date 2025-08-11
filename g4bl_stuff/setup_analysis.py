@@ -14,7 +14,7 @@ import pandas as pd
 
 # DICTS #######################################################
 files = {
-    'g4bl path': 'G4beamline/bin/',
+    'g4bl path': 'G4beamline-3.08/bin/',
     'workspace dir': 'MakingMatterfromLight2025/',
     'output fname': 'noise_measure_Det.txt'
 }
