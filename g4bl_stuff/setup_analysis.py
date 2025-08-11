@@ -20,7 +20,7 @@ files_local = {
 }
 
 files = {
-    'g4bl path': '/rds/general/user/ttc22/home/G4beamline-3.08',
+    'g4bl path': '/rds/general/user/ttc22/home/G4beamline-3.08/bin/',
     'workspace dir': '/rds/general/user/ttc22/home/MakingMatterfromLight2025/',
     'output fname': 'noise_measure_Det.txt'
 }
