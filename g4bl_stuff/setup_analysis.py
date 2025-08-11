@@ -77,6 +77,7 @@ def run_g4blsim(g4bl_file: str, d=1, theta=40):
     """
     # command string
     theta = theta * np.pi / 180
+    print(os.getcwd())
     command = [
         files['g4bl path'] + 'g4bl',
         files['workspace dir'] + g4bl_file,
