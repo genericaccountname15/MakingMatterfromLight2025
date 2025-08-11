@@ -5,7 +5,5 @@
 
 cd $PBS_O_WORKDIR
 
-module load gcc/11.2.0
-
 python3 module_download.py
 python3 g4bl_stuff/setup_analysis.py
