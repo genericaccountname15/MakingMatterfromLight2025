@@ -81,6 +81,7 @@ def run_g4blsim(g4bl_file: str, d=1, theta=40):
     command = [
         files['g4bl path'] + 'g4bl',
         files['workspace dir'] + g4bl_file,
+        "format='ascii'",
         f'd={d}',
         f'sin={np.sin(theta)}',
         f'cos={np.cos(theta)}'
