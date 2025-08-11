@@ -90,5 +90,5 @@ param kapton_length=25 cos=0.76604444311 sin=0.64278760968
 box kapton_tape material=KAPTON width=8 height=0.025 length=25 color=1,0.5,0
 place kapton_tape x=0 y=-1-$kapton_length/2*$sin z=85+$block_length+45+$tantalum_length+25+$magnet_length+160-$kapton_length/2*$cos+195+85 rotation=x-40
 
-virtualdetector noise_measure_Det height=100 width=100 length=0.001 color=0,1,0,0.3
+virtualdetector noise_measure_Det filename='noise_measure_Det.txt' height=100 width=100 length=0.001 color=0,1,0,0.3
 place noise_measure_Det x=0 y=0 z=85+$block_length+45+$tantalum_length+25+$magnet_length+160+360+195+85
