@@ -10,7 +10,7 @@ Timothy Chew
 import numpy as np
 import matplotlib.pyplot as plt
 
-data = np.loadtxt('Gamma_profile_Det_LWFA_100mil.txt', skiprows=1)
+data = np.loadtxt('profile_test_Det.txt', skiprows=1)
 
 x = np.arctan2(data[:,1],85+50+45+100+25+400+160) * 1000
 y = np.arctan2(data[:,0],85+50+45+100+25+400+160) * 1000
