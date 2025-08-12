@@ -95,4 +95,4 @@ def run_g4blsim(g4bl_file: str, d=1, theta=40):
 if __name__ == '__main__':
     # run_g4blsim('g4bl_stuff/g4beamlinesfiles/setup_redo.g4bl')
     run_d_analysis('g4bl_stuff/g4beamlinesfiles/data_collection.g4bl',
-                   'd_noise_data_11Aug', save_all=False, repeat=1)
+                   'd_noise_data_12Aug', save_all=False, repeat=1)
