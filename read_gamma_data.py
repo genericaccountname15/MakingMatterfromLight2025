@@ -11,7 +11,7 @@ from scipy.stats import binned_statistic_2d
 
 class GammaDetRead:
     def __init__(self, detdatafile: str):
-        self.data = np.loadtxt(detdatafile, skiprows=1)
+        self.data = np.loadtxt(detdatafile, skiprows=1, delimiter=',')
         self.x = self.get_data()[:, 0]
         self.y = self.get_data()[:, 1]
         self.z = self.get_data()[0, 2]
@@ -69,7 +69,7 @@ class GammaDetRead:
         
         mask = (self.get_data()[:,7] == -11)
         
-        ax.hist(self.get_energy()[mask])
+        ax.hist(self.get_energy()[mask], bins=100)
         
         plt.show()
 
@@ -152,7 +152,6 @@ class GammaDetRead:
                                     )
                         file_handler.write(f"{beam_string}\n\n")
 
-
     
     def get_data(self):
         return self.data
@@ -178,5 +177,6 @@ if __name__ == '__main__':
     # print(len(cat.get_data()))
     # cat.plot_hitmap()
     # cat.plot_spectra()
-    cat = GammaDetRead('Gamma_profile_Det_LWFA_100mil.txt')
-    cat.gen_beam_objects(nbins=100, n_samples=len(cat.get_data()), dist_source=300, beam_pos=495, binning_range=[[-10,10],[-10,10]])
+    cat = GammaDetRead('big_Gamma_Det_positrons.txt')
+    cat.plot_positron_spectra()
+    #cat.gen_beam_objects(nbins=100, n_samples=len(cat.get_data())*100, dist_source=300, beam_pos=495)
