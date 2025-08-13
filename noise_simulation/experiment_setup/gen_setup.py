@@ -61,7 +61,8 @@ VIRTUAL_DETECTOR = (
 
 VIRTUAL_DETECTOR_GAMMAPROFILE = (
     f"#Virtual detector\n"
-    f"virtualdetector noise_measure_Det filename={virtual_detector['filename']} "
+    f"param filename={virtual_detector['filename']}\n"
+    f"virtualdetector noise_measure_Det filename=$filename "
     f"format='ascii' color={virtual_detector['color']} "
     f"width={virtual_detector['width']} height={virtual_detector['height']} "
     f"length={virtual_detector['length']}\n"

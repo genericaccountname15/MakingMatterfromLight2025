@@ -31,13 +31,18 @@ class Analysis:
                     repeat = 3, save_all = True): Repeats the g4beamline simulation while
                     varying a setup parameter and saving the data.
     """
-    def __init__(self, file_dict: dict):
+    def __init__(self, file_dict: dict, save_filename: str = None):
         self.file_dict = file_dict
         self.pdgid_dict = {
             'positron': -11,
             'electron': 11,
             'gamma': 22
         }
+        if save_filename is not None:
+            self.file_dict = {
+                **self.get_file_dict(),
+                'output fname': save_filename
+                }
 
     def run_g4blsim(self, g4bl_filename: str, d=1, angle=40):
         """Runs the g4beamlines simulation
