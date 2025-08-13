@@ -4,7 +4,7 @@ G4ENSDFSTATEDATA=C:\Geant4Data/G4ENSDFSTATE2.3
 G4PARTICLEXSDATA=C:\Geant4Data/G4PARTICLEXS4.0
 G4LEVELGAMMADATA=C:\Geant4Data/PhotonEvaporation5.7
 G4RADIOACTIVEDATA=C:\Geant4Data/RadioactiveDecay5.6
-G4beamline Process ID 6548
+G4beamline Process ID 14844
 
 *************************************************************
  g4beamline version: 3.08                        (Oct  8 2022)
@@ -32,100 +32,46 @@ physics      FTFP_BERT     disable= inactivate= deactivate= doStochastics=1
                            fluct=1 minRangeCut=1 list=0 gammaToMuPair=0
                            spinTracking=0 synchrotronRadiation=0
                            synchrotronRadiationMuon=0 maxTime=1e+06
-beam    GAUSSIAN particle=e- nEvents=3282 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=373.6 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=155.2 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=4020 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=528.8 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=155.2 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=2141 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=684.0 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=155.2 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=224 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=839.2 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=155.2 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=98 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=994.4 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=155.2 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=71 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1149.6 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=155.2 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=61 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1304.8 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=155.2 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=36 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1460.0 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=155.2 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=35 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1615.2 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=155.2 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=32 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1770.4 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=155.2 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-param        bismuth_height 8
-param        bismuth_thickness 1
-param        bismuth_width 8
 box          bismuth_converter height=8 width=8 length=1 maxStep=100
                            material=Bi color=1,0.84,0 kill=0
 place   bismuth_converter copies=1 x=0.0 y=0.0 z=194.0 
-param        block_height  50
-param        block_length  50
-param        block_width   20
 box          tungsten_block height=50 width=20 length=50 maxStep=100
                            material=W color=1,1,1 kill=0
 place   tungsten_block copies=1 x=0.0 y=-25.0 z=305.0 
                 kill=1
-param        tantalum_inner_rad 1
-param        tantalum_length 100
-param        tantalum_outer_rad 10
-tubs         tantalum_col  innerRadius=1 outerRadius=10 initialPhi=0
+tubs         talantum_col  innerRadius=1 outerRadius=10 initialPhi=0
                            finalPhi=360 length=100 maxStep=100 material=Ta
                            color=1,1,1 kill=0 radius=10
-place   tantalum_col copies=1 x=0.0 y=0.0 z=425.0 
-                kill=1
-param        magnet_length 400
-param        magnet_strength 3
-genericbend  magnet        fieldWidth=100 fieldHeight=200 fieldLength=400
+place   talantum_col copies=1 x=0.0 y=0.0 z=425.0 
+genericbend  separator     fieldWidth=100 fieldHeight=200 fieldLength=400
                            ironWidth=0 ironHeight=0 ironLength=0 By=3
                            maxStep=100 fieldMaterial=Vacuum
                            fieldColor=1,0,0,0.3 ironMaterial=Fe
                            ironColor=1,1,1 kill=0 fringe= fringeFactor=1
                            openAperture=0
-place   magnet  copies=1 x=0.0 y=0.0 z=700.0 
+place   separator copies=1 x=0.0 y=0.0 z=700.0 
+param        angle         40
 param        cos           0.76604444311
-param        kapton_length 25
-param        sin           0.64278760968
+param        d             1
+param        sin           0.642787609
 box          kapton_tape   height=0.025 width=8 length=25 maxStep=100
                            material=KAPTON color=1,0.5,0 kill=0
 place   kapton_tape copies=1 x=0.0 y=-9.0 z=1050.4 rotation='x-40'
 virtualdetector noise_measure_Det radius=0 innerRadius=0 height=100 width=100
                            length=0.001 maxStep=100 material= color=0,1,0,0.3
-                           noSingles=0 format=bltrackfile filename= file=
-                           require= referenceParticle=0 coordinates=Centerline
-                           kill=0
+                           noSingles=0 format=bltrackfile
+                           filename=noise_measure_Det.txt
+                           file=noise_measure_Det.txt require=
+                           referenceParticle=0 coordinates=Centerline kill=0
 place   noise_measure_Det copies=1 x=0.0 y=0.0 z=1420.0 
 
 World size (before incrementing by 201.357 mm): 100.0 H  100.0 W  2840.0 L
 
 PARAMETERS:
             Zcl=1420
- bismuth_height=8
-bismuth_thickness=1
-  bismuth_width=8
-   block_height=50
-   block_length=50
-    block_width=20
+          angle=40
             cos=0.76604444311
+              d=1
      deltaChord=3.0
 deltaIntersection=0.1
    deltaOneStep=0.01
@@ -135,17 +81,11 @@ deltaIntersection=0.1
     fieldVoxels=200,200,200
       histoFile=g4beamline
     histoUpdate=0
-  kapton_length=25
-  magnet_length=400
-magnet_strength=3
         maxStep=100.0
         minStep=0.01
-            sin=0.64278760968
+            sin=0.642787609
  steppingFormat=N GLOBAL CL KE STEP VOL PROCESS
 steppingVerbose=0
-tantalum_inner_rad=1
-tantalum_length=100
-tantalum_outer_rad=10
          viewer=best,1
  wallClockLimit=-1
   worldMaterial=Vacuum
@@ -156,11 +96,11 @@ BLCMDbox::Construct bismuth_converter parent= relZ=194.0 globZ=194.0
 Checking overlaps for volume tungsten_block:0 (G4Box) ... OK! 
 BLCMDbox::Construct tungsten_block parent= relZ=305.0 globZ=305.0
 	zmin=280.0 zmax=330.0
-Checking overlaps for volume tantalum_col:0 (G4Tubs) ... OK! 
-BLCMDtubs::Construct tantalum_col parent= relZ=425.0 globZ=425.0
-	zmin=375.0 zmax=475.0 kill=1
-Checking overlaps for volume magnet:0 (G4Box) ... OK! 
-BLCMDgenericbend::Construct magnet parent= relZ=700.0 globZ=700.0
+Checking overlaps for volume talantum_col:0 (G4Tubs) ... OK! 
+BLCMDtubs::Construct talantum_col parent= relZ=425.0 globZ=425.0
+	zmin=375.0 zmax=475.0 kill=0
+Checking overlaps for volume separator:0 (G4Box) ... OK! 
+BLCMDgenericbend::Construct separator parent= relZ=700.0 globZ=700.0
 	zmin=500.0 zmax=900.0
 Checking overlaps for volume kapton_tape:0 (G4Box) ... OK! 
 BLCMDbox::Construct kapton_tape parent= relZ=1050.4 globZ=1050.4

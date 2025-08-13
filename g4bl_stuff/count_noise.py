@@ -7,8 +7,6 @@ Timothy Chew
 """
 
 from tqdm import tqdm
-
-import math
 import pandas as pd
 
 input_file = "g4bl_stuff/g4beamlinesfiles/big_gamma_Det.txt"
