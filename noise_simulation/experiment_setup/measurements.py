@@ -64,6 +64,7 @@ z_positions = {
     'kapton tape': 195 + 85 + half_block['length'] + 45 + collimator['length']
                 + 25 + separator['length'] + 160,
     'virtual detector': 195 + 85 + half_block['length'] + 45 + collimator['length']
-                + 25 + separator['length'] + 160 + 360
-
+                + 25 + separator['length'] + 160 + 360,
+    'virtual detector gamma': 195 + 85 + half_block['length'] + 45 + collimator['length']
+                + 25 + separator['length'] + 160,
 }

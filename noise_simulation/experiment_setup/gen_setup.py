@@ -59,6 +59,15 @@ VIRTUAL_DETECTOR = (
     f"place noise_measure_Det z={z_positions['virtual detector']}"
 )
 
+VIRTUAL_DETECTOR_GAMMAPROFILE = (
+    f"#Virtual detector\n"
+    f"virtualdetector noise_measure_Det filename={virtual_detector['filename']} "
+    f"format='ascii' color={virtual_detector['color']} "
+    f"width={virtual_detector['width']} height={virtual_detector['height']} "
+    f"length={virtual_detector['length']}\n"
+    f"place noise_measure_Det z={z_positions['virtual detector gamma']}"
+)
+
 MEASUREMENTS = (
     f"#Measuring boxes\n"
     f"cylinder origin outerRadius=100 length=0.01 material=Vacuum color=0,0,1,0.3\n"
@@ -92,6 +101,7 @@ def gen_setup(
         beams: str=None,
         measure=False,
         test_beam=False,
+        measure_beam_profile=False,
         write_file=True
         ) -> str:
     """Writes the setup script for g4beamline
@@ -120,6 +130,13 @@ def gen_setup(
         beam_string = beams
         if test_beam:
             print('Beam import detected. Removing test beam.')
+    
+    if measure_beam_profile:
+        kapton_tape_string = ""
+        virtual_detector_string = VIRTUAL_DETECTOR_GAMMAPROFILE
+    else:
+        kapton_tape_string = KAPTON_TAPE
+        virtual_detector_string = VIRTUAL_DETECTOR
 
     write_string = (
         f"{PREAMBLE}\n\n"
@@ -128,8 +145,8 @@ def gen_setup(
         f"{HALF_BLOCK}\n\n"
         f"{COLLIMATOR}\n\n"
         f"{SEPARATOR}\n\n"
-        f"{KAPTON_TAPE}\n\n"
-        f"{VIRTUAL_DETECTOR}\n"
+        f"{kapton_tape_string}\n\n"
+        f"{virtual_detector_string}\n"
         f"\n{measure_string}\n"
     )
 
@@ -140,4 +157,4 @@ def gen_setup(
     return write_string
 
 if __name__ == '__main__':
-    gen_setup('setup_test', measure=True, test_beam=True)
+    gen_setup('setup_test', measure=False, test_beam=False, measure_beam_profile=True)

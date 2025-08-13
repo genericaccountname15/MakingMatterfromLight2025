@@ -1,0 +1,32 @@
+# runs the simulation using sampled gamma spectra
+# The 'default' physics list is QGSP_BERT
+physics QGSP
+
+#Particle beams
+
+#Bismuth converters
+box bismuth_converter material=Bi width=8 height=8 length=1 color=1,0.84,0
+place bismuth_converter z=194
+
+#Tungsten half block
+box tungsten_block material=W width=20 height=50 length=50
+place tungsten_block x=0 y=-25.0 z=305.0 kill=1
+
+#Talantum collimator
+cylinder talantum_col material=Ta innerRadius=1 outerRadius=10 length=100
+place talantum_col z=425.0
+
+#Separator magnet to remove Bethe-Heitler
+genericbend separator By=3 fieldMaterial=Vacuum fieldWidth=100 fieldHeight=200 fieldLength=400 fieldColor=1,0,0,0.3
+place separator z=700.0
+
+#Kapton Tape
+param d=1 cos=0.76604444311 sin=0.642787609 angle=40
+box kapton_tape material=KAPTON width=8 height=0.025 length=25 color=1,0.5,0
+place kapton_tape x=0 y=-$d-12.5*$sin z=1060-12.5*$cos rotation=x-$angle
+
+#Virtual detector
+virtualdetector noise_measure_Det filename=noise_measure_Det.txt format='ascii' color=0,1,0,0.3 width=100 height=100 length=0.001
+place noise_measure_Det z=1420
+
+

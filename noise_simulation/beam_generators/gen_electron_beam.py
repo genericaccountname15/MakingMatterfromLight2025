@@ -184,7 +184,7 @@ class ElectronSpectra:
 
         return n_events, energy, energy_width
 
-    def gen_beam_objects(self, bins: int, n_samples: int):
+    def gen_beam_objects(self, bins: int, n_samples: int, gen_beams_filename='electron_beams.g4bl'):
         """Generates the g4bl containing the generated beam params
         by writing to a .g4bl file.
 
@@ -199,7 +199,7 @@ class ElectronSpectra:
         p_list = np.round(p_list, 2)
         p_width = np.round(p_width, 2)
 
-        with open("electron_beams.g4bl", "w", encoding='utf-8') as file_handler:
+        with open(gen_beams_filename, 'w', encoding='utf-8') as file_handler:
             for i, n_events in enumerate(n_events_list):
                 beam_string = (f"beam gaussian particle=e- nEvents={n_events}"
                                f"beamZ=0.0 weight=100 \\\n"
@@ -274,3 +274,10 @@ class ElectronSpectra:
             list[float]: error in electron charge of dataset B
         """
         return self.charge_b_err
+
+if __name__ == '__main__':
+    ebeams = ElectronSpectra(
+        dataset_a_dir = 'noise_simulation/beam_generators/SpectraData/electron_beam_data/ElectronBeams/Dataset A/',
+        dataset_b_dir = 'noise_simulation/beam_generators/SpectraData/electron_beam_data/ElectronBeams/Dataset A/'
+        )
+    ebeams.gen_beam_objects(100, 100000000, gen_beams_filename='electron_beam_100bins.g4bl')
