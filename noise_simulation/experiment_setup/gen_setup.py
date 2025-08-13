@@ -40,7 +40,6 @@ SEPARATOR = (
 
 KAPTON_TAPE = (
     f"#Kapton Tape\n"
-    f"param d=1 cos=0.76604444311 sin=0.642787609 angle=40\n"
     f"box kapton_tape material={kapton_tape['material']} "
     f"width={kapton_tape['width']} height={kapton_tape['height']} "
     f"length={kapton_tape['length']} "
@@ -52,7 +51,7 @@ KAPTON_TAPE = (
 
 VIRTUAL_DETECTOR = (
     f"#Virtual detector\n"
-    f"virtualdetector noise_measure_Det filename={virtual_detector['filename']} "
+    f"virtualdetector noise_measure_Det filename=$filename "
     f"format='ascii' color={virtual_detector['color']} "
     f"width={virtual_detector['width']} height={virtual_detector['height']} "
     f"length={virtual_detector['length']}\n"
@@ -61,7 +60,7 @@ VIRTUAL_DETECTOR = (
 
 VIRTUAL_DETECTOR_GAMMAPROFILE = (
     f"#Virtual detector\n"
-    f"param filename={virtual_detector['filename']}\n"
+    f"param filename=$filename\n"
     f"virtualdetector noise_measure_Det filename=$filename "
     f"format='ascii' color={virtual_detector['color']} "
     f"width={virtual_detector['width']} height={virtual_detector['height']} "
@@ -70,6 +69,9 @@ VIRTUAL_DETECTOR_GAMMAPROFILE = (
 )
 
 MEASUREMENTS = (
+    f"#Parameters\n"
+    f"param d=1 cos=0.76604444311 sin=0.642787609 angle=40\n"
+    f"param filename={virtual_detector['filename']}\n"
     f"#Measuring boxes\n"
     f"cylinder origin outerRadius=100 length=0.01 material=Vacuum color=0,0,1,0.3\n"
     f"place origin z=0\n"
