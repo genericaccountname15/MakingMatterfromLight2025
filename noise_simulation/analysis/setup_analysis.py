@@ -63,7 +63,8 @@ class Analysis:
             f'd={d}',
             f'angle={angle}',
             f'sin={np.sin(angle)}',
-            f'cos={np.cos(angle)}'
+            f'cos={np.cos(angle)}',
+            f'filename={self.get_file_dict()['output fname']}'
         ]
 
         status = subprocess.run(command, check=True, cwd=self.get_file_dict()['workspace dir'])
