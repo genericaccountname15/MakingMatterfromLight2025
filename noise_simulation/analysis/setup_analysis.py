@@ -56,7 +56,7 @@ class Analysis:
             self.get_file_dict()['workspace dir'] + g4bl_filename,
             "format='ascii'",
             f'd={d}',
-            f'angle={angle}'
+            f'angle={angle}',
             f'sin={np.sin(angle)}',
             f'cos={np.cos(angle)}'
         ]

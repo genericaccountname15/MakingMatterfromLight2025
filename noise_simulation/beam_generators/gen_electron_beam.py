@@ -201,10 +201,10 @@ class ElectronSpectra:
 
         with open(gen_beams_filename, 'w', encoding='utf-8') as file_handler:
             for i, n_events in enumerate(n_events_list):
-                beam_string = (f"beam gaussian particle=e- nEvents={n_events}"
+                beam_string = (f"beam gaussian particle=e- nEvents={n_events} "
                                f"beamZ=0.0 weight=100 \\\n"
                             f"sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \\\n"
-                            f"meanMomentum={p_list[i]} sigmaP={p_width}"
+                            f"meanMomentum={p_list[i]} sigmaP={p_width} "
                             f"meanXp=0.00 meanYp=0.00 \\\n"
                             f"meanT=0.0 sigmaT=0.0 \n"
                             )

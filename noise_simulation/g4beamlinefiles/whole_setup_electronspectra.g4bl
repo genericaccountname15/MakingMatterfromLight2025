@@ -3,603 +3,603 @@
 physics QGSP
 
 #Particle beams
-beam gaussian particle=e- nEvents=641445beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=639867 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=303.77 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=303.77 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=1031517beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=1031554 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=319.31 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=319.31 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=1662616beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=1663680 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=334.85 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=334.85 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=2892657beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=2893451 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=350.39 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=350.39 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=3701850beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=3700892 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=365.93 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=365.93 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=4541113beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=4537672 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=381.47 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=381.47 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=4425273beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=4424873 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=397.01 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=397.01 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=4766774beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=4765650 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=412.55 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=412.55 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=4551295beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=4551959 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=428.09 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=428.09 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=4752556beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=4752915 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=443.63 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=443.63 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=4126986beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=4127307 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=459.17 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=459.17 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=4326881beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=4327467 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=474.71 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=474.71 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=4320175beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=4314480 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=490.25 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=490.25 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=3990539beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=3993466 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=505.79 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=505.79 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=4194344beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=4196687 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=521.33 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=521.33 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=3888989beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=3887392 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=536.87 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=536.87 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=4201778beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=4204264 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=552.41 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=552.41 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=3919863beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=3917217 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=567.95 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=567.95 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=3872297beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=3875176 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=583.49 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=583.49 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=3434477beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=3436301 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=599.03 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=599.03 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=3451184beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=3452774 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=614.57 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=614.57 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=2975987beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=2972938 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=630.11 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=630.11 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=2892547beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=2895101 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=645.65 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=645.65 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=2431053beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=2432031 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=661.19 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=661.19 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=2275284beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=2276811 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=676.73 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=676.73 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=1966950beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=1966387 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=692.27 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=692.27 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=1579544beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=1578328 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=707.81 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=707.81 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=1399235beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=1397643 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=723.35 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=723.35 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=1050791beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=1049120 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=738.89 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=738.89 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=928020beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=928721 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=754.43 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=754.43 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=679596beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=679302 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=769.97 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=769.97 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=444799beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=445714 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=785.51 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=785.51 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=240584beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=241394 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=801.05 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=801.05 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=195126beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=194575 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=816.59 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=816.59 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=141452beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=142216 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=832.13 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=832.13 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=130531beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=130209 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=847.67 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=847.67 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=123037beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=123383 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=863.21 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=863.21 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=122274beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=122056 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=878.75 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=878.75 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=128431beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=128606 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=894.29 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=894.29 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=112103beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=111582 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=909.83 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=909.83 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=115277beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=114734 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=925.37 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=925.37 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=102404beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=102099 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=940.91 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=940.91 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=107622beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=107600 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=956.45 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=956.45 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=104854beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=105583 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=971.99 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=971.99 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=103355beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=103375 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=987.53 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=987.53 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=98906beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=98804 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1003.07 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1003.07 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=98164beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=98500 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1018.61 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1018.61 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=98036beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=97767 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1034.15 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1034.15 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=97019beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=97024 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1049.69 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1049.69 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=85079beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=84813 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1065.23 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1065.23 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=89110beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=88842 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1080.77 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1080.77 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=87160beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=87345 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1096.31 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1096.31 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=84252beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=84026 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1111.85 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1111.85 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=85604beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=85703 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1127.39 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1127.39 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=79022beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=79741 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1142.93 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1142.93 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=79719beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=80847 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1158.47 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1158.47 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=61843beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=62235 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1174.01 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1174.01 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=66864beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=66719 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1189.55 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1189.55 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=66030beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=66154 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1205.09 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1205.09 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=63914beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=64309 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1220.63 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1220.63 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=62109beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=61497 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1236.17 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1236.17 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=62561beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=62830 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1251.71 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1251.71 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=61300beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=61404 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1267.25 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1267.25 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=66999beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=66927 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1282.79 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1282.79 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=65767beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=66219 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1298.33 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1298.33 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=57602beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=57743 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1313.87 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1313.87 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=59865beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=60099 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1329.41 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1329.41 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=55217beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=55299 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1344.95 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1344.95 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=59404beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=59385 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1360.49 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1360.49 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=56506beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=56452 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1376.03 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1376.03 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=57656beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=57317 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1391.57 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1391.57 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=50839beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=50781 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1407.11 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1407.11 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=53546beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=53895 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1422.65 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1422.65 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=44016beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=44016 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1438.19 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1438.19 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=46822beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=46921 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1453.73 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1453.73 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=42213beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=42432 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1469.27 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1469.27 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=41002beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=40468 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1484.81 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1484.81 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=42832beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=43099 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1500.35 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1500.35 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=44077beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=43862 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1515.89 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1515.89 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=50269beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=50312 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1531.43 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1531.43 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=46290beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=45832 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1546.97 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1546.97 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=43813beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=43711 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1562.51 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1562.51 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=45170beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=45097 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1578.05 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1578.05 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=42755beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=42580 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1593.59 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1593.59 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=37322beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=37032 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1609.13 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1609.13 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=37502beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=37562 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1624.67 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1624.67 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=29181beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=29171 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1640.21 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1640.21 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=31589beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=31655 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1655.75 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1655.75 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=30839beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=31096 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1671.29 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1671.29 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=26569beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=26283 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1686.83 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1686.83 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=28349beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=28046 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1702.37 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1702.37 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=28192beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=28382 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1717.91 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1717.91 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=25826beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=25671 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1733.45 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1733.45 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=25585beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=25484 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1748.99 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1748.99 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=29183beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=28967 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1764.53 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1764.53 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=26265beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=26144 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1780.07 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1780.07 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=24791beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=24711 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1795.61 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1795.61 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=24984beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=24961 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1811.15 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1811.15 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=24114beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=24103 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1826.69 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1826.69 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
-beam gaussian particle=e- nEvents=24892beamZ=0.0 weight=100 \
+beam gaussian particle=e- nEvents=25173 beamZ=0.0 weight=100 \
 sigmaX=0.0 sigmaY=0.00 sigmaXp=0.0024 sigmaYp=0.0024 \
-meanMomentum=1842.23 sigmaP=15.53meanXp=0.00 meanYp=0.00 \
+meanMomentum=1842.23 sigmaP=15.53 meanXp=0.00 meanYp=0.00 \
 meanT=0.0 sigmaT=0.0 
 
 
