@@ -59,24 +59,85 @@ VIRTUAL_DETECTOR = (
     f"place noise_measure_Det z={z_positions['virtual detector']}"
 )
 
-def gen_setup(g4blfilename: str):
+MEASUREMENTS = (
+    f"#Measuring boxes\n"
+    f"cylinder origin outerRadius=100 length=0.01 material=Vacuum color=0,0,1,0.3\n"
+    f"place origin z=0\n"
+    f"cylinder measure_converter outerRadius=100 length=0.01 material=Vacuum color=0,0,1,0.3\n"
+    f"place measure_converter z={z_positions['converter']}\n"
+    f"cylinder measure_half_block outerRadius=100 length=0.01 material=Vacuum color=0,0,1,0.3\n"
+    f"place measure_half_block z={z_positions['half block']}\n"
+    f"cylinder measure_collimator outerRadius=100 length=0.01 material=Vacuum color=0,0,1,0.3\n"
+    f"place measure_collimator z={z_positions['collimator']}\n"
+    f"cylinder measure_separator outerRadius=100 length=0.01 material=Vacuum color=0,0,1,0.3\n"
+    f"place measure_separator z={z_positions['separator']}\n"
+    f"cylinder measure_kapton outerRadius=100 length=0.01 material=Vacuum color=0,0,1,0.3\n"
+    f"place measure_kapton z={z_positions['kapton tape']}\n"
+    f"cylinder measure_detector outerRadius=100 length=0.01 material=Vacuum color=0,0,1,0.3\n"
+    f"place measure_detector z={z_positions['virtual detector']}\n"
+    f"box measure_axis length=2000 width=100 height=0.01 material=Vacuum color=0,0,1,0.3\n"
+    f"place measure_axis x=50 y=0 z=1000\n"
+    f"box measure_kapton_d length=2000 width=100 height=0.01 material=Vacuum color=1,0,1,0.3\n"
+    f"place measure_kapton_d x=50 y=-$d z=1000\n"
+)
+
+TEST_BEAM = (
+    f"#Particle beams\n"
+    f"beam gaussian particle=gamma nEvents=100 beamZ={z_positions['converter']} "
+    f"meanMomentum=1000"
+)
+
+def gen_setup(
+        g4blfilename: str,
+        beams: str=None,
+        measure=False,
+        test_beam=False,
+        write_file=True
+        ) -> str:
     """Writes the setup script for g4beamline
 
     Args:
         g4blfilename (str): the g4beamline file name (without extension)
+        beams (str, optional): g4beamline beams to import into setup. Defaults to None.
+        measure (bool, optional): True to place measurement planes. Defaults to False.
+        test_beam (bool, optional): True to place test beam. Defaults to False.
+        write_file (bool, optional): True to write the output to a .g4bl file. Defaults to True.
+
+    Returns:
+        str: The string for the g4beamline setup.
     """
-    with open(f"{g4blfilename}.g4bl", "w", encoding="utf-8") as file_handler:
-        write_string = (
-            f"{PREAMBLE}\n\n"
-            f"#Particle beams\n\n"
-            f"{CONVERTER}\n\n"
-            f"{HALF_BLOCK}\n\n"
-            f"{COLLIMATOR}\n\n"
-            f"{SEPARATOR}\n\n"
-            f"{KAPTON_TAPE}\n\n"
-            f"{VIRTUAL_DETECTOR}\n"
-        )
-        file_handler.write(write_string)
+    if measure:
+        measure_string = MEASUREMENTS
+    else:
+        measure_string=""
+
+    if test_beam:
+        beam_string = TEST_BEAM
+    else:
+        beam_string = "#Particle beams"
+
+    if beams is not None:
+        beam_string = beams
+        if test_beam:
+            print('Beam import detected. Removing test beam.')
+
+    write_string = (
+        f"{PREAMBLE}\n\n"
+        f"{beam_string}\n\n"
+        f"{CONVERTER}\n\n"
+        f"{HALF_BLOCK}\n\n"
+        f"{COLLIMATOR}\n\n"
+        f"{SEPARATOR}\n\n"
+        f"{KAPTON_TAPE}\n\n"
+        f"{VIRTUAL_DETECTOR}\n"
+        f"\n{measure_string}\n"
+    )
+
+    if write_file:
+        with open(f"{g4blfilename}.g4bl", "w", encoding="utf-8") as file_handler:
+            file_handler.write(write_string)
+
+    return write_string
 
 if __name__ == '__main__':
-    gen_setup('whole_setup')
+    gen_setup('setup_test', measure=True, test_beam=True)
