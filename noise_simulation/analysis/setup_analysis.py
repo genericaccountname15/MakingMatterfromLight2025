@@ -44,13 +44,15 @@ class Analysis:
                 'output fname': save_filename
                 }
 
-    def run_g4blsim(self, g4bl_filename: str, d=1, angle=40):
+    def run_g4blsim(self, g4bl_filename: str, d=1, angle=40, f=0):
         """Runs the g4beamlines simulation
 
         Args:
             g4bl_file (str): g4beamline filename (with extension)
             d (float, optional): off axial displacement of the kapton tape (mm). Defaults to 1.
             angle (float, optional): angle of the kapton tape (degrees). Defaults to 40.
+            f (float, optional): Displacement of the half block from the axis,
+                    negative to let more beam through. Defaults to 0
         """
         # convert to radians
         angle = angle * np.pi / 180
@@ -64,6 +66,7 @@ class Analysis:
             f'angle={angle}',
             f'sin={np.sin(angle)}',
             f'cos={np.cos(angle)}',
+            f'f={f}',
             f"filename={self.get_file_dict()['output fname']}"
         ]
 
@@ -164,6 +167,11 @@ class Analysis:
                         g4bl_filename = g4bl_filename,
                         angle = var
                         )
+                elif variable_name == 'f':
+                    self.run_g4blsim(
+                        g4bl_filename = g4bl_filename,
+                        f = var
+                    )
                 else:
                     os.remove(f'{save_filedir}/g4bl_sim_{np.round(var, 1)}')
                     os.remove(f'{save_filedir}/g4bl_sim_{np.round(var, 1)}')

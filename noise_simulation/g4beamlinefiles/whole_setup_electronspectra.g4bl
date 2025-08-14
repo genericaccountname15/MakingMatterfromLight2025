@@ -609,7 +609,7 @@ place bismuth_converter z=194
 
 #Tungsten half block
 box tungsten_block material=W width=20 height=50 length=50
-place tungsten_block x=0 y=-25.0 z=305.0 kill=1
+place tungsten_block x=0 y=-25.0+$f z=305.0 kill=1
 
 #Talantum collimator
 cylinder talantum_col material=Ta innerRadius=1 outerRadius=10 length=100

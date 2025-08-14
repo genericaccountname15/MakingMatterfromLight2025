@@ -4,7 +4,7 @@ G4ENSDFSTATEDATA=C:\Geant4Data/G4ENSDFSTATE2.3
 G4PARTICLEXSDATA=C:\Geant4Data/G4PARTICLEXS4.0
 G4LEVELGAMMADATA=C:\Geant4Data/PhotonEvaporation5.7
 G4RADIOACTIVEDATA=C:\Geant4Data/RadioactiveDecay5.6
-G4beamline Process ID 10852
+G4beamline Process ID 21268
 
 *************************************************************
  g4beamline version: 3.08                        (Oct  8 2022)
@@ -20,6 +20,7 @@ G4beamline Process ID 10852
                              WWW : http://geant4.org/
 **************************************************************
 
+param        viewer        best,1
 geometry                   nPoints=100 printGeometry=0 visual=0
                            tolerance=0.002
 Physics list QGSP is obsolete, replaced by FTFP_BERT
@@ -31,418 +32,22 @@ physics      FTFP_BERT     disable= inactivate= deactivate= doStochastics=1
                            fluct=1 minRangeCut=1 list=0 gammaToMuPair=0
                            spinTracking=0 synchrotronRadiation=0
                            synchrotronRadiationMuon=0 maxTime=1e+06
-beam    GAUSSIAN particle=e- nEvents=639867 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=303.8 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=1031554 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=319.3 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=1663680 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=334.9 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=2893451 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=350.4 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=3700892 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=365.9 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=4537672 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=381.5 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=4424873 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=397.0 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=4765650 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=412.6 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=4551959 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=428.1 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=4752915 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=443.6 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=4127307 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=459.2 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=4327467 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=474.7 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=4314480 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=490.2 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=3993466 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=505.8 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=4196687 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=521.3 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=3887392 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=536.9 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=4204264 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=552.4 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=3917217 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=568.0 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=3875176 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=583.5 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=3436301 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=599.0 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=3452774 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=614.6 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=2972938 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=630.1 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=2895101 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=645.6 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=2432031 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=661.2 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=2276811 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=676.7 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=1966387 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=692.3 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=1578328 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=707.8 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=1397643 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=723.4 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=1049120 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=738.9 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=928721 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=754.4 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=679302 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=770.0 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=445714 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=785.5 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=241394 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=801.0 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=194575 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=816.6 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=142216 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=832.1 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=130209 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=847.7 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=123383 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=863.2 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=122056 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=878.8 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=128606 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=894.3 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=111582 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=909.8 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=114734 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=925.4 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=102099 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=940.9 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=107600 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=956.5 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=105583 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=972.0 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=103375 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=987.5 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=98804 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1003.1 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=98500 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1018.6 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=97767 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1034.2 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=97024 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1049.7 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=84813 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1065.2 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=88842 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1080.8 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=87345 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1096.3 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=84026 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1111.8 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=85703 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1127.4 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=79741 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1142.9 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=80847 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1158.5 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=62235 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1174.0 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=66719 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1189.5 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=66154 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1205.1 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=64309 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1220.6 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=61497 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1236.2 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=62830 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1251.7 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=61404 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1267.2 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=66927 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1282.8 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=66219 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1298.3 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=57743 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1313.9 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=60099 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1329.4 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=55299 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1345.0 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=59385 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1360.5 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=56452 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1376.0 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=57317 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1391.6 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=50781 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1407.1 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=53895 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1422.7 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=44016 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1438.2 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=46921 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1453.7 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=42432 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1469.3 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=40468 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1484.8 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=43099 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1500.3 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=43862 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1515.9 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=50312 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1531.4 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=45832 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1547.0 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=43711 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1562.5 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=45097 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1578.0 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=42580 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1593.6 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=37032 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1609.1 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=37562 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1624.7 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=29171 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1640.2 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=31655 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1655.8 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=31096 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1671.3 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=26283 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1686.8 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=28046 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1702.4 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=28382 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1717.9 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=25671 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1733.5 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=25484 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1749.0 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=28967 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1764.5 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=26144 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1780.1 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=24711 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1795.6 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=24961 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1811.2 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=24103 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1826.7 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
-beam    GAUSSIAN particle=e- nEvents=25173 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=1842.2 weight=100.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00240 sigmaYp=0.00240 
-		sigmaP=15.5 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
+beam    GAUSSIAN particle=gamma nEvents=100 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=194.0 maxR=1000000.0 
+		meanMomentum=1000.0 weight=1.000000 
+		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00000 sigmaYp=0.00000 
+		sigmaP=0.0 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
 box          bismuth_converter height=8 width=8 length=1 maxStep=100
                            material=Bi color=1,0.84,0 kill=0
 place   bismuth_converter copies=1 x=0.0 y=0.0 z=194.0 
+param        f             -1
 box          tungsten_block height=50 width=20 length=50 maxStep=100
                            material=W color=1,1,1 kill=0
-place   tungsten_block copies=1 x=0.0 y=-25.0 z=305.0 
+place   tungsten_block copies=1 x=0.0 y=-26.0 z=305.0 
                 kill=1
 tubs         talantum_col  innerRadius=1 outerRadius=10 initialPhi=0
                            finalPhi=360 length=100 maxStep=100 material=Ta
                            color=1,1,1 kill=0 radius=10
 place   talantum_col copies=1 x=0.0 y=0.0 z=425.0 
-                kill=1
 genericbend  separator     fieldWidth=100 fieldHeight=200 fieldLength=400
                            ironWidth=0 ironHeight=0 ironLength=0 By=3
                            maxStep=100 fieldMaterial=Vacuum
@@ -454,20 +59,52 @@ param        angle         40
 param        cos           0.76604444311
 param        d             1
 param        sin           0.642787609
-param        filename      noise_measure_Det.txt
-param        filename      gamma_spec_LWFA_100mil
+box          kapton_tape   height=0.025 width=8 length=25 maxStep=100
+                           material=KAPTON color=1,0.5,0 kill=0
+place   kapton_tape copies=1 x=0.0 y=-9.0 z=1050.4 rotation='x-40'
 virtualdetector noise_measure_Det radius=0 innerRadius=0 height=100 width=100
                            length=0.001 maxStep=100 material= color=0,1,0,0.3
                            noSingles=0 format=bltrackfile
-                           filename=gamma_spec_LWFA_100mil
-                           file=gamma_spec_LWFA_100mil require=
+                           filename=noise_measure_Det.txt
+                           file=noise_measure_Det.txt require=
                            referenceParticle=0 coordinates=Centerline kill=0
-place   noise_measure_Det copies=1 x=0.0 y=0.0 z=1060.0 
+place   noise_measure_Det copies=1 x=0.0 y=0.0 z=1420.0 
+tubs         origin        innerRadius=0 outerRadius=100 initialPhi=0
+                           finalPhi=360 length=0.01 maxStep=100
+                           material=Vacuum color=0,0,1,0.3 kill=0 radius=100
+place   origin  copies=1 x=0.0 y=0.0 z=0.0 
+tubs         measure_converter innerRadius=0 outerRadius=100 initialPhi=0
+                           finalPhi=360 length=0.01 maxStep=100
+                           material=Vacuum color=0,0,1,0.3 kill=0 radius=100
+place   measure_converter copies=1 x=0.0 y=0.0 z=194.0 
+tubs         measure_half_block innerRadius=0 outerRadius=100 initialPhi=0
+                           finalPhi=360 length=0.01 maxStep=100
+                           material=Vacuum color=0,0,1,0.3 kill=0 radius=100
+place   measure_half_block copies=1 x=0.0 y=0.0 z=305.0 
+tubs         measure_collimator innerRadius=0 outerRadius=100 initialPhi=0
+                           finalPhi=360 length=0.01 maxStep=100
+                           material=Vacuum color=0,0,1,0.3 kill=0 radius=100
+place   measure_collimator copies=1 x=0.0 y=0.0 z=425.0 
+tubs         measure_separator innerRadius=0 outerRadius=100 initialPhi=0
+                           finalPhi=360 length=0.01 maxStep=100
+                           material=Vacuum color=0,0,1,0.3 kill=0 radius=100
+place   measure_separator copies=1 x=0.0 y=0.0 z=700.0 
+tubs         measure_kapton innerRadius=0 outerRadius=100 initialPhi=0
+                           finalPhi=360 length=0.01 maxStep=100
+                           material=Vacuum color=0,0,1,0.3 kill=0 radius=100
+place   measure_kapton copies=1 x=0.0 y=0.0 z=1060.0 
+tubs         measure_detector innerRadius=0 outerRadius=100 initialPhi=0
+                           finalPhi=360 length=0.01 maxStep=100
+                           material=Vacuum color=0,0,1,0.3 kill=0 radius=100
+place   measure_detector copies=1 x=0.0 y=0.0 z=1420.0 
+box          measure_axis  height=0.01 width=100 length=2000 maxStep=100
+                           material=Vacuum color=0,0,1,0.3 kill=0
+place   measure_axis copies=1 x=50.0 y=0.0 z=1000.0 
 
-World size (before incrementing by 201.357 mm): 100.0 H  100.0 W  2120.0 L
+World size (before incrementing by 201.357 mm): 200.0 H  200.0 W  4000.0 L
 
 PARAMETERS:
-            Zcl=1060
+            Zcl=2000
           angle=40
             cos=0.76604444311
               d=1
@@ -477,5 +114,270 @@ deltaIntersection=0.1
          epsMax=0.05
          epsMin=2.5e-7
  eventTimeLimit=30
+              f=-1
     fieldVoxels=200,200,200
-       filename=gamma_sp
+      histoFile=g4beamline
+    histoUpdate=0
+        maxStep=100.0
+        minStep=0.01
+            sin=0.642787609
+ steppingFormat=N GLOBAL CL KE STEP VOL PROCESS
+steppingVerbose=0
+         viewer=best,1
+ wallClockLimit=-1
+  worldMaterial=Vacuum
+     zTolerance=2.0
+Checking overlaps for volume bismuth_converter:0 (G4Box) ... OK! 
+BLCMDbox::Construct bismuth_converter parent= relZ=194.0 globZ=194.0
+	zmin=193.5 zmax=194.5
+Checking overlaps for volume tungsten_block:0 (G4Box) ... OK! 
+BLCMDbox::Construct tungsten_block parent= relZ=305.0 globZ=305.0
+	zmin=280.0 zmax=330.0
+Checking overlaps for volume talantum_col:0 (G4Tubs) ... OK! 
+BLCMDtubs::Construct talantum_col parent= relZ=425.0 globZ=425.0
+	zmin=375.0 zmax=475.0 kill=0
+Checking overlaps for volume separator:0 (G4Box) ... OK! 
+BLCMDgenericbend::Construct separator parent= relZ=700.0 globZ=700.0
+	zmin=500.0 zmax=900.0
+Checking overlaps for volume kapton_tape:0 (G4Box) ... OK! 
+BLCMDbox::Construct kapton_tape parent= relZ=1050.4 globZ=1050.4
+	zmin=1037.9 zmax=1062.9
+Checking overlaps for volume noise_measure_Det:0 (G4Box) ... OK! 
+BLCMDvirtualdetector::Construct noise_measure_Det parent= relZ=1420.0 globZ=1420.0
+Checking overlaps for volume origin:0 (G4Tubs) ... OK! 
+BLCMDtubs::Construct origin parent= relZ=0.0 globZ=0.0
+	zmin=-0.0 zmax=0.0 kill=0
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with volume already placed !
+          Overlap is detected for volume measure_converter:0 (G4Tubs) with bismuth_converter:0 (G4Box)
+          overlap at local point (2.01532,-3.19717,0.005) by 495 um  (max of 2 cases)
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+BLCMDtubs::Construct measure_converter parent= relZ=194.0 globZ=194.0
+	zmin=194.0 zmax=194.0 kill=0
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with volume already placed !
+          Overlap is detected for volume measure_half_block:0 (G4Tubs) with tungsten_block:0 (G4Box)
+          overlap at local point (0.0624336,3.50928,0.005) by 9.93757 mm  (max of 28 cases)
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+BLCMDtubs::Construct measure_half_block parent= relZ=305.0 globZ=305.0
+	zmin=305.0 zmax=305.0 kill=0
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with volume already placed !
+          Overlap is detected for volume measure_collimator:0 (G4Tubs) with talantum_col:0 (G4Tubs)
+          overlap at local point (2.94516,-5.09024,0.005) by 4.11914 mm  (max of 10 cases)
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+BLCMDtubs::Construct measure_collimator parent= relZ=425.0 globZ=425.0
+	zmin=425.0 zmax=425.0 kill=0
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with volume already placed !
+          Overlap is detected for volume measure_separator:0 (G4Tubs) with separator:0 (G4Box)
+          overlap at local point (0.543507,-33.0505,0.005) by 4.94565 cm  (max of 588 cases)
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+BLCMDtubs::Construct measure_separator parent= relZ=700.0 globZ=700.0
+	zmin=700.0 zmax=700.0 kill=0
+Checking overlaps for volume measure_converter:0 (G4Tubs) ... Checking overlaps for volume measure_half_block:0 (G4Tubs) ... Checking overlaps for volume measure_collimator:0 (G4Tubs) ... Checking overlaps for volume measure_separator:0 (G4Tubs) ... Checking overlaps for volume measure_kapton:0 (G4Tubs) ... OK! 
+BLCMDtubs::Construct measure_kapton parent= relZ=1060.0 globZ=1060.0
+	zmin=1060.0 zmax=1060.0 kill=0
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with volume already placed !
+          Overlap is detected for volume measure_detector:0 (G4Tubs)
+          apparently fully encapsulating volume noise_measure_Det:0 (G4Box) at the same level!
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+BLCMDtubs::Construct measure_detector parent= relZ=1420.0 globZ=1420.0
+	zmin=1420.0 zmax=1420.0 kill=0
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with volume already placed !
+          Overlap is detected for volume measure_axis:0 (G4Box) with talantum_col:0 (G4Tubs)
+          overlap at local point (7.2445,-0.005,-20.902) by 2.75549 mm  (max of 3 cases)
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+BLCMDbox::Construct measure_axis parent= relZ=1000.0 globZ=1000.0
+	zmin=0.0 zmax=2000.0
+Checking overlaps for volume measure_detector:0 (G4Tubs) ... Checking overlaps for volume measure_axis:0 (G4Box) ... ### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
+
+Geometry test nPoints=100 tolerance=0.002 mm:
+Testing geometry for children of group 'World':
+**************************************************************************
+*** G4Exception: Geometry Error
+***    severity: Warning
+***   issued by: geometry
+*** description: box 'bismuth_converter' intersects tubs 'measure_converter'
+**************************************************************************
+**************************************************************************
+*** G4Exception: Geometry Error
+***    severity: Warning
+***   issued by: geometry
+*** description: box 'bismuth_converter' intersects box 'measure_axis'
+**************************************************************************
+**************************************************************************
+*** G4Exception: Geometry Error
+***    severity: Warning
+***   issued by: geometry
+*** description: box 'tungsten_block' intersects tubs 'measure_half_block'
+**************************************************************************
+**************************************************************************
+*** G4Exception: Geometry Error
+***    severity: Warning
+***   issued by: geometry
+*** description: tubs 'talantum_col' intersects tubs 'measure_collimator'
+**************************************************************************
+**************************************************************************
+*** G4Exception: Geometry Error
+***    severity: Warning
+***   issued by: geometry
+*** description: tubs 'talantum_col' intersects box 'measure_axis'
+**************************************************************************
+**************************************************************************
+*** G4Exception: Geometry Error
+***    severity: Warning
+***   issued by: geometry
+*** description: box 'kapton_tape' intersects tubs 'measure_kapton'
+**************************************************************************
+**************************************************************************
+*** G4Exception: Geometry Error
+***    severity: Warning
+***   issued by: geometry
+*** description: virtualdetector 'noise_measure_Det' intersects tubs 'measure_detector'
+**************************************************************************
+**************************************************************************
+*** G4Exception: Geometry Error
+***    severity: Warning
+***   issued by: geometry
+*** description: virtualdetector 'noise_measure_Det' intersects box 'measure_axis'
+**************************************************************************
+**************************************************************************
+*** G4Exception: Geometry Error
+***    severity: Warning
+***   issued by: geometry
+*** description: tubs 'measure_converter' intersects box 'bismuth_converter'
+**************************************************************************
+**************************************************************************
+*** G4Exception: Geometry Error
+***    severity: Warning
+***   issued by: geometry
+*** description: tubs 'measure_half_block' intersects box 'tungsten_block'
+***    printing: every 10-th occurrence
+**************************************************************************
+Total geometry errors = 12  0 seconds
+
+================== Prepare Visualization ==================
+Stochastic processes are enabled.
+Available UI session types: [ Qt, Win32, csh ]
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Visualization Manager initialising...
+Registering graphics systems...
+
+You have successfully registered the following graphics systems.
+Registered graphics systems are:
+  ASCIITree (ATree)
+  DAWNFILE (DAWNFILE)
+  G4HepRepFile (HepRepFile)
+  RayTracer (RayTracer)
+  VRML2FILE (VRML2FILE)
+  gMocrenFile (gMocrenFile)
+  OpenGLImmediateQt (OGLIQt, OGLI)
+  OpenGLStoredQt (OGLSQt, OGL, OGLS)
+  OpenGLImmediateWin32 (OGLIWin32, OGLIQt_FALLBACK)
+  OpenGLStoredWin32 (OGLSWin32, OGLSQt_FALLBACK)
+
+Registering model factories...
+
+You have successfully registered the following model factories.
+Registered model factories:
+  generic
+  drawByAttribute
+  drawByCharge
+  drawByOriginVolume
+  drawByParticleID
+  drawByEncounteredVolume
+
+Registered models:
+  None
+
+Registered filter factories:
+  attributeFilter
+  chargeFilter
+  originVolumeFilter
+  particleFilter
+  encounteredVolumeFilter
+
+Registered filters:
+  None
+
+You have successfully registered the following user vis actions.
+Run Duration User Vis Actions: none
+End of Event User Vis Actions: none
+End of Run User Vis Actions: none
+
+Some /vis commands (optionally) take a string to specify colour.
+"/vis/list" to see available colours.
+
+Selected visualization viewer: Qt
+BLVisManager init: /vis/open OGLSQt
+BLVisManager init: /vis/viewer/set/auxiliaryEdge true
+BLVisManager init: /vis/viewer/set/style surface
+BLVisManager init: /vis/viewer/set/viewpointThetaPhi 0 0 deg
+BLVisManager init: /vis/drawVolume
+BLVisManager init: /tracking/storeTrajectory 1
+BLVisManager init: /vis/scene/add/trajectories
+/tracking/storeTrajectory 1
+Attributes available for modeling and filtering with
+  "/vis/modeling/trajectories/create/drawByAttribute" and
+  "/vis/filtering/trajectories/create/attributeFilter" commands:
+G4TrajectoriesModel:
+  Event ID (EventID): G4int
+  Run ID (RunID): G4int
+G4Trajectory:
+  Charge (Ch): unit: e+ (G4double)
+  Track ID (ID): G4int
+  Initial kinetic energy (IKE): G4BestUnit (G4double)
+  Initial momentum magnitude (IMag): G4BestUnit (G4double)
+  Initial momentum (IMom): G4BestUnit (G4ThreeVector)
+  No. of points (NTP): G4int
+  PDG Encoding (PDG): G4int
+  Parent ID (PID): G4int
+  Particle Name (PN): G4String
+G4TrajectoryPoint:
+  Position (Pos): G4BestUnit (G4ThreeVector)
+WARNING: Trajectory storing has been requested.  This action may be
+  reversed with "/tracking/storeTrajectory 0".
+BLVisManager init: /vis/scene/endOfEventAction accumulate -1
+WARNING: The vis manager will keep an unlimited number of events.
+  This may use a lot of memory.
+  It may be changed with, e.g., "/vis/scene/endOfEventAction accumulate 10".
+BLVisManager init: /vis/viewer/set/hiddenMarker true
+
+WARNING: No extent set for user vis action "DrawMarkers".
+WARNING: User Vis Action "DrawMarkers" extent is null.
+ Changing export format to "jpg"
+
+Graphics systems deleted.
+Visualization Manager deleting...
+
+Exceptions: 0 Fatal, 0 Events Aborted, 0 Stuck Tracks (stopped), 18 Warnings
+      6 times: GeomVol1002
+     12 times: Geometry Error
+g4beamline: simulation complete
