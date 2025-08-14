@@ -100,8 +100,7 @@ class Analysis:
                 comment = '#',
                 header = None,
                 skiprows = 1,
-                chunksize = chunksize,
-                dtype = {col: 'float32' for col in header if col != 'PDGid'} | {'PDGid': 'int32'},
+                chunksize = chunksize
             ),
             desc = 'Reading file',
             unit = 'chunk'
