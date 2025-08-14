@@ -152,6 +152,7 @@ class GammaDetRead:
             self,
             nbins: int,
             n_samples: int,
+            beam_pos: float,
             dist_source: float,
             binning_range: list=None,
             gen_beams_filename = 'gamma_beams.g4bl'
@@ -162,14 +163,13 @@ class GammaDetRead:
 
         Args:
             nbins (int): number of bins to bin the data
-            n_samples (_type_): number of total events
-            dist_source (_type_): distance from the bismuth source to the gamma source we're placing
-            beam_pos (_type_): distance from the origin to the gamma source we're placing
+            n_samples (int): number of total events
+            dist_source (float): distance from the bismuth source to the gamma source we're placing
+            beam_pos (float): distance from the origin to the gamma source we're placing
             binning_range (list[list[float]], optional): Range of divergences to bin over (mrad).
                 Of the form [[xmin, xmax], [ymin, ymax]]. Defaults to None.
         """
         div, div_err, n_events, p = self.bin_det_data(nbins, n_samples, binning_range=binning_range)
-        beam_pos = dist_source + self.get_det_pos()
 
         with open(gen_beams_filename, "w", encoding='utf-8') as file_handler:
             for i, div_x in enumerate(div[0]):
@@ -239,21 +239,23 @@ class GammaDetRead:
         return self.energy
 
 if __name__ == '__main__':
+    # gbeams = GammaDetRead(
+    #     detdatafile = 'noise_simulation/g4beamlinefiles/gamma_profile_test.txt',
+    #     det_pos = 1420-195
+    # )
+    # print(len(gbeams.get_data()))
+    # gbeams.plot_hitmap()
+    # gbeams.plot_spectra()
+
     gbeams = GammaDetRead(
-        detdatafile = 'noise_simulation/g4beamlinefiles/gamma_profile_test.txt',
+        detdatafile = 'noise_simulation/g4beamlinefiles/gamma_spec_LWFA_100mil.txt',
         det_pos = 1060-195
     )
-    gbeams.plot_hitmap()
-    gbeams.plot_spectra()
-
-    # gbeams = GammaDetRead(
-    #     detdatafile = 'noise_simulation/g4beamlinefiles/gamma_spec_LWFA_100mil.txt',
-    #     det_pos = 1060-195
-    # )
-    # gbeams.gen_beam_objects(
-    #     nbins=100,
-    #     n_samples=len(gbeams.get_data()),
-    #     dist_source=195,
-    #     binning_range=None,
-    #     gen_beams_filename='gamma_beams_new.g4bl'
-    #     )
+    gbeams.gen_beam_objects(
+        nbins=100,
+        n_samples=len(gbeams.get_data()),
+        dist_source=195,
+        beam_pos=425.0,
+        binning_range=None,
+        gen_beams_filename='gamma_beams_new.g4bl'
+        )
