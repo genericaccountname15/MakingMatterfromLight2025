@@ -613,7 +613,7 @@ place tungsten_block x=0 y=-25.0 z=305.0 kill=1
 
 #Talantum collimator
 cylinder talantum_col material=Ta innerRadius=1 outerRadius=10 length=100
-place talantum_col z=425.0
+place talantum_col z=425.0 kill=1
 
 #Separator magnet to remove Bethe-Heitler
 genericbend separator By=3 fieldMaterial=Vacuum fieldWidth=100 fieldHeight=200 fieldLength=400 fieldColor=1,0,0,0.3

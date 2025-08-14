@@ -6,6 +6,7 @@ from measurements import (converter, half_block, collimator, separator,
 
 PREAMBLE = ("# The 'default' physics list is QGSP_BERT\n"
                     "physics QGSP")
+
 CONVERTER = (
     f"#Bismuth converters\n"
     f"box bismuth_converter material={converter['material']} "
@@ -36,6 +37,13 @@ SEPARATOR = (
     f"fieldLength={separator['length']} "
     f"fieldColor={separator['color']}\n"
     f"place separator z={z_positions['separator']}"
+)
+
+PARAMS = (
+    f"#Parameters\n"
+    f"param d=1 cos=0.76604444311 sin=0.642787609 angle=40\n"
+    f"param filename={virtual_detector['filename']}\n"
+    f"#Measuring boxes\n"
 )
 
 KAPTON_TAPE = (
@@ -69,10 +77,6 @@ VIRTUAL_DETECTOR_GAMMAPROFILE = (
 )
 
 MEASUREMENTS = (
-    f"#Parameters\n"
-    f"param d=1 cos=0.76604444311 sin=0.642787609 angle=40\n"
-    f"param filename={virtual_detector['filename']}\n"
-    f"#Measuring boxes\n"
     f"cylinder origin outerRadius=100 length=0.01 material=Vacuum color=0,0,1,0.3\n"
     f"place origin z=0\n"
     f"cylinder measure_converter outerRadius=100 length=0.01 material=Vacuum color=0,0,1,0.3\n"
@@ -105,7 +109,8 @@ def gen_setup(
         measure=False,
         test_beam=False,
         measure_beam_profile=False,
-        write_file=True
+        write_file=True,
+        vary_params=False
         ) -> str:
     """Writes the setup script for g4beamline
 
@@ -140,6 +145,11 @@ def gen_setup(
     else:
         kapton_tape_string = KAPTON_TAPE
         virtual_detector_string = VIRTUAL_DETECTOR
+    
+    if vary_params:
+        param_string = "#Parameters"
+    else:
+        param_string = PARAMS
 
     write_string = (
         f"{PREAMBLE}\n\n"
@@ -148,6 +158,7 @@ def gen_setup(
         f"{HALF_BLOCK}\n\n"
         f"{COLLIMATOR}\n\n"
         f"{SEPARATOR}\n\n"
+        f"{param_string}\n\n"
         f"{kapton_tape_string}\n\n"
         f"{virtual_detector_string}\n"
         f"\n{measure_string}\n"
@@ -160,4 +171,4 @@ def gen_setup(
     return write_string
 
 if __name__ == '__main__':
-    gen_setup('setup_test', measure=False, test_beam=False, measure_beam_profile=True)
+    gen_setup('measure_profile', measure=False, test_beam=False, measure_beam_profile=True)
