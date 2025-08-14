@@ -144,7 +144,7 @@ class Analysis:
         os.makedirs(save_filedir, exist_ok=True)
 
         for var in variables:
-            os.makedirs(f'{save_filedir}/g4bl_sim_{np.round(var, 1)}', exist_ok=True)
+            os.makedirs(f'{save_filedir}/g4bl_sim_{variable_name}_{np.round(var, 1)}', exist_ok=True)
 
             if os.path.exists(f'{save_filedir}/g4bl_sim_{np.round(var, 1)}'):
                 print(
