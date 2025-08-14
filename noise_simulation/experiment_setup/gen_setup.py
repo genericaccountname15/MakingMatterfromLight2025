@@ -28,7 +28,7 @@ COLLIMATOR = (
     f"cylinder talantum_col material={collimator['material']} "
     f"innerRadius={collimator['inner radius']} outerRadius={collimator['outer radius']} "
     f"length={collimator['length']}\n"
-    f"place talantum_col z={z_positions['collimator']}"
+    f"place talantum_col z={z_positions['collimator']} kill={collimator['kill']}"
 )
 SEPARATOR = (
     f"#Separator magnet to remove Bethe-Heitler\n"
