@@ -4,7 +4,7 @@ Attempted analytical modelling of the optimal timing
 
 import numpy as np
 import matplotlib.pyplot as plt
-import Final_simulation.values as values
+import optimisation_simulation.theory.values as values
 
 def get_tmin(t_delay, d, width):
     output =  ( t_delay ** 2 + ( d / values.c ) ** 2 ) / (
