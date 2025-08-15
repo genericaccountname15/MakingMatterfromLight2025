@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -N f_noise_sim_run
+#PBS -N f_cont_noise_sim_run
 #PBS -l select=1:ncpus=1:mem=8gb
 #PBS -l walltime=48:00:00
 

@@ -9,8 +9,8 @@ if __name__ == '__main__':
     analysis = Analysis(file_dict = files_HPC, save_filename = 'noise_f_Det.txt')
     analysis.run_analysis(
         g4bl_filename = 'noise_simulation/g4beamlinefiles/whole_setup_electronspectra.g4bl',
-        save_filedir = 'f_noise_measure_14Aug',
-        variables = np.linspace(-1.5, 1.5, 10),
+        save_filedir = 'f_noise_measure_15Aug',
+        variables = np.linspace(-1.5, 1.5, 10)[5:],
         variable_name = 'f',
         save_all = False,
         repeat = 3
