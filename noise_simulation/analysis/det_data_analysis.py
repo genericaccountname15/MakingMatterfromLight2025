@@ -111,7 +111,7 @@ def plot_noise_data(
 if __name__ == '__main__':
     write_csv(
         variable_name = 'axial displacement',
-        variable_list = np.linspace(0,90,10),
+        variable_list = np.linspace(0.1,3.0,10),
         data_dir = 'd_noise_measure_14Aug',
         csvname = 'd_noise'
     )

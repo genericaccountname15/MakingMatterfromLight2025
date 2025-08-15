@@ -253,9 +253,9 @@ if __name__ == '__main__':
     )
     gbeams.gen_beam_objects(
         nbins=100,
-        n_samples=len(gbeams.get_data()),
+        n_samples=len(gbeams.get_data())*10,
         dist_source=195,
         beam_pos=425.0,
         binning_range=None,
-        gen_beams_filename='gamma_beams_new.g4bl'
+        gen_beams_filename='gamma_beams_10x.g4bl'
         )

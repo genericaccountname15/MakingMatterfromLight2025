@@ -1,8 +1,3 @@
-# runs the simulation using sampled gamma spectra
-# The 'default' physics list is QGSP_BERT
-physics QGSP
-
-#Particle beams
 beam gaussian particle=gamma nEvents=10 beamZ=425.0 beamX=-11.158667866688313 beamY=-1.3856904938230425 weight=100 \
 sigmaX=0.22518192892825287 sigmaY=0.17203772961623204 sigmaXp=0.0011547791227089891 sigmaYp=0.0008822447672627284 \
 meanMomentum=273.2367292376455 sigmaP=0.0 meanXp=-0.057223937777888784 meanYp=-0.007106105096528423 \
@@ -18925,33 +18920,5 @@ beam gaussian particle=gamma nEvents=590 beamZ=425.0 beamX=11.158645324832884 be
 sigmaX=0.22518192892825287 sigmaY=0.17203772961623204 sigmaXp=0.0011547791227089891 sigmaYp=0.0008822447672627284 \
 meanMomentum=27.184245040889856 sigmaP=76.45748015879464 meanXp=0.057223822178630174 meanYp=0.05736065209749841 \
 meanT=0.0 sigmaT=0.0 
-
-
-
-
-
-#Bismuth converters
-box bismuth_converter material=Bi width=8 height=8 length=1 color=1,0.84,0
-place bismuth_converter z=194
-
-#Tungsten half block
-box tungsten_block material=W width=20 height=50 length=50
-place tungsten_block x=0 y=-25.0 z=305.0 kill=1
-
-#Talantum collimator
-cylinder talantum_col material=Ta innerRadius=1 outerRadius=10 length=100
-place talantum_col z=425.0 kill=1
-
-#Separator magnet to remove Bethe-Heitler
-genericbend separator By=3 fieldMaterial=Vacuum fieldWidth=100 fieldHeight=200 fieldLength=400 fieldColor=1,0,0,0.3
-place separator z=700.0
-
-#Kapton Tape
-box kapton_tape material=KAPTON width=8 height=0.025 length=25 color=1,0.5,0
-place kapton_tape x=0 y=-$d-12.5*$sin z=1060-12.5*$cos rotation=x-$angle
-
-#Virtual detector
-virtualdetector noise_measure_Det filename=$filename format='ascii' color=0,1,0,0.3 width=100 height=100 length=0.001
-place noise_measure_Det z=1420
 
 
