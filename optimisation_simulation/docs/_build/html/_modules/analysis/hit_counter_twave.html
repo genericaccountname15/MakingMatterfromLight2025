@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>analysis.hit_counter_twave &mdash; Monte Carlo BW Pair Production Simulation Documentation 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=86f27845" />
+
+  
+  
+        <script src="../../_static/jquery.js?v=8dae8fb0"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Monte Carlo BW Pair Production Simulation Documentation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis.html">analysis package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data_analysis.html">data_analysis package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data_collection.html">data_collection package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">examples package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory.html">theory package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualisation.html">visualisation package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Monte Carlo BW Pair Production Simulation Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">analysis.hit_counter_twave</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for analysis.hit_counter_twave</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">hit_counter_line.py</span>
+
+<span class="sd">Defines the HitCounterTwave class which inherits from the HitCounter class.</span>
+<span class="sd">Modifies the class to add the travelling wave speed to the params file.</span>
+
+<span class="sd">Timothy Chew</span>
+<span class="sd">1/8/25</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">analysis.hit_counter</span> <span class="kn">import</span> <span class="n">HitCounter</span>     <span class="c1">#pylint: disable=import-error</span>
+
+<div class="viewcode-block" id="HitCounterTwave">
+<a class="viewcode-back" href="../../analysis.html#analysis.hit_counter_twave.HitCounterTwave">[docs]</a>
+<span class="k">class</span> <span class="nc">HitCounterTwave</span><span class="p">(</span><span class="n">HitCounter</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Counts the number of collisions between the X-ray bath</span>
+<span class="sd">    and Gamma pulse for a line source</span>
+
+<span class="sd">    Changed methods: get_params</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="HitCounterTwave.get_params">
+<a class="viewcode-back" href="../../analysis.html#analysis.hit_counter_twave.HitCounterTwave.get_params">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;FWHM (mm)&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_xray_bath</span><span class="p">()</span><span class="o">.</span><span class="n">get_fwhm</span><span class="p">(),</span>
+            <span class="s1">&#39;Rotation (rad)&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_xray_bath</span><span class="p">()</span><span class="o">.</span><span class="n">get_rotation</span><span class="p">(),</span>
+            <span class="s1">&#39;Length of Xray source (mm)&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_xray_bath</span><span class="p">()</span><span class="o">.</span><span class="n">get_line_length</span><span class="p">(),</span>
+            <span class="s1">&#39;Travelling wave speed (ms^-1)&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_xray_bath</span><span class="p">()</span><span class="o">.</span><span class="n">get_wave_speed</span><span class="p">(),</span>
+            <span class="s1">&#39;Number of samples on line&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_xray_bath</span><span class="p">()</span><span class="o">.</span><span class="n">get_n_line_samples</span><span class="p">(),</span>
+            <span class="s1">&#39;Number of sampled angles&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_xray_bath</span><span class="p">()</span><span class="o">.</span><span class="n">get_n_samples_angular</span><span class="p">(),</span>
+            <span class="s1">&#39;Number of samples per angle&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_n_samples</span><span class="p">(),</span>
+            <span class="s1">&#39;Height of gamma pulse (mm)&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_gamma_pulse</span><span class="p">()</span><span class="o">.</span><span class="n">get_height</span><span class="p">(),</span>
+            <span class="s1">&#39;Length of gamma pulse (mm)&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_gamma_pulse</span><span class="p">()</span><span class="o">.</span><span class="n">get_pulse_length</span><span class="p">(),</span>
+            <span class="s1">&#39;Off axial distance (mm)&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_gamma_pulse</span><span class="p">()</span><span class="o">.</span><span class="n">get_off_axis_dist</span><span class="p">()</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">params</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Timothy Chew.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

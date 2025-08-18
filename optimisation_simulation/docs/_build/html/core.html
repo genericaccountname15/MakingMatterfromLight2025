@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>core package &mdash; Monte Carlo BW Pair Production Simulation Documentation 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=86f27845" />
+
+  
+  
+        <script src="_static/jquery.js?v=8dae8fb0"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8d563738"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Monte Carlo BW Pair Production Simulation Documentation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">analysis package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_analysis.html">data_analysis package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_collection.html">data_collection package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">examples package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">theory package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualisation.html">visualisation package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Monte Carlo BW Pair Production Simulation Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">core package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/core.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="core-package">
+<h1>core package<a class="headerlink" href="#core-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-core.gamma">
+<span id="core-gamma-module"></span><h2>core.gamma module<a class="headerlink" href="#module-core.gamma" title="Link to this heading"></a></h2>
+<p>gamma.py</p>
+<p>Defines the class Gamma, representing a gamma pulse in the
+simulation.
+This class provides geometric properties and methods to change
+its dimensions and position.
+Also includes matplotlib integration through patches.</p>
+<p>Timothy Chew
+1/8/25</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="core.gamma.Gamma">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.gamma.</span></span><span class="sig-name descname"><span class="pre">Gamma</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pulse_length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">off_axis_dist</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">facecolor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">1,</span> <span class="pre">0.5)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edgecolor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(1,</span> <span class="pre">0,</span> <span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linewidth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/gamma.html#Gamma"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.gamma.Gamma" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Gamma pulse parameters and axes object</p>
+<dl>
+<dt>Attributes:</dt><dd><p>x_pos (float): x-coordinate of gamma pulse (left edge of rectangle) (mm)
+pulse_length (float): length of gamma pulse (mm)
+height (float): height of gamma pulse in 2D, for an azimuthal angle of 0,</p>
+<blockquote>
+<div><p>this corresponds to the radius (mm)</p>
+</div></blockquote>
+<dl class="simple">
+<dt>off_axis_dist (float): perpendicular distance from bottom of gamma pulse </dt><dd><p>to x-ray source when directly over head (mm)</p>
+</dd>
+</dl>
+<p>facecolor (tuple, optional): face colour of axes object. Defaults to (0, 0, 1, 0.5).
+edgecolor (tuple, optional): edge colour of axes object. Defaults to (1, 0, 0).
+linewidth (int, optional): line width of axes object. Defaults to 2.</p>
+</dd>
+<dt>Methods:</dt><dd><p>get_bounds() -&gt; list: returns the coordinates of the 4 corners of the gamma pulse
+move(dx: float): moves the gamma pulse by distance dx
+set_xpos(new_xpos: float): changes gamma pulse’s x-position
+set_height(new_height: float): changes the height/radius of the gamma pulse</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="core.gamma.Gamma.get_bounds">
+<span class="sig-name descname"><span class="pre">get_bounds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/gamma.html#Gamma.get_bounds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.gamma.Gamma.get_bounds" title="Link to this definition"></a></dt>
+<dd><p>Coordinates of the gamma pulse boundaries</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>list: coordinates of the 4 corners of the gamma pulse [xmin, xmax, ymin, ymax]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.gamma.Gamma.get_gamma_axes_obj">
+<span class="sig-name descname"><span class="pre">get_gamma_axes_obj</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/core/gamma.html#Gamma.get_gamma_axes_obj"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.gamma.Gamma.get_gamma_axes_obj" title="Link to this definition"></a></dt>
+<dd><p>Access method for the gamma axes object</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>matplotlib.patches.Rectangle: Axes object for gamma pulse</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.gamma.Gamma.get_height">
+<span class="sig-name descname"><span class="pre">get_height</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/core/gamma.html#Gamma.get_height"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.gamma.Gamma.get_height" title="Link to this definition"></a></dt>
+<dd><p>Access method for pulse height</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>float: pulse height (mm)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.gamma.Gamma.get_off_axis_dist">
+<span class="sig-name descname"><span class="pre">get_off_axis_dist</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/core/gamma.html#Gamma.get_off_axis_dist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.gamma.Gamma.get_off_axis_dist" title="Link to this definition"></a></dt>
+<dd><p>Access method for the axial displacement</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>float: axial displacement (mm)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.gamma.Gamma.get_pulse_length">
+<span class="sig-name descname"><span class="pre">get_pulse_length</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/core/gamma.html#Gamma.get_pulse_length"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.gamma.Gamma.get_pulse_length" title="Link to this definition"></a></dt>
+<dd><p>Access method for pulse length</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>float: length of pulse (mm)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.gamma.Gamma.get_x_pos">
+<span class="sig-name descname"><span class="pre">get_x_pos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/core/gamma.html#Gamma.get_x_pos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.gamma.Gamma.get_x_pos" title="Link to this definition"></a></dt>
+<dd><p>Access method for initial x position</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>float: initial x-coordinate (mm)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.gamma.Gamma.move">
+<span class="sig-name descname"><span class="pre">move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/gamma.html#Gamma.move"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.gamma.Gamma.move" title="Link to this definition"></a></dt>
+<dd><p>Moves gamma pulse object</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>dx (float): distance to move (mm)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.gamma.Gamma.set_height">
+<span class="sig-name descname"><span class="pre">set_height</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/gamma.html#Gamma.set_height"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.gamma.Gamma.set_height" title="Link to this definition"></a></dt>
+<dd><p>change the height of the gamma pulse</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>new_height (float): new height of the gamma pulse</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.gamma.Gamma.set_x_pos">
+<span class="sig-name descname"><span class="pre">set_x_pos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_x_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/gamma.html#Gamma.set_x_pos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.gamma.Gamma.set_x_pos" title="Link to this definition"></a></dt>
+<dd><p>Sets the gamma pulse to a new defined x coordinate</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>new_x_pos (float): x coordinate to move to</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-core.simulation">
+<span id="core-simulation-module"></span><h2>core.simulation module<a class="headerlink" href="#module-core.simulation" title="Link to this heading"></a></h2>
+<p>simulation.py</p>
+<p>Defines the class simulation, which simulates the interaction
+between the Xray bath and Gamma pulse using a Monte Carlo method.
+Performs basic simulation tasks such as predicting hits,
+detecting hits, and plotting.
+Designed as a subclass to more in-depth simulation tasks
+such as visualisation and estimating positron pairs produced</p>
+<p>Timothy Chew
+1/8/25</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="core.simulation.Simulation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.simulation.</span></span><span class="sig-name descname"><span class="pre">Simulation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xray_bath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#core.xray.Xray" title="core.xray.Xray"><span class="pre">Xray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma_pulse</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#core.gamma.Gamma" title="core.gamma.Gamma"><span class="pre">Gamma</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/simulation.html#Simulation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.simulation.Simulation" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Simulation of X-ray bath and gamma pulse interactions (hits)</p>
+<dl>
+<dt>Attributes:</dt><dd><p>xray_bath (Xray): Xray object instance
+gamma_pulse (Gamma): Gamma object instance</p>
+</dd>
+<dt>Methods:</dt><dd><dl class="simple">
+<dt>get_overlap_coords(coords: list, beam_bounds: list) -&gt; int, numpy.ndarray:</dt><dd><p>finds coordinates of Xrays inside the gamma pulse beam bounds</p>
+</dd>
+</dl>
+<p>find_hits(self, eff_height = None, eff_d = None) -&gt; int, list[list[float]]</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="core.simulation.Simulation.find_hits">
+<span class="sig-name descname"><span class="pre">find_hits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eff_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eff_d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/core/simulation.html#Simulation.find_hits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.simulation.Simulation.find_hits" title="Link to this definition"></a></dt>
+<dd><p>Calculate hits using X-ray seed coordinates
+Check future position and see if registers a hit</p>
+<dl>
+<dt>Args:</dt><dd><dl class="simple">
+<dt>eff_height (float, optional): effective height if on an off-azimuthal position.</dt><dd><p>Defaults to None</p>
+</dd>
+</dl>
+<p>eff_d (float, optional): effective off-axis displacement. Defaults to None</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>tuple (float, list[list[float]]): Tuple containing:</dt><dd><ul class="simple">
+<li><p>number of ovelaps</p></li>
+<li><p>coordinates of overlaps in the form [time, x, y, angle]</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.simulation.Simulation.get_gamma_pulse">
+<span class="sig-name descname"><span class="pre">get_gamma_pulse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#core.gamma.Gamma" title="core.gamma.Gamma"><span class="pre">Gamma</span></a></span></span><a class="reference internal" href="_modules/core/simulation.html#Simulation.get_gamma_pulse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.simulation.Simulation.get_gamma_pulse" title="Link to this definition"></a></dt>
+<dd><p>Access method for the gamma pulse</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Gamma: Gamma pulse instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.simulation.Simulation.get_n_samples">
+<span class="sig-name descname"><span class="pre">get_n_samples</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/core/simulation.html#Simulation.get_n_samples"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.simulation.Simulation.get_n_samples" title="Link to this definition"></a></dt>
+<dd><p>Access method for number of samples</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>int: number of points to sample per angle</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.simulation.Simulation.get_n_samples_angular">
+<span class="sig-name descname"><span class="pre">get_n_samples_angular</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/core/simulation.html#Simulation.get_n_samples_angular"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.simulation.Simulation.get_n_samples_angular" title="Link to this definition"></a></dt>
+<dd><p>Access method for the number of angular samples</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>int: number of angles to sample</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.simulation.Simulation.get_overlap_coords">
+<span class="sig-name descname"><span class="pre">get_overlap_coords</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beam_bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/core/simulation.html#Simulation.get_overlap_coords"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.simulation.Simulation.get_overlap_coords" title="Link to this definition"></a></dt>
+<dd><p>Get coordinates of overlapping points of x-ray and gamma pulses</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>coords (list): Coordinates of x-ray pulse points
+beam_bounds (list): Boundaries of gamma pulse [xmin, xmax, ymin, ymax]</p>
+</dd>
+<dt>Returns:</dt><dd><p>list[float]: Array of overlapping coordinates [x, y]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.simulation.Simulation.get_xray_bath">
+<span class="sig-name descname"><span class="pre">get_xray_bath</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#core.xray.Xray" title="core.xray.Xray"><span class="pre">Xray</span></a></span></span><a class="reference internal" href="_modules/core/simulation.html#Simulation.get_xray_bath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.simulation.Simulation.get_xray_bath" title="Link to this definition"></a></dt>
+<dd><p>Access method for the x ray path</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Xray: Xray bath instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-core.xray">
+<span id="core-xray-module"></span><h2>core.xray module<a class="headerlink" href="#module-core.xray" title="Link to this heading"></a></h2>
+<p>xray.py</p>
+<p>Defines the class Xray, representing the Xray bath in the simulation.
+Does so by sampling a radially-uniform, gaussian travelling profile.
+This class provides attributes and methods for sampling, generating,
+and moving the sampled ‘Xray photons’.
+Designed to be subclassed by other distribution types for Xray modelling
+such as ‘XrayLambertian’ and ‘XrayLine’</p>
+<p>Timothy Chew
+1/8/25</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="core.xray.Xray">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.xray.</span></span><span class="sig-name descname"><span class="pre">Xray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fwhm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples_angular</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">400</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/xray.html#Xray"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray.Xray" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Coordinates and distribution of the X-ray bath</p>
+<dl>
+<dt>Attributes:</dt><dd><p>fwhm (float): Full-Width-Half-Maximum of the X-ray distribution (mm)
+Variance (float): Variance of the X-ray distribution (mm^2)</p>
+</dd>
+<dt>Methods:</dt><dd><dl class="simple">
+<dt>gen_xray_seed(mean: float, variance: float, <a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs: float) -&gt; numpy.ndarray:</dt><dd><p>Generates Xray coordinates sampled from a radially-uniform, gaussian profile.</p>
+</dd>
+</dl>
+<p>move_xrays(t: float): moves Xray coordinates to their position at time t.
+resample(phi: unused): Generates a new set of Xray coordinates
+get_n_samples_total() -&gt; int: Returns the total number of Xray coordinates generated</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="core.xray.Xray.gen_xray_seed">
+<span class="sig-name descname"><span class="pre">gen_xray_seed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variance</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/core/xray.html#Xray.gen_xray_seed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray.Xray.gen_xray_seed" title="Link to this definition"></a></dt>
+<dd><p>Generates distribution of X ray pulse in 2D</p>
+<dl>
+<dt>Args:</dt><dd><p>mean (float): mean of distribution, radial position (m)
+variance (float): variance of x-ray distribution (mm^2)
+<a href="#id3"><span class="problematic" id="id4">**</span></a>kwargs: optional</p>
+<blockquote>
+<div><dl class="simple">
+<dt>rotation (float, optional): rotation of the Xray source</dt><dd><p>or the kapton tape angle (rad). Defaults to 0</p>
+</dd>
+</dl>
+<p>n_samples_angular (int, optional): Number of angles to sample. Defaults to 400
+n_samples (int, optional): Number of samples per angle. Defaults to 10.</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><p>numpy.ndarray[list[float]]: coordinates for distribution points in form
+[x, y, angle] | the angle is to the x-axis in the plane of the gamma pulse’s motion</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.xray.Xray.get_fwhm">
+<span class="sig-name descname"><span class="pre">get_fwhm</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/core/xray.html#Xray.get_fwhm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray.Xray.get_fwhm" title="Link to this definition"></a></dt>
+<dd><p>Access method for fwhm</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>float: Full-Width-Half-Maximum of the X-ray distribution (mm)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.xray.Xray.get_n_samples">
+<span class="sig-name descname"><span class="pre">get_n_samples</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/core/xray.html#Xray.get_n_samples"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray.Xray.get_n_samples" title="Link to this definition"></a></dt>
+<dd><p>Access method for n_samples</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>int: number of samples per angle</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.xray.Xray.get_n_samples_angular">
+<span class="sig-name descname"><span class="pre">get_n_samples_angular</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/core/xray.html#Xray.get_n_samples_angular"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray.Xray.get_n_samples_angular" title="Link to this definition"></a></dt>
+<dd><p>Access method for n_samples_angular</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>int: number of angles sampled</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.xray.Xray.get_n_samples_total">
+<span class="sig-name descname"><span class="pre">get_n_samples_total</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/core/xray.html#Xray.get_n_samples_total"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray.Xray.get_n_samples_total" title="Link to this definition"></a></dt>
+<dd><p>Get total number of samples</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>int: total number of distribution samples</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.xray.Xray.get_rotation">
+<span class="sig-name descname"><span class="pre">get_rotation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/core/xray.html#Xray.get_rotation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray.Xray.get_rotation" title="Link to this definition"></a></dt>
+<dd><p>Access method for rotation</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>float: rotation of kapton tape</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.xray.Xray.get_variance">
+<span class="sig-name descname"><span class="pre">get_variance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/core/xray.html#Xray.get_variance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray.Xray.get_variance" title="Link to this definition"></a></dt>
+<dd><p>Access method for variance</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>float: Variance of the X-ray distribution (mm^2)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.xray.Xray.get_xray_coords">
+<span class="sig-name descname"><span class="pre">get_xray_coords</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/core/xray.html#Xray.get_xray_coords"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray.Xray.get_xray_coords" title="Link to this definition"></a></dt>
+<dd><p>Access method for Xray coordinates</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>numpy.ndarray: Array of xray coordinates</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.xray.Xray.move_xrays">
+<span class="sig-name descname"><span class="pre">move_xrays</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/xray.html#Xray.move_xrays"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray.Xray.move_xrays" title="Link to this definition"></a></dt>
+<dd><p>Moves xray points</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>t (float): Time step (ps)</p>
+</dd>
+<dt>Returns:</dt><dd><p>numpy.ndarray: moved xray point coordinates</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.xray.Xray.resample">
+<span class="sig-name descname"><span class="pre">resample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/xray.html#Xray.resample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray.Xray.resample" title="Link to this definition"></a></dt>
+<dd><p>Resamples x-ray distribution</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-core.xray_lambertian">
+<span id="core-xray-lambertian-module"></span><h2>core.xray_lambertian module<a class="headerlink" href="#module-core.xray_lambertian" title="Link to this heading"></a></h2>
+<p>xray_lambertian.py</p>
+<p>Defines the XrayLambertian class which inherits from the Xray class.
+Represents a Lambertian disturibution of Xrays, I = I0cosx.
+This class redefines the Xray coordinate generation and method for
+obtaining the total number of samples taken.</p>
+<p>Timothy Chew
+1/8/25</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="core.xray_lambertian.XrayLambertian">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.xray_lambertian.</span></span><span class="sig-name descname"><span class="pre">XrayLambertian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fwhm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples_angular</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">400</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/xray_lambertian.html#XrayLambertian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray_lambertian.XrayLambertian" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#core.xray.Xray" title="core.xray.Xray"><code class="xref py py-class docutils literal notranslate"><span class="pre">Xray</span></code></a></p>
+<p>Coordinates and distribution of the X-ray bath
+Inherits from the Xray bath class
+Uses a lambertian distribution for points instead</p>
+<dl class="simple">
+<dt>Overridden methods:</dt><dd><dl class="simple">
+<dt>gen_xray_seed(mean: float, variance: float, <a href="#id5"><span class="problematic" id="id6">**</span></a>kwargs: float) -&gt; numpy.ndarray:</dt><dd><p>Generates Xray coordinates sampled from a lambertian, gaussian profile.</p>
+</dd>
+<dt>get_n_samples_total() -&gt; int: Returns the total number of Xray coordinates generated</dt><dd><p>appropriate for a lambertian distribution.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="core.xray_lambertian.XrayLambertian.gen_xray_seed">
+<span class="sig-name descname"><span class="pre">gen_xray_seed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mean</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/xray_lambertian.html#XrayLambertian.gen_xray_seed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray_lambertian.XrayLambertian.gen_xray_seed" title="Link to this definition"></a></dt>
+<dd><p>Generates a lambertian distribution of X ray pulse in 2D</p>
+<dl>
+<dt>Args:</dt><dd><p>mean (float): mean of distribution, radial position (m)
+variance (float): variance of x-ray distribution (mm^2)
+<a href="#id7"><span class="problematic" id="id8">**</span></a>kwargs: optional</p>
+<blockquote>
+<div><dl class="simple">
+<dt>rotation (float, optional): rotation of the Xray source</dt><dd><p>or the kapton tape angle (rad). Defaults to 0</p>
+</dd>
+</dl>
+<p>n_samples_angular (int, optional): Number of angles to sample. Defaults to 400
+n_samples (int, optional): Number of samples per angle. Defaults to 10.
+get_n_lambert (bool, optional): If True, returns the number of generated</p>
+<blockquote>
+<div><p>samples along with the coordinates. Defaults to False.</p>
+</div></blockquote>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><p>np.ndarray[list[float]]: list of coordinates for distribution points
+int (conditional): number of samples taken</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.xray_lambertian.XrayLambertian.get_n_samples_total">
+<span class="sig-name descname"><span class="pre">get_n_samples_total</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/core/xray_lambertian.html#XrayLambertian.get_n_samples_total"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray_lambertian.XrayLambertian.get_n_samples_total" title="Link to this definition"></a></dt>
+<dd><p>Access method for n_samples_total</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>int: total number of xray coordinates generated</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.xray_lambertian.XrayLambertian.resample">
+<span class="sig-name descname"><span class="pre">resample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/xray_lambertian.html#XrayLambertian.resample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray_lambertian.XrayLambertian.resample" title="Link to this definition"></a></dt>
+<dd><p>Resamples xray distribution depending
+on azimuthal angle</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>phi (float): _description_</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-core.xray_lambertian_Ge">
+<span id="core-xray-lambertian-ge-module"></span><h2>core.xray_lambertian_Ge module<a class="headerlink" href="#module-core.xray_lambertian_Ge" title="Link to this heading"></a></h2>
+<p>xray_lambertian.py</p>
+<p>Defines a Lambertian Xray source Characteristic of a
+Germanium source.
+cos0.4 x (Cary Colgan PhD)</p>
+<p>Timothy Chew
+4/8/25</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="core.xray_lambertian_Ge.XrayLambertianGe">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.xray_lambertian_Ge.</span></span><span class="sig-name descname"><span class="pre">XrayLambertianGe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fwhm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples_angular</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">400</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/xray_lambertian_Ge.html#XrayLambertianGe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray_lambertian_Ge.XrayLambertianGe" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#core.xray.Xray" title="core.xray.Xray"><code class="xref py py-class docutils literal notranslate"><span class="pre">Xray</span></code></a></p>
+<p>Coordinates and distribution of the X-ray bath
+Inherits from the Xray bath class
+Uses a Germanium lambertian distribution for points instead</p>
+<dl class="simple">
+<dt>Overridden methods:</dt><dd><dl class="simple">
+<dt>gen_xray_seed(mean: float, variance: float, <a href="#id9"><span class="problematic" id="id10">**</span></a>kwargs: float) -&gt; numpy.ndarray:</dt><dd><p>Generates Xray coordinates sampled from a lambertian, gaussian profile.</p>
+</dd>
+<dt>get_n_samples_total() -&gt; int: Returns the total number of Xray coordinates generated</dt><dd><p>appropriate for a lambertian distribution.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="core.xray_lambertian_Ge.XrayLambertianGe.gen_xray_seed">
+<span class="sig-name descname"><span class="pre">gen_xray_seed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mean</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/xray_lambertian_Ge.html#XrayLambertianGe.gen_xray_seed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray_lambertian_Ge.XrayLambertianGe.gen_xray_seed" title="Link to this definition"></a></dt>
+<dd><p>Generates a lambertian distribution of X ray pulse in 2D</p>
+<dl>
+<dt>Args:</dt><dd><p>mean (float): mean of distribution, radial position (m)
+variance (float): variance of x-ray distribution (mm^2)
+<a href="#id11"><span class="problematic" id="id12">**</span></a>kwargs: optional</p>
+<blockquote>
+<div><dl class="simple">
+<dt>rotation (float, optional): rotation of the Xray source</dt><dd><p>or the kapton tape angle (rad). Defaults to 0</p>
+</dd>
+</dl>
+<p>n_samples_angular (int, optional): Number of angles to sample. Defaults to 400
+n_samples (int, optional): Number of samples per angle. Defaults to 10.
+get_n_lambert (bool, optional): If True, returns the number of generated</p>
+<blockquote>
+<div><p>samples along with the coordinates. Defaults to False.</p>
+</div></blockquote>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><p>np.ndarray[list[float]]: list of coordinates for distribution points
+int (conditional): number of samples taken</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.xray_lambertian_Ge.XrayLambertianGe.get_n_samples_total">
+<span class="sig-name descname"><span class="pre">get_n_samples_total</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/core/xray_lambertian_Ge.html#XrayLambertianGe.get_n_samples_total"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray_lambertian_Ge.XrayLambertianGe.get_n_samples_total" title="Link to this definition"></a></dt>
+<dd><p>Access method for n_samples_total</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>int: total number of xray coordinates generated</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.xray_lambertian_Ge.XrayLambertianGe.resample">
+<span class="sig-name descname"><span class="pre">resample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/xray_lambertian_Ge.html#XrayLambertianGe.resample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray_lambertian_Ge.XrayLambertianGe.resample" title="Link to this definition"></a></dt>
+<dd><p>Resamples xray distribution depending
+on azimuthal angle</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>phi (float): _description_</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-core.xray_lambertian_Pd">
+<span id="core-xray-lambertian-pd-module"></span><h2>core.xray_lambertian_Pd module<a class="headerlink" href="#module-core.xray_lambertian_Pd" title="Link to this heading"></a></h2>
+<p>xray_lambertian.py</p>
+<p>Defines a Lambertian Xray source Characteristic of a
+Paladium source.
+cos0.59 x (Cary Colgan PhD)</p>
+<p>Timothy Chew
+4/8/25</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="core.xray_lambertian_Pd.XrayLambertianPd">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.xray_lambertian_Pd.</span></span><span class="sig-name descname"><span class="pre">XrayLambertianPd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fwhm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples_angular</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">400</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/xray_lambertian_Pd.html#XrayLambertianPd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray_lambertian_Pd.XrayLambertianPd" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#core.xray.Xray" title="core.xray.Xray"><code class="xref py py-class docutils literal notranslate"><span class="pre">Xray</span></code></a></p>
+<p>Coordinates and distribution of the X-ray bath
+Inherits from the Xray bath class
+Uses a Germanium lambertian distribution for points instead</p>
+<dl class="simple">
+<dt>Overridden methods:</dt><dd><dl class="simple">
+<dt>gen_xray_seed(mean: float, variance: float, <a href="#id13"><span class="problematic" id="id14">**</span></a>kwargs: float) -&gt; numpy.ndarray:</dt><dd><p>Generates Xray coordinates sampled from a lambertian, gaussian profile.</p>
+</dd>
+<dt>get_n_samples_total() -&gt; int: Returns the total number of Xray coordinates generated</dt><dd><p>appropriate for a lambertian distribution.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="core.xray_lambertian_Pd.XrayLambertianPd.gen_xray_seed">
+<span class="sig-name descname"><span class="pre">gen_xray_seed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mean</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/xray_lambertian_Pd.html#XrayLambertianPd.gen_xray_seed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray_lambertian_Pd.XrayLambertianPd.gen_xray_seed" title="Link to this definition"></a></dt>
+<dd><p>Generates a lambertian distribution of X ray pulse in 2D</p>
+<dl>
+<dt>Args:</dt><dd><p>mean (float): mean of distribution, radial position (m)
+variance (float): variance of x-ray distribution (mm^2)
+<a href="#id15"><span class="problematic" id="id16">**</span></a>kwargs: optional</p>
+<blockquote>
+<div><dl class="simple">
+<dt>rotation (float, optional): rotation of the Xray source</dt><dd><p>or the kapton tape angle (rad). Defaults to 0</p>
+</dd>
+</dl>
+<p>n_samples_angular (int, optional): Number of angles to sample. Defaults to 400
+n_samples (int, optional): Number of samples per angle. Defaults to 10.
+get_n_lambert (bool, optional): If True, returns the number of generated</p>
+<blockquote>
+<div><p>samples along with the coordinates. Defaults to False.</p>
+</div></blockquote>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><p>np.ndarray[list[float]]: list of coordinates for distribution points
+int (conditional): number of samples taken</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.xray_lambertian_Pd.XrayLambertianPd.get_n_samples_total">
+<span class="sig-name descname"><span class="pre">get_n_samples_total</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/core/xray_lambertian_Pd.html#XrayLambertianPd.get_n_samples_total"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray_lambertian_Pd.XrayLambertianPd.get_n_samples_total" title="Link to this definition"></a></dt>
+<dd><p>Access method for n_samples_total</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>int: total number of xray coordinates generated</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.xray_lambertian_Pd.XrayLambertianPd.resample">
+<span class="sig-name descname"><span class="pre">resample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/xray_lambertian_Pd.html#XrayLambertianPd.resample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray_lambertian_Pd.XrayLambertianPd.resample" title="Link to this definition"></a></dt>
+<dd><p>Resamples xray distribution depending
+on azimuthal angle</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>phi (float): _description_</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-core.xray_line">
+<span id="core-xray-line-module"></span><h2>core.xray_line module<a class="headerlink" href="#module-core.xray_line" title="Link to this heading"></a></h2>
+<p>xrayline.py</p>
+<p>Defines the XrayLine class which inherits from the XrayLambertian class.
+Represents a line source’s Xray emissions, done so by placing multiple
+point-Lambertian sources along its length.</p>
+<p>Timothy Chew
+1/8/25</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="core.xray_line.XrayLine">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.xray_line.</span></span><span class="sig-name descname"><span class="pre">XrayLine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fwhm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples_angular</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">400</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_line_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/xray_line.html#XrayLine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray_line.XrayLine" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#core.xray_lambertian.XrayLambertian" title="core.xray_lambertian.XrayLambertian"><code class="xref py py-class docutils literal notranslate"><span class="pre">XrayLambertian</span></code></a></p>
+<p>Generates a line source by setting up an
+array of lambertian point sources</p>
+<p>This class extends ‘XrayLambertian’
+Attributes:</p>
+<blockquote>
+<div><p>line_length (float): Total physical length of the X-ray line source (mm).
+n_line_samples (int): Number of discrete Lambertian emitters along the line.
+xray_coords (list): 2D array of sampled ray coordinates (overridden).
+n_samples_total (int): Total number of Xray photons generated (overridden).</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Overridden Methods:</dt><dd><ul class="simple">
+<li><p>resample(azimuthal_angle: float): Resamples Xrays based on azimuthal orientation.</p></li>
+<li><p>get_n_samples_total() -&gt; int: Returns total number of Xrays photons generated.</p></li>
+</ul>
+</dd>
+<dt>New Methods:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>gen_xray_seed_line(azimuthal_angle: float) -&gt; list, int:</dt><dd><p>Initializes the Xray coordinates by seeding each point source along the line.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="core.xray_line.XrayLine.gen_xray_seed_line">
+<span class="sig-name descname"><span class="pre">gen_xray_seed_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_total_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/xray_line.html#XrayLine.gen_xray_seed_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray_line.XrayLine.gen_xray_seed_line" title="Link to this definition"></a></dt>
+<dd><p>Generates xray coordinates for a line source</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>list: array of line source generated xray coordinates</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.xray_line.XrayLine.get_line_length">
+<span class="sig-name descname"><span class="pre">get_line_length</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/core/xray_line.html#XrayLine.get_line_length"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray_line.XrayLine.get_line_length" title="Link to this definition"></a></dt>
+<dd><p>Access method for line_length</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>float: length of line source</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.xray_line.XrayLine.get_n_line_samples">
+<span class="sig-name descname"><span class="pre">get_n_line_samples</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/core/xray_line.html#XrayLine.get_n_line_samples"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray_line.XrayLine.get_n_line_samples" title="Link to this definition"></a></dt>
+<dd><p>Access method for number of line samples</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>int: number of line samples</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.xray_line.XrayLine.get_n_samples_total">
+<span class="sig-name descname"><span class="pre">get_n_samples_total</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/core/xray_line.html#XrayLine.get_n_samples_total"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray_line.XrayLine.get_n_samples_total" title="Link to this definition"></a></dt>
+<dd><p>Access method for total n_samples_total</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>int: Number of Xray coordinates generated</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.xray_line.XrayLine.resample">
+<span class="sig-name descname"><span class="pre">resample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/xray_line.html#XrayLine.resample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray_line.XrayLine.resample" title="Link to this definition"></a></dt>
+<dd><p>Resamples x-ray distribution</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-core.xray_line_twave">
+<span id="core-xray-line-twave-module"></span><h2>core.xray_line_twave module<a class="headerlink" href="#module-core.xray_line_twave" title="Link to this heading"></a></h2>
+<p>xrayline.py</p>
+<p>Defines the XrayTwave class which inherits from the XrayLine class.
+Represents a line source’s Xray emissions, done so by placing multiple
+point-Lambertian sources along its length.
+And the sources are ignited by a travelling wave.</p>
+<p>Timothy Chew
+1/8/25</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="core.xray_line_twave.XrayTwave">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.xray_line_twave.</span></span><span class="sig-name descname"><span class="pre">XrayTwave</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fwhm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples_angular</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">400</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_line_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wave_speed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/xray_line_twave.html#XrayTwave"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray_line_twave.XrayTwave" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#core.xray_line.XrayLine" title="core.xray_line.XrayLine"><code class="xref py py-class docutils literal notranslate"><span class="pre">XrayLine</span></code></a></p>
+<p>Generates a line source by setting up an
+array of lambertian point sources which are
+ignited by a travelling wave</p>
+<p>This class extends ‘Xrayline’
+Attributes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>wave_speed (float, optional): speed of the travelling wave igniting the xray source</dt><dd><p>(natural units). Defaults to 1.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>Overridden Methods:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>gen_xray_seed_line(azimuthal_angle: float) -&gt; list, int:</dt><dd><p>Initializes the Xray coordinates by seeding each point source along the line
+and displacing their mean to for a travelling wave with velocity c.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="core.xray_line_twave.XrayTwave.gen_xray_seed_line">
+<span class="sig-name descname"><span class="pre">gen_xray_seed_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_total_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/xray_line_twave.html#XrayTwave.gen_xray_seed_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray_line_twave.XrayTwave.gen_xray_seed_line" title="Link to this definition"></a></dt>
+<dd><p>Generates xray coordinates for a line source</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>list: array of line source generated xray coordinates</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.xray_line_twave.XrayTwave.get_wave_speed">
+<span class="sig-name descname"><span class="pre">get_wave_speed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/xray_line_twave.html#XrayTwave.get_wave_speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.xray_line_twave.XrayTwave.get_wave_speed" title="Link to this definition"></a></dt>
+<dd><p>Access method for wave_speed</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>float: travelling wave velocity (ms^-1)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-core">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-core" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Timothy Chew.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

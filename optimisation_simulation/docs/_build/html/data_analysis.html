@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>data_analysis package &mdash; Monte Carlo BW Pair Production Simulation Documentation 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=86f27845" />
+
+  
+  
+        <script src="_static/jquery.js?v=8dae8fb0"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8d563738"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="data_collection package" href="data_collection.html" />
+    <link rel="prev" title="analysis package" href="analysis.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Monte Carlo BW Pair Production Simulation Documentation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">analysis package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">data_analysis package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-data_analysis.optimise_delay">data_analysis.optimise_delay module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_analysis.optimise_delay.avg_data"><code class="docutils literal notranslate"><span class="pre">avg_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_analysis.optimise_delay.find_yield"><code class="docutils literal notranslate"><span class="pre">find_yield()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_analysis.optimise_delay.find_yield_gain"><code class="docutils literal notranslate"><span class="pre">find_yield_gain()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_analysis.optimise_delay.plot_data"><code class="docutils literal notranslate"><span class="pre">plot_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_analysis.optimise_delay.write_data_csv"><code class="docutils literal notranslate"><span class="pre">write_data_csv()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-data_analysis.plot_optimise_data">data_analysis.plot_optimise_data module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_analysis.plot_optimise_data.plot_optimised_data"><code class="docutils literal notranslate"><span class="pre">plot_optimised_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-data_analysis">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="data_collection.html">data_collection package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">examples package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">theory package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualisation.html">visualisation package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Monte Carlo BW Pair Production Simulation Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">data_analysis package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/data_analysis.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="data-analysis-package">
+<h1>data_analysis package<a class="headerlink" href="#data-analysis-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-data_analysis.optimise_delay">
+<span id="data-analysis-optimise-delay-module"></span><h2>data_analysis.optimise_delay module<a class="headerlink" href="#module-data_analysis.optimise_delay" title="Link to this heading"></a></h2>
+<p>optimise_delay.py</p>
+<p>Contains functions to read the pickled simulation data files,
+perform statistics on the data (mean, dev), and find the optimal
+timing which maximises positron count along with the maximum
+positron count.
+Also has plotting features.</p>
+<p>Timothy Chew
+1/8/25</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="data_analysis.optimise_delay.avg_data">
+<span class="sig-prename descclassname"><span class="pre">data_analysis.optimise_delay.</span></span><span class="sig-name descname"><span class="pre">avg_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">simdata_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/data_analysis/optimise_delay.html#avg_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_analysis.optimise_delay.avg_data" title="Link to this definition"></a></dt>
+<dd><p>Averages the simulation data saved in pickle files in a specified directory</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>simdata_dir (string): Directory where the datafiles are located</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>tuple (list[float], list[float]): Tuple containing</dt><dd><ul class="simple">
+<li><p>The averaged dataset in the form [delay, npos, npos_uncertainty]</p></li>
+<li><p>The optimal delay which maximises Npos in the form [optimal delay, uncertainty]</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_analysis.optimise_delay.find_yield">
+<span class="sig-prename descclassname"><span class="pre">data_analysis.optimise_delay.</span></span><span class="sig-name descname"><span class="pre">find_yield</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">npos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">peak_delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">peak_delay_err</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/data_analysis/optimise_delay.html#find_yield"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_analysis.optimise_delay.find_yield" title="Link to this definition"></a></dt>
+<dd><p>returns the maximal positron yield</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>delay (list[float]): pulse delay values (ps)
+npos (list[float]): number of positrons incident on CsI/pC
+peak_delay (float): mean value of the optimal delay (ps)
+peak_delay_err (float): standard deviation in the optimal delay (ps)</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>tuple(float, float): tuple containing:</dt><dd><ul class="simple">
+<li><p>maximal positron yield</p></li>
+<li><p>maximal positron yield error</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_analysis.optimise_delay.find_yield_gain">
+<span class="sig-prename descclassname"><span class="pre">data_analysis.optimise_delay.</span></span><span class="sig-name descname"><span class="pre">find_yield_gain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">npos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">peak_delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">peak_delay_err</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/data_analysis/optimise_delay.html#find_yield_gain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_analysis.optimise_delay.find_yield_gain" title="Link to this definition"></a></dt>
+<dd><p>returns the yield gain (%) compared to the 2018 experiment</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>delay (list[float]): pulse delay values (ps)
+npos (list[float]): number of positrons incident on CsI/pC
+peak_delay (float): mean value of the optimal delay (ps)
+peak_delay_err (float): standard deviation in the optimal delay (ps)</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>tuple (float, float): tuple containing:</dt><dd><p>-yield gain
+-yield gain error (%)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_analysis.optimise_delay.plot_data">
+<span class="sig-prename descclassname"><span class="pre">data_analysis.optimise_delay.</span></span><span class="sig-name descname"><span class="pre">plot_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">npos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">npos_err</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">peak_delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_analysis/optimise_delay.html#plot_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_analysis.optimise_delay.plot_data" title="Link to this definition"></a></dt>
+<dd><p>Plots the averaged simulation data</p>
+<dl>
+<dt>Args:</dt><dd><p>delay (list[float]): Delay between pulse and xray ignition (ps)
+npos (list[float]): Number of positrons/pC incident on the CsI detector
+npos_err (list[float]): Standard deviation in the number of positrons
+peak_delay (list[float]): two element list in form</p>
+<blockquote>
+<div><p>[Delay value which gives greatest positron yield, uncertainty]</p>
+</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_analysis.optimise_delay.write_data_csv">
+<span class="sig-prename descclassname"><span class="pre">data_analysis.optimise_delay.</span></span><span class="sig-name descname"><span class="pre">write_data_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datadir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">csvname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_analysis/optimise_delay.html#write_data_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_analysis.optimise_delay.write_data_csv" title="Link to this definition"></a></dt>
+<dd><p>Auto scans data and generates a csv for it
+Gets the positron yield dependence on the data</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>variable_name (string): Name of the variable (csv column)
+variable_list (list[float]): list of independent variable values
+datadir (string): name of directory containing all simulation runs data
+csvname (string): name of csv to be saved to</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-data_analysis.plot_optimise_data">
+<span id="data-analysis-plot-optimise-data-module"></span><h2>data_analysis.plot_optimise_data module<a class="headerlink" href="#module-data_analysis.plot_optimise_data" title="Link to this heading"></a></h2>
+<p>plot_optimise_data.py</p>
+<p>Plots the variation of an independent variable
+against the maximum positron yield with data taken
+from a csv generated by optimise_delay’s write_data_csv()
+function</p>
+<p>Timothy Chew
+1/8/25</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="data_analysis.plot_optimise_data.plot_optimised_data">
+<span class="sig-prename descclassname"><span class="pre">data_analysis.plot_optimise_data.</span></span><span class="sig-name descname"><span class="pre">plot_optimised_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_analysis/plot_optimise_data.html#plot_optimised_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_analysis.plot_optimise_data.plot_optimised_data" title="Link to this definition"></a></dt>
+<dd><p>Plots the optimise data with option to save the figure generated</p>
+<dl>
+<dt>Args:</dt><dd><p>filename (str): filename of data csv
+variable_name (str): name of variable being varied
+xlabel (str): what to label the x-axis
+<a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs: optional</p>
+<blockquote>
+<div><p>old_value (float, optional): value of the variable used in 2018. Defaults to None
+ylims (tuple[float, float], optional): ylims of the plot. Defaults to None.
+save_fig (bool, optional): If True, saves the figure as a png. Defaults to False.
+fig_location (str, optional): Specified file location of the figure. Defaults to None.</p>
+</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-data_analysis">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-data_analysis" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="analysis.html" class="btn btn-neutral float-left" title="analysis package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="data_collection.html" class="btn btn-neutral float-right" title="data_collection package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Timothy Chew.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

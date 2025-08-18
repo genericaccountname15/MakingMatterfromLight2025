@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>analysis.hit_counter &mdash; Monte Carlo BW Pair Production Simulation Documentation 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=86f27845" />
+
+  
+  
+        <script src="../../_static/jquery.js?v=8dae8fb0"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Monte Carlo BW Pair Production Simulation Documentation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis.html">analysis package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data_analysis.html">data_analysis package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data_collection.html">data_collection package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">examples package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory.html">theory package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualisation.html">visualisation package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Monte Carlo BW Pair Production Simulation Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">analysis.hit_counter</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for analysis.hit_counter</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">hit_counter.py</span>
+
+<span class="sd">Defines the HitCounter class which inherits from the Simulation class.</span>
+<span class="sd">Count the number of collisions between the gamma pulse and Xray bath by </span>
+<span class="sd">calculating future positions.</span>
+<span class="sd">Predicts number of positron pairs to be generated and received by</span>
+<span class="sd">the CsI detector.</span>
+
+<span class="sd">Timothy Chew</span>
+<span class="sd">1/8/25</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="kn">from</span> <span class="nn">core.simulation</span> <span class="kn">import</span> <span class="n">Simulation</span>                              <span class="c1">#pylint: disable=import-error</span>
+<span class="kn">from</span> <span class="nn">core.xray</span> <span class="kn">import</span> <span class="n">Xray</span>                                          <span class="c1">#pylint: disable=import-error</span>
+<span class="kn">from</span> <span class="nn">core.gamma</span> <span class="kn">import</span> <span class="n">Gamma</span>                                        <span class="c1">#pylint: disable=import-error</span>
+<span class="kn">from</span> <span class="nn">theory</span> <span class="kn">import</span> <span class="n">values</span>                                           <span class="c1">#pylint: disable=import-error</span>
+<span class="kn">from</span> <span class="nn">theory.cross_section</span> <span class="kn">import</span> <span class="n">c_bw</span>                               <span class="c1">#pylint: disable=import-error</span>
+<span class="kn">from</span> <span class="nn">theory.energy_spectra.xray_spectra</span> <span class="kn">import</span> <span class="n">XraySpectra</span>          <span class="c1">#pylint: disable=import-error</span>
+<span class="kn">from</span> <span class="nn">theory.energy_spectra.gamma_spectra</span> <span class="kn">import</span> <span class="n">GammaSpectra</span>        <span class="c1">#pylint: disable=import-error</span>
+
+<div class="viewcode-block" id="HitCounter">
+<a class="viewcode-back" href="../../analysis.html#analysis.hit_counter.HitCounter">[docs]</a>
+<span class="k">class</span> <span class="nc">HitCounter</span><span class="p">(</span><span class="n">Simulation</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Counts the number of collisions between the X-ray bath</span>
+<span class="sd">    and Gamma pulse</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        n_samples_azimuthal (float): number of azimuthal samples to take for width of Xray pulse</span>
+<span class="sd">    </span>
+<span class="sd">    Methods:</span>
+<span class="sd">        count_hits: Counts the total number of collisions for a given pulse timing</span>
+<span class="sd">        calc_effective_height: Solves a geometric problem to find the new effective height of the </span>
+<span class="sd">                                gamma pulse when looking at an azimuthal plane of the x-ray bath.</span>
+<span class="sd">        calc_effective_d: Solves geometric problem to calculate effective off-axis</span>
+<span class="sd">                        displacement when looking at another azimuthal plane paramaterised by phi</span>
+<span class="sd">        est_npairs: Estimates the number of positron pairs produced and lands on the CsI detector</span>
+<span class="sd">        plot_hit_count: Plots the hit count and estimated number of pairs for a range of delays</span>
+<span class="sd">                        (with option to save data)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">xray_bath</span><span class="p">:</span> <span class="n">Xray</span><span class="p">,</span>
+            <span class="n">gamma_pulse</span><span class="p">:</span> <span class="n">Gamma</span><span class="p">,</span>
+            <span class="n">n_samples_azimuthal</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">xray_bath</span><span class="p">,</span> <span class="n">gamma_pulse</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_samples_azimuthal</span> <span class="o">=</span> <span class="n">n_samples_azimuthal</span>
+
+
+    <span class="c1">############ METHODS ######################################################################</span>
+<div class="viewcode-block" id="HitCounter.count_hits">
+<a class="viewcode-back" href="../../analysis.html#analysis.hit_counter.HitCounter.count_hits">[docs]</a>
+    <span class="k">def</span> <span class="nf">count_hits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delay</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Counts the total number of collisions for a given pulse timing</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            delay (float): time delay of gamma pulse to x-ray ignition (ps)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple (float, numpy.ndarray): number of collisions, </span>
+<span class="sd">                                        array of coordinates for each hit (x, y, angles)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#delay to distance in mm</span>
+        <span class="n">x0</span> <span class="o">=</span> <span class="o">-</span><span class="n">delay</span> <span class="o">*</span> <span class="mf">1e-12</span> <span class="o">*</span> <span class="mf">3e8</span> <span class="o">*</span> <span class="mf">1e3</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gamma_pulse</span><span class="o">.</span><span class="n">set_x_pos</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+
+        <span class="c1">#azimuthal angles to sweep</span>
+        <span class="n">max_angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_gamma_pulse</span><span class="p">()</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span> <span class="o">/</span>
+                              <span class="bp">self</span><span class="o">.</span><span class="n">get_gamma_pulse</span><span class="p">()</span><span class="o">.</span><span class="n">get_off_axis_dist</span><span class="p">()</span> <span class="p">)</span>
+        <span class="n">angles_azim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">max_angle</span><span class="p">,</span> <span class="n">max_angle</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_n_samples_azimuthal</span><span class="p">())</span>
+
+        <span class="n">total_hit_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">total_hit_coords</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">samples</span> <span class="o">=</span> <span class="mi">0</span>
+
+
+
+        <span class="k">for</span> <span class="n">phi</span> <span class="ow">in</span> <span class="n">angles_azim</span><span class="p">:</span>
+            <span class="n">hit_count</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">hit_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+
+            <span class="c1"># resample xray distribution ###########################</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">xray_bath</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">phi</span> <span class="o">=</span> <span class="n">phi</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_xray_bath</span><span class="p">()</span><span class="o">.</span><span class="n">get_xray_coords</span><span class="p">())</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># calculate &#39;effective gamma pulse parameters&#39; ##########</span>
+                <span class="n">eff_height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_effective_height</span><span class="p">(</span>
+                    <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_gamma_pulse</span><span class="p">()</span><span class="o">.</span><span class="n">get_height</span><span class="p">(),</span>
+                    <span class="n">phi</span> <span class="o">=</span> <span class="n">phi</span><span class="p">,</span>
+                    <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_gamma_pulse</span><span class="p">()</span><span class="o">.</span><span class="n">get_off_axis_dist</span><span class="p">()</span>
+                <span class="p">)</span>
+
+                <span class="n">eff_d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_effective_d</span><span class="p">(</span>
+                    <span class="n">phi</span> <span class="o">=</span> <span class="n">phi</span><span class="p">,</span>
+                    <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_gamma_pulse</span><span class="p">()</span><span class="o">.</span><span class="n">get_off_axis_dist</span><span class="p">()</span>
+                <span class="p">)</span>
+                <span class="n">hit_count</span><span class="p">,</span> <span class="n">hit_coords</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_hits</span><span class="p">(</span><span class="n">eff_height</span> <span class="o">=</span> <span class="n">eff_height</span><span class="p">,</span> <span class="n">eff_d</span> <span class="o">=</span> <span class="n">eff_d</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">hit_count</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">total_hit_count</span> <span class="o">+=</span> <span class="n">hit_count</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">total_hit_coords</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">total_hit_coords</span> <span class="o">=</span> <span class="n">hit_coords</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">total_hit_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">total_hit_coords</span><span class="p">,</span> <span class="n">hit_coords</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+                <span class="n">samples</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_xray_bath</span><span class="p">()</span><span class="o">.</span><span class="n">get_n_samples_total</span><span class="p">()</span>
+
+
+        <span class="k">return</span> <span class="n">total_hit_count</span><span class="p">,</span> <span class="n">total_hit_coords</span><span class="p">,</span> <span class="n">samples</span></div>
+
+
+<div class="viewcode-block" id="HitCounter.calc_effective_height">
+<a class="viewcode-back" href="../../analysis.html#analysis.hit_counter.HitCounter.calc_effective_height">[docs]</a>
+    <span class="k">def</span> <span class="nf">calc_effective_height</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">phi</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Solves a geometric problem to find the new effective height of the </span>
+<span class="sd">        gamma pulse when looking at an azimuthal plane of the x-ray bath.</span>
+<span class="sd">        When phi = 0 the effective height is the radius of the beam</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            r (float): radius of gamma pulse (mm)</span>
+<span class="sd">            phi (float): azimuthal angle being considered (radians)</span>
+<span class="sd">            d (float): off-axial displacement (mm)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: new effective height</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="n">r</span>
+
+        <span class="k">if</span> <span class="n">phi</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span> <span class="p">)</span> <span class="c1">#gradient of line, direction don&#39;t matter cuz symmetric</span>
+            <span class="k">if</span> <span class="n">d</span> <span class="o">*</span> <span class="n">d</span> <span class="o">-</span> <span class="p">(</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">m</span> <span class="o">*</span> <span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span> <span class="n">d</span> <span class="o">*</span> <span class="n">d</span> <span class="o">-</span> <span class="n">r</span> <span class="o">*</span> <span class="n">r</span> <span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">pass</span> <span class="c1"># ignore not intersecting</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">x1</span> <span class="o">=</span> <span class="p">(</span> <span class="n">d</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span> <span class="n">d</span> <span class="o">*</span> <span class="n">d</span>
+                                        <span class="o">-</span> <span class="p">(</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">m</span> <span class="o">*</span> <span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span> <span class="n">d</span> <span class="o">*</span> <span class="n">d</span> <span class="o">-</span> <span class="n">r</span> <span class="o">*</span> <span class="n">r</span> <span class="p">))</span>
+                                        <span class="p">)</span> <span class="o">/</span> <span class="p">(</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">m</span> <span class="o">*</span> <span class="n">m</span> <span class="p">)</span>
+                <span class="n">y1</span> <span class="o">=</span> <span class="n">m</span> <span class="o">*</span> <span class="n">x1</span>
+
+                <span class="n">x2</span> <span class="o">=</span> <span class="n">d</span>
+                <span class="n">y2</span> <span class="o">=</span> <span class="n">m</span> <span class="o">*</span> <span class="n">d</span>
+
+                <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span> <span class="p">(</span> <span class="n">x1</span> <span class="o">-</span> <span class="n">x2</span> <span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span> <span class="n">y1</span> <span class="o">-</span> <span class="n">y2</span> <span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">dist</span></div>
+
+
+<div class="viewcode-block" id="HitCounter.calc_effective_d">
+<a class="viewcode-back" href="../../analysis.html#analysis.hit_counter.HitCounter.calc_effective_d">[docs]</a>
+    <span class="k">def</span> <span class="nf">calc_effective_d</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phi</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Solves geometric problem to calculate effective off-axis</span>
+<span class="sd">        displacement when looking at another azimuthal plane paramaterised</span>
+<span class="sd">        by phi</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            phi (float): azimuthal angle being considered (radians)</span>
+<span class="sd">            d (float): off-axial displacement (mm)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: effective off-axis displacement</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">eff_d</span> <span class="o">=</span> <span class="n">d</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+            <span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">eff_d</span></div>
+
+
+<div class="viewcode-block" id="HitCounter.est_npairs">
+<a class="viewcode-back" href="../../analysis.html#analysis.hit_counter.HitCounter.est_npairs">[docs]</a>
+    <span class="k">def</span> <span class="nf">est_npairs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angles</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Estimates the number of positron pairs produced</span>
+<span class="sd">        and lands on the CsI detector</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            angles (list[float]): list of angle coordinates for each detected hit</span>
+<span class="sd">            samples (int): number of Xray coordinates generated</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[float,float]: array containing:</span>
+<span class="sd">                [estimated number of positrons, uncertainty]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># calculate cross section of each hit and sum #####################################</span>
+        <span class="n">xray_data</span> <span class="o">=</span> <span class="n">XraySpectra</span><span class="p">(</span><span class="s1">&#39;optimisation_simulation/theory/energy_spectra/data/XrayBath/XraySpectra/&#39;</span><span class="p">,</span>
+                                 <span class="n">resolution</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">gamma_data</span> <span class="o">=</span> <span class="n">GammaSpectra</span><span class="p">(</span>
+            <span class="s1">&#39;optimisation_simulation/theory/energy_spectra/data/GammaSpectra/Fig4b_GammaSpecLineouts.mat&#39;</span><span class="p">)</span>
+
+        <span class="n">xray_energy_sample</span> <span class="o">=</span> <span class="n">xray_data</span><span class="o">.</span><span class="n">sample_pdf</span><span class="p">(</span>
+            <span class="n">min_energy</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">xray_spectra_min</span><span class="p">,</span>
+            <span class="n">max_energy</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">xray_spectra_max</span><span class="p">,</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">angles</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">gamma_energy_sample</span> <span class="o">=</span> <span class="n">gamma_data</span><span class="o">.</span><span class="n">sample_pdf</span><span class="p">(</span><span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">angles</span><span class="p">))</span>
+
+        <span class="n">cs_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">angle</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">angles</span><span class="p">):</span>
+            <span class="c1">#get cross section</span>
+            <span class="c1"># s = 2 * ( 1 - np.cos(angle) ) * 230 * 1.38e-3</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="p">)</span> <span class="o">*</span> <span class="n">gamma_energy_sample</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">xray_energy_sample</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="mf">1e6</span>
+            <span class="n">cs</span> <span class="o">=</span> <span class="n">c_bw</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">s</span><span class="p">))</span> <span class="c1">#get cross sec for 230MeV root s</span>
+            <span class="n">cs</span> <span class="o">*=</span> <span class="mf">1e-28</span> <span class="c1">#convert from barns to m^2</span>
+            <span class="n">cs_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cs</span><span class="p">)</span>
+
+        <span class="c1"># get maximum azimuthal angle we calculate ######################################</span>
+        <span class="n">max_angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_gamma_pulse</span><span class="p">()</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span> <span class="o">/</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">get_gamma_pulse</span><span class="p">()</span><span class="o">.</span><span class="n">get_off_axis_dist</span><span class="p">()</span> <span class="p">)</span>
+
+        <span class="c1"># estimate number of positrons #################################################</span>
+        <span class="n">n_pos</span> <span class="o">=</span> <span class="p">(</span> <span class="n">values</span><span class="o">.</span><span class="n">xray_number_density</span> <span class="o">*</span> <span class="n">values</span><span class="o">.</span><span class="n">gamma_photons_number</span>
+                  <span class="o">*</span> <span class="n">values</span><span class="o">.</span><span class="n">AMS_transmision</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">cs_list</span><span class="p">)</span>
+                  <span class="o">/</span> <span class="n">samples</span>
+                  <span class="o">*</span> <span class="p">(</span> <span class="n">max_angle</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="p">)</span> <span class="p">)</span>
+
+        <span class="c1"># estimate uncertainty ##########################################################</span>
+        <span class="n">uncertainty</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">gamma_photons_number_err</span><span class="o">/</span><span class="n">values</span><span class="o">.</span><span class="n">gamma_photons_number</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="o">+</span> <span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">xray_number_density_err</span><span class="o">/</span><span class="n">values</span><span class="o">.</span><span class="n">xray_number_density</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="o">+</span> <span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">gamma_length_err</span> <span class="o">/</span> <span class="n">values</span><span class="o">.</span><span class="n">gamma_length</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="p">)</span> <span class="o">*</span> <span class="n">n_pos</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">n_pos</span><span class="p">,</span> <span class="n">uncertainty</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="HitCounter.plot_hit_count">
+<a class="viewcode-back" href="../../analysis.html#analysis.hit_counter.HitCounter.plot_hit_count">[docs]</a>
+    <span class="k">def</span> <span class="nf">plot_hit_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_delay</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">max_delay</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plots the hit count and estimated number of pairs for a</span>
+<span class="sd">        range of delays</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            min_delay (float): Minumum pulse delay (ps)</span>
+<span class="sd">            max_delay (float): Maximum pulse delay (ps)</span>
+<span class="sd">            samples (int, optional): Number of delays to check.</span>
+<span class="sd">            Defaults to 50.</span>
+<span class="sd">            **kwargs: optional</span>
+<span class="sd">                show_exp_value (bool, optional): Whether to plot the delay used in 2018.</span>
+<span class="sd">                                                Defaults to False.</span>
+<span class="sd">                save_data (bool, optional): Whether to save the plot data to a csv.</span>
+<span class="sd">                                            Defaults to False</span>
+<span class="sd">                plot_wait (float, optional): Time to leave plot open.</span>
+<span class="sd">                                            Defaults to None</span>
+<span class="sd">                save_params (bool, optional): Whether to save parameters for Xray and Gamma objects.</span>
+<span class="sd">                                            Defaults to False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># kwaargs ##########################################################</span>
+        <span class="n">show_exp_value</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;show_exp_value&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="n">save_data</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;save_data&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="n">save_data_filename</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;save_data_filename&#39;</span><span class="p">,</span> <span class="s1">&#39;Npos_plot_data&#39;</span><span class="p">)</span>
+        <span class="n">plot_wait</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;plot_wait&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">save_params</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;save_params&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="n">save_params_filename</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;save_params_fname&#39;</span><span class="p">,</span> <span class="s1">&#39;Simulation_parameters&#39;</span><span class="p">)</span>
+
+        <span class="c1"># set up figure ############################################</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Hit count against time delay&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Delay (ps)&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Number of hits&#39;</span><span class="p">)</span>
+
+        <span class="n">twin</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+        <span class="n">twin</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Number of positrons/pC incident on CsI&#39;</span><span class="p">)</span>
+
+
+        <span class="c1"># generate values #########################################</span>
+        <span class="n">delay_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">min_delay</span><span class="p">,</span> <span class="n">max_delay</span><span class="p">,</span> <span class="n">samples</span><span class="p">)</span>
+
+        <span class="n">n_pos_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">hit_count_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">delay</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">delay_list</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s1">&#39;Simulation&#39;</span><span class="p">,</span> <span class="n">leave</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+            <span class="n">hit_count</span><span class="p">,</span> <span class="n">hit_coords</span><span class="p">,</span> <span class="n">samples</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">count_hits</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+            <span class="c1">#avoid numpy [:,3] splitting error when no hits are counted</span>
+            <span class="k">if</span> <span class="n">hit_count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">n_pos_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">]]))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">n_pos_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">est_npairs</span><span class="p">(</span><span class="n">angles</span> <span class="o">=</span> <span class="n">hit_coords</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">samples</span> <span class="o">=</span> <span class="n">samples</span><span class="p">)</span> <span class="p">)</span>
+            <span class="n">hit_count_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hit_count</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">xray_bath</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">phi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">#resample x-ray distribution</span>
+
+        <span class="n">n_pos_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">n_pos_list</span><span class="p">)</span>
+
+
+        <span class="c1"># plot values ##################################################</span>
+        <span class="n">hits</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">delay_list</span><span class="p">,</span> <span class="n">hit_count_list</span><span class="p">,</span> <span class="s1">&#39;-x&#39;</span><span class="p">,</span>
+                        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Hit count&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+        <span class="n">positrons</span><span class="p">,</span> <span class="o">=</span> <span class="n">twin</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">delay_list</span><span class="p">,</span> <span class="n">n_pos_list</span><span class="p">[:,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span>
+                               <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Number of positrons/pC incident on CsI&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+        <span class="n">fill_band</span> <span class="o">=</span> <span class="n">twin</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">delay_list</span><span class="p">,</span> <span class="n">n_pos_list</span><span class="p">[:,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">n_pos_list</span><span class="p">[:,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+                                      <span class="n">n_pos_list</span><span class="p">[:,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">n_pos_list</span><span class="p">[:,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+                                      <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Uncertainty&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">show_exp_value</span><span class="p">:</span>
+            <span class="n">exp_value</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">delay_experiment</span><span class="p">,</span>
+                                    <span class="n">ymin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                                    <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Delay used in 2018&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="p">[</span><span class="n">hits</span><span class="p">,</span> <span class="n">positrons</span><span class="p">,</span> <span class="n">fill_band</span><span class="p">,</span> <span class="n">exp_value</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="p">[</span><span class="n">hits</span><span class="p">,</span> <span class="n">positrons</span><span class="p">,</span> <span class="n">fill_band</span><span class="p">])</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+
+        <span class="k">if</span> <span class="n">save_data</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;delay&#39;</span> <span class="p">:</span> <span class="n">delay_list</span><span class="p">,</span>
+                <span class="s1">&#39;hit_count&#39;</span><span class="p">:</span> <span class="n">hit_count_list</span><span class="p">,</span>
+                <span class="s1">&#39;Npos_CsI&#39;</span><span class="p">:</span> <span class="n">n_pos_list</span><span class="p">[:,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+                <span class="s1">&#39;Npos_CsI_err&#39;</span><span class="p">:</span> <span class="n">n_pos_list</span><span class="p">[:,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+                <span class="s1">&#39;n_samples&#39;</span><span class="p">:</span> <span class="n">samples</span>
+            <span class="p">}</span>
+
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">save_data_filename</span><span class="si">}</span><span class="s1">.pickle&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">save_params</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">get_params</span><span class="p">()])</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">save_params_filename</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        
+        <span class="k">if</span> <span class="n">plot_wait</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">plot_wait</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">plot_wait</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="HitCounter.get_params">
+<a class="viewcode-back" href="../../analysis.html#analysis.hit_counter.HitCounter.get_params">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_params</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get parameters of Xray and Gamma objects</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: parameters of objects</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;FWHM (mm)&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_xray_bath</span><span class="p">()</span><span class="o">.</span><span class="n">get_fwhm</span><span class="p">(),</span>
+            <span class="s1">&#39;Rotation (rad)&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_xray_bath</span><span class="p">()</span><span class="o">.</span><span class="n">get_rotation</span><span class="p">(),</span>
+            <span class="s1">&#39;Number of sampled angles&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_xray_bath</span><span class="p">()</span><span class="o">.</span><span class="n">get_n_samples_angular</span><span class="p">(),</span>
+            <span class="s1">&#39;Number of samples per angle&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_n_samples</span><span class="p">(),</span>
+            <span class="s1">&#39;Height of gamma pulse (mm)&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_gamma_pulse</span><span class="p">()</span><span class="o">.</span><span class="n">get_height</span><span class="p">(),</span>
+            <span class="s1">&#39;Length of gamma pulse (mm)&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_gamma_pulse</span><span class="p">()</span><span class="o">.</span><span class="n">get_pulse_length</span><span class="p">(),</span>
+            <span class="s1">&#39;Off axial distance (mm)&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_gamma_pulse</span><span class="p">()</span><span class="o">.</span><span class="n">get_off_axis_dist</span><span class="p">()</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">params</span></div>
+
+
+
+<div class="viewcode-block" id="HitCounter.plot_ang_dist">
+<a class="viewcode-back" href="../../analysis.html#analysis.hit_counter.HitCounter.plot_ang_dist">[docs]</a>
+    <span class="k">def</span> <span class="nf">plot_ang_dist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delay</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plots the angular distribution of hits for</span>
+<span class="sd">        a pulse delay</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            delay (float): delay between gamma pulse and Xray ignition (ps)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">hit_coords</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">count_hits</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+        <span class="n">angles</span> <span class="o">=</span> <span class="n">hit_coords</span><span class="p">[:,</span><span class="mi">3</span><span class="p">]</span>
+        <span class="c1">#angles = self.get_xray_bath().get_xray_coords()[:,2]</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Angular distribution of hits&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Angle&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Quantity&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+
+    <span class="c1">############ ACCESS METHODS ############################################################</span>
+<div class="viewcode-block" id="HitCounter.get_n_samples_azimuthal">
+<a class="viewcode-back" href="../../analysis.html#analysis.hit_counter.HitCounter.get_n_samples_azimuthal">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_n_samples_azimuthal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for n_samples_azimuthal</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: number of azimuthal samples to take</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_samples_azimuthal</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Timothy Chew.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

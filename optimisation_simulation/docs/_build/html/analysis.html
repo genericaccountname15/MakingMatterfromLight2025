@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>analysis package &mdash; Monte Carlo BW Pair Production Simulation Documentation 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=86f27845" />
+
+  
+  
+        <script src="_static/jquery.js?v=8dae8fb0"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8d563738"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="data_analysis package" href="data_analysis.html" />
+    <link rel="prev" title="Welcome to Monte Carlo BW Pair Production Simulation Documentation’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Monte Carlo BW Pair Production Simulation Documentation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">analysis package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-analysis.hit_counter">analysis.hit_counter module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#analysis.hit_counter.HitCounter"><code class="docutils literal notranslate"><span class="pre">HitCounter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#analysis.hit_counter.HitCounter.calc_effective_d"><code class="docutils literal notranslate"><span class="pre">HitCounter.calc_effective_d()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#analysis.hit_counter.HitCounter.calc_effective_height"><code class="docutils literal notranslate"><span class="pre">HitCounter.calc_effective_height()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#analysis.hit_counter.HitCounter.count_hits"><code class="docutils literal notranslate"><span class="pre">HitCounter.count_hits()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#analysis.hit_counter.HitCounter.est_npairs"><code class="docutils literal notranslate"><span class="pre">HitCounter.est_npairs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#analysis.hit_counter.HitCounter.get_n_samples_azimuthal"><code class="docutils literal notranslate"><span class="pre">HitCounter.get_n_samples_azimuthal()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#analysis.hit_counter.HitCounter.get_params"><code class="docutils literal notranslate"><span class="pre">HitCounter.get_params()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#analysis.hit_counter.HitCounter.plot_ang_dist"><code class="docutils literal notranslate"><span class="pre">HitCounter.plot_ang_dist()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#analysis.hit_counter.HitCounter.plot_hit_count"><code class="docutils literal notranslate"><span class="pre">HitCounter.plot_hit_count()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-analysis.hit_counter_gespec">analysis.hit_counter_gespec module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#analysis.hit_counter_gespec.HitCounterGe"><code class="docutils literal notranslate"><span class="pre">HitCounterGe</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#analysis.hit_counter_gespec.HitCounterGe.est_npairs"><code class="docutils literal notranslate"><span class="pre">HitCounterGe.est_npairs()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-analysis.hit_counter_line">analysis.hit_counter_line module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#analysis.hit_counter_line.HitCounterLine"><code class="docutils literal notranslate"><span class="pre">HitCounterLine</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#analysis.hit_counter_line.HitCounterLine.get_params"><code class="docutils literal notranslate"><span class="pre">HitCounterLine.get_params()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-analysis.hit_counter_twave">analysis.hit_counter_twave module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#analysis.hit_counter_twave.HitCounterTwave"><code class="docutils literal notranslate"><span class="pre">HitCounterTwave</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#analysis.hit_counter_twave.HitCounterTwave.get_params"><code class="docutils literal notranslate"><span class="pre">HitCounterTwave.get_params()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-analysis">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="data_analysis.html">data_analysis package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_collection.html">data_collection package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">examples package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">theory package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualisation.html">visualisation package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Monte Carlo BW Pair Production Simulation Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">analysis package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/analysis.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="analysis-package">
+<h1>analysis package<a class="headerlink" href="#analysis-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-analysis.hit_counter">
+<span id="analysis-hit-counter-module"></span><h2>analysis.hit_counter module<a class="headerlink" href="#module-analysis.hit_counter" title="Link to this heading"></a></h2>
+<p>hit_counter.py</p>
+<p>Defines the HitCounter class which inherits from the Simulation class.
+Count the number of collisions between the gamma pulse and Xray bath by 
+calculating future positions.
+Predicts number of positron pairs to be generated and received by
+the CsI detector.</p>
+<p>Timothy Chew
+1/8/25</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="analysis.hit_counter.HitCounter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">analysis.hit_counter.</span></span><span class="sig-name descname"><span class="pre">HitCounter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xray_bath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="core.html#core.xray.Xray" title="core.xray.Xray"><span class="pre">Xray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma_pulse</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="core.html#core.gamma.Gamma" title="core.gamma.Gamma"><span class="pre">Gamma</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples_azimuthal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/analysis/hit_counter.html#HitCounter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#analysis.hit_counter.HitCounter" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="core.html#core.simulation.Simulation" title="core.simulation.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a></p>
+<p>Counts the number of collisions between the X-ray bath
+and Gamma pulse</p>
+<dl>
+<dt>Attributes:</dt><dd><p>n_samples_azimuthal (float): number of azimuthal samples to take for width of Xray pulse</p>
+</dd>
+<dt>Methods:</dt><dd><p>count_hits: Counts the total number of collisions for a given pulse timing
+calc_effective_height: Solves a geometric problem to find the new effective height of the</p>
+<blockquote>
+<div><p>gamma pulse when looking at an azimuthal plane of the x-ray bath.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>calc_effective_d: Solves geometric problem to calculate effective off-axis</dt><dd><p>displacement when looking at another azimuthal plane paramaterised by phi</p>
+</dd>
+</dl>
+<p>est_npairs: Estimates the number of positron pairs produced and lands on the CsI detector
+plot_hit_count: Plots the hit count and estimated number of pairs for a range of delays</p>
+<blockquote>
+<div><p>(with option to save data)</p>
+</div></blockquote>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="analysis.hit_counter.HitCounter.calc_effective_d">
+<span class="sig-name descname"><span class="pre">calc_effective_d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/analysis/hit_counter.html#HitCounter.calc_effective_d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#analysis.hit_counter.HitCounter.calc_effective_d" title="Link to this definition"></a></dt>
+<dd><p>Solves geometric problem to calculate effective off-axis
+displacement when looking at another azimuthal plane paramaterised
+by phi</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>phi (float): azimuthal angle being considered (radians)
+d (float): off-axial displacement (mm)</p>
+</dd>
+<dt>Returns:</dt><dd><p>float: effective off-axis displacement</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="analysis.hit_counter.HitCounter.calc_effective_height">
+<span class="sig-name descname"><span class="pre">calc_effective_height</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/analysis/hit_counter.html#HitCounter.calc_effective_height"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#analysis.hit_counter.HitCounter.calc_effective_height" title="Link to this definition"></a></dt>
+<dd><p>Solves a geometric problem to find the new effective height of the 
+gamma pulse when looking at an azimuthal plane of the x-ray bath.
+When phi = 0 the effective height is the radius of the beam</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>r (float): radius of gamma pulse (mm)
+phi (float): azimuthal angle being considered (radians)
+d (float): off-axial displacement (mm)</p>
+</dd>
+<dt>Returns:</dt><dd><p>float: new effective height</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="analysis.hit_counter.HitCounter.count_hits">
+<span class="sig-name descname"><span class="pre">count_hits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/analysis/hit_counter.html#HitCounter.count_hits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#analysis.hit_counter.HitCounter.count_hits" title="Link to this definition"></a></dt>
+<dd><p>Counts the total number of collisions for a given pulse timing</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>delay (float): time delay of gamma pulse to x-ray ignition (ps)</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>tuple (float, numpy.ndarray): number of collisions, </dt><dd><p>array of coordinates for each hit (x, y, angles)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="analysis.hit_counter.HitCounter.est_npairs">
+<span class="sig-name descname"><span class="pre">est_npairs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/analysis/hit_counter.html#HitCounter.est_npairs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#analysis.hit_counter.HitCounter.est_npairs" title="Link to this definition"></a></dt>
+<dd><p>Estimates the number of positron pairs produced
+and lands on the CsI detector</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>angles (list[float]): list of angle coordinates for each detected hit
+samples (int): number of Xray coordinates generated</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>list[float,float]: array containing:</dt><dd><p>[estimated number of positrons, uncertainty]</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="analysis.hit_counter.HitCounter.get_n_samples_azimuthal">
+<span class="sig-name descname"><span class="pre">get_n_samples_azimuthal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/analysis/hit_counter.html#HitCounter.get_n_samples_azimuthal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#analysis.hit_counter.HitCounter.get_n_samples_azimuthal" title="Link to this definition"></a></dt>
+<dd><p>Access method for n_samples_azimuthal</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>int: number of azimuthal samples to take</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="analysis.hit_counter.HitCounter.get_params">
+<span class="sig-name descname"><span class="pre">get_params</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/analysis/hit_counter.html#HitCounter.get_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#analysis.hit_counter.HitCounter.get_params" title="Link to this definition"></a></dt>
+<dd><p>Get parameters of Xray and Gamma objects</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>dict: parameters of objects</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="analysis.hit_counter.HitCounter.plot_ang_dist">
+<span class="sig-name descname"><span class="pre">plot_ang_dist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/analysis/hit_counter.html#HitCounter.plot_ang_dist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#analysis.hit_counter.HitCounter.plot_ang_dist" title="Link to this definition"></a></dt>
+<dd><p>Plots the angular distribution of hits for
+a pulse delay</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>delay (float): delay between gamma pulse and Xray ignition (ps)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="analysis.hit_counter.HitCounter.plot_hit_count">
+<span class="sig-name descname"><span class="pre">plot_hit_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/analysis/hit_counter.html#HitCounter.plot_hit_count"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#analysis.hit_counter.HitCounter.plot_hit_count" title="Link to this definition"></a></dt>
+<dd><p>Plots the hit count and estimated number of pairs for a
+range of delays</p>
+<dl>
+<dt>Args:</dt><dd><p>min_delay (float): Minumum pulse delay (ps)
+max_delay (float): Maximum pulse delay (ps)
+samples (int, optional): Number of delays to check.
+Defaults to 50.
+<a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs: optional</p>
+<blockquote>
+<div><dl class="simple">
+<dt>show_exp_value (bool, optional): Whether to plot the delay used in 2018.</dt><dd><p>Defaults to False.</p>
+</dd>
+<dt>save_data (bool, optional): Whether to save the plot data to a csv.</dt><dd><p>Defaults to False</p>
+</dd>
+<dt>plot_wait (float, optional): Time to leave plot open.</dt><dd><p>Defaults to None</p>
+</dd>
+<dt>save_params (bool, optional): Whether to save parameters for Xray and Gamma objects.</dt><dd><p>Defaults to False</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-analysis.hit_counter_gespec">
+<span id="analysis-hit-counter-gespec-module"></span><h2>analysis.hit_counter_gespec module<a class="headerlink" href="#module-analysis.hit_counter_gespec" title="Link to this heading"></a></h2>
+<p>Use a different Germanium energy spectra without
+the alumnium filter</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="analysis.hit_counter_gespec.HitCounterGe">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">analysis.hit_counter_gespec.</span></span><span class="sig-name descname"><span class="pre">HitCounterGe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xray_bath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="core.html#core.xray.Xray" title="core.xray.Xray"><span class="pre">Xray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma_pulse</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="core.html#core.gamma.Gamma" title="core.gamma.Gamma"><span class="pre">Gamma</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples_azimuthal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/analysis/hit_counter_gespec.html#HitCounterGe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#analysis.hit_counter_gespec.HitCounterGe" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#analysis.hit_counter.HitCounter" title="analysis.hit_counter.HitCounter"><code class="xref py py-class docutils literal notranslate"><span class="pre">HitCounter</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="analysis.hit_counter_gespec.HitCounterGe.est_npairs">
+<span class="sig-name descname"><span class="pre">est_npairs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/analysis/hit_counter_gespec.html#HitCounterGe.est_npairs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#analysis.hit_counter_gespec.HitCounterGe.est_npairs" title="Link to this definition"></a></dt>
+<dd><p>Estimates the number of positron pairs produced
+and lands on the CsI detector</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>angles (list[float]): list of angle coordinates for each detected hit
+samples (int): number of Xray coordinates generated</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>list[float,float]: array containing:</dt><dd><p>[estimated number of positrons, uncertainty]</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-analysis.hit_counter_line">
+<span id="analysis-hit-counter-line-module"></span><h2>analysis.hit_counter_line module<a class="headerlink" href="#module-analysis.hit_counter_line" title="Link to this heading"></a></h2>
+<p>hit_counter_line.py</p>
+<p>Defines the HitCounterLine class which inherits from the HitCounter class.
+Modifies the class to add the line source parameters to the parameter file output.</p>
+<p>Timothy Chew
+1/8/25</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="analysis.hit_counter_line.HitCounterLine">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">analysis.hit_counter_line.</span></span><span class="sig-name descname"><span class="pre">HitCounterLine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xray_bath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="core.html#core.xray.Xray" title="core.xray.Xray"><span class="pre">Xray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma_pulse</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="core.html#core.gamma.Gamma" title="core.gamma.Gamma"><span class="pre">Gamma</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples_azimuthal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/analysis/hit_counter_line.html#HitCounterLine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#analysis.hit_counter_line.HitCounterLine" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#analysis.hit_counter.HitCounter" title="analysis.hit_counter.HitCounter"><code class="xref py py-class docutils literal notranslate"><span class="pre">HitCounter</span></code></a></p>
+<p>Counts the number of collisions between the X-ray bath
+and Gamma pulse for a line source</p>
+<p>Changed methods: get_params</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="analysis.hit_counter_line.HitCounterLine.get_params">
+<span class="sig-name descname"><span class="pre">get_params</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/analysis/hit_counter_line.html#HitCounterLine.get_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#analysis.hit_counter_line.HitCounterLine.get_params" title="Link to this definition"></a></dt>
+<dd><p>Get parameters of Xray and Gamma objects</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>dict: parameters of objects</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-analysis.hit_counter_twave">
+<span id="analysis-hit-counter-twave-module"></span><h2>analysis.hit_counter_twave module<a class="headerlink" href="#module-analysis.hit_counter_twave" title="Link to this heading"></a></h2>
+<p>hit_counter_line.py</p>
+<p>Defines the HitCounterTwave class which inherits from the HitCounter class.
+Modifies the class to add the travelling wave speed to the params file.</p>
+<p>Timothy Chew
+1/8/25</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="analysis.hit_counter_twave.HitCounterTwave">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">analysis.hit_counter_twave.</span></span><span class="sig-name descname"><span class="pre">HitCounterTwave</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xray_bath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="core.html#core.xray.Xray" title="core.xray.Xray"><span class="pre">Xray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma_pulse</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="core.html#core.gamma.Gamma" title="core.gamma.Gamma"><span class="pre">Gamma</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples_azimuthal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/analysis/hit_counter_twave.html#HitCounterTwave"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#analysis.hit_counter_twave.HitCounterTwave" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#analysis.hit_counter.HitCounter" title="analysis.hit_counter.HitCounter"><code class="xref py py-class docutils literal notranslate"><span class="pre">HitCounter</span></code></a></p>
+<p>Counts the number of collisions between the X-ray bath
+and Gamma pulse for a line source</p>
+<p>Changed methods: get_params</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="analysis.hit_counter_twave.HitCounterTwave.get_params">
+<span class="sig-name descname"><span class="pre">get_params</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/analysis/hit_counter_twave.html#HitCounterTwave.get_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#analysis.hit_counter_twave.HitCounterTwave.get_params" title="Link to this definition"></a></dt>
+<dd><p>Get parameters of Xray and Gamma objects</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>dict: parameters of objects</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-analysis">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-analysis" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Monte Carlo BW Pair Production Simulation Documentation’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="data_analysis.html" class="btn btn-neutral float-right" title="data_analysis package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Timothy Chew.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

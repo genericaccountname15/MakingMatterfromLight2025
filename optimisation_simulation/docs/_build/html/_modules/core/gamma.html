@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>core.gamma &mdash; Monte Carlo BW Pair Production Simulation Documentation 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=86f27845" />
+
+  
+  
+        <script src="../../_static/jquery.js?v=8dae8fb0"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Monte Carlo BW Pair Production Simulation Documentation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis.html">analysis package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data_analysis.html">data_analysis package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data_collection.html">data_collection package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">examples package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory.html">theory package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualisation.html">visualisation package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Monte Carlo BW Pair Production Simulation Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">core.gamma</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for core.gamma</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">gamma.py</span>
+
+<span class="sd">Defines the class Gamma, representing a gamma pulse in the</span>
+<span class="sd">simulation.</span>
+<span class="sd">This class provides geometric properties and methods to change</span>
+<span class="sd">its dimensions and position.</span>
+<span class="sd">Also includes matplotlib integration through patches.</span>
+
+<span class="sd">Timothy Chew</span>
+<span class="sd">1/8/25</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">Rectangle</span>
+
+
+<div class="viewcode-block" id="Gamma">
+<a class="viewcode-back" href="../../core.html#core.gamma.Gamma">[docs]</a>
+<span class="k">class</span> <span class="nc">Gamma</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Gamma pulse parameters and axes object</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        x_pos (float): x-coordinate of gamma pulse (left edge of rectangle) (mm)</span>
+<span class="sd">        pulse_length (float): length of gamma pulse (mm)</span>
+<span class="sd">        height (float): height of gamma pulse in 2D, for an azimuthal angle of 0, </span>
+<span class="sd">                    this corresponds to the radius (mm)</span>
+<span class="sd">        off_axis_dist (float): perpendicular distance from bottom of gamma pulse </span>
+<span class="sd">                            to x-ray source when directly over head (mm)</span>
+<span class="sd">        facecolor (tuple, optional): face colour of axes object. Defaults to (0, 0, 1, 0.5).</span>
+<span class="sd">        edgecolor (tuple, optional): edge colour of axes object. Defaults to (1, 0, 0).</span>
+<span class="sd">        linewidth (int, optional): line width of axes object. Defaults to 2.</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">        get_bounds() -&gt; list: returns the coordinates of the 4 corners of the gamma pulse</span>
+<span class="sd">        move(dx: float): moves the gamma pulse by distance dx</span>
+<span class="sd">        set_xpos(new_xpos: float): changes gamma pulse&#39;s x-position</span>
+<span class="sd">        set_height(new_height: float): changes the height/radius of the gamma pulse</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">x_pos</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="n">pulse_length</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="n">height</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="n">off_axis_dist</span> <span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="n">facecolor</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span>
+            <span class="n">edgecolor</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+            <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_pos</span> <span class="o">=</span> <span class="n">x_pos</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pulse_length</span> <span class="o">=</span> <span class="n">pulse_length</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">off_axis_dist</span> <span class="o">=</span> <span class="n">off_axis_dist</span>
+
+        <span class="c1"># matplotlib rectangle object for visualisation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gamma_axes_obj</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span>
+            <span class="n">xy</span> <span class="o">=</span> <span class="p">[</span> <span class="n">x_pos</span><span class="p">,</span> <span class="n">off_axis_dist</span> <span class="p">]</span> <span class="p">,</span>
+              <span class="n">width</span> <span class="o">=</span> <span class="n">pulse_length</span> <span class="p">,</span>
+              <span class="n">height</span> <span class="o">=</span> <span class="n">height</span> <span class="p">,</span>
+              <span class="n">facecolor</span> <span class="o">=</span> <span class="n">facecolor</span> <span class="p">,</span>
+              <span class="n">edgecolor</span> <span class="o">=</span> <span class="n">edgecolor</span> <span class="p">,</span>
+              <span class="n">linewidth</span> <span class="o">=</span> <span class="n">linewidth</span> <span class="p">,</span>
+              <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;gamma pulse&#39;</span><span class="p">)</span>
+
+    <span class="c1">############ METHODS ###########################################################################</span>
+<div class="viewcode-block" id="Gamma.get_bounds">
+<a class="viewcode-back" href="../../core.html#core.gamma.Gamma.get_bounds">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_bounds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Coordinates of the gamma pulse boundaries</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: coordinates of the 4 corners of the gamma pulse [xmin, xmax, ymin, ymax]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">xmin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma_axes_obj</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span>
+        <span class="n">ymin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma_axes_obj</span><span class="o">.</span><span class="n">get_y</span><span class="p">()</span>
+
+        <span class="n">bounds</span> <span class="o">=</span> <span class="p">[</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmin</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">pulse_length</span><span class="p">,</span>
+                  <span class="n">ymin</span><span class="p">,</span> <span class="n">ymin</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">bounds</span></div>
+
+
+<div class="viewcode-block" id="Gamma.move">
+<a class="viewcode-back" href="../../core.html#core.gamma.Gamma.move">[docs]</a>
+    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dx</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Moves gamma pulse object</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dx (float): distance to move (mm)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gamma_axes_obj</span><span class="o">.</span><span class="n">set_x</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_x_pos</span><span class="p">()</span> <span class="o">+</span> <span class="n">dx</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Gamma.set_x_pos">
+<a class="viewcode-back" href="../../core.html#core.gamma.Gamma.set_x_pos">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_x_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_x_pos</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the gamma pulse to a new defined x coordinate</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            new_x_pos (float): x coordinate to move to</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_pos</span> <span class="o">=</span> <span class="n">new_x_pos</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gamma_axes_obj</span><span class="o">.</span><span class="n">set_x</span><span class="p">(</span><span class="n">new_x_pos</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Gamma.set_height">
+<a class="viewcode-back" href="../../core.html#core.gamma.Gamma.set_height">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_height</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_height</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;change the height of the gamma pulse</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            new_height (float): new height of the gamma pulse</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">new_height</span></div>
+
+
+    <span class="c1">############ ACCESS METHODS ####################################################################</span>
+<div class="viewcode-block" id="Gamma.get_x_pos">
+<a class="viewcode-back" href="../../core.html#core.gamma.Gamma.get_x_pos">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_x_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for initial x position</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: initial x-coordinate (mm)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_pos</span></div>
+
+
+<div class="viewcode-block" id="Gamma.get_pulse_length">
+<a class="viewcode-back" href="../../core.html#core.gamma.Gamma.get_pulse_length">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_pulse_length</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for pulse length</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: length of pulse (mm)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pulse_length</span></div>
+
+
+<div class="viewcode-block" id="Gamma.get_height">
+<a class="viewcode-back" href="../../core.html#core.gamma.Gamma.get_height">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_height</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for pulse height</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: pulse height (mm)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span></div>
+
+
+<div class="viewcode-block" id="Gamma.get_off_axis_dist">
+<a class="viewcode-back" href="../../core.html#core.gamma.Gamma.get_off_axis_dist">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_off_axis_dist</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for the axial displacement</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: axial displacement (mm)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">off_axis_dist</span></div>
+
+
+<div class="viewcode-block" id="Gamma.get_gamma_axes_obj">
+<a class="viewcode-back" href="../../core.html#core.gamma.Gamma.get_gamma_axes_obj">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_gamma_axes_obj</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for the gamma axes object</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            matplotlib.patches.Rectangle: Axes object for gamma pulse</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma_axes_obj</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Timothy Chew.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

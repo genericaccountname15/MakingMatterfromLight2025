@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>core.xray_line &mdash; Monte Carlo BW Pair Production Simulation Documentation 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=86f27845" />
+
+  
+  
+        <script src="../../_static/jquery.js?v=8dae8fb0"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Monte Carlo BW Pair Production Simulation Documentation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis.html">analysis package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data_analysis.html">data_analysis package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data_collection.html">data_collection package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">examples package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory.html">theory package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualisation.html">visualisation package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Monte Carlo BW Pair Production Simulation Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">core.xray_line</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for core.xray_line</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">xrayline.py</span>
+
+<span class="sd">Defines the XrayLine class which inherits from the XrayLambertian class.</span>
+<span class="sd">Represents a line source&#39;s Xray emissions, done so by placing multiple</span>
+<span class="sd">point-Lambertian sources along its length.</span>
+
+<span class="sd">Timothy Chew</span>
+<span class="sd">1/8/25</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">core.xray_lambertian</span> <span class="kn">import</span> <span class="n">XrayLambertian</span>     <span class="c1">#pylint: disable=import-error</span>
+
+<div class="viewcode-block" id="XrayLine">
+<a class="viewcode-back" href="../../core.html#core.xray_line.XrayLine">[docs]</a>
+<span class="k">class</span> <span class="nc">XrayLine</span><span class="p">(</span><span class="n">XrayLambertian</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates a line source by setting up an</span>
+<span class="sd">    array of lambertian point sources</span>
+
+<span class="sd">    This class extends &#39;XrayLambertian&#39;</span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        line_length (float): Total physical length of the X-ray line source (mm).</span>
+<span class="sd">        n_line_samples (int): Number of discrete Lambertian emitters along the line.</span>
+<span class="sd">        xray_coords (list): 2D array of sampled ray coordinates (overridden).</span>
+<span class="sd">        n_samples_total (int): Total number of Xray photons generated (overridden).</span>
+<span class="sd">    </span>
+<span class="sd">    Overridden Methods:</span>
+<span class="sd">        - resample(azimuthal_angle: float): Resamples Xrays based on azimuthal orientation.</span>
+<span class="sd">        - get_n_samples_total() -&gt; int: Returns total number of Xrays photons generated.</span>
+
+<span class="sd">    New Methods:</span>
+<span class="sd">        - gen_xray_seed_line(azimuthal_angle: float) -&gt; list, int:</span>
+<span class="sd">            Initializes the Xray coordinates by seeding each point source along the line.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">fwhm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="n">line_length</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">n_samples_angular</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span>
+            <span class="n">n_samples</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+            <span class="n">n_line_samples</span><span class="o">=</span><span class="mi">10</span>
+        <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">fwhm</span><span class="p">,</span> <span class="n">rotation</span><span class="p">,</span> <span class="n">n_samples_angular</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_line_samples</span> <span class="o">=</span> <span class="n">n_line_samples</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">line_length</span> <span class="o">=</span> <span class="n">line_length</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">xray_coords</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_samples_total</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gen_xray_seed_line</span><span class="p">(</span> <span class="n">get_total_samples</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">)</span>
+
+<div class="viewcode-block" id="XrayLine.gen_xray_seed_line">
+<a class="viewcode-back" href="../../core.html#core.xray_line.XrayLine.gen_xray_seed_line">[docs]</a>
+    <span class="k">def</span> <span class="nf">gen_xray_seed_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">get_total_samples</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generates xray coordinates for a line source</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: array of line source generated xray coordinates</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">coords</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">n_samples_total</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">if</span> <span class="n">phi</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">n_samples</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_n_samples</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_n_samples</span><span class="p">()</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span> <span class="n">phi</span> <span class="p">)</span> <span class="p">)</span>
+
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_n_line_samples</span><span class="p">()):</span>
+            <span class="c1"># generate point source coordinates</span>
+            <span class="n">gen_coords</span><span class="p">,</span> <span class="n">n_samples_lambert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gen_xray_seed</span><span class="p">(</span>
+                <span class="n">mean</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">get_fwhm</span><span class="p">(),</span>
+                <span class="n">variance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_variance</span><span class="p">(),</span>
+                <span class="n">rotation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_rotation</span><span class="p">(),</span>
+                <span class="n">n_samples_angular</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_n_samples_angular</span><span class="p">(),</span>
+                <span class="n">n_samples</span> <span class="o">=</span> <span class="n">n_samples</span><span class="p">,</span>
+                <span class="n">get_n_lambert</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="p">)</span>
+
+            <span class="c1">#shift point source coordinates</span>
+            <span class="n">shift</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_line_length</span><span class="p">()</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_n_line_samples</span><span class="p">()</span> <span class="o">*</span> <span class="n">i</span>
+            <span class="n">gen_coords</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="n">shift</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_rotation</span><span class="p">())</span>
+            <span class="n">gen_coords</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="n">shift</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_rotation</span><span class="p">())</span>
+
+            <span class="c1"># append to coords</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gen_coords</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">gen_coords</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+            <span class="n">n_samples_total</span> <span class="o">+=</span> <span class="n">n_samples_lambert</span>
+
+        <span class="k">if</span> <span class="n">get_total_samples</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">coords</span><span class="p">,</span> <span class="n">n_samples_total</span>
+        <span class="k">return</span> <span class="n">coords</span></div>
+
+
+<div class="viewcode-block" id="XrayLine.resample">
+<a class="viewcode-back" href="../../core.html#core.xray_line.XrayLine.resample">[docs]</a>
+    <span class="k">def</span> <span class="nf">resample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phi</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Resamples x-ray distribution</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">phi</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">xray_coords</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gen_xray_seed_line</span><span class="p">(</span><span class="n">phi</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">xray_coords</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gen_xray_seed_line</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="XrayLine.get_n_samples_total">
+<a class="viewcode-back" href="../../core.html#core.xray_line.XrayLine.get_n_samples_total">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_n_samples_total</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for total n_samples_total</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: Number of Xray coordinates generated</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_samples_total</span></div>
+
+
+
+<div class="viewcode-block" id="XrayLine.get_n_line_samples">
+<a class="viewcode-back" href="../../core.html#core.xray_line.XrayLine.get_n_line_samples">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_n_line_samples</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for number of line samples</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: number of line samples</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_line_samples</span></div>
+
+
+<div class="viewcode-block" id="XrayLine.get_line_length">
+<a class="viewcode-back" href="../../core.html#core.xray_line.XrayLine.get_line_length">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_line_length</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for line_length</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: length of line source</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">line_length</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Timothy Chew.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
