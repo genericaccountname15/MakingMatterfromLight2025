@@ -43,27 +43,39 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="core.html">core package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualisation.html">visualisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">theory package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis.html">analysis package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_analysis.html">data_analysis package</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">data_collection package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-data_collection">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Data Collection Package</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#module-data_collection.data_collection">data_collection.data_collection module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#data_collection.data_collection.run_data_collection"><code class="docutils literal notranslate"><span class="pre">run_data_collection()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#data_collection.data_collection.run_hit_counter_var"><code class="docutils literal notranslate"><span class="pre">run_hit_counter_var()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#module-data_collection.data_params">data_collection.data_params module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-data_collection.data_params">data_collection.data_params module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_collection.data_params.quick"><code class="docutils literal notranslate"><span class="pre">quick</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_collection.data_params.quick_line"><code class="docutils literal notranslate"><span class="pre">quick_line</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_collection.data_params.deep"><code class="docutils literal notranslate"><span class="pre">deep</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_collection.data_params.deep_line"><code class="docutils literal notranslate"><span class="pre">deep_line</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_collection.data_params.accurate"><code class="docutils literal notranslate"><span class="pre">accurate</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_collection.data_params.accurate_line"><code class="docutils literal notranslate"><span class="pre">accurate_line</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_collection.data_params.visual"><code class="docutils literal notranslate"><span class="pre">visual</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#module-data_collection.delay_optimise_collection">data_collection.delay_optimise_collection module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#data_collection.delay_optimise_collection.run_hit_counter"><code class="docutils literal notranslate"><span class="pre">run_hit_counter()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#data_collection.delay_optimise_collection.run_optimise_delay"><code class="docutils literal notranslate"><span class="pre">run_optimise_delay()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#module-data_collection">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">examples package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="theory.html">theory package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="visualisation.html">visualisation package</a></li>
 </ul>
 
         </div>
@@ -92,56 +104,92 @@
              
   <section id="data-collection-package">
 <h1>data_collection package<a class="headerlink" href="#data-collection-package" title="Link to this heading"></a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+<section id="module-data_collection">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-data_collection" title="Link to this heading"></a></h2>
+<section id="id1">
+<h3>Data Collection Package<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<p>This package contains the submodules for bulk data collection.
+Runs the simulation while varying specified simulation parameters
+and plotting their effects.</p>
+<dl class="simple">
+<dt>Modules:</dt><dd><ul class="simple">
+<li><p>data_collection: changing a simulation parameter and measuring effect on total positron yield</p></li>
+<li><p>data_params: dicts for simulation and sampling parameters</p></li>
+<li><p>delay_optimise_collection: repeats a simulation and optimises the delay</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">data_collection.data_collection</span> <span class="kn">import</span> <span class="n">run_data_collection</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">data_collection.data_params</span> <span class="kn">import</span> <span class="n">accurate</span><span class="p">,</span> <span class="n">quick</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">theory</span> <span class="kn">import</span> <span class="n">values</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">run_data_collection</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">variables</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">variable_name</span> <span class="o">=</span> <span class="s1">&#39;angle&#39;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">variable_parameter_name</span> <span class="o">=</span> <span class="s1">&#39;rotation&#39;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">units</span> <span class="o">=</span> <span class="s1">&#39;degrees&#39;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">old_value</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">source_angle</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">xray_type</span> <span class="o">=</span> <span class="s1">&#39;lambertian&#39;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">repeat</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">additional_label</span> <span class="o">=</span> <span class="s1">&#39;example&#39;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">sim_params</span> <span class="o">=</span> <span class="n">accurate</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">sample_params</span> <span class="o">=</span> <span class="n">quick</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<a class="reference internal image-reference" href="_images/Data_collection_example.png"><img alt="Example plot from data collection" src="_images/Data_collection_example.png" style="width: 600px;" /></a>
+</section>
 </section>
 <section id="module-data_collection.data_collection">
 <span id="data-collection-data-collection-module"></span><h2>data_collection.data_collection module<a class="headerlink" href="#module-data_collection.data_collection" title="Link to this heading"></a></h2>
-<p>data_collection.py</p>
 <p>Runs the simulation multiple times and finds the maximum positron
 yield variation with a specified independent variable.</p>
-<p>Timothy Chew
-1/8/25</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="data_collection.data_collection.run_data_collection">
-<span class="sig-prename descclassname"><span class="pre">data_collection.data_collection.</span></span><span class="sig-name descname"><span class="pre">run_data_collection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variables</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_parameter_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xray_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repeat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">additional_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sim_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'bath</span> <span class="pre">vis':</span> <span class="pre">False,</span> <span class="pre">'fwhm':</span> <span class="pre">11.99169832,</span> <span class="pre">'off</span> <span class="pre">axis</span> <span class="pre">dist':</span> <span class="pre">1,</span> <span class="pre">'pulse</span> <span class="pre">height':</span> <span class="pre">3.1,</span> <span class="pre">'pulse</span> <span class="pre">length':</span> <span class="pre">0.0135,</span> <span class="pre">'rotation':</span> <span class="pre">0.6981317007977318,</span> <span class="pre">'x</span> <span class="pre">pos':</span> <span class="pre">-11.99169832}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'angle</span> <span class="pre">samples':</span> <span class="pre">400,</span> <span class="pre">'azimuthal</span> <span class="pre">samples':</span> <span class="pre">50,</span> <span class="pre">'delay</span> <span class="pre">samples':</span> <span class="pre">100,</span> <span class="pre">'samples</span> <span class="pre">per</span> <span class="pre">angle':</span> <span class="pre">20}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_collection/data_collection.html#run_data_collection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_collection.data_collection.run_data_collection" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_collection.data_collection.</span></span><span class="sig-name descname"><span class="pre">run_data_collection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variables</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_parameter_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xray_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repeat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">additional_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sim_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_collection/data_collection.html#run_data_collection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_collection.data_collection.run_data_collection" title="Link to this definition"></a></dt>
 <dd><p>Automatic data collection script
 Loops simulation to observe changes to a defined variable</p>
-<dl>
-<dt>Args:</dt><dd><p>variables (list[float]): variable values
-variable_name (str): name of the variable being varied
-variable_parameter_name (str): specific parameter name of the variable
-units (str): units of the variable
-old_value (float): value of the variable in the 2018 experiment
-xray_type (float): type of xray source used
-repeat (int, optional): number of times to repeat the simulation. Defaults to 3.
-additional_label (str, optional): additional labels on the</p>
-<blockquote>
-<div><p>directory to store the data. Defaults to None.</p>
-</div></blockquote>
-<dl class="simple">
-<dt>sim_params (dict, optional): simulation parameters (e.g.: fwhm, rotation).</dt><dd><p>Defaults to accurate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>variables</strong> (<em>list</em><em>[</em><em>float</em><em>]</em>) – variable values</p></li>
+<li><p><strong>variable_name</strong> (<em>str</em>) – name of the variable being varied</p></li>
+<li><p><strong>variable_parameter_name</strong> (<em>str</em>) – specific parameter name of the variable</p></li>
+<li><p><strong>units</strong> (<em>str</em>) – units of the variable</p></li>
+<li><p><strong>old_value</strong> (<em>float</em>) – value of the variable in the 2018 experiment</p></li>
+<li><p><strong>xray_type</strong> (<em>float</em>) – type of xray source used</p></li>
+<li><p><strong>repeat</strong> (<em>int</em><em>, </em><em>optional</em>) – number of times to repeat the simulation. Defaults to 3.</p></li>
+<li><p><strong>additional_label</strong> (<em>str</em><em>, </em><em>optional</em>) – additional labels on the
+directory to store the data. Defaults to None.</p></li>
+<li><p><strong>sim_params</strong> (<em>dict</em><em>, </em><em>optional</em>) – simulation parameters (e.g.: fwhm, rotation).
+Defaults to accurate.</p></li>
+<li><p><strong>sample_params</strong> (<em>dict</em><em>, </em><em>optional</em>) – sampling parameters (e.g.: n_samples).
+Defaults to deep.</p></li>
+</ul>
 </dd>
-<dt>sample_params (dict, optional): sampling parameters (e.g.: n_samples).</dt><dd><p>Defaults to deep.</p>
-</dd>
-</dl>
-</dd>
-<dt>Raises:</dt><dd><p>KeyError: if variable_parameter_name isn’t a valid parameter name</p>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>KeyError</strong> – if variable_parameter_name isn’t a valid parameter name</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="data_collection.data_collection.run_hit_counter_var">
-<span class="sig-prename descclassname"><span class="pre">data_collection.data_collection.</span></span><span class="sig-name descname"><span class="pre">run_hit_counter_var</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'bath</span> <span class="pre">vis':</span> <span class="pre">False,</span> <span class="pre">'fwhm':</span> <span class="pre">11.99169832,</span> <span class="pre">'off</span> <span class="pre">axis</span> <span class="pre">dist':</span> <span class="pre">1,</span> <span class="pre">'pulse</span> <span class="pre">height':</span> <span class="pre">3.1,</span> <span class="pre">'pulse</span> <span class="pre">length':</span> <span class="pre">0.0135,</span> <span class="pre">'rotation':</span> <span class="pre">0.6981317007977318,</span> <span class="pre">'x</span> <span class="pre">pos':</span> <span class="pre">-11.99169832}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'angle</span> <span class="pre">samples':</span> <span class="pre">400,</span> <span class="pre">'azimuthal</span> <span class="pre">samples':</span> <span class="pre">50,</span> <span class="pre">'delay</span> <span class="pre">samples':</span> <span class="pre">100,</span> <span class="pre">'samples</span> <span class="pre">per</span> <span class="pre">angle':</span> <span class="pre">20}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xray_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'uniform'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_collection/data_collection.html#run_hit_counter_var"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_collection.data_collection.run_hit_counter_var" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_collection.data_collection.</span></span><span class="sig-name descname"><span class="pre">run_hit_counter_var</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xray_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'uniform'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_collection/data_collection.html#run_hit_counter_var"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_collection.data_collection.run_hit_counter_var" title="Link to this definition"></a></dt>
 <dd><p>Runs hit counter while changing variable var</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>var (dict): variable to vary {‘name’: float}
-params (dict): parameters of experiment. Defaults to accurate.
-sampling (dict): sampling parameters. Defaults to deep.
-xray_type (str, optional): Type of xray source use e.g. ‘lambertian’. Defaults to ‘uniform’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>var</strong> (<em>dict</em>) – variable to vary {‘name’: float}</p></li>
+<li><p><strong>params</strong> (<em>dict</em>) – parameters of experiment. Defaults to accurate.</p></li>
+<li><p><strong>sampling</strong> (<em>dict</em>) – sampling parameters. Defaults to deep.</p></li>
+<li><p><strong>xray_type</strong> (<em>str</em><em>, </em><em>optional</em>) – Type of xray source use e.g. ‘lambertian’. Defaults to ‘uniform’.</p></li>
+</ul>
 </dd>
-<dt>Raises:</dt><dd><p>ValueError: When calling for an unsupported Xray source type</p>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – When calling for an unsupported Xray source type</p>
 </dd>
 </dl>
 </dd></dl>
@@ -149,39 +197,126 @@ xray_type (str, optional): Type of xray source use e.g. ‘lambertian’. Defaul
 </section>
 <section id="module-data_collection.data_params">
 <span id="data-collection-data-params-module"></span><h2>data_collection.data_params module<a class="headerlink" href="#module-data_collection.data_params" title="Link to this heading"></a></h2>
-<p>dataparams.py</p>
 <p>Contains dict objects for ideal data collection parameters.</p>
-<p>Timothy Chew
-1/8/25</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_collection.data_params.quick">
+<span class="sig-prename descclassname"><span class="pre">data_collection.data_params.</span></span><span class="sig-name descname"><span class="pre">quick</span></span><a class="headerlink" href="#data_collection.data_params.quick" title="Link to this definition"></a></dt>
+<dd><p>Sampling parameters for fast sampling</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_collection.data_params.quick_line">
+<span class="sig-prename descclassname"><span class="pre">data_collection.data_params.</span></span><span class="sig-name descname"><span class="pre">quick_line</span></span><a class="headerlink" href="#data_collection.data_params.quick_line" title="Link to this definition"></a></dt>
+<dd><p>Sampling parameters for fast sampling for a line xray source</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_collection.data_params.deep">
+<span class="sig-prename descclassname"><span class="pre">data_collection.data_params.</span></span><span class="sig-name descname"><span class="pre">deep</span></span><a class="headerlink" href="#data_collection.data_params.deep" title="Link to this definition"></a></dt>
+<dd><p>Sampling parameters for detailed sampling</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_collection.data_params.deep_line">
+<span class="sig-prename descclassname"><span class="pre">data_collection.data_params.</span></span><span class="sig-name descname"><span class="pre">deep_line</span></span><a class="headerlink" href="#data_collection.data_params.deep_line" title="Link to this definition"></a></dt>
+<dd><p>Sampling parameters for detailed sampling for a line xray source</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_collection.data_params.accurate">
+<span class="sig-prename descclassname"><span class="pre">data_collection.data_params.</span></span><span class="sig-name descname"><span class="pre">accurate</span></span><a class="headerlink" href="#data_collection.data_params.accurate" title="Link to this definition"></a></dt>
+<dd><p>Simulation parameters of the 2018 experiment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_collection.data_params.accurate_line">
+<span class="sig-prename descclassname"><span class="pre">data_collection.data_params.</span></span><span class="sig-name descname"><span class="pre">accurate_line</span></span><a class="headerlink" href="#data_collection.data_params.accurate_line" title="Link to this definition"></a></dt>
+<dd><p>Simulation parameters of the 2018 experiment along with line source params</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_collection.data_params.visual">
+<span class="sig-prename descclassname"><span class="pre">data_collection.data_params.</span></span><span class="sig-name descname"><span class="pre">visual</span></span><a class="headerlink" href="#data_collection.data_params.visual" title="Link to this definition"></a></dt>
+<dd><p>Simulation parameters for the visualiser, selected for visual appeal</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="module-data_collection.delay_optimise_collection">
 <span id="data-collection-delay-optimise-collection-module"></span><h2>data_collection.delay_optimise_collection module<a class="headerlink" href="#module-data_collection.delay_optimise_collection" title="Link to this heading"></a></h2>
 <p>Module to collect optimising delay data</p>
-<p>Timothy Chew
-6/8/25</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="data_collection.delay_optimise_collection.run_hit_counter">
-<span class="sig-prename descclassname"><span class="pre">data_collection.delay_optimise_collection.</span></span><span class="sig-name descname"><span class="pre">run_hit_counter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'bath</span> <span class="pre">vis':</span> <span class="pre">False,</span> <span class="pre">'fwhm':</span> <span class="pre">11.99169832,</span> <span class="pre">'off</span> <span class="pre">axis</span> <span class="pre">dist':</span> <span class="pre">1,</span> <span class="pre">'pulse</span> <span class="pre">height':</span> <span class="pre">3.1,</span> <span class="pre">'pulse</span> <span class="pre">length':</span> <span class="pre">0.0135,</span> <span class="pre">'rotation':</span> <span class="pre">0.6981317007977318,</span> <span class="pre">'x</span> <span class="pre">pos':</span> <span class="pre">-11.99169832}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'angle</span> <span class="pre">samples':</span> <span class="pre">400,</span> <span class="pre">'azimuthal</span> <span class="pre">samples':</span> <span class="pre">50,</span> <span class="pre">'delay</span> <span class="pre">samples':</span> <span class="pre">100,</span> <span class="pre">'samples</span> <span class="pre">per</span> <span class="pre">angle':</span> <span class="pre">20}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xray_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'uniform'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spectra_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_collection/delay_optimise_collection.html#run_hit_counter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_collection.delay_optimise_collection.run_hit_counter" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_collection.delay_optimise_collection.</span></span><span class="sig-name descname"><span class="pre">run_hit_counter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xray_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'uniform'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spectra_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_collection/delay_optimise_collection.html#run_hit_counter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_collection.delay_optimise_collection.run_hit_counter" title="Link to this definition"></a></dt>
 <dd><p>Runs hit counter while changing variable var</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>var (dict): variable to vary {‘name’: float}
-params (dict): parameters of experiment. Defaults to accurate.
-sampling (dict): sampling parameters. Defaults to deep.
-xray_type (str, optional): Type of xray source use e.g. ‘lambertian’. Defaults to ‘uniform’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>var</strong> (<em>dict</em>) – variable to vary {‘name’: float}</p></li>
+<li><p><strong>params</strong> (<em>dict</em>) – parameters of experiment. Defaults to accurate.</p></li>
+<li><p><strong>sampling</strong> (<em>dict</em>) – sampling parameters. Defaults to deep.</p></li>
+<li><p><strong>xray_type</strong> (<em>str</em><em>, </em><em>optional</em>) – type of xray source use e.g. ‘lambertian’. Defaults to ‘uniform’.</p></li>
+</ul>
 </dd>
-<dt>Raises:</dt><dd><p>ValueError: When calling for an unsupported Xray source type</p>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – When calling for an unsupported Xray source type</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="data_collection.delay_optimise_collection.run_optimise_delay">
-<span class="sig-prename descclassname"><span class="pre">data_collection.delay_optimise_collection.</span></span><span class="sig-name descname"><span class="pre">run_optimise_delay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xray_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spectra_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repeat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sim_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'bath</span> <span class="pre">vis':</span> <span class="pre">False,</span> <span class="pre">'fwhm':</span> <span class="pre">11.99169832,</span> <span class="pre">'off</span> <span class="pre">axis</span> <span class="pre">dist':</span> <span class="pre">1,</span> <span class="pre">'pulse</span> <span class="pre">height':</span> <span class="pre">3.1,</span> <span class="pre">'pulse</span> <span class="pre">length':</span> <span class="pre">0.0135,</span> <span class="pre">'rotation':</span> <span class="pre">0.6981317007977318,</span> <span class="pre">'x</span> <span class="pre">pos':</span> <span class="pre">-11.99169832}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'angle</span> <span class="pre">samples':</span> <span class="pre">400,</span> <span class="pre">'azimuthal</span> <span class="pre">samples':</span> <span class="pre">50,</span> <span class="pre">'delay</span> <span class="pre">samples':</span> <span class="pre">100,</span> <span class="pre">'samples</span> <span class="pre">per</span> <span class="pre">angle':</span> <span class="pre">20}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_collection/delay_optimise_collection.html#run_optimise_delay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_collection.delay_optimise_collection.run_optimise_delay" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<span class="sig-prename descclassname"><span class="pre">data_collection.delay_optimise_collection.</span></span><span class="sig-name descname"><span class="pre">run_optimise_delay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xray_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spectra_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repeat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sim_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_collection/delay_optimise_collection.html#run_optimise_delay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_collection.delay_optimise_collection.run_optimise_delay" title="Link to this definition"></a></dt>
+<dd><p>Repeats the simulation to find optimal delay
+and maximum positon yield</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_name</strong> (<em>str</em>) – directory to save the simulation data</p></li>
+<li><p><strong>xray_type</strong> (<em>str</em>) – type of xray source to use e.g.: ‘lambertian’</p></li>
+<li><p><strong>spectra_type</strong> (<em>float</em>) – type of xray energy spectra to use</p></li>
+<li><p><strong>repeat</strong> (<em>int</em><em>, </em><em>optional</em>) – number of times to repeat the simulation. Defaults to 3.</p></li>
+<li><p><strong>sim_params</strong> (<em>dict</em><em>, </em><em>optional</em>) – simulation parameters. Defaults to accurate.</p></li>
+<li><p><strong>sample_params</strong> (<em>dict</em><em>, </em><em>optional</em>) – sampling parameters. Defaults to deep.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
-</section>
-<section id="module-data_collection">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-data_collection" title="Link to this heading"></a></h2>
 </section>
 </section>
 

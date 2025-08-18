@@ -40,12 +40,13 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../core.html">core package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualisation.html">visualisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory.html">theory package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../analysis.html">analysis package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../data_analysis.html">data_analysis package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../data_collection.html">data_collection package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples.html">examples package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../theory.html">theory package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../visualisation.html">visualisation package</a></li>
 </ul>
 
         </div>
@@ -74,14 +75,9 @@
              
   <h1>Source code for core.xray_lambertian_Ge</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">xray_lambertian.py</span>
-
 <span class="sd">Defines a Lambertian Xray source Characteristic of a</span>
 <span class="sd">Germanium source.</span>
-<span class="sd">cos0.4 x (Cary Colgan PhD)</span>
-
-<span class="sd">Timothy Chew</span>
-<span class="sd">4/8/25</span>
+<span class="sd">cos^0.4(x) (Cary Colgan PhD)</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -97,7 +93,8 @@
 <span class="sd">    Overridden methods:</span>
 <span class="sd">        gen_xray_seed(mean: float, variance: float, **kwargs: float) -&gt; numpy.ndarray:</span>
 <span class="sd">            Generates Xray coordinates sampled from a lambertian, gaussian profile.</span>
-<span class="sd">        get_n_samples_total() -&gt; int: Returns the total number of Xray coordinates generated</span>
+<span class="sd">        get_n_samples_total() -&gt; int:</span>
+<span class="sd">            Returns the total number of Xray coordinates generated</span>
 <span class="sd">            appropriate for a lambertian distribution.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
@@ -131,13 +128,13 @@
 <span class="sd">        Args:</span>
 <span class="sd">            mean (float): mean of distribution, radial position (m)</span>
 <span class="sd">            variance (float): variance of x-ray distribution (mm^2)</span>
-<span class="sd">            **kwargs: optional</span>
+<span class="sd">            **kwargs: optional keyword arguments.</span>
 <span class="sd">                rotation (float, optional): rotation of the Xray source</span>
-<span class="sd">                    or the kapton tape angle (rad). Defaults to 0</span>
+<span class="sd">                or the kapton tape angle (rad). Defaults to 0.</span>
 <span class="sd">                n_samples_angular (int, optional): Number of angles to sample. Defaults to 400</span>
 <span class="sd">                n_samples (int, optional): Number of samples per angle. Defaults to 10.</span>
 <span class="sd">                get_n_lambert (bool, optional): If True, returns the number of generated</span>
-<span class="sd">                    samples along with the coordinates. Defaults to False.</span>
+<span class="sd">                samples along with the coordinates. Defaults to False.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            np.ndarray[list[float]]: list of coordinates for distribution points</span>

@@ -1,8 +1,13 @@
 data\_analysis package
 ===============================================
 
-Submodules
-----------
+Module contents
+---------------
+
+.. automodule:: data_analysis
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 data\_analysis.optimise\_delay module
 --------------------------------------------------------------
@@ -16,14 +21,6 @@ data\_analysis.plot\_optimise\_data module
 -------------------------------------------------------------------
 
 .. automodule:: data_analysis.plot_optimise_data
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: data_analysis
    :members:
    :undoc-members:
    :show-inheritance:

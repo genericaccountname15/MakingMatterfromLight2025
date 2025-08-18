@@ -40,12 +40,13 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../core.html">core package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualisation.html">visualisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory.html">theory package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../analysis.html">analysis package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../data_analysis.html">data_analysis package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../data_collection.html">data_collection package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples.html">examples package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../theory.html">theory package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../visualisation.html">visualisation package</a></li>
 </ul>
 
         </div>
@@ -75,9 +76,6 @@
   <h1>Source code for data_collection.delay_optimise_collection</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Module to collect optimising delay data</span>
-
-<span class="sd">Timothy Chew</span>
-<span class="sd">6/8/25</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
@@ -99,8 +97,8 @@
 <div class="viewcode-block" id="run_hit_counter">
 <a class="viewcode-back" href="../../data_collection.html#data_collection.delay_optimise_collection.run_hit_counter">[docs]</a>
 <span class="k">def</span> <span class="nf">run_hit_counter</span><span class="p">(</span>
-        <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">accurate</span><span class="p">,</span>
-        <span class="n">sampling</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">deep</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">sampling</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">xray_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;uniform&#39;</span><span class="p">,</span>
         <span class="n">spectra_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span>
         <span class="p">):</span>
@@ -110,11 +108,16 @@
 <span class="sd">        var (dict): variable to vary {&#39;name&#39;: float}</span>
 <span class="sd">        params (dict): parameters of experiment. Defaults to accurate.</span>
 <span class="sd">        sampling (dict): sampling parameters. Defaults to deep.</span>
-<span class="sd">        xray_type (str, optional): Type of xray source use e.g. &#39;lambertian&#39;. Defaults to &#39;uniform&#39;.</span>
+<span class="sd">        xray_type (str, optional): type of xray source use e.g. &#39;lambertian&#39;. Defaults to &#39;uniform&#39;.</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ValueError: When calling for an unsupported Xray source type</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">dict</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="n">accurate</span>
+    <span class="k">if</span> <span class="n">sampling</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">sampling</span> <span class="o">=</span> <span class="n">deep</span>
+
     <span class="k">if</span> <span class="n">xray_type</span> <span class="o">==</span> <span class="s1">&#39;uniform&#39;</span><span class="p">:</span>
         <span class="n">xray</span> <span class="o">=</span> <span class="n">Xray</span><span class="p">(</span>
             <span class="n">fwhm</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;fwhm&#39;</span><span class="p">],</span>
@@ -222,12 +225,28 @@
 <a class="viewcode-back" href="../../data_collection.html#data_collection.delay_optimise_collection.run_optimise_delay">[docs]</a>
 <span class="k">def</span> <span class="nf">run_optimise_delay</span><span class="p">(</span>
         <span class="n">dir_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">xray_type</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-        <span class="n">spectra_type</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">xray_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">spectra_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">repeat</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
-        <span class="n">sim_params</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">accurate</span><span class="p">,</span>
-        <span class="n">sample_params</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">deep</span>
+        <span class="n">sim_params</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">sample_params</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Repeats the simulation to find optimal delay</span>
+<span class="sd">    and maximum positon yield</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dir_name (str): directory to save the simulation data</span>
+<span class="sd">        xray_type (str): type of xray source to use e.g.: &#39;lambertian&#39;</span>
+<span class="sd">        spectra_type (float): type of xray energy spectra to use</span>
+<span class="sd">        repeat (int, optional): number of times to repeat the simulation. Defaults to 3.</span>
+<span class="sd">        sim_params (dict, optional): simulation parameters. Defaults to accurate.</span>
+<span class="sd">        sample_params (dict, optional): sampling parameters. Defaults to deep.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">dict</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">sim_params</span> <span class="o">=</span> <span class="n">accurate</span>
+    <span class="k">if</span> <span class="n">sampling</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">sampling</span> <span class="o">=</span> <span class="n">deep</span>
+
     <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">dir_name</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">20</span> <span class="o">+</span> <span class="s1">&#39;BEGINNING DATA COLLECTION&#39;</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">20</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">repeat</span><span class="p">),</span> <span class="n">desc</span> <span class="o">=</span> <span class="s1">&#39;Repeating simulations&#39;</span><span class="p">,</span> <span class="n">leave</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>

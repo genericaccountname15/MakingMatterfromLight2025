@@ -14,19 +14,19 @@ from theory.energy_spectra.xray_spectra import XraySpectra      #pylint: disable
 def plot_gamma_spectra():
     """Plots the gamma energy spectra
     """
-    gamma_data = GammaSpectra('simulation_restructure/theory/energy_spectra/data/GammaSpectra/Fig4b_GammaSpecLineouts.mat')
+    gamma_data = GammaSpectra('optimisation_simulation/theory/energy_spectra/data/GammaSpectra/Fig4b_GammaSpecLineouts.mat')
     gamma_data.replicate_plot()
 
 def plot_xray_spectra():
     """Plots the Xray energy spectra
     """
-    xray_data = XraySpectra('simulation_restructure/theory/energy_spectra/data/XrayBath/XraySpectra/', resolution=0.5)
+    xray_data = XraySpectra('optimisation_simulation/theory/energy_spectra/data/XrayBath/XraySpectra/', resolution=0.5)
     xray_data.replicate_plot()
 
 def plot_xray_pdf():
     """Plots the Xray energy probability density function
     """
-    xray_data = XraySpectra('simulation_restructure/theory/energy_spectra/data/XrayBath/XraySpectra/', resolution=0.5)
+    xray_data = XraySpectra('optimisation_simulation/theory/energy_spectra/data/XrayBath/XraySpectra/', resolution=0.5)
     sampling = xray_data.sample_pdf(min_energy=1300, max_energy=1500, n=1000)
     plt.title('Sampled x-ray distribution')
     plt.ylabel('N')

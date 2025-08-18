@@ -1,11 +1,6 @@
 """
-visualisation.py
-
 Defines the Visualiser class which inherits from the Simulation class.
 Uses matplotlib to render the simulation.
-
-Timothy Chew
-1/8/25
 """
 import matplotlib.pyplot as plt
 from matplotlib.widgets import Slider
@@ -23,9 +18,6 @@ class Visualiser(Simulation):
             - True to focus on X-ray pulse
             - False to focus on gamma pulse
             Affects the limits of the plot (for values used in the 2018 experiment)
-    
-    Methods:
-        plot: Plots out the simulation with a time step slider
     """
     def __init__(
             self,

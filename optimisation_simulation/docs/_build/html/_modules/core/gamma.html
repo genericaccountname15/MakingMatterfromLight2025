@@ -40,12 +40,13 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../core.html">core package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualisation.html">visualisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory.html">theory package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../analysis.html">analysis package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../data_analysis.html">data_analysis package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../data_collection.html">data_collection package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples.html">examples package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../theory.html">theory package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../visualisation.html">visualisation package</a></li>
 </ul>
 
         </div>
@@ -74,16 +75,11 @@
              
   <h1>Source code for core.gamma</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">gamma.py</span>
-
 <span class="sd">Defines the class Gamma, representing a gamma pulse in the</span>
 <span class="sd">simulation.</span>
 <span class="sd">This class provides geometric properties and methods to change</span>
 <span class="sd">its dimensions and position.</span>
 <span class="sd">Also includes matplotlib integration through patches.</span>
-
-<span class="sd">Timothy Chew</span>
-<span class="sd">1/8/25</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">Rectangle</span>
 
@@ -104,12 +100,6 @@
 <span class="sd">        facecolor (tuple, optional): face colour of axes object. Defaults to (0, 0, 1, 0.5).</span>
 <span class="sd">        edgecolor (tuple, optional): edge colour of axes object. Defaults to (1, 0, 0).</span>
 <span class="sd">        linewidth (int, optional): line width of axes object. Defaults to 2.</span>
-
-<span class="sd">    Methods:</span>
-<span class="sd">        get_bounds() -&gt; list: returns the coordinates of the 4 corners of the gamma pulse</span>
-<span class="sd">        move(dx: float): moves the gamma pulse by distance dx</span>
-<span class="sd">        set_xpos(new_xpos: float): changes gamma pulse&#39;s x-position</span>
-<span class="sd">        set_height(new_height: float): changes the height/radius of the gamma pulse</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>

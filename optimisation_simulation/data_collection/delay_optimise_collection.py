@@ -1,8 +1,5 @@
 """
 Module to collect optimising delay data
-
-Timothy Chew
-6/8/25
 """
 import os
 from tqdm import tqdm
@@ -22,8 +19,8 @@ from data_collection.data_params import deep, deep_line, accurate   #pylint: dis
 from data_analysis.optimise_delay import plot_data, avg_data        #pylint: disable=import-error
 
 def run_hit_counter(
-        params: dict = accurate,
-        sampling: dict = deep,
+        params: dict = None,
+        sampling: dict = None,
         xray_type: str = 'uniform',
         spectra_type: str = 'default'
         ):
@@ -33,11 +30,16 @@ def run_hit_counter(
         var (dict): variable to vary {'name': float}
         params (dict): parameters of experiment. Defaults to accurate.
         sampling (dict): sampling parameters. Defaults to deep.
-        xray_type (str, optional): Type of xray source use e.g. 'lambertian'. Defaults to 'uniform'.
+        xray_type (str, optional): type of xray source use e.g. 'lambertian'. Defaults to 'uniform'.
 
     Raises:
         ValueError: When calling for an unsupported Xray source type
     """
+    if dict is None:
+        params = accurate
+    if sampling is None:
+        sampling = deep
+
     if xray_type == 'uniform':
         xray = Xray(
             fwhm = params['fwhm'],
@@ -142,12 +144,28 @@ def run_hit_counter(
 
 def run_optimise_delay(
         dir_name: str,
-        xray_type: float,
-        spectra_type: float,
+        xray_type: str,
+        spectra_type: str,
         repeat: int = 3,
-        sim_params: dict = accurate,
-        sample_params: dict = deep
+        sim_params: dict = None,
+        sample_params: dict = None
     ):
+    """Repeats the simulation to find optimal delay
+    and maximum positon yield
+
+    Args:
+        dir_name (str): directory to save the simulation data
+        xray_type (str): type of xray source to use e.g.: 'lambertian'
+        spectra_type (float): type of xray energy spectra to use
+        repeat (int, optional): number of times to repeat the simulation. Defaults to 3.
+        sim_params (dict, optional): simulation parameters. Defaults to accurate.
+        sample_params (dict, optional): sampling parameters. Defaults to deep.
+    """
+    if dict is None:
+        sim_params = accurate
+    if sampling is None:
+        sampling = deep
+
     os.makedirs(dir_name, exist_ok=True)
     print('-'*20 + 'BEGINNING DATA COLLECTION' + '-'*20)
     for i in tqdm(range(1, 1 + repeat), desc = 'Repeating simulations', leave = False):

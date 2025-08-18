@@ -1,10 +1,14 @@
 """
-dataparams.py
-
 Contains dict objects for ideal data collection parameters.
 
-Timothy Chew
-1/8/25
+Attributes:
+    quick(dict): Sampling parameters for fast sampling
+    quick_line(dict): Sampling parameters for fast sampling for a line xray source
+    deep(dict): Sampling parameters for detailed sampling
+    deep_line(dict): Sampling parameters for detailed sampling for a line xray source
+    accurate(dict): Simulation parameters of the 2018 experiment
+    accurate_line(dict): Simulation parameters of the 2018 experiment along with line source params
+    visual(dict): Simulation parameters for the visualiser, selected for visual appeal
 """
 import numpy as np
 from theory import values       #pylint: disable=import-error

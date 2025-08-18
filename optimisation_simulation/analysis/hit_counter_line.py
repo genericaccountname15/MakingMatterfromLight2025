@@ -1,11 +1,6 @@
 """
-hit_counter_line.py
-
 Defines the HitCounterLine class which inherits from the HitCounter class.
 Modifies the class to add the line source parameters to the parameter file output.
-
-Timothy Chew
-1/8/25
 """
 from analysis.hit_counter import HitCounter     #pylint: disable=import-error
 
@@ -13,9 +8,16 @@ class HitCounterLine(HitCounter):
     """Counts the number of collisions between the X-ray bath
     and Gamma pulse for a line source
 
-    Changed methods: get_params
+    Overridden methods:
+        get_params() -> dict: returns additional parameters
     """
-    def get_params(self):
+    def get_params(self) -> dict:
+        """Get parameters of Xray and Gamma objects.
+        Now including the length of the Xray linesource.
+
+        Returns:
+            dict: parameters of objects
+        """
         params = {
             'FWHM (mm)': self.get_xray_bath().get_fwhm(),
             'Rotation (rad)': self.get_xray_bath().get_rotation(),

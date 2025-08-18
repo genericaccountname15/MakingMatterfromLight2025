@@ -1,11 +1,6 @@
 """
-data_collection.py
-
 Runs the simulation multiple times and finds the maximum positron
 yield variation with a specified independent variable.
-
-Timothy Chew
-1/8/25
 """
 import os
 from tqdm import tqdm
@@ -27,8 +22,8 @@ from data_analysis.plot_optimise_data import plot_optimised_data    #pylint: dis
 
 def run_hit_counter_var(
         var: dict,
-        params: dict = accurate,
-        sampling: dict = deep,
+        params: dict = None,
+        sampling: dict = None,
         xray_type: str = 'uniform'
         ):
     """Runs hit counter while changing variable var
@@ -42,6 +37,11 @@ def run_hit_counter_var(
     Raises:
         ValueError: When calling for an unsupported Xray source type
     """
+    if dict is None:
+        params = accurate
+    if sampling is None:
+        sampling = deep
+
     varied_params = {**params, **var}
     if xray_type == 'uniform':
         xray = Xray(
@@ -150,8 +150,8 @@ def run_data_collection(
         xray_type: float,
         repeat: int = 3,
         additional_label: str = None,
-        sim_params: dict = accurate,
-        sample_params: dict = deep
+        sim_params: dict = None,
+        sample_params: dict = None
     ):
     """Automatic data collection script
     Loops simulation to observe changes to a defined variable
@@ -174,6 +174,11 @@ def run_data_collection(
     Raises:
         KeyError: if variable_parameter_name isn't a valid parameter name
     """
+    if dict is None:
+        sim_params = accurate
+    if sampling is None:
+        sampling = deep
+
     ### Check variable parameter name is valid
     if variable_parameter_name not in sim_params:
         raise KeyError(f"'{variable_parameter_name}' not found in parameter dictionary keys: {list(accurate.keys())}")

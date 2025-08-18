@@ -40,12 +40,13 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../core.html">core package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualisation.html">visualisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory.html">theory package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../analysis.html">analysis package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../data_analysis.html">data_analysis package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../data_collection.html">data_collection package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples.html">examples package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../theory.html">theory package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../visualisation.html">visualisation package</a></li>
 </ul>
 
         </div>
@@ -74,17 +75,12 @@
              
   <h1>Source code for core.simulation</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">simulation.py</span>
-
 <span class="sd">Defines the class simulation, which simulates the interaction</span>
 <span class="sd">between the Xray bath and Gamma pulse using a Monte Carlo method.</span>
 <span class="sd">Performs basic simulation tasks such as predicting hits,</span>
 <span class="sd">detecting hits, and plotting.</span>
 <span class="sd">Designed as a subclass to more in-depth simulation tasks</span>
 <span class="sd">such as visualisation and estimating positron pairs produced</span>
-
-<span class="sd">Timothy Chew</span>
-<span class="sd">1/8/25</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -100,11 +96,6 @@
 <span class="sd">    Attributes:</span>
 <span class="sd">        xray_bath (Xray): Xray object instance</span>
 <span class="sd">        gamma_pulse (Gamma): Gamma object instance</span>
-<span class="sd">    </span>
-<span class="sd">    Methods:</span>
-<span class="sd">        get_overlap_coords(coords: list, beam_bounds: list) -&gt; int, numpy.ndarray:</span>
-<span class="sd">            finds coordinates of Xrays inside the gamma pulse beam bounds</span>
-<span class="sd">        find_hits(self, eff_height = None, eff_d = None) -&gt; int, list[list[float]]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
@@ -152,9 +143,9 @@
 <span class="sd">            eff_d (float, optional): effective off-axis displacement. Defaults to None</span>
 <span class="sd">        </span>
 <span class="sd">        Returns:</span>
-<span class="sd">            tuple (float, list[list[float]]): Tuple containing:</span>
-<span class="sd">                - number of ovelaps</span>
-<span class="sd">                - coordinates of overlaps in the form [time, x, y, angle]</span>
+<span class="sd">            tuple[float, list[list[float]]]: Tuple containing:</span>
+<span class="sd">                - float: number of ovelaps</span>
+<span class="sd">                - list[list[float]]: list of coordinates of overlaps in the form [time, x, y, angle]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">seed_coords</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_xray_bath</span><span class="p">()</span><span class="o">.</span><span class="n">get_xray_coords</span><span class="p">()</span>
         <span class="n">bounds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_gamma_pulse</span><span class="p">()</span><span class="o">.</span><span class="n">get_bounds</span><span class="p">()</span>

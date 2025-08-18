@@ -18,7 +18,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="theory package" href="theory.html" /> 
+    <link rel="next" title="theory package" href="theory.html" />
+    <link rel="prev" title="core package" href="core.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,24 +43,28 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="analysis.html">analysis package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data_analysis.html">data_analysis package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data_collection.html">data_collection package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">examples package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="theory.html">theory package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core.html">core package</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">visualisation package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-visualisation">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Visualisation Package</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#module-visualisation.visualisation">visualisation.visualisation module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#visualisation.visualisation.Visualiser"><code class="docutils literal notranslate"><span class="pre">Visualiser</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#visualisation.visualisation.Visualiser.bath_vis"><code class="docutils literal notranslate"><span class="pre">Visualiser.bath_vis</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#visualisation.visualisation.Visualiser.get_bath_vis"><code class="docutils literal notranslate"><span class="pre">Visualiser.get_bath_vis()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#visualisation.visualisation.Visualiser.plot"><code class="docutils literal notranslate"><span class="pre">Visualiser.plot()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#module-visualisation">Module contents</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">theory package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">analysis package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_analysis.html">data_analysis package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_collection.html">data_collection package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">examples package</a></li>
 </ul>
 
         </div>
@@ -88,41 +93,72 @@
              
   <section id="visualisation-package">
 <h1>visualisation package<a class="headerlink" href="#visualisation-package" title="Link to this heading"></a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+<section id="module-visualisation">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-visualisation" title="Link to this heading"></a></h2>
+<section id="id1">
+<h3>Visualisation Package<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<p>This package contains the matplotlib renderer for
+visualisation of the simulation.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">core.xray</span> <span class="kn">import</span> <span class="n">Xray</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">core.gamma</span> <span class="kn">import</span> <span class="n">Gamma</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">visualisation.visualisation</span> <span class="kn">import</span> <span class="n">Visualiser</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xray</span> <span class="o">=</span> <span class="n">Xray</span><span class="p">(</span><span class="n">fwhm</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">rotation</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">n_samples</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">n_samples_angular</span> <span class="o">=</span> <span class="mi">400</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gamma</span> <span class="o">=</span> <span class="n">Gamma</span><span class="p">(</span><span class="n">x_pos</span> <span class="o">=</span> <span class="o">-</span><span class="mi">300</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">pulse_length</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">height</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">off_axis_dist</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vis</span> <span class="o">=</span> <span class="n">Visualiser</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">xray_bath</span> <span class="o">=</span> <span class="n">xray</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">gamma_pulse</span> <span class="o">=</span> <span class="n">gamma</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">bath_vis</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<a class="reference internal image-reference" href="_images/Visualier_example.png"><img alt="Example of the visualiser" src="_images/Visualier_example.png" style="width: 600px;" /></a>
+</section>
 </section>
 <section id="module-visualisation.visualisation">
 <span id="visualisation-visualisation-module"></span><h2>visualisation.visualisation module<a class="headerlink" href="#module-visualisation.visualisation" title="Link to this heading"></a></h2>
-<p>visualisation.py</p>
 <p>Defines the Visualiser class which inherits from the Simulation class.
 Uses matplotlib to render the simulation.</p>
-<p>Timothy Chew
-1/8/25</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="visualisation.visualisation.Visualiser">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">visualisation.visualisation.</span></span><span class="sig-name descname"><span class="pre">Visualiser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xray_bath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="core.html#core.xray.Xray" title="core.xray.Xray"><span class="pre">Xray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma_pulse</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="core.html#core.gamma.Gamma" title="core.gamma.Gamma"><span class="pre">Gamma</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bath_vis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualisation/visualisation.html#Visualiser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualisation.visualisation.Visualiser" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="core.html#core.simulation.Simulation" title="core.simulation.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a></p>
 <p>Visualiser for simulation
 Child of Simulation</p>
-<dl>
-<dt>Attributes:</dt><dd><dl>
-<dt>bath_vis (bool):</dt><dd><ul class="simple">
+<dl class="py attribute">
+<dt class="sig sig-object py" id="visualisation.visualisation.Visualiser.bath_vis">
+<span class="sig-name descname"><span class="pre">bath_vis</span></span><a class="headerlink" href="#visualisation.visualisation.Visualiser.bath_vis" title="Link to this definition"></a></dt>
+<dd><ul class="simple">
 <li><p>True to focus on X-ray pulse</p></li>
 <li><p>False to focus on gamma pulse</p></li>
 </ul>
 <p>Affects the limits of the plot (for values used in the 2018 experiment)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
-</dd>
-<dt>Methods:</dt><dd><p>plot: Plots out the simulation with a time step slider</p>
-</dd>
-</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="visualisation.visualisation.Visualiser.get_bath_vis">
 <span class="sig-name descname"><span class="pre">get_bath_vis</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/visualisation/visualisation.html#Visualiser.get_bath_vis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualisation.visualisation.Visualiser.get_bath_vis" title="Link to this definition"></a></dt>
 <dd><p>Access method for bath visualiser boolean</p>
-<dl class="simple">
-<dt>Returns:</dt><dd><p>bool: bath visualiser boolean</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bath visualiser boolean</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>
@@ -136,16 +172,14 @@ Child of Simulation</p>
 </dd></dl>
 
 </section>
-<section id="module-visualisation">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-visualisation" title="Link to this heading"></a></h2>
-</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="theory.html" class="btn btn-neutral float-left" title="theory package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="core.html" class="btn btn-neutral float-left" title="core package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="theory.html" class="btn btn-neutral float-right" title="theory package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

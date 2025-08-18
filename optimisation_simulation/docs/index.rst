@@ -5,6 +5,7 @@
 
 Welcome to Monte Carlo BW Pair Production Simulation Documentation's documentation!
 ===================================================================================
+This module contains some stuff
 
 .. toctree::
    :maxdepth: 2

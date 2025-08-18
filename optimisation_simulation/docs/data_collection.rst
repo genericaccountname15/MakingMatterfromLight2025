@@ -1,8 +1,13 @@
 data\_collection package
 =================================================
 
-Submodules
-----------
+Module contents
+---------------
+
+.. automodule:: data_collection
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 data\_collection.data\_collection module
 -----------------------------------------------------------------
@@ -24,14 +29,6 @@ data\_collection.delay\_optimise\_collection module
 ----------------------------------------------------------------------------
 
 .. automodule:: data_collection.delay_optimise_collection
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: data_collection
    :members:
    :undoc-members:
    :show-inheritance:

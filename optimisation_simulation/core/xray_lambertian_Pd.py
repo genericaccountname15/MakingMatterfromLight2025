@@ -1,12 +1,7 @@
 """
-xray_lambertian.py
-
 Defines a Lambertian Xray source Characteristic of a
 Paladium source.
-cos0.59 x (Cary Colgan PhD)
-
-Timothy Chew
-4/8/25
+cos^0.59(x) (Cary Colgan PhD)
 """
 import numpy as np
 
@@ -20,7 +15,8 @@ class XrayLambertianPd(Xray):
     Overridden methods:
         gen_xray_seed(mean: float, variance: float, **kwargs: float) -> numpy.ndarray:
             Generates Xray coordinates sampled from a lambertian, gaussian profile.
-        get_n_samples_total() -> int: Returns the total number of Xray coordinates generated
+        get_n_samples_total() -> int:
+            Returns the total number of Xray coordinates generated
             appropriate for a lambertian distribution.
     """
     def __init__(
@@ -51,13 +47,13 @@ class XrayLambertianPd(Xray):
         Args:
             mean (float): mean of distribution, radial position (m)
             variance (float): variance of x-ray distribution (mm^2)
-            **kwargs: optional
+            **kwargs: optional keyword arguments.
                 rotation (float, optional): rotation of the Xray source
-                    or the kapton tape angle (rad). Defaults to 0
+                or the kapton tape angle (rad). Defaults to 0.
                 n_samples_angular (int, optional): Number of angles to sample. Defaults to 400
                 n_samples (int, optional): Number of samples per angle. Defaults to 10.
                 get_n_lambert (bool, optional): If True, returns the number of generated
-                    samples along with the coordinates. Defaults to False.
+                samples along with the coordinates. Defaults to False.
 
         Returns:
             np.ndarray[list[float]]: list of coordinates for distribution points

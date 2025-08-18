@@ -1,14 +1,9 @@
 """
-gamma.py
-
 Defines the class Gamma, representing a gamma pulse in the
 simulation.
 This class provides geometric properties and methods to change
 its dimensions and position.
 Also includes matplotlib integration through patches.
-
-Timothy Chew
-1/8/25
 """
 from matplotlib.patches import Rectangle
 
@@ -27,12 +22,6 @@ class Gamma:
         facecolor (tuple, optional): face colour of axes object. Defaults to (0, 0, 1, 0.5).
         edgecolor (tuple, optional): edge colour of axes object. Defaults to (1, 0, 0).
         linewidth (int, optional): line width of axes object. Defaults to 2.
-
-    Methods:
-        get_bounds() -> list: returns the coordinates of the 4 corners of the gamma pulse
-        move(dx: float): moves the gamma pulse by distance dx
-        set_xpos(new_xpos: float): changes gamma pulse's x-position
-        set_height(new_height: float): changes the height/radius of the gamma pulse
     """
     def __init__(
             self,

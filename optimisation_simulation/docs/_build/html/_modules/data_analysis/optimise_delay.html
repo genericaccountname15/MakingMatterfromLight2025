@@ -40,12 +40,13 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../core.html">core package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualisation.html">visualisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory.html">theory package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../analysis.html">analysis package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../data_analysis.html">data_analysis package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../data_collection.html">data_collection package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples.html">examples package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../theory.html">theory package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../visualisation.html">visualisation package</a></li>
 </ul>
 
         </div>
@@ -74,16 +75,11 @@
              
   <h1>Source code for data_analysis.optimise_delay</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">optimise_delay.py</span>
-
 <span class="sd">Contains functions to read the pickled simulation data files,</span>
 <span class="sd">perform statistics on the data (mean, dev), and find the optimal</span>
 <span class="sd">timing which maximises positron count along with the maximum</span>
 <span class="sd">positron count.</span>
 <span class="sd">Also has plotting features.</span>
-
-<span class="sd">Timothy Chew</span>
-<span class="sd">1/8/25</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
@@ -102,9 +98,9 @@
 <span class="sd">        simdata_dir (string): Directory where the datafiles are located</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        tuple (list[float], list[float]): Tuple containing</span>
-<span class="sd">            - The averaged dataset in the form [delay, npos, npos_uncertainty]</span>
-<span class="sd">            - The optimal delay which maximises Npos in the form [optimal delay, uncertainty]</span>
+<span class="sd">        tuple[list[float], list[float]]: Tuple containing:</span>
+<span class="sd">            - list[float]: The averaged dataset in the form [delay, npos, npos_uncertainty]</span>
+<span class="sd">            - list[float]: The optimal delay which maximises the number of positron pairs in the form [optimal delay, uncertainty]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">file_list</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">simdata_dir</span><span class="p">)</span>
 
@@ -159,8 +155,7 @@
 <span class="sd">        delay (list[float]): Delay between pulse and xray ignition (ps)</span>
 <span class="sd">        npos (list[float]): Number of positrons/pC incident on the CsI detector</span>
 <span class="sd">        npos_err (list[float]): Standard deviation in the number of positrons</span>
-<span class="sd">        peak_delay (list[float]): two element list in form</span>
-<span class="sd">            [Delay value which gives greatest positron yield, uncertainty]</span>
+<span class="sd">        peak_delay (list[float]): peak delay in the form [peak delay value, uncertainty]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -232,9 +227,9 @@
 <span class="sd">        peak_delay_err (float): standard deviation in the optimal delay (ps)</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        tuple (float, float): tuple containing:</span>
-<span class="sd">            -yield gain</span>
-<span class="sd">            -yield gain error (%)</span>
+<span class="sd">        tuple[float, float]: Tuple containing:</span>
+<span class="sd">            - float: yield gain</span>
+<span class="sd">            - float: yield gain error (%)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">pos_exp</span> <span class="o">=</span> <span class="n">npos</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">delay</span> <span class="o">-</span> <span class="mi">40</span><span class="p">))]</span>
     <span class="n">pos_max</span> <span class="o">=</span> <span class="n">npos</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">delay</span> <span class="o">-</span> <span class="n">peak_delay</span><span class="p">))]</span>
@@ -261,9 +256,9 @@
 <span class="sd">        peak_delay_err (float): standard deviation in the optimal delay (ps)</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        tuple(float, float): tuple containing:</span>
-<span class="sd">            - maximal positron yield</span>
-<span class="sd">            - maximal positron yield error</span>
+<span class="sd">        tuple[float, float]: tuple containing:</span>
+<span class="sd">            - float: maximal positron yield</span>
+<span class="sd">            - float: maximal positron yield error</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">pos_max</span> <span class="o">=</span> <span class="n">npos</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">delay</span> <span class="o">-</span> <span class="n">peak_delay</span><span class="p">))]</span>
     <span class="n">pos_max_sigma</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="n">npos</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">delay</span> <span class="o">-</span> <span class="n">peak_delay</span> <span class="o">+</span> <span class="n">peak_delay_err</span><span class="p">))],</span>
@@ -280,7 +275,7 @@
         <span class="n">datadir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">csvname</span><span class="p">:</span> <span class="nb">str</span>
         <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Auto scans data and generates a csv for it</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Auto scans data and generates a csv for it.</span>
 <span class="sd">    Gets the positron yield dependence on the data</span>
 
 <span class="sd">    Args:</span>

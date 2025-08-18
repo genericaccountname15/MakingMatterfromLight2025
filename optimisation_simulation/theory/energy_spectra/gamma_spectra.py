@@ -1,13 +1,8 @@
 """
-gamma_spectra.py
-
 Defines the GammaSpectra class, which reads the gamma pulse's energy spectral data matlab file,
 with methods to plot and sample a probability density function based on the data.
-The data was taken from the 2018 paper's zenodo records repository.
-The data was used to plot figures 4b and 5a in the 2018 paper.
-
-Timothy Chew
-1/8/25
+The data was taken from the 2021 paper's zenodo records repository.
+The data was used to plot figures 4b and 5a in the 2021 paper.
 """
 from scipy.io import loadmat
 import numpy as np
@@ -16,25 +11,18 @@ import matplotlib.pyplot as plt
 
 class GammaSpectra:
     """Gamma spectra data set
-    Args:
-        mat_fname (str): filename of the gamma spectrum matlab file (filename.mat)
     
     Attributes:
         matfile (dict): loaded matlab file containing dataset
         gamma_energy (list[float]): energy of gamma photon (MeV)
-        sim_nph_a_mean, _sim_nph_a_sigma (list[float]):
-            mean and standard deviation of simulated optimal beam performance
-        sim_nph_b_mean, _sim_nph_b_sigma (list[float]):
-            mean and standard deviation of simulated commissioned beam performance
-        exp_nph_a_mean, _exp_nph_a_sigma (list[float]):
-            mean and standard deviation of experimental optimal beam performance
-        exp_nph_b_mean, _exp_nph_b_sigma (list[float]):
-            mean and standard deviation of experimental commissioned beam performance
-    
-    Methods:
-        replicate_plot(): replicates plots from the literature for sanity check
-        sample_pdf(n_samples: int) -> list[float]:
-            returns list of sampled energies from the gamma energy probability distribution
+        sim_nph_a_mean (list[float]): mean simulated optimal beam performance
+        sim_nph_a_sigma (list[float]): error in simulated optimal beam performance
+        sim_nph_b_mean (list[float]): mean simulated commissioned beam performance
+        sim_nph_b_sigma (list[float]): error in simulated commissioned beam performance
+        exp_nph_a_mean (list[float]): mean experimental optimal beam performance
+        exp_nph_a_sigma (list[float]): error in experimental optimal beam performance
+        exp_nph_b_mean (list[float]): mean experimental commissioned beam performance
+        exp_nph_b_sigma (list[float]): error in experimental commissioned beam performance
     """
     def __init__(
             self,
@@ -160,8 +148,7 @@ class GammaSpectra:
         """Access method for sim_nph_a_sigma
 
         Returns:
-            list[float]: standard deviation in the number of photons
-                for simulated optimal beam performance
+            list[float]: standard deviation in the number of photons for simulated optimal beam performance
         """
         return self.sim_nph_a_sigma
     
@@ -169,8 +156,7 @@ class GammaSpectra:
         """Access method for sim_nph_b_sigma
 
         Returns:
-            list[float]: standard deviation in the number of photons
-                for simulated commissioned beam performance
+            list[float]: standard deviation in the number of photons for simulated commissioned beam performance
         """
         return self.sim_nph_b_sigma
     
@@ -186,8 +172,7 @@ class GammaSpectra:
         """Access method for exp_nph_a_sigma
 
         Returns:
-            list[float]: standard deviation in the number of photons
-                for experimental optimal beam performance
+            list[float]: standard deviation in the number of photons for experimental optimal beam performance
         """
         return self.exp_nph_a_sigma
     
@@ -203,8 +188,7 @@ class GammaSpectra:
         """Access method for exp_nph_b_sigma
 
         Returns:
-            list[float]: standard deviation in the number of photons
-                for experimental commissioned beam performance
+            list[float]: standard deviation in the number of photons for experimental commissioned beam performance
         """
         return self.exp_nph_b_sigma
 

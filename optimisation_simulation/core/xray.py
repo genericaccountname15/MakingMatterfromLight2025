@@ -1,15 +1,10 @@
 """
-xray.py
-
 Defines the class Xray, representing the Xray bath in the simulation.
 Does so by sampling a radially-uniform, gaussian travelling profile.
 This class provides attributes and methods for sampling, generating,
 and moving the sampled 'Xray photons'.
 Designed to be subclassed by other distribution types for Xray modelling
 such as 'XrayLambertian' and 'XrayLine'
-
-Timothy Chew
-1/8/25
 """
 import numpy as np
 
@@ -20,13 +15,6 @@ class Xray:
     Attributes:
         fwhm (float): Full-Width-Half-Maximum of the X-ray distribution (mm)
         Variance (float): Variance of the X-ray distribution (mm^2)
-
-    Methods:
-        gen_xray_seed(mean: float, variance: float, **kwargs: float) -> numpy.ndarray:
-            Generates Xray coordinates sampled from a radially-uniform, gaussian profile.
-        move_xrays(t: float): moves Xray coordinates to their position at time t.
-        resample(phi: unused): Generates a new set of Xray coordinates
-        get_n_samples_total() -> int: Returns the total number of Xray coordinates generated
     """
     def __init__(
             self,
@@ -56,15 +44,16 @@ class Xray:
         Args:
             mean (float): mean of distribution, radial position (m)
             variance (float): variance of x-ray distribution (mm^2)
-            **kwargs: optional
+            **kwargs: optional keyword arguments.
                 rotation (float, optional): rotation of the Xray source
-                    or the kapton tape angle (rad). Defaults to 0
-                n_samples_angular (int, optional): Number of angles to sample. Defaults to 400
+                or the kapton tape angle (rad). Defaults to 0.
+                n_samples_angular (int, optional): Number of angles to sample. Defaults to 400.
                 n_samples (int, optional): Number of samples per angle. Defaults to 10.
 
         Returns:
-            numpy.ndarray[list[float]]: coordinates for distribution points in form
-            [x, y, angle] | the angle is to the x-axis in the plane of the gamma pulse's motion
+            numpy.ndarray[list[float]]: numpy array containing:
+                - coordinates for distribution points in the form [x, y, angle].
+                The angle is to the x-axis in the plane of the gamma pulse's motion
         """
         # kwargs ##################################################################################
         rotation = kwargs.get('rotation', 0)

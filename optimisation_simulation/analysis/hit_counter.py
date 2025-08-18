@@ -1,14 +1,9 @@
 """
-hit_counter.py
-
 Defines the HitCounter class which inherits from the Simulation class.
-Count the number of collisions between the gamma pulse and Xray bath by 
+Counts the number of collisions between the gamma pulse and Xray bath by 
 calculating future positions.
 Predicts number of positron pairs to be generated and received by
 the CsI detector.
-
-Timothy Chew
-1/8/25
 """
 import time
 import pickle
@@ -26,21 +21,12 @@ from theory.energy_spectra.xray_spectra import XraySpectra          #pylint: dis
 from theory.energy_spectra.gamma_spectra import GammaSpectra        #pylint: disable=import-error
 
 class HitCounter(Simulation):
-    """Counts the number of collisions between the X-ray bath
+    """
+    Counts the number of collisions between the X-ray bath
     and Gamma pulse
 
     Attributes:
         n_samples_azimuthal (float): number of azimuthal samples to take for width of Xray pulse
-    
-    Methods:
-        count_hits: Counts the total number of collisions for a given pulse timing
-        calc_effective_height: Solves a geometric problem to find the new effective height of the 
-                                gamma pulse when looking at an azimuthal plane of the x-ray bath.
-        calc_effective_d: Solves geometric problem to calculate effective off-axis
-                        displacement when looking at another azimuthal plane paramaterised by phi
-        est_npairs: Estimates the number of positron pairs produced and lands on the CsI detector
-        plot_hit_count: Plots the hit count and estimated number of pairs for a range of delays
-                        (with option to save data)
     """
     def __init__(
             self,
@@ -60,8 +46,9 @@ class HitCounter(Simulation):
             delay (float): time delay of gamma pulse to x-ray ignition (ps)
 
         Returns:
-            tuple (float, numpy.ndarray): number of collisions, 
-                                        array of coordinates for each hit (x, y, angles)
+            tuple[float, numpy.ndarray]: A tuple containing:
+                - float: number of collisions, 
+                - numpy.ndarray: array of coordinates for each hit (x, y, angles)
 
         """
         #delay to distance in mm
@@ -171,8 +158,9 @@ class HitCounter(Simulation):
             samples (int): number of Xray coordinates generated
 
         Returns:
-            list[float,float]: array containing:
-                [estimated number of positrons, uncertainty]
+            list[float,float]: list containing:
+                - float: estimated number of positrons
+                - float: uncertainty
         """
 
         # calculate cross section of each hit and sum #####################################
@@ -226,15 +214,15 @@ class HitCounter(Simulation):
             max_delay (float): Maximum pulse delay (ps)
             samples (int, optional): Number of delays to check.
             Defaults to 50.
-            **kwargs: optional
+            **kwargs: optional keyword arguments.
                 show_exp_value (bool, optional): Whether to plot the delay used in 2018.
-                                                Defaults to False.
+                Defaults to False.
                 save_data (bool, optional): Whether to save the plot data to a csv.
-                                            Defaults to False
+                Defaults to False.
                 plot_wait (float, optional): Time to leave plot open.
-                                            Defaults to None
+                Defaults to None.
                 save_params (bool, optional): Whether to save parameters for Xray and Gamma objects.
-                                            Defaults to False
+                Defaults to False.
         """
         # kwaargs ##########################################################
         show_exp_value = kwargs.get('show_exp_value', False)
@@ -310,7 +298,7 @@ class HitCounter(Simulation):
             df = pd.DataFrame([self.get_params()])
             df.to_csv(f'{save_params_filename}.csv',index=False)
 
-        
+
         if plot_wait == 0:
             plt.close(fig)
 

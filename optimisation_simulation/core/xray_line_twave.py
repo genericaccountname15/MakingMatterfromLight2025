@@ -1,41 +1,39 @@
 """
-xrayline.py
-
 Defines the XrayTwave class which inherits from the XrayLine class.
 Represents a line source's Xray emissions, done so by placing multiple
 point-Lambertian sources along its length.
 And the sources are ignited by a travelling wave.
-
-Timothy Chew
-1/8/25
 """
 import numpy as np
 
 from core.xray_line import XrayLine     #pylint: disable=import-error
 
 class XrayTwave(XrayLine):
-    """Generates a line source by setting up an
-    array of lambertian point sources which are
-    ignited by a travelling wave
+    """
+    Generates a line source by setting up an array of lambertian point sources which are
+    ignited by a travelling wave. This class extends 'Xrayline'
 
-    This class extends 'Xrayline'
     Attributes:
-        - wave_speed (float, optional): speed of the travelling wave igniting the xray source
+        wave_speed (float, optional): speed of the travelling wave igniting the xray source
                 (natural units). Defaults to 1.
+
     Overridden Methods:
-        - gen_xray_seed_line(azimuthal_angle: float) -> list, int:
+        gen_xray_seed_line(azimuthal_angle: float) -> tuple[list, int(conditional)]:
             Initializes the Xray coordinates by seeding each point source along the line
-            and displacing their mean to for a travelling wave with velocity c.
+            and displacing their mean to for a travelling wave with a specified velocity.
     """
     def __init__(self, fwhm, line_length, rotation=0, n_samples_angular=400, n_samples=10, n_line_samples=10, wave_speed = 1):
         self.wave_speed = wave_speed
         super().__init__(fwhm, line_length, rotation, n_samples_angular, n_samples, n_line_samples)
 
-    def gen_xray_seed_line(self, phi = 0, get_total_samples=False):
-        """Generates xray coordinates for a line source
+    def gen_xray_seed_line(self, phi = 0, get_total_samples=False) -> tuple:
+        """Generates xray coordinates for a line source generated
+        by a travelling wave source
 
         Returns:
-            list: array of line source generated xray coordinates
+            tuple[list, int]: A tuple containing
+                - list: array of line-source-generated xray coordinates
+                - int(conditional): the total number of xray points
         """
         coords = []
         n_samples_total = 0
@@ -79,6 +77,6 @@ class XrayTwave(XrayLine):
         """Access method for wave_speed
 
         Returns:
-            float: travelling wave velocity (ms^-1)
+            float: travelling wave velocity (c)
         """
         return self.wave_speed

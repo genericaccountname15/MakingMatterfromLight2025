@@ -40,12 +40,13 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../core.html">core package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualisation.html">visualisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory.html">theory package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../analysis.html">analysis package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../data_analysis.html">data_analysis package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../data_collection.html">data_collection package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples.html">examples package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../theory.html">theory package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../visualisation.html">visualisation package</a></li>
 </ul>
 
         </div>
@@ -88,9 +89,19 @@
 <div class="viewcode-block" id="HitCounterGe">
 <a class="viewcode-back" href="../../analysis.html#analysis.hit_counter_gespec.HitCounterGe">[docs]</a>
 <span class="k">class</span> <span class="nc">HitCounterGe</span><span class="p">(</span><span class="n">HitCounter</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Counts the number of collisions between the X-ray bath</span>
+<span class="sd">    and Gamma pulse for a line source using an extended</span>
+<span class="sd">    Xray spectrum for a Germanium source.</span>
+
+<span class="sd">    Overriden methods:</span>
+<span class="sd">        est_npairs(angles: list, samples: int) -&gt; list:</span>
+<span class="sd">            Estimates the number of positron pairs produced and lands on the CsI</span>
+<span class="sd">            detector using the new spectrum</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="HitCounterGe.est_npairs">
 <a class="viewcode-back" href="../../analysis.html#analysis.hit_counter_gespec.HitCounterGe.est_npairs">[docs]</a>
-    <span class="k">def</span> <span class="nf">est_npairs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angles</span><span class="p">,</span> <span class="n">samples</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">est_npairs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angles</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Estimates the number of positron pairs produced</span>
 <span class="sd">        and lands on the CsI detector</span>
 
@@ -99,8 +110,9 @@
 <span class="sd">            samples (int): number of Xray coordinates generated</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list[float,float]: array containing:</span>
-<span class="sd">                [estimated number of positrons, uncertainty]</span>
+<span class="sd">            list[float,float]: list containing:</span>
+<span class="sd">                - float: estimated number of positrons</span>
+<span class="sd">                - float: uncertainty</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># calculate cross section of each hit and sum #####################################</span>

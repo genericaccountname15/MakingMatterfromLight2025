@@ -1,12 +1,7 @@
 """
-xrayline.py
-
 Defines the XrayLine class which inherits from the XrayLambertian class.
 Represents a line source's Xray emissions, done so by placing multiple
 point-Lambertian sources along its length.
-
-Timothy Chew
-1/8/25
 """
 import numpy as np
 
@@ -14,9 +9,8 @@ from core.xray_lambertian import XrayLambertian     #pylint: disable=import-erro
 
 class XrayLine(XrayLambertian):
     """Generates a line source by setting up an
-    array of lambertian point sources
+    array of lambertian point sources. This class extends 'XrayLambertian'.
 
-    This class extends 'XrayLambertian'
     Attributes:
         line_length (float): Total physical length of the X-ray line source (mm).
         n_line_samples (int): Number of discrete Lambertian emitters along the line.
@@ -24,11 +18,13 @@ class XrayLine(XrayLambertian):
         n_samples_total (int): Total number of Xray photons generated (overridden).
     
     Overridden Methods:
-        - resample(azimuthal_angle: float): Resamples Xrays based on azimuthal orientation.
-        - get_n_samples_total() -> int: Returns total number of Xrays photons generated.
+        resample(azimuthal_angle: float):
+            Resamples Xrays based on azimuthal orientation.
+        get_n_samples_total() -> int:
+            Returns total number of Xrays photons generated.
 
     New Methods:
-        - gen_xray_seed_line(azimuthal_angle: float) -> list, int:
+        gen_xray_seed_line(azimuthal_angle: float) -> tuple[list, int(conditional)]:
             Initializes the Xray coordinates by seeding each point source along the line.
     """
     def __init__(
@@ -46,11 +42,13 @@ class XrayLine(XrayLambertian):
 
         self.xray_coords, self.n_samples_total = self.gen_xray_seed_line( get_total_samples = True )
 
-    def gen_xray_seed_line(self, phi = 0, get_total_samples=False):
+    def gen_xray_seed_line(self, phi = 0, get_total_samples=False) -> tuple:
         """Generates xray coordinates for a line source
 
         Returns:
-            list: array of line source generated xray coordinates
+            tuple[list, int]: A tuple containing
+                - list: array of line-source-generated xray coordinates
+                - int(conditional): the total number of xray points
         """
         coords = []
         n_samples_total = 0

@@ -40,12 +40,13 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../core.html">core package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualisation.html">visualisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory.html">theory package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../analysis.html">analysis package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../data_analysis.html">data_analysis package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../data_collection.html">data_collection package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples.html">examples package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../theory.html">theory package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../visualisation.html">visualisation package</a></li>
 </ul>
 
         </div>
@@ -74,15 +75,10 @@
              
   <h1>Source code for core.xray_lambertian</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">xray_lambertian.py</span>
-
 <span class="sd">Defines the XrayLambertian class which inherits from the Xray class.</span>
 <span class="sd">Represents a Lambertian disturibution of Xrays, I = I0cosx.</span>
 <span class="sd">This class redefines the Xray coordinate generation and method for</span>
 <span class="sd">obtaining the total number of samples taken.</span>
-
-<span class="sd">Timothy Chew</span>
-<span class="sd">1/8/25</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -132,13 +128,13 @@
 <span class="sd">        Args:</span>
 <span class="sd">            mean (float): mean of distribution, radial position (m)</span>
 <span class="sd">            variance (float): variance of x-ray distribution (mm^2)</span>
-<span class="sd">            **kwargs: optional</span>
+<span class="sd">            **kwargs: optional keyword arguments.</span>
 <span class="sd">                rotation (float, optional): rotation of the Xray source</span>
-<span class="sd">                    or the kapton tape angle (rad). Defaults to 0</span>
-<span class="sd">                n_samples_angular (int, optional): Number of angles to sample. Defaults to 400</span>
+<span class="sd">                or the kapton tape angle (rad). Defaults to 0,</span>
+<span class="sd">                n_samples_angular (int, optional): Number of angles to sample. Defaults to 400.</span>
 <span class="sd">                n_samples (int, optional): Number of samples per angle. Defaults to 10.</span>
 <span class="sd">                get_n_lambert (bool, optional): If True, returns the number of generated</span>
-<span class="sd">                    samples along with the coordinates. Defaults to False.</span>
+<span class="sd">                samples along with the coordinates. Defaults to False.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            np.ndarray[list[float]]: list of coordinates for distribution points</span>

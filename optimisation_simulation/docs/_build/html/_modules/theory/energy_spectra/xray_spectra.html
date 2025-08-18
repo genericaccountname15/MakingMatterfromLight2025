@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>theory.energy_spectra.xray_spectra &mdash; Monte Carlo BW Pair Production Simulation Documentation 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=86f27845" />
+
+  
+  
+        <script src="../../../_static/jquery.js?v=8dae8fb0"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Monte Carlo BW Pair Production Simulation Documentation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../core.html">core package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../visualisation.html">visualisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../theory.html">theory package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../analysis.html">analysis package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_analysis.html">data_analysis package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_collection.html">data_collection package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">examples package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Monte Carlo BW Pair Production Simulation Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">theory.energy_spectra.xray_spectra</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for theory.energy_spectra.xray_spectra</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Defines the XraySpectra class, which reads the Xray bath&#39;s energy spectral data folder,</span>
+<span class="sd">with methods to plot and sample a probability density function based on the data.</span>
+<span class="sd">The data was taken from the 2018 paper&#39;s zenodo records repository.</span>
+<span class="sd">The data was used to plot figures 4b and 5a in the 2018 paper.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<div class="viewcode-block" id="XraySpectra">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.xray_spectra.XraySpectra">[docs]</a>
+<span class="k">class</span> <span class="nc">XraySpectra</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Xray spectra data set</span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        file_dir (string): file directory address containing the pickled xray spectra files.</span>
+<span class="sd">        file_list (list[str]): list of filenames within the directory specified.</span>
+<span class="sd">        resolution (float): resolution of xray energy bins for averaging over data sets (eV)</span>
+<span class="sd">        energy (list[float]): all energy values from all datafiles</span>
+<span class="sd">        nph (list[float]): all values of number of photons/eV/J/srad from all data files,</span>
+<span class="sd">            corresponds to energy value</span>
+<span class="sd">        nph_err (list[float]): standard deviation of number of photons/eV/J/srad from all data files</span>
+<span class="sd">        avg_energy (list[float]): bin energies (centre of bin values)</span>
+<span class="sd">        avg_nph (list[float]): bin-average photon count</span>
+<span class="sd">        avg_nph_err (list[float]): bin-summed photon count standard deviation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">file_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">resolution</span><span class="o">=</span><span class="mf">0.5</span>
+        <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_dir</span> <span class="o">=</span> <span class="n">file_dir</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_list</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">file_dir</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resolution</span> <span class="o">=</span> <span class="n">resolution</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">energy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nph</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nph_err</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">avg_energy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">avg_nph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bin_data</span><span class="p">(</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_energy</span><span class="p">(),</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_nph</span><span class="p">(),</span>
+            <span class="n">bin_width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_resolution</span><span class="p">()</span>
+            <span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">avg_nph_err</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bin_data</span><span class="p">(</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_energy</span><span class="p">(),</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_nph_err</span><span class="p">(),</span>
+            <span class="n">bin_width</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_resolution</span><span class="p">(),</span>
+            <span class="n">err</span><span class="o">=</span><span class="kc">True</span>
+            <span class="p">)</span>
+
+    <span class="c1">##### METHODS #################################################################################</span>
+<div class="viewcode-block" id="XraySpectra.get_data">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.xray_spectra.XraySpectra.get_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Obtains and combines data from all datasets</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple[list[float]]: Tuple containing:</span>
+<span class="sd">                - list[float]: compiled energy data</span>
+<span class="sd">                - list[float]: compiled number of photons data</span>
+<span class="sd">                - list[float]: compiled number of photons error data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">energy_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+        <span class="n">nph_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+        <span class="n">nph_err_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+        <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_file_list</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.pickle&#39;</span><span class="p">):</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_file_dir</span><span class="p">()</span> <span class="o">+</span> <span class="n">file</span><span class="p">,</span> <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">energy_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">energy_list</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;E&#39;</span><span class="p">][:][</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="n">laser_energy</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;laser_energy&#39;</span><span class="p">]</span>
+
+                <span class="c1">#normalise number of photons</span>
+                <span class="n">nph_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">nph_list</span><span class="p">,</span>
+                    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;normalised_number&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">laser_energy</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span>
+                    <span class="p">)</span>
+                <span class="n">nph_err_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">nph_err_list</span><span class="p">,</span>
+                    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;normalised_number_sem&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">laser_energy</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span>
+                    <span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">energy_list</span><span class="p">,</span> <span class="n">nph_list</span><span class="p">,</span> <span class="n">nph_err_list</span></div>
+
+            
+<div class="viewcode-block" id="XraySpectra.bin_data">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.xray_spectra.XraySpectra.bin_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">bin_data</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">x</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+            <span class="n">y</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+            <span class="n">bin_width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+            <span class="n">err</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Bins arrays of x and y data points and averages</span>
+<span class="sd">        y values in bins</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (list[float]): list of x data points</span>
+<span class="sd">            y (list[float]): list of y data points</span>
+<span class="sd">            bin_width (float, optional): resolution of bins. Defaults to 0.5.</span>
+<span class="sd">            err (bool, optional): True if handling uncertainties. Defaults to False</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple[list[float], list[float]]: Tuple containing:</span>
+<span class="sd">                - list[float]: bin centre coordinates</span>
+<span class="sd">                - list[float]: height of bins</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Define bin edges (uniform or custom spacing)</span>
+        <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="n">bin_width</span><span class="p">,</span> <span class="n">bin_width</span><span class="p">)</span>
+
+        <span class="c1"># Digitize x-values to bin indices</span>
+        <span class="n">bin_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bins</span><span class="p">)</span>
+
+        <span class="c1"># Aggregate y-values into bins</span>
+        <span class="n">binned_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bins</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">bins</span><span class="p">)):</span>
+            <span class="n">in_bin</span> <span class="o">=</span> <span class="n">bin_indices</span> <span class="o">==</span> <span class="n">i</span>
+            <span class="k">if</span> <span class="n">err</span><span class="p">:</span>
+                <span class="n">binned_y</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">in_bin</span><span class="p">])</span> <span class="c1">#sum uncertainties</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">binned_y</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">in_bin</span><span class="p">])</span>
+
+        <span class="c1"># Bin centers for plotting</span>
+        <span class="n">bin_centers</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">bins</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">bins</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+        <span class="k">return</span> <span class="n">bin_centers</span><span class="p">,</span> <span class="n">binned_y</span></div>
+
+    
+<div class="viewcode-block" id="XraySpectra.replicate_plot">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.xray_spectra.XraySpectra.replicate_plot">[docs]</a>
+    <span class="k">def</span> <span class="nf">replicate_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Replicates plot from the 2018 paper for sanity check</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Xray Spectrum&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Xray Energy (eV)&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Photons/eV/J/srad&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_axisbelow</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_avg_energy</span><span class="p">(),</span>
+            <span class="n">y1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="n">y2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_avg_nph</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_avg_nph_err</span><span class="p">()</span><span class="o">/</span><span class="mi">47</span><span class="p">,</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span>
+        <span class="p">)</span>
+        
+        <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_avg_energy</span><span class="p">(),</span>
+            <span class="n">y1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="n">y2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_avg_nph</span><span class="p">(),</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;rebeccapurple&#39;</span>
+        <span class="p">)</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">1300</span><span class="p">,</span> <span class="mi">1550</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1e11</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="XraySpectra.filter_energies">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.xray_spectra.XraySpectra.filter_energies">[docs]</a>
+    <span class="k">def</span> <span class="nf">filter_energies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_energy</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">max_energy</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Filters energies between the 1.3-1.5keV energy range</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            min_energy (float): minimum energy (eV)</span>
+<span class="sd">            max_energy (float): maximum energy (eV)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_avg_energy</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">min_energy</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_avg_energy</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">max_energy</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">avg_energy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_avg_energy</span><span class="p">()[</span><span class="n">mask</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">avg_nph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_avg_nph</span><span class="p">()[</span><span class="n">mask</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">avg_nph_err</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_avg_nph_err</span><span class="p">()[</span><span class="n">mask</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="XraySpectra.sample_pdf">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.xray_spectra.XraySpectra.sample_pdf">[docs]</a>
+    <span class="k">def</span> <span class="nf">sample_pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_energy</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">max_energy</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span>
+                   <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generates discrete probability distribution</span>
+<span class="sd">        and returns a sample of energies</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            min_energy (float): minimum xray energy (eV)</span>
+<span class="sd">            max_energy (float): maximum xray energy (eV)</span>
+<span class="sd">            n (int): number of samples to take</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[float]: sampled xray energies</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filter_energies</span><span class="p">(</span><span class="n">min_energy</span><span class="p">,</span> <span class="n">max_energy</span><span class="p">)</span>
+        <span class="n">prob</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_avg_nph</span><span class="p">()</span>
+        <span class="n">prob</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span> <span class="c1">#normalisation</span>
+
+        <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_avg_energy</span><span class="p">(),</span> <span class="n">size</span> <span class="o">=</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">prob</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">samples</span></div>
+
+
+    <span class="c1"># ACCESS METHODS #########################################################</span>
+<div class="viewcode-block" id="XraySpectra.get_file_dir">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.xray_spectra.XraySpectra.get_file_dir">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_file_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for file_dir</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: file directory address containing the pickled xray spectra files</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_dir</span></div>
+
+
+<div class="viewcode-block" id="XraySpectra.get_file_list">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.xray_spectra.XraySpectra.get_file_list">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_file_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for file_list</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[str]: list of filenames within the directory specified</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_list</span></div>
+
+    
+<div class="viewcode-block" id="XraySpectra.get_resolution">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.xray_spectra.XraySpectra.get_resolution">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_resolution</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for file_list</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: resolution of xray energy bins for averaging over data sets (eV)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolution</span></div>
+
+    
+<div class="viewcode-block" id="XraySpectra.get_energy">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.xray_spectra.XraySpectra.get_energy">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for energy</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[float]: all energy values from all datafiles</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">energy</span></div>
+
+    
+<div class="viewcode-block" id="XraySpectra.get_nph">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.xray_spectra.XraySpectra.get_nph">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_nph</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for nph</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[float]: all values of number of photons/eV/J/srad from all data files, corresponds to energy value</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">nph</span></div>
+
+    
+<div class="viewcode-block" id="XraySpectra.get_nph_err">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.xray_spectra.XraySpectra.get_nph_err">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_nph_err</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for nph_err</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[float]: standard deviation of number of photons/eV/J/srad from all data files</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">nph_err</span></div>
+
+    
+<div class="viewcode-block" id="XraySpectra.get_avg_energy">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.xray_spectra.XraySpectra.get_avg_energy">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_avg_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for avg_energy</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[float]: bin energies (centre of bin values)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">avg_energy</span></div>
+
+    
+<div class="viewcode-block" id="XraySpectra.get_avg_nph">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.xray_spectra.XraySpectra.get_avg_nph">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_avg_nph</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for avg_nph</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[float]: bin-average photon count</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">avg_nph</span></div>
+
+    
+<div class="viewcode-block" id="XraySpectra.get_avg_nph_err">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.xray_spectra.XraySpectra.get_avg_nph_err">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_avg_nph_err</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for avg_nph_err</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[float]: bin-summed photon count standard deviation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">avg_nph_err</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Timothy Chew.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

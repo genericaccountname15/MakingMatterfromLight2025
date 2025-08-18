@@ -1,14 +1,9 @@
 """
-optimise_delay.py
-
 Contains functions to read the pickled simulation data files,
 perform statistics on the data (mean, dev), and find the optimal
 timing which maximises positron count along with the maximum
 positron count.
 Also has plotting features.
-
-Timothy Chew
-1/8/25
 """
 
 import os
@@ -25,9 +20,9 @@ def avg_data(simdata_dir: str) -> tuple:
         simdata_dir (string): Directory where the datafiles are located
 
     Returns:
-        tuple (list[float], list[float]): Tuple containing
-            - The averaged dataset in the form [delay, npos, npos_uncertainty]
-            - The optimal delay which maximises Npos in the form [optimal delay, uncertainty]
+        tuple[list[float], list[float]]: Tuple containing:
+            - list[float]: The averaged dataset in the form [delay, npos, npos_uncertainty]
+            - list[float]: The optimal delay which maximises the number of positron pairs in the form [optimal delay, uncertainty]
     """
     file_list = os.listdir(simdata_dir)
 
@@ -79,8 +74,7 @@ def plot_data(
         delay (list[float]): Delay between pulse and xray ignition (ps)
         npos (list[float]): Number of positrons/pC incident on the CsI detector
         npos_err (list[float]): Standard deviation in the number of positrons
-        peak_delay (list[float]): two element list in form
-            [Delay value which gives greatest positron yield, uncertainty]
+        peak_delay (list[float]): peak delay in the form [peak delay value, uncertainty]
     """
 
     _, ax = plt.subplots()
@@ -149,9 +143,9 @@ def find_yield_gain(
         peak_delay_err (float): standard deviation in the optimal delay (ps)
 
     Returns:
-        tuple (float, float): tuple containing:
-            -yield gain
-            -yield gain error (%)
+        tuple[float, float]: Tuple containing:
+            - float: yield gain
+            - float: yield gain error (%)
     """
     pos_exp = npos[np.argmin(abs(delay - 40))]
     pos_max = npos[np.argmin(abs(delay - peak_delay))]
@@ -175,9 +169,9 @@ def find_yield(
         peak_delay_err (float): standard deviation in the optimal delay (ps)
 
     Returns:
-        tuple(float, float): tuple containing:
-            - maximal positron yield
-            - maximal positron yield error
+        tuple[float, float]: tuple containing:
+            - float: maximal positron yield
+            - float: maximal positron yield error
     """
     pos_max = npos[np.argmin(abs(delay - peak_delay))]
     pos_max_sigma = max([npos[np.argmin(abs(delay - peak_delay + peak_delay_err))],
@@ -191,7 +185,7 @@ def write_data_csv(
         datadir: str,
         csvname: str
         ):
-    """Auto scans data and generates a csv for it
+    """Auto scans data and generates a csv for it.
     Gets the positron yield dependence on the data
 
     Args:

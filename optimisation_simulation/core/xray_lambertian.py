@@ -1,13 +1,8 @@
 """
-xray_lambertian.py
-
 Defines the XrayLambertian class which inherits from the Xray class.
 Represents a Lambertian disturibution of Xrays, I = I0cosx.
 This class redefines the Xray coordinate generation and method for
 obtaining the total number of samples taken.
-
-Timothy Chew
-1/8/25
 """
 import numpy as np
 
@@ -53,13 +48,13 @@ class XrayLambertian(Xray):
         Args:
             mean (float): mean of distribution, radial position (m)
             variance (float): variance of x-ray distribution (mm^2)
-            **kwargs: optional
+            **kwargs: optional keyword arguments.
                 rotation (float, optional): rotation of the Xray source
-                    or the kapton tape angle (rad). Defaults to 0
-                n_samples_angular (int, optional): Number of angles to sample. Defaults to 400
+                or the kapton tape angle (rad). Defaults to 0,
+                n_samples_angular (int, optional): Number of angles to sample. Defaults to 400.
                 n_samples (int, optional): Number of samples per angle. Defaults to 10.
                 get_n_lambert (bool, optional): If True, returns the number of generated
-                    samples along with the coordinates. Defaults to False.
+                samples along with the coordinates. Defaults to False.
 
         Returns:
             np.ndarray[list[float]]: list of coordinates for distribution points

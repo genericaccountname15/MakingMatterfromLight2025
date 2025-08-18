@@ -40,12 +40,13 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../core.html">core package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualisation.html">visualisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory.html">theory package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../analysis.html">analysis package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../data_analysis.html">data_analysis package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../data_collection.html">data_collection package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples.html">examples package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../theory.html">theory package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../visualisation.html">visualisation package</a></li>
 </ul>
 
         </div>
@@ -74,16 +75,11 @@
              
   <h1>Source code for analysis.hit_counter</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">hit_counter.py</span>
-
 <span class="sd">Defines the HitCounter class which inherits from the Simulation class.</span>
-<span class="sd">Count the number of collisions between the gamma pulse and Xray bath by </span>
+<span class="sd">Counts the number of collisions between the gamma pulse and Xray bath by </span>
 <span class="sd">calculating future positions.</span>
 <span class="sd">Predicts number of positron pairs to be generated and received by</span>
 <span class="sd">the CsI detector.</span>
-
-<span class="sd">Timothy Chew</span>
-<span class="sd">1/8/25</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">pickle</span>
@@ -103,21 +99,12 @@
 <div class="viewcode-block" id="HitCounter">
 <a class="viewcode-back" href="../../analysis.html#analysis.hit_counter.HitCounter">[docs]</a>
 <span class="k">class</span> <span class="nc">HitCounter</span><span class="p">(</span><span class="n">Simulation</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Counts the number of collisions between the X-ray bath</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Counts the number of collisions between the X-ray bath</span>
 <span class="sd">    and Gamma pulse</span>
 
 <span class="sd">    Attributes:</span>
 <span class="sd">        n_samples_azimuthal (float): number of azimuthal samples to take for width of Xray pulse</span>
-<span class="sd">    </span>
-<span class="sd">    Methods:</span>
-<span class="sd">        count_hits: Counts the total number of collisions for a given pulse timing</span>
-<span class="sd">        calc_effective_height: Solves a geometric problem to find the new effective height of the </span>
-<span class="sd">                                gamma pulse when looking at an azimuthal plane of the x-ray bath.</span>
-<span class="sd">        calc_effective_d: Solves geometric problem to calculate effective off-axis</span>
-<span class="sd">                        displacement when looking at another azimuthal plane paramaterised by phi</span>
-<span class="sd">        est_npairs: Estimates the number of positron pairs produced and lands on the CsI detector</span>
-<span class="sd">        plot_hit_count: Plots the hit count and estimated number of pairs for a range of delays</span>
-<span class="sd">                        (with option to save data)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
@@ -139,8 +126,9 @@
 <span class="sd">            delay (float): time delay of gamma pulse to x-ray ignition (ps)</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            tuple (float, numpy.ndarray): number of collisions, </span>
-<span class="sd">                                        array of coordinates for each hit (x, y, angles)</span>
+<span class="sd">            tuple[float, numpy.ndarray]: A tuple containing:</span>
+<span class="sd">                - float: number of collisions, </span>
+<span class="sd">                - numpy.ndarray: array of coordinates for each hit (x, y, angles)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1">#delay to distance in mm</span>
@@ -259,8 +247,9 @@
 <span class="sd">            samples (int): number of Xray coordinates generated</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list[float,float]: array containing:</span>
-<span class="sd">                [estimated number of positrons, uncertainty]</span>
+<span class="sd">            list[float,float]: list containing:</span>
+<span class="sd">                - float: estimated number of positrons</span>
+<span class="sd">                - float: uncertainty</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># calculate cross section of each hit and sum #####################################</span>
@@ -317,15 +306,15 @@
 <span class="sd">            max_delay (float): Maximum pulse delay (ps)</span>
 <span class="sd">            samples (int, optional): Number of delays to check.</span>
 <span class="sd">            Defaults to 50.</span>
-<span class="sd">            **kwargs: optional</span>
+<span class="sd">            **kwargs: optional keyword arguments.</span>
 <span class="sd">                show_exp_value (bool, optional): Whether to plot the delay used in 2018.</span>
-<span class="sd">                                                Defaults to False.</span>
+<span class="sd">                Defaults to False.</span>
 <span class="sd">                save_data (bool, optional): Whether to save the plot data to a csv.</span>
-<span class="sd">                                            Defaults to False</span>
+<span class="sd">                Defaults to False.</span>
 <span class="sd">                plot_wait (float, optional): Time to leave plot open.</span>
-<span class="sd">                                            Defaults to None</span>
+<span class="sd">                Defaults to None.</span>
 <span class="sd">                save_params (bool, optional): Whether to save parameters for Xray and Gamma objects.</span>
-<span class="sd">                                            Defaults to False</span>
+<span class="sd">                Defaults to False.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># kwaargs ##########################################################</span>
         <span class="n">show_exp_value</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;show_exp_value&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
@@ -401,7 +390,7 @@
             <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">get_params</span><span class="p">()])</span>
             <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">save_params_filename</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-        
+
         <span class="k">if</span> <span class="n">plot_wait</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
 

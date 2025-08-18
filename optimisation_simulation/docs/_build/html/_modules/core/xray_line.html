@@ -40,12 +40,13 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../core.html">core package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualisation.html">visualisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory.html">theory package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../analysis.html">analysis package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../data_analysis.html">data_analysis package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../data_collection.html">data_collection package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples.html">examples package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../theory.html">theory package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../visualisation.html">visualisation package</a></li>
 </ul>
 
         </div>
@@ -74,14 +75,9 @@
              
   <h1>Source code for core.xray_line</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">xrayline.py</span>
-
 <span class="sd">Defines the XrayLine class which inherits from the XrayLambertian class.</span>
 <span class="sd">Represents a line source&#39;s Xray emissions, done so by placing multiple</span>
 <span class="sd">point-Lambertian sources along its length.</span>
-
-<span class="sd">Timothy Chew</span>
-<span class="sd">1/8/25</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -91,9 +87,8 @@
 <a class="viewcode-back" href="../../core.html#core.xray_line.XrayLine">[docs]</a>
 <span class="k">class</span> <span class="nc">XrayLine</span><span class="p">(</span><span class="n">XrayLambertian</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates a line source by setting up an</span>
-<span class="sd">    array of lambertian point sources</span>
+<span class="sd">    array of lambertian point sources. This class extends &#39;XrayLambertian&#39;.</span>
 
-<span class="sd">    This class extends &#39;XrayLambertian&#39;</span>
 <span class="sd">    Attributes:</span>
 <span class="sd">        line_length (float): Total physical length of the X-ray line source (mm).</span>
 <span class="sd">        n_line_samples (int): Number of discrete Lambertian emitters along the line.</span>
@@ -101,11 +96,13 @@
 <span class="sd">        n_samples_total (int): Total number of Xray photons generated (overridden).</span>
 <span class="sd">    </span>
 <span class="sd">    Overridden Methods:</span>
-<span class="sd">        - resample(azimuthal_angle: float): Resamples Xrays based on azimuthal orientation.</span>
-<span class="sd">        - get_n_samples_total() -&gt; int: Returns total number of Xrays photons generated.</span>
+<span class="sd">        resample(azimuthal_angle: float):</span>
+<span class="sd">            Resamples Xrays based on azimuthal orientation.</span>
+<span class="sd">        get_n_samples_total() -&gt; int:</span>
+<span class="sd">            Returns total number of Xrays photons generated.</span>
 
 <span class="sd">    New Methods:</span>
-<span class="sd">        - gen_xray_seed_line(azimuthal_angle: float) -&gt; list, int:</span>
+<span class="sd">        gen_xray_seed_line(azimuthal_angle: float) -&gt; tuple[list, int(conditional)]:</span>
 <span class="sd">            Initializes the Xray coordinates by seeding each point source along the line.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
@@ -125,11 +122,13 @@
 
 <div class="viewcode-block" id="XrayLine.gen_xray_seed_line">
 <a class="viewcode-back" href="../../core.html#core.xray_line.XrayLine.gen_xray_seed_line">[docs]</a>
-    <span class="k">def</span> <span class="nf">gen_xray_seed_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">get_total_samples</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">gen_xray_seed_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">get_total_samples</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Generates xray coordinates for a line source</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list: array of line source generated xray coordinates</span>
+<span class="sd">            tuple[list, int]: A tuple containing</span>
+<span class="sd">                - list: array of line-source-generated xray coordinates</span>
+<span class="sd">                - int(conditional): the total number of xray points</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">coords</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">n_samples_total</span> <span class="o">=</span> <span class="mi">0</span>

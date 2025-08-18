@@ -1,8 +1,13 @@
 core package
 =====================================
 
-Submodules
-----------
+Module contents
+---------------
+
+.. automodule:: core
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 core.gamma module
 ------------------------------------------
@@ -64,14 +69,6 @@ core.xray\_line\_twave module
 ------------------------------------------------------
 
 .. automodule:: core.xray_line_twave
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: core
    :members:
    :undoc-members:
    :show-inheritance:

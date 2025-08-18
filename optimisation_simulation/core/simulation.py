@@ -1,15 +1,10 @@
 """
-simulation.py
-
 Defines the class simulation, which simulates the interaction
 between the Xray bath and Gamma pulse using a Monte Carlo method.
 Performs basic simulation tasks such as predicting hits,
 detecting hits, and plotting.
 Designed as a subclass to more in-depth simulation tasks
 such as visualisation and estimating positron pairs produced
-
-Timothy Chew
-1/8/25
 """
 import numpy as np
 
@@ -23,11 +18,6 @@ class Simulation:
     Attributes:
         xray_bath (Xray): Xray object instance
         gamma_pulse (Gamma): Gamma object instance
-    
-    Methods:
-        get_overlap_coords(coords: list, beam_bounds: list) -> int, numpy.ndarray:
-            finds coordinates of Xrays inside the gamma pulse beam bounds
-        find_hits(self, eff_height = None, eff_d = None) -> int, list[list[float]]
     """
     def __init__(
             self,
@@ -70,9 +60,9 @@ class Simulation:
             eff_d (float, optional): effective off-axis displacement. Defaults to None
         
         Returns:
-            tuple (float, list[list[float]]): Tuple containing:
-                - number of ovelaps
-                - coordinates of overlaps in the form [time, x, y, angle]
+            tuple[float, list[list[float]]]: Tuple containing:
+                - float: number of ovelaps
+                - list[list[float]]: list of coordinates of overlaps in the form [time, x, y, angle]
         """
         seed_coords = self.get_xray_bath().get_xray_coords()
         bounds = self.get_gamma_pulse().get_bounds()

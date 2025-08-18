@@ -1,9 +1,6 @@
 examples package
 =========================================
 
-Submodules
-----------
-
 examples.example\_data\_collection module
 ------------------------------------------------------------------
 

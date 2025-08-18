@@ -11,7 +11,17 @@ from theory.energy_spectra.gamma_spectra import GammaSpectra  #pylint: disable=i
 from theory.energy_spectra.xray_spectra_Ge import XraySpectraGe  #pylint: disable=import-error
 
 class HitCounterGe(HitCounter):
-    def est_npairs(self, angles, samples):
+    """
+    Counts the number of collisions between the X-ray bath
+    and Gamma pulse for a line source using an extended
+    Xray spectrum for a Germanium source.
+
+    Overriden methods:
+        est_npairs(angles: list, samples: int) -> list:
+            Estimates the number of positron pairs produced and lands on the CsI
+            detector using the new spectrum
+    """
+    def est_npairs(self, angles: list, samples: int) -> list:
         """Estimates the number of positron pairs produced
         and lands on the CsI detector
 
@@ -20,8 +30,9 @@ class HitCounterGe(HitCounter):
             samples (int): number of Xray coordinates generated
 
         Returns:
-            list[float,float]: array containing:
-                [estimated number of positrons, uncertainty]
+            list[float,float]: list containing:
+                - float: estimated number of positrons
+                - float: uncertainty
         """
 
         # calculate cross section of each hit and sum #####################################

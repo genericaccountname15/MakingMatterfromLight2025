@@ -40,12 +40,13 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../core.html">core package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualisation.html">visualisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory.html">theory package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../analysis.html">analysis package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../data_analysis.html">data_analysis package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../data_collection.html">data_collection package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples.html">examples package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../theory.html">theory package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../visualisation.html">visualisation package</a></li>
 </ul>
 
         </div>
@@ -91,7 +92,7 @@
 <span class="k">def</span> <span class="nf">plot_gamma_spectra</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Plots the gamma energy spectra</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">gamma_data</span> <span class="o">=</span> <span class="n">GammaSpectra</span><span class="p">(</span><span class="s1">&#39;simulation_restructure/theory/energy_spectra/data/GammaSpectra/Fig4b_GammaSpecLineouts.mat&#39;</span><span class="p">)</span>
+    <span class="n">gamma_data</span> <span class="o">=</span> <span class="n">GammaSpectra</span><span class="p">(</span><span class="s1">&#39;optimisation_simulation/theory/energy_spectra/data/GammaSpectra/Fig4b_GammaSpecLineouts.mat&#39;</span><span class="p">)</span>
     <span class="n">gamma_data</span><span class="o">.</span><span class="n">replicate_plot</span><span class="p">()</span></div>
 
 
@@ -100,7 +101,7 @@
 <span class="k">def</span> <span class="nf">plot_xray_spectra</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Plots the Xray energy spectra</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">xray_data</span> <span class="o">=</span> <span class="n">XraySpectra</span><span class="p">(</span><span class="s1">&#39;simulation_restructure/theory/energy_spectra/data/XrayBath/XraySpectra/&#39;</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">xray_data</span> <span class="o">=</span> <span class="n">XraySpectra</span><span class="p">(</span><span class="s1">&#39;optimisation_simulation/theory/energy_spectra/data/XrayBath/XraySpectra/&#39;</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
     <span class="n">xray_data</span><span class="o">.</span><span class="n">replicate_plot</span><span class="p">()</span></div>
 
 
@@ -109,7 +110,7 @@
 <span class="k">def</span> <span class="nf">plot_xray_pdf</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Plots the Xray energy probability density function</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">xray_data</span> <span class="o">=</span> <span class="n">XraySpectra</span><span class="p">(</span><span class="s1">&#39;simulation_restructure/theory/energy_spectra/data/XrayBath/XraySpectra/&#39;</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">xray_data</span> <span class="o">=</span> <span class="n">XraySpectra</span><span class="p">(</span><span class="s1">&#39;optimisation_simulation/theory/energy_spectra/data/XrayBath/XraySpectra/&#39;</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
     <span class="n">sampling</span> <span class="o">=</span> <span class="n">xray_data</span><span class="o">.</span><span class="n">sample_pdf</span><span class="p">(</span><span class="n">min_energy</span><span class="o">=</span><span class="mi">1300</span><span class="p">,</span> <span class="n">max_energy</span><span class="o">=</span><span class="mi">1500</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Sampled x-ray distribution&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">)</span>

@@ -18,8 +18,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="visualisation package" href="visualisation.html" />
-    <link rel="prev" title="examples package" href="examples.html" /> 
+    <link rel="next" title="analysis package" href="analysis.html" />
+    <link rel="prev" title="visualisation package" href="visualisation.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,12 +43,13 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="analysis.html">analysis package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data_analysis.html">data_analysis package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data_collection.html">data_collection package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">examples package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core.html">core package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualisation.html">visualisation package</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">theory package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-theory">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Theory Package</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#module-theory.cross_section">theory.cross_section module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#theory.cross_section.c_bw"><code class="docutils literal notranslate"><span class="pre">c_bw()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#theory.cross_section.dc_bw"><code class="docutils literal notranslate"><span class="pre">dc_bw()</span></code></a></li>
@@ -56,10 +57,88 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-theory.values">theory.values module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-theory">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-theory.energy_spectra">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#energy-spectra-subpackage">Energy Spectra Subpackage</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="visualisation.html">visualisation package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-theory.energy_spectra.gamma_spectra">theory.energy_spectra.gamma_spectra module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#theory.energy_spectra.gamma_spectra.GammaSpectra"><code class="docutils literal notranslate"><span class="pre">GammaSpectra</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.matfile"><code class="docutils literal notranslate"><span class="pre">GammaSpectra.matfile</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.gamma_energy"><code class="docutils literal notranslate"><span class="pre">GammaSpectra.gamma_energy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.sim_nph_a_mean"><code class="docutils literal notranslate"><span class="pre">GammaSpectra.sim_nph_a_mean</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.sim_nph_a_sigma"><code class="docutils literal notranslate"><span class="pre">GammaSpectra.sim_nph_a_sigma</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.sim_nph_b_mean"><code class="docutils literal notranslate"><span class="pre">GammaSpectra.sim_nph_b_mean</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.sim_nph_b_sigma"><code class="docutils literal notranslate"><span class="pre">GammaSpectra.sim_nph_b_sigma</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.exp_nph_a_mean"><code class="docutils literal notranslate"><span class="pre">GammaSpectra.exp_nph_a_mean</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.exp_nph_a_sigma"><code class="docutils literal notranslate"><span class="pre">GammaSpectra.exp_nph_a_sigma</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.exp_nph_b_mean"><code class="docutils literal notranslate"><span class="pre">GammaSpectra.exp_nph_b_mean</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.exp_nph_b_sigma"><code class="docutils literal notranslate"><span class="pre">GammaSpectra.exp_nph_b_sigma</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.get_exp_nph_a_mean"><code class="docutils literal notranslate"><span class="pre">GammaSpectra.get_exp_nph_a_mean()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.get_exp_nph_a_sigma"><code class="docutils literal notranslate"><span class="pre">GammaSpectra.get_exp_nph_a_sigma()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.get_exp_nph_b_mean"><code class="docutils literal notranslate"><span class="pre">GammaSpectra.get_exp_nph_b_mean()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.get_exp_nph_b_sigma"><code class="docutils literal notranslate"><span class="pre">GammaSpectra.get_exp_nph_b_sigma()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.get_gamma_energy"><code class="docutils literal notranslate"><span class="pre">GammaSpectra.get_gamma_energy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.get_matfile"><code class="docutils literal notranslate"><span class="pre">GammaSpectra.get_matfile()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.get_sim_nph_a_mean"><code class="docutils literal notranslate"><span class="pre">GammaSpectra.get_sim_nph_a_mean()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.get_sim_nph_a_sigma"><code class="docutils literal notranslate"><span class="pre">GammaSpectra.get_sim_nph_a_sigma()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.get_sim_nph_b_mean"><code class="docutils literal notranslate"><span class="pre">GammaSpectra.get_sim_nph_b_mean()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.get_sim_nph_b_sigma"><code class="docutils literal notranslate"><span class="pre">GammaSpectra.get_sim_nph_b_sigma()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.replicate_plot"><code class="docutils literal notranslate"><span class="pre">GammaSpectra.replicate_plot()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.sample_pdf"><code class="docutils literal notranslate"><span class="pre">GammaSpectra.sample_pdf()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-theory.energy_spectra.xray_spectra">theory.energy_spectra.xray_spectra module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#theory.energy_spectra.xray_spectra.XraySpectra"><code class="docutils literal notranslate"><span class="pre">XraySpectra</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra.XraySpectra.file_list"><code class="docutils literal notranslate"><span class="pre">XraySpectra.file_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra.XraySpectra.resolution"><code class="docutils literal notranslate"><span class="pre">XraySpectra.resolution</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra.XraySpectra.energy"><code class="docutils literal notranslate"><span class="pre">XraySpectra.energy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra.XraySpectra.nph"><code class="docutils literal notranslate"><span class="pre">XraySpectra.nph</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra.XraySpectra.nph_err"><code class="docutils literal notranslate"><span class="pre">XraySpectra.nph_err</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra.XraySpectra.avg_energy"><code class="docutils literal notranslate"><span class="pre">XraySpectra.avg_energy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra.XraySpectra.avg_nph"><code class="docutils literal notranslate"><span class="pre">XraySpectra.avg_nph</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra.XraySpectra.avg_nph_err"><code class="docutils literal notranslate"><span class="pre">XraySpectra.avg_nph_err</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra.XraySpectra.bin_data"><code class="docutils literal notranslate"><span class="pre">XraySpectra.bin_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra.XraySpectra.filter_energies"><code class="docutils literal notranslate"><span class="pre">XraySpectra.filter_energies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra.XraySpectra.get_avg_energy"><code class="docutils literal notranslate"><span class="pre">XraySpectra.get_avg_energy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra.XraySpectra.get_avg_nph"><code class="docutils literal notranslate"><span class="pre">XraySpectra.get_avg_nph()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra.XraySpectra.get_avg_nph_err"><code class="docutils literal notranslate"><span class="pre">XraySpectra.get_avg_nph_err()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra.XraySpectra.get_data"><code class="docutils literal notranslate"><span class="pre">XraySpectra.get_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra.XraySpectra.get_energy"><code class="docutils literal notranslate"><span class="pre">XraySpectra.get_energy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra.XraySpectra.get_file_dir"><code class="docutils literal notranslate"><span class="pre">XraySpectra.get_file_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra.XraySpectra.get_file_list"><code class="docutils literal notranslate"><span class="pre">XraySpectra.get_file_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra.XraySpectra.get_nph"><code class="docutils literal notranslate"><span class="pre">XraySpectra.get_nph()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra.XraySpectra.get_nph_err"><code class="docutils literal notranslate"><span class="pre">XraySpectra.get_nph_err()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra.XraySpectra.get_resolution"><code class="docutils literal notranslate"><span class="pre">XraySpectra.get_resolution()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra.XraySpectra.replicate_plot"><code class="docutils literal notranslate"><span class="pre">XraySpectra.replicate_plot()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra.XraySpectra.sample_pdf"><code class="docutils literal notranslate"><span class="pre">XraySpectra.sample_pdf()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-theory.energy_spectra.xray_spectra_Ge">theory.energy_spectra.xray_spectra_Ge module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#theory.energy_spectra.xray_spectra_Ge.XraySpectraGe"><code class="docutils literal notranslate"><span class="pre">XraySpectraGe</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.filename"><code class="docutils literal notranslate"><span class="pre">XraySpectraGe.filename</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.energy"><code class="docutils literal notranslate"><span class="pre">XraySpectraGe.energy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.flux"><code class="docutils literal notranslate"><span class="pre">XraySpectraGe.flux</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.get_data"><code class="docutils literal notranslate"><span class="pre">XraySpectraGe.get_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.get_energy"><code class="docutils literal notranslate"><span class="pre">XraySpectraGe.get_energy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.get_filename"><code class="docutils literal notranslate"><span class="pre">XraySpectraGe.get_filename()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.get_flux"><code class="docutils literal notranslate"><span class="pre">XraySpectraGe.get_flux()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.normalise_nph"><code class="docutils literal notranslate"><span class="pre">XraySpectraGe.normalise_nph()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.replicate_plot"><code class="docutils literal notranslate"><span class="pre">XraySpectraGe.replicate_plot()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.sample_pdf"><code class="docutils literal notranslate"><span class="pre">XraySpectraGe.sample_pdf()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">analysis package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_analysis.html">data_analysis package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_collection.html">data_collection package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">examples package</a></li>
 </ul>
 
         </div>
@@ -88,26 +167,82 @@
              
   <section id="theory-package">
 <h1>theory package<a class="headerlink" href="#theory-package" title="Link to this heading"></a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+<section id="module-theory">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-theory" title="Link to this heading"></a></h2>
+<section id="id1">
+<h3>Theory Package<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<p>This package contains the values of the 2018 experiment, measurements
+of the setup, energy spectra of the Xray and Gamma pulses, and the Breit-Wheeler
+cross-section formula as a Python function.</p>
+<dl class="simple">
+<dt>Modules:</dt><dd><ul class="simple">
+<li><p>cross_section: Breit-Wheeler cross section function</p></li>
+<li><p>values: values from the 2018 experiment</p></li>
+<li><p>energy_spectra: Xray and Gamma energy spectra and datasets</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">theory.cross_section</span> <span class="kn">import</span> <span class="n">c_bw</span><span class="p">,</span> <span class="n">dc_bw</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># setup figure</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">figaspect</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax1</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="n">elev</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">azim</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">roll</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Differential Breit-Wheeler scattering cross-section&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$</span><span class="se">\t</span><span class="s1">heta$(rad)&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$\sqrt</span><span class="si">{s}</span><span class="s1">$(MeV)&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax1</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;$d\sigma_{\gamma\gamma}/d\Omega (b)$&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Total Breit-Wheeler scattering cross-section&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$\sqrt</span><span class="si">{s}</span><span class="s1">$(MeV)&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$\sigma_{\gamma\gamma}(b)$&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">1e-1</span><span class="p">,</span> <span class="mf">1e3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># generate values</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root_s_differential</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">theta</span><span class="p">,</span> <span class="n">root_s_differential</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">root_s_differential</span><span class="p">)</span> <span class="c1">#for array dimensions</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># differential cross section</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">diff_cross_sec</span> <span class="o">=</span> <span class="n">dc_bw</span><span class="p">(</span><span class="n">root_s_differential</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># total cross section</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cross_sec</span> <span class="o">=</span> <span class="n">c_bw</span><span class="p">(</span><span class="n">root_s</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># plot values</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax1</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">root_s_differential</span><span class="p">,</span> <span class="n">diff_cross_sec</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;gnuplot&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax2</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">root_s</span><span class="p">,</span> <span class="n">cross_sec</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<a class="reference internal image-reference" href="_images/cross_section_example.png"><img alt="Example plot of the Breit-Wheeler cross section formulae" src="_images/cross_section_example.png" style="width: 600px;" /></a>
+</section>
 </section>
 <section id="module-theory.cross_section">
 <span id="theory-cross-section-module"></span><h2>theory.cross_section module<a class="headerlink" href="#module-theory.cross_section" title="Link to this heading"></a></h2>
-<p>cross_section.py</p>
 <p>Formula for the Breit Wheeler cross-section taken from
 BKettle et al. A laser-plasma platform for photon-photon physics. 2018.
 New J. Phys 23 115006 Section 8</p>
-<p>Plot_formulae function is to compare with the plots generated by Cary Colgan in his PhD thesis.</p>
-<p>Timothy Chew
-1/8/25</p>
+<p>Plot_formulae() is to compare with the plots generated by Cary Colgan in his PhD thesis.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="theory.cross_section.c_bw">
 <span class="sig-prename descclassname"><span class="pre">theory.cross_section.</span></span><span class="sig-name descname"><span class="pre">c_bw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/theory/cross_section.html#c_bw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.cross_section.c_bw" title="Link to this definition"></a></dt>
 <dd><p>Breit Wheeler total cross section</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>root_s (np.ndarray[float]): centre of mass energy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>root_s</strong> (<em>np.ndarray</em><em>[</em><em>float</em><em>]</em>) – centre of mass energy</p>
 </dd>
-<dt>Returns:</dt><dd><p>np.ndarray[float]: Breit wheeler total cross section</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Breit wheeler total cross section</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray[float]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -115,15 +250,19 @@ New J. Phys 23 115006 Section 8</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="theory.cross_section.dc_bw">
 <span class="sig-prename descclassname"><span class="pre">theory.cross_section.</span></span><span class="sig-name descname"><span class="pre">dc_bw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/theory/cross_section.html#dc_bw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.cross_section.dc_bw" title="Link to this definition"></a></dt>
-<dd><p>Breit Wheeler differential cross section
-We get invalid values into the square root sometimes
-Supposed to set the value of d_cs to 0
-But lazy to handle the meshgrid array</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>root_s (np.ndarray[float]): centre of mass energy
-theta (np.ndarray[float]): Collision and scattering angle</p>
+<dd><p>Breit Wheeler differential cross section</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>root_s</strong> (<em>np.ndarray</em><em>[</em><em>float</em><em>]</em>) – centre of mass energy</p></li>
+<li><p><strong>theta</strong> (<em>np.ndarray</em><em>[</em><em>float</em><em>]</em>) – Collision and scattering angle</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>np.ndarray[float]: differential Briet Wheeler cross section (barns)</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>differential Briet Wheeler cross section (barns)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray[float]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -137,15 +276,838 @@ theta (np.ndarray[float]): Collision and scattering angle</p>
 </section>
 <section id="module-theory.values">
 <span id="theory-values-module"></span><h2>theory.values module<a class="headerlink" href="#module-theory.values" title="Link to this heading"></a></h2>
-<p>values.py</p>
-<p>Stores values of common scientific constants.
+<p>Stores values of common scientific constants in python variables.
 Stores values of measurements, estimations, and experimental setup
 parameters taken from the 2018 experiment.</p>
-<p>Timothy Chew
-1/8/25</p>
+<dl class="simple">
+<dt>Physical constants:</dt><dd><ul class="simple">
+<li><p>e: electronic charge (C)</p></li>
+<li><p>c: speed of light in vacuum (m/s)</p></li>
+<li><p>m: electron mass (kg)</p></li>
+<li><p>re: classical electron radius</p></li>
+</ul>
+</dd>
+<dt>Simulation parameters from 2018:</dt><dd><ul class="simple">
+<li><p>gamma_length: length of gamma pulse (mm)</p></li>
+<li><p>gamma_length_err: error in length of gamma pulse (mm)</p></li>
+<li><p>gamma_radius: radius of gamma pulse (mm)</p></li>
+<li><p>off_axial_dist: perpendicular distance from gamma pulse to Xray source when directly overhead (mm)</p></li>
+<li><p>source_angle: angle of the Xray source (degrees)</p></li>
+<li><p>Xray_FWHM: Full Width Half Maximum of Xray bath (mm)</p></li>
+<li><p>delay_experiment: Pulse delay used (ps)</p></li>
+<li><p>xray_number_density: Xray photon number density measured at 1mm from the target (m^-3)</p></li>
+<li><p>xray_number_density_err: error in the Xray photon number density</p></li>
+<li><p>gamma_photon_number: number of gamma photons</p></li>
+<li><p>gamma_photon_number_err: error in the number of gamma photons</p></li>
+<li><p>AMS_transmission: transmission efficiency of the AMS system</p></li>
+<li><p>AMS_transmission_err: error in the AMS system transmission efficiency</p></li>
+<li><p>xray_spectra_min: minimum Xray spectral value as measured by the Xray CCD (eV)</p></li>
+<li><p>xray_spectra_max: maximum Xray spectral value as measured by the Xray CCD (ev)</p></li>
+</ul>
+</dd>
+<dt>Outdated variables:</dt><dd><ul class="simple">
+<li><p>gamma_energy: Constant gamma energy required for pair creation (MeV)</p></li>
+<li><p>xray_energy: Energy of a peak in the Xray spectral distribution (MeV)</p></li>
+</ul>
+</dd>
+</dl>
 </section>
-<section id="module-theory">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-theory" title="Link to this heading"></a></h2>
+<section id="module-theory.energy_spectra">
+<span id="submodules"></span><h2>Submodules<a class="headerlink" href="#module-theory.energy_spectra" title="Link to this heading"></a></h2>
+<section id="energy-spectra-subpackage">
+<h3>Energy Spectra Subpackage<a class="headerlink" href="#energy-spectra-subpackage" title="Link to this heading"></a></h3>
+<p>This package contains the energy spectra for the Xray and Gamma photon distribution.
+Contains the datafiles and methods to plot and process data.
+Includes methods to sample a probability distribution from those energy spectra.</p>
+<dl class="simple">
+<dt>Modules:</dt><dd><ul class="simple">
+<li><p>gamma_spectra: gamma spectra after the collimator from the 2018 experiment</p></li>
+<li><p>xray_spectra: measured Xray spectra with aluminium filter</p></li>
+<li><p>xray_spectra: measured Xray spectra without aluminium filter, so uncallibrated</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">theory.energy_spectra.gamma_spectra</span> <span class="kn">import</span> <span class="n">GammaSpectra</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">theory.energy_spectra.xray_spectra</span> <span class="kn">import</span> <span class="n">XraySpectra</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gamma_data</span> <span class="o">=</span> <span class="n">GammaSpectra</span><span class="p">(</span><span class="s1">&#39;optimisation_simulation/theory/energy_spectra/data/GammaSpectra/Fig4b_GammaSpecLineouts.mat&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xray_data</span> <span class="o">=</span> <span class="n">XraySpectra</span><span class="p">(</span><span class="s1">&#39;optimisation_simulation/theory/energy_spectra/data/XrayBath/XraySpectra/&#39;</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gamma_data</span><span class="o">.</span><span class="n">replicate_plot</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xray_data</span><span class="o">.</span><span class="n">replicate_plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<a class="reference internal image-reference" href="_images/Gamma_spectrum_example.png"><img alt="Example plot of gamma spectrum" src="_images/Gamma_spectrum_example.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/Xray_spectrum_example.png"><img alt="Example plot of the Xray spectrum" src="_images/Xray_spectrum_example.png" style="width: 600px;" /></a>
+</section>
+</section>
+<section id="module-theory.energy_spectra.gamma_spectra">
+<span id="theory-energy-spectra-gamma-spectra-module"></span><h2>theory.energy_spectra.gamma_spectra module<a class="headerlink" href="#module-theory.energy_spectra.gamma_spectra" title="Link to this heading"></a></h2>
+<p>Defines the GammaSpectra class, which reads the gamma pulse’s energy spectral data matlab file,
+with methods to plot and sample a probability density function based on the data.
+The data was taken from the 2021 paper’s zenodo records repository.
+The data was used to plot figures 4b and 5a in the 2021 paper.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="theory.energy_spectra.gamma_spectra.GammaSpectra">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">theory.energy_spectra.gamma_spectra.</span></span><span class="sig-name descname"><span class="pre">GammaSpectra</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mat_fname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/theory/energy_spectra/gamma_spectra.html#GammaSpectra"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.gamma_spectra.GammaSpectra" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Gamma spectra data set</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="theory.energy_spectra.gamma_spectra.GammaSpectra.matfile">
+<span class="sig-name descname"><span class="pre">matfile</span></span><a class="headerlink" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.matfile" title="Link to this definition"></a></dt>
+<dd><p>loaded matlab file containing dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="theory.energy_spectra.gamma_spectra.GammaSpectra.gamma_energy">
+<span class="sig-name descname"><span class="pre">gamma_energy</span></span><a class="headerlink" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.gamma_energy" title="Link to this definition"></a></dt>
+<dd><p>energy of gamma photon (MeV)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="theory.energy_spectra.gamma_spectra.GammaSpectra.sim_nph_a_mean">
+<span class="sig-name descname"><span class="pre">sim_nph_a_mean</span></span><a class="headerlink" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.sim_nph_a_mean" title="Link to this definition"></a></dt>
+<dd><p>mean simulated optimal beam performance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="theory.energy_spectra.gamma_spectra.GammaSpectra.sim_nph_a_sigma">
+<span class="sig-name descname"><span class="pre">sim_nph_a_sigma</span></span><a class="headerlink" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.sim_nph_a_sigma" title="Link to this definition"></a></dt>
+<dd><p>error in simulated optimal beam performance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="theory.energy_spectra.gamma_spectra.GammaSpectra.sim_nph_b_mean">
+<span class="sig-name descname"><span class="pre">sim_nph_b_mean</span></span><a class="headerlink" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.sim_nph_b_mean" title="Link to this definition"></a></dt>
+<dd><p>mean simulated commissioned beam performance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="theory.energy_spectra.gamma_spectra.GammaSpectra.sim_nph_b_sigma">
+<span class="sig-name descname"><span class="pre">sim_nph_b_sigma</span></span><a class="headerlink" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.sim_nph_b_sigma" title="Link to this definition"></a></dt>
+<dd><p>error in simulated commissioned beam performance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="theory.energy_spectra.gamma_spectra.GammaSpectra.exp_nph_a_mean">
+<span class="sig-name descname"><span class="pre">exp_nph_a_mean</span></span><a class="headerlink" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.exp_nph_a_mean" title="Link to this definition"></a></dt>
+<dd><p>mean experimental optimal beam performance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="theory.energy_spectra.gamma_spectra.GammaSpectra.exp_nph_a_sigma">
+<span class="sig-name descname"><span class="pre">exp_nph_a_sigma</span></span><a class="headerlink" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.exp_nph_a_sigma" title="Link to this definition"></a></dt>
+<dd><p>error in experimental optimal beam performance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="theory.energy_spectra.gamma_spectra.GammaSpectra.exp_nph_b_mean">
+<span class="sig-name descname"><span class="pre">exp_nph_b_mean</span></span><a class="headerlink" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.exp_nph_b_mean" title="Link to this definition"></a></dt>
+<dd><p>mean experimental commissioned beam performance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="theory.energy_spectra.gamma_spectra.GammaSpectra.exp_nph_b_sigma">
+<span class="sig-name descname"><span class="pre">exp_nph_b_sigma</span></span><a class="headerlink" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.exp_nph_b_sigma" title="Link to this definition"></a></dt>
+<dd><p>error in experimental commissioned beam performance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.gamma_spectra.GammaSpectra.get_exp_nph_a_mean">
+<span class="sig-name descname"><span class="pre">get_exp_nph_a_mean</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/gamma_spectra.html#GammaSpectra.get_exp_nph_a_mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.get_exp_nph_a_mean" title="Link to this definition"></a></dt>
+<dd><p>Access method for exp_nph_a_mean</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>mean number of photons for experimental optimal beam performance</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.gamma_spectra.GammaSpectra.get_exp_nph_a_sigma">
+<span class="sig-name descname"><span class="pre">get_exp_nph_a_sigma</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/gamma_spectra.html#GammaSpectra.get_exp_nph_a_sigma"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.get_exp_nph_a_sigma" title="Link to this definition"></a></dt>
+<dd><p>Access method for exp_nph_a_sigma</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>standard deviation in the number of photons for experimental optimal beam performance</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.gamma_spectra.GammaSpectra.get_exp_nph_b_mean">
+<span class="sig-name descname"><span class="pre">get_exp_nph_b_mean</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/gamma_spectra.html#GammaSpectra.get_exp_nph_b_mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.get_exp_nph_b_mean" title="Link to this definition"></a></dt>
+<dd><p>Access method for exp_nph_mean</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>mean number of photons for experimental commissioned beam performance</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.gamma_spectra.GammaSpectra.get_exp_nph_b_sigma">
+<span class="sig-name descname"><span class="pre">get_exp_nph_b_sigma</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/gamma_spectra.html#GammaSpectra.get_exp_nph_b_sigma"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.get_exp_nph_b_sigma" title="Link to this definition"></a></dt>
+<dd><p>Access method for exp_nph_b_sigma</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>standard deviation in the number of photons for experimental commissioned beam performance</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.gamma_spectra.GammaSpectra.get_gamma_energy">
+<span class="sig-name descname"><span class="pre">get_gamma_energy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/gamma_spectra.html#GammaSpectra.get_gamma_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.get_gamma_energy" title="Link to this definition"></a></dt>
+<dd><p>Access method for gamma_energy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>energy of the gamma photons (MeV)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.gamma_spectra.GammaSpectra.get_matfile">
+<span class="sig-name descname"><span class="pre">get_matfile</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/gamma_spectra.html#GammaSpectra.get_matfile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.get_matfile" title="Link to this definition"></a></dt>
+<dd><p>Access method for matfile</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>data from the gamma spectra which was stored in a matfile</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.gamma_spectra.GammaSpectra.get_sim_nph_a_mean">
+<span class="sig-name descname"><span class="pre">get_sim_nph_a_mean</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/gamma_spectra.html#GammaSpectra.get_sim_nph_a_mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.get_sim_nph_a_mean" title="Link to this definition"></a></dt>
+<dd><p>Access method for sim_nph_a_mean</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>mean number of photons for simulated optimal beam performance</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.gamma_spectra.GammaSpectra.get_sim_nph_a_sigma">
+<span class="sig-name descname"><span class="pre">get_sim_nph_a_sigma</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/gamma_spectra.html#GammaSpectra.get_sim_nph_a_sigma"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.get_sim_nph_a_sigma" title="Link to this definition"></a></dt>
+<dd><p>Access method for sim_nph_a_sigma</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>standard deviation in the number of photons for simulated optimal beam performance</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.gamma_spectra.GammaSpectra.get_sim_nph_b_mean">
+<span class="sig-name descname"><span class="pre">get_sim_nph_b_mean</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/gamma_spectra.html#GammaSpectra.get_sim_nph_b_mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.get_sim_nph_b_mean" title="Link to this definition"></a></dt>
+<dd><p>Access method for sim_nph_b_mean</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>mean number of photons for simulated commissioned beam performance</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.gamma_spectra.GammaSpectra.get_sim_nph_b_sigma">
+<span class="sig-name descname"><span class="pre">get_sim_nph_b_sigma</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/gamma_spectra.html#GammaSpectra.get_sim_nph_b_sigma"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.get_sim_nph_b_sigma" title="Link to this definition"></a></dt>
+<dd><p>Access method for sim_nph_b_sigma</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>standard deviation in the number of photons for simulated commissioned beam performance</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.gamma_spectra.GammaSpectra.replicate_plot">
+<span class="sig-name descname"><span class="pre">replicate_plot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/theory/energy_spectra/gamma_spectra.html#GammaSpectra.replicate_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.replicate_plot" title="Link to this definition"></a></dt>
+<dd><p>Replicates the plot displayed in the paper for sanity check</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.gamma_spectra.GammaSpectra.sample_pdf">
+<span class="sig-name descname"><span class="pre">sample_pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/gamma_spectra.html#GammaSpectra.sample_pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.gamma_spectra.GammaSpectra.sample_pdf" title="Link to this definition"></a></dt>
+<dd><p>Samples the gamma spectral distribution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n_samples</strong> (<em>int</em>) – number of samples to take from the distribution</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>sampled energies</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-theory.energy_spectra.xray_spectra">
+<span id="theory-energy-spectra-xray-spectra-module"></span><h2>theory.energy_spectra.xray_spectra module<a class="headerlink" href="#module-theory.energy_spectra.xray_spectra" title="Link to this heading"></a></h2>
+<p>Defines the XraySpectra class, which reads the Xray bath’s energy spectral data folder,
+with methods to plot and sample a probability density function based on the data.
+The data was taken from the 2018 paper’s zenodo records repository.
+The data was used to plot figures 4b and 5a in the 2018 paper.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra.XraySpectra">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">theory.energy_spectra.xray_spectra.</span></span><span class="sig-name descname"><span class="pre">XraySpectra</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/theory/energy_spectra/xray_spectra.html#XraySpectra"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.xray_spectra.XraySpectra" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Xray spectra data set
+.. attribute:: file_dir</p>
+<blockquote>
+<div><p>file directory address containing the pickled xray spectra files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra.XraySpectra.file_list">
+<span class="sig-name descname"><span class="pre">file_list</span></span><a class="headerlink" href="#theory.energy_spectra.xray_spectra.XraySpectra.file_list" title="Link to this definition"></a></dt>
+<dd><p>list of filenames within the directory specified.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra.XraySpectra.resolution">
+<span class="sig-name descname"><span class="pre">resolution</span></span><a class="headerlink" href="#theory.energy_spectra.xray_spectra.XraySpectra.resolution" title="Link to this definition"></a></dt>
+<dd><p>resolution of xray energy bins for averaging over data sets (eV)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra.XraySpectra.energy">
+<span class="sig-name descname"><span class="pre">energy</span></span><a class="headerlink" href="#theory.energy_spectra.xray_spectra.XraySpectra.energy" title="Link to this definition"></a></dt>
+<dd><p>all energy values from all datafiles</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra.XraySpectra.nph">
+<span class="sig-name descname"><span class="pre">nph</span></span><a class="headerlink" href="#theory.energy_spectra.xray_spectra.XraySpectra.nph" title="Link to this definition"></a></dt>
+<dd><p>all values of number of photons/eV/J/srad from all data files,
+corresponds to energy value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra.XraySpectra.nph_err">
+<span class="sig-name descname"><span class="pre">nph_err</span></span><a class="headerlink" href="#theory.energy_spectra.xray_spectra.XraySpectra.nph_err" title="Link to this definition"></a></dt>
+<dd><p>standard deviation of number of photons/eV/J/srad from all data files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra.XraySpectra.avg_energy">
+<span class="sig-name descname"><span class="pre">avg_energy</span></span><a class="headerlink" href="#theory.energy_spectra.xray_spectra.XraySpectra.avg_energy" title="Link to this definition"></a></dt>
+<dd><p>bin energies (centre of bin values)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra.XraySpectra.avg_nph">
+<span class="sig-name descname"><span class="pre">avg_nph</span></span><a class="headerlink" href="#theory.energy_spectra.xray_spectra.XraySpectra.avg_nph" title="Link to this definition"></a></dt>
+<dd><p>bin-average photon count</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra.XraySpectra.avg_nph_err">
+<span class="sig-name descname"><span class="pre">avg_nph_err</span></span><a class="headerlink" href="#theory.energy_spectra.xray_spectra.XraySpectra.avg_nph_err" title="Link to this definition"></a></dt>
+<dd><p>bin-summed photon count standard deviation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra.XraySpectra.bin_data">
+<span class="sig-name descname"><span class="pre">bin_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bin_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">err</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/xray_spectra.html#XraySpectra.bin_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.xray_spectra.XraySpectra.bin_data" title="Link to this definition"></a></dt>
+<dd><p>Bins arrays of x and y data points and averages
+y values in bins</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>list</em><em>[</em><em>float</em><em>]</em>) – list of x data points</p></li>
+<li><p><strong>y</strong> (<em>list</em><em>[</em><em>float</em><em>]</em>) – list of y data points</p></li>
+<li><p><strong>bin_width</strong> (<em>float</em><em>, </em><em>optional</em>) – resolution of bins. Defaults to 0.5.</p></li>
+<li><p><strong>err</strong> (<em>bool</em><em>, </em><em>optional</em>) – True if handling uncertainties. Defaults to False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Tuple containing:</dt><dd><ul class="simple">
+<li><p>list[float]: bin centre coordinates</p></li>
+<li><p>list[float]: height of bins</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[list[float], list[float]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra.XraySpectra.filter_energies">
+<span class="sig-name descname"><span class="pre">filter_energies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_energy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_energy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/theory/energy_spectra/xray_spectra.html#XraySpectra.filter_energies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.xray_spectra.XraySpectra.filter_energies" title="Link to this definition"></a></dt>
+<dd><p>Filters energies between the 1.3-1.5keV energy range</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>min_energy</strong> (<em>float</em>) – minimum energy (eV)</p></li>
+<li><p><strong>max_energy</strong> (<em>float</em>) – maximum energy (eV)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra.XraySpectra.get_avg_energy">
+<span class="sig-name descname"><span class="pre">get_avg_energy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/xray_spectra.html#XraySpectra.get_avg_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.xray_spectra.XraySpectra.get_avg_energy" title="Link to this definition"></a></dt>
+<dd><p>Access method for avg_energy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bin energies (centre of bin values)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra.XraySpectra.get_avg_nph">
+<span class="sig-name descname"><span class="pre">get_avg_nph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/xray_spectra.html#XraySpectra.get_avg_nph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.xray_spectra.XraySpectra.get_avg_nph" title="Link to this definition"></a></dt>
+<dd><p>Access method for avg_nph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bin-average photon count</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra.XraySpectra.get_avg_nph_err">
+<span class="sig-name descname"><span class="pre">get_avg_nph_err</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/xray_spectra.html#XraySpectra.get_avg_nph_err"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.xray_spectra.XraySpectra.get_avg_nph_err" title="Link to this definition"></a></dt>
+<dd><p>Access method for avg_nph_err</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bin-summed photon count standard deviation</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra.XraySpectra.get_data">
+<span class="sig-name descname"><span class="pre">get_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/xray_spectra.html#XraySpectra.get_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.xray_spectra.XraySpectra.get_data" title="Link to this definition"></a></dt>
+<dd><p>Obtains and combines data from all datasets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>Tuple containing:</dt><dd><ul class="simple">
+<li><p>list[float]: compiled energy data</p></li>
+<li><p>list[float]: compiled number of photons data</p></li>
+<li><p>list[float]: compiled number of photons error data</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple[list[float]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra.XraySpectra.get_energy">
+<span class="sig-name descname"><span class="pre">get_energy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/xray_spectra.html#XraySpectra.get_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.xray_spectra.XraySpectra.get_energy" title="Link to this definition"></a></dt>
+<dd><p>Access method for energy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>all energy values from all datafiles</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra.XraySpectra.get_file_dir">
+<span class="sig-name descname"><span class="pre">get_file_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/xray_spectra.html#XraySpectra.get_file_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.xray_spectra.XraySpectra.get_file_dir" title="Link to this definition"></a></dt>
+<dd><p>Access method for file_dir</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>file directory address containing the pickled xray spectra files</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra.XraySpectra.get_file_list">
+<span class="sig-name descname"><span class="pre">get_file_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/xray_spectra.html#XraySpectra.get_file_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.xray_spectra.XraySpectra.get_file_list" title="Link to this definition"></a></dt>
+<dd><p>Access method for file_list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of filenames within the directory specified</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra.XraySpectra.get_nph">
+<span class="sig-name descname"><span class="pre">get_nph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/xray_spectra.html#XraySpectra.get_nph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.xray_spectra.XraySpectra.get_nph" title="Link to this definition"></a></dt>
+<dd><p>Access method for nph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>all values of number of photons/eV/J/srad from all data files, corresponds to energy value</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra.XraySpectra.get_nph_err">
+<span class="sig-name descname"><span class="pre">get_nph_err</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/xray_spectra.html#XraySpectra.get_nph_err"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.xray_spectra.XraySpectra.get_nph_err" title="Link to this definition"></a></dt>
+<dd><p>Access method for nph_err</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>standard deviation of number of photons/eV/J/srad from all data files</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra.XraySpectra.get_resolution">
+<span class="sig-name descname"><span class="pre">get_resolution</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/xray_spectra.html#XraySpectra.get_resolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.xray_spectra.XraySpectra.get_resolution" title="Link to this definition"></a></dt>
+<dd><p>Access method for file_list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>resolution of xray energy bins for averaging over data sets (eV)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra.XraySpectra.replicate_plot">
+<span class="sig-name descname"><span class="pre">replicate_plot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/theory/energy_spectra/xray_spectra.html#XraySpectra.replicate_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.xray_spectra.XraySpectra.replicate_plot" title="Link to this definition"></a></dt>
+<dd><p>Replicates plot from the 2018 paper for sanity check</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra.XraySpectra.sample_pdf">
+<span class="sig-name descname"><span class="pre">sample_pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_energy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_energy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/xray_spectra.html#XraySpectra.sample_pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.xray_spectra.XraySpectra.sample_pdf" title="Link to this definition"></a></dt>
+<dd><p>Generates discrete probability distribution
+and returns a sample of energies</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>min_energy</strong> (<em>float</em>) – minimum xray energy (eV)</p></li>
+<li><p><strong>max_energy</strong> (<em>float</em>) – maximum xray energy (eV)</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – number of samples to take</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>sampled xray energies</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-theory.energy_spectra.xray_spectra_Ge">
+<span id="theory-energy-spectra-xray-spectra-ge-module"></span><h2>theory.energy_spectra.xray_spectra_Ge module<a class="headerlink" href="#module-theory.energy_spectra.xray_spectra_Ge" title="Link to this heading"></a></h2>
+<p>Defines the XraySpectraGe class. Reads Ge_spectrum.csv
+with methods to plot and sample a probability density function based on the data.
+The data was given by Rose Steven.
+This in an Xray spectra dataset measured without the Aluminium filter.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra_Ge.XraySpectraGe">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">theory.energy_spectra.xray_spectra_Ge.</span></span><span class="sig-name descname"><span class="pre">XraySpectraGe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datafile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/theory/energy_spectra/xray_spectra_Ge.html#XraySpectraGe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.xray_spectra_Ge.XraySpectraGe" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Germanium Xray spectra data set</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.filename">
+<span class="sig-name descname"><span class="pre">filename</span></span><a class="headerlink" href="#theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.filename" title="Link to this definition"></a></dt>
+<dd><p>location of the datafile</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.energy">
+<span class="sig-name descname"><span class="pre">energy</span></span><a class="headerlink" href="#theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.energy" title="Link to this definition"></a></dt>
+<dd><p>list of Xray photon energies</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.flux">
+<span class="sig-name descname"><span class="pre">flux</span></span><a class="headerlink" href="#theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.flux" title="Link to this definition"></a></dt>
+<dd><p>flux of the corresponding Xray photon energy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.get_data">
+<span class="sig-name descname"><span class="pre">get_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/xray_spectra_Ge.html#XraySpectraGe.get_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.get_data" title="Link to this definition"></a></dt>
+<dd><p>Reads the Xray spectrum datafile (.csv)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>Tuple containing:</dt><dd><ul class="simple">
+<li><p>list[float]: list of Xray photon energies</p></li>
+<li><p>list[float]: flux of the corresponding Xray photon energy</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.get_energy">
+<span class="sig-name descname"><span class="pre">get_energy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/xray_spectra_Ge.html#XraySpectraGe.get_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.get_energy" title="Link to this definition"></a></dt>
+<dd><p>Access method for energy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of Xray photon energies</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.get_filename">
+<span class="sig-name descname"><span class="pre">get_filename</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/xray_spectra_Ge.html#XraySpectraGe.get_filename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.get_filename" title="Link to this definition"></a></dt>
+<dd><p>Access method for filename</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>location of the datafile</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.get_flux">
+<span class="sig-name descname"><span class="pre">get_flux</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/xray_spectra_Ge.html#XraySpectraGe.get_flux"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.get_flux" title="Link to this definition"></a></dt>
+<dd><p>Access method for flux</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>flux of the corresponding Xray photon energy</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.normalise_nph">
+<span class="sig-name descname"><span class="pre">normalise_nph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/theory/energy_spectra/xray_spectra_Ge.html#XraySpectraGe.normalise_nph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.normalise_nph" title="Link to this definition"></a></dt>
+<dd><p>Get ratio of whole spectra / spectra from 2018 experiment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>normalisation ratio</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.replicate_plot">
+<span class="sig-name descname"><span class="pre">replicate_plot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/theory/energy_spectra/xray_spectra_Ge.html#XraySpectraGe.replicate_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.replicate_plot" title="Link to this definition"></a></dt>
+<dd><p>Plots the Xray spectrum</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.sample_pdf">
+<span class="sig-name descname"><span class="pre">sample_pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/theory/energy_spectra/xray_spectra_Ge.html#XraySpectraGe.sample_pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#theory.energy_spectra.xray_spectra_Ge.XraySpectraGe.sample_pdf" title="Link to this definition"></a></dt>
+<dd><p>Samples a probability density function based off the Xray photon energy spectrum</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – number of samples to take</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of Xray photon energies as sampled from the distribution</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 </section>
 
@@ -153,8 +1115,8 @@ parameters taken from the 2018 experiment.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="examples.html" class="btn btn-neutral float-left" title="examples package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="visualisation.html" class="btn btn-neutral float-right" title="visualisation package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="visualisation.html" class="btn btn-neutral float-left" title="visualisation package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="analysis.html" class="btn btn-neutral float-right" title="analysis package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

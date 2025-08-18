@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>theory.energy_spectra.gamma_spectra &mdash; Monte Carlo BW Pair Production Simulation Documentation 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=86f27845" />
+
+  
+  
+        <script src="../../../_static/jquery.js?v=8dae8fb0"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Monte Carlo BW Pair Production Simulation Documentation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../core.html">core package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../visualisation.html">visualisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../theory.html">theory package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../analysis.html">analysis package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_analysis.html">data_analysis package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_collection.html">data_collection package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">examples package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Monte Carlo BW Pair Production Simulation Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">theory.energy_spectra.gamma_spectra</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for theory.energy_spectra.gamma_spectra</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Defines the GammaSpectra class, which reads the gamma pulse&#39;s energy spectral data matlab file,</span>
+<span class="sd">with methods to plot and sample a probability density function based on the data.</span>
+<span class="sd">The data was taken from the 2021 paper&#39;s zenodo records repository.</span>
+<span class="sd">The data was used to plot figures 4b and 5a in the 2021 paper.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">scipy.io</span> <span class="kn">import</span> <span class="n">loadmat</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+
+<div class="viewcode-block" id="GammaSpectra">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.gamma_spectra.GammaSpectra">[docs]</a>
+<span class="k">class</span> <span class="nc">GammaSpectra</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Gamma spectra data set</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        matfile (dict): loaded matlab file containing dataset</span>
+<span class="sd">        gamma_energy (list[float]): energy of gamma photon (MeV)</span>
+<span class="sd">        sim_nph_a_mean (list[float]): mean simulated optimal beam performance</span>
+<span class="sd">        sim_nph_a_sigma (list[float]): error in simulated optimal beam performance</span>
+<span class="sd">        sim_nph_b_mean (list[float]): mean simulated commissioned beam performance</span>
+<span class="sd">        sim_nph_b_sigma (list[float]): error in simulated commissioned beam performance</span>
+<span class="sd">        exp_nph_a_mean (list[float]): mean experimental optimal beam performance</span>
+<span class="sd">        exp_nph_a_sigma (list[float]): error in experimental optimal beam performance</span>
+<span class="sd">        exp_nph_b_mean (list[float]): mean experimental commissioned beam performance</span>
+<span class="sd">        exp_nph_b_sigma (list[float]): error in experimental commissioned beam performance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">mat_fname</span><span class="p">:</span> <span class="nb">str</span>
+        <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">matfile</span> <span class="o">=</span> <span class="n">loadmat</span><span class="p">(</span><span class="n">mat_fname</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gamma_energy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_matfile</span><span class="p">()[</span><span class="s1">&#39;GammaEnergy_MeV&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1">#simulated values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sim_nph_a_mean</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_matfile</span><span class="p">()[</span><span class="s1">&#39;SimNph_Mean_A&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sim_nph_a_sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_matfile</span><span class="p">()[</span><span class="s1">&#39;SimNph_Sigma_A&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sim_nph_b_mean</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_matfile</span><span class="p">()[</span><span class="s1">&#39;SimNph_Mean_B&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sim_nph_b_sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_matfile</span><span class="p">()[</span><span class="s1">&#39;SimNph_Sigma_B&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1">#experimental values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exp_nph_a_mean</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_matfile</span><span class="p">()[</span><span class="s1">&#39;ExpNph_Mean_A&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exp_nph_a_sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_matfile</span><span class="p">()[</span><span class="s1">&#39;ExpNph_Sigma_A&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">exp_nph_b_mean</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_matfile</span><span class="p">()[</span><span class="s1">&#39;ExpNph_Mean_B&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exp_nph_b_sigma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_matfile</span><span class="p">()[</span><span class="s1">&#39;ExpNph_Sigma_B&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+<div class="viewcode-block" id="GammaSpectra.replicate_plot">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.gamma_spectra.GammaSpectra.replicate_plot">[docs]</a>
+    <span class="k">def</span> <span class="nf">replicate_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Replicates the plot displayed in the paper for sanity check</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Gamma Spectrum&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Gamma Photon Energy (MeV)&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Photons/MeV&#39;</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_gamma_energy</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_sim_nph_a_mean</span><span class="p">(),</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;A simulation&#39;</span><span class="p">,</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span>
+        <span class="p">)</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_gamma_energy</span><span class="p">(),</span>
+            <span class="n">y1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_exp_nph_a_mean</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_exp_nph_a_sigma</span><span class="p">(),</span>
+            <span class="n">y2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_exp_nph_a_mean</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_exp_nph_a_sigma</span><span class="p">(),</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;A measurement&#39;</span><span class="p">,</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span>
+            <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.3</span>
+        <span class="p">)</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_gamma_energy</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_sim_nph_b_mean</span><span class="p">(),</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;B simulation&#39;</span><span class="p">,</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;purple&#39;</span>
+        <span class="p">)</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_gamma_energy</span><span class="p">(),</span>
+            <span class="n">y1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_exp_nph_b_mean</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_exp_nph_b_sigma</span><span class="p">(),</span>
+            <span class="n">y2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_exp_nph_b_mean</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_exp_nph_b_sigma</span><span class="p">(),</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;B measurement&#39;</span><span class="p">,</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;purple&#39;</span><span class="p">,</span>
+            <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.3</span>
+        <span class="p">)</span>
+        
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">230</span><span class="p">,</span> <span class="mf">5e6</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">800</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_axisbelow</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="GammaSpectra.sample_pdf">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.gamma_spectra.GammaSpectra.sample_pdf">[docs]</a>
+    <span class="k">def</span> <span class="nf">sample_pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Samples the gamma spectral distribution</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            n_samples (int): number of samples to take from the distribution</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[float]: sampled energies</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">prob</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_exp_nph_a_mean</span><span class="p">()</span> <span class="c1">#using optimum beam performance</span>
+        <span class="n">prob</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span> <span class="c1">#normalisation</span>
+        <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_gamma_energy</span><span class="p">(),</span> <span class="n">size</span> <span class="o">=</span> <span class="n">n_samples</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">prob</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">samples</span></div>
+
+
+
+    <span class="c1"># ACCESS METHODS #####################################################</span>
+<div class="viewcode-block" id="GammaSpectra.get_matfile">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.gamma_spectra.GammaSpectra.get_matfile">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_matfile</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for matfile</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: data from the gamma spectra which was stored in a matfile</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">matfile</span></div>
+
+    
+<div class="viewcode-block" id="GammaSpectra.get_gamma_energy">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.gamma_spectra.GammaSpectra.get_gamma_energy">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_gamma_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for gamma_energy</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[float]: energy of the gamma photons (MeV)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma_energy</span></div>
+
+    
+<div class="viewcode-block" id="GammaSpectra.get_sim_nph_a_mean">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.gamma_spectra.GammaSpectra.get_sim_nph_a_mean">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_sim_nph_a_mean</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for sim_nph_a_mean</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[float]: mean number of photons for simulated optimal beam performance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim_nph_a_mean</span></div>
+
+    
+<div class="viewcode-block" id="GammaSpectra.get_sim_nph_b_mean">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.gamma_spectra.GammaSpectra.get_sim_nph_b_mean">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_sim_nph_b_mean</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for sim_nph_b_mean</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[float]: mean number of photons for simulated commissioned beam performance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim_nph_b_mean</span></div>
+
+    
+<div class="viewcode-block" id="GammaSpectra.get_sim_nph_a_sigma">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.gamma_spectra.GammaSpectra.get_sim_nph_a_sigma">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_sim_nph_a_sigma</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for sim_nph_a_sigma</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[float]: standard deviation in the number of photons for simulated optimal beam performance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim_nph_a_sigma</span></div>
+
+    
+<div class="viewcode-block" id="GammaSpectra.get_sim_nph_b_sigma">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.gamma_spectra.GammaSpectra.get_sim_nph_b_sigma">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_sim_nph_b_sigma</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for sim_nph_b_sigma</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[float]: standard deviation in the number of photons for simulated commissioned beam performance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim_nph_b_sigma</span></div>
+
+    
+<div class="viewcode-block" id="GammaSpectra.get_exp_nph_a_mean">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.gamma_spectra.GammaSpectra.get_exp_nph_a_mean">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_exp_nph_a_mean</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for exp_nph_a_mean</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[float]: mean number of photons for experimental optimal beam performance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp_nph_a_mean</span></div>
+
+    
+<div class="viewcode-block" id="GammaSpectra.get_exp_nph_a_sigma">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.gamma_spectra.GammaSpectra.get_exp_nph_a_sigma">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_exp_nph_a_sigma</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for exp_nph_a_sigma</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[float]: standard deviation in the number of photons for experimental optimal beam performance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp_nph_a_sigma</span></div>
+
+    
+<div class="viewcode-block" id="GammaSpectra.get_exp_nph_b_mean">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.gamma_spectra.GammaSpectra.get_exp_nph_b_mean">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_exp_nph_b_mean</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for exp_nph_mean</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[float]: mean number of photons for experimental commissioned beam performance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp_nph_b_mean</span></div>
+
+    
+<div class="viewcode-block" id="GammaSpectra.get_exp_nph_b_sigma">
+<a class="viewcode-back" href="../../../theory.html#theory.energy_spectra.gamma_spectra.GammaSpectra.get_exp_nph_b_sigma">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_exp_nph_b_sigma</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for exp_nph_b_sigma</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list[float]: standard deviation in the number of photons for experimental commissioned beam performance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp_nph_b_sigma</span></div>
+</div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Timothy Chew.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

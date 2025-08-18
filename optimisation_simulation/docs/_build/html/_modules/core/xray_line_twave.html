@@ -40,12 +40,13 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../core.html">core package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualisation.html">visualisation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory.html">theory package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../analysis.html">analysis package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../data_analysis.html">data_analysis package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../data_collection.html">data_collection package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples.html">examples package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../theory.html">theory package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../visualisation.html">visualisation package</a></li>
 </ul>
 
         </div>
@@ -74,15 +75,10 @@
              
   <h1>Source code for core.xray_line_twave</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">xrayline.py</span>
-
 <span class="sd">Defines the XrayTwave class which inherits from the XrayLine class.</span>
 <span class="sd">Represents a line source&#39;s Xray emissions, done so by placing multiple</span>
 <span class="sd">point-Lambertian sources along its length.</span>
 <span class="sd">And the sources are ignited by a travelling wave.</span>
-
-<span class="sd">Timothy Chew</span>
-<span class="sd">1/8/25</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -91,18 +87,18 @@
 <div class="viewcode-block" id="XrayTwave">
 <a class="viewcode-back" href="../../core.html#core.xray_line_twave.XrayTwave">[docs]</a>
 <span class="k">class</span> <span class="nc">XrayTwave</span><span class="p">(</span><span class="n">XrayLine</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates a line source by setting up an</span>
-<span class="sd">    array of lambertian point sources which are</span>
-<span class="sd">    ignited by a travelling wave</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generates a line source by setting up an array of lambertian point sources which are</span>
+<span class="sd">    ignited by a travelling wave. This class extends &#39;Xrayline&#39;</span>
 
-<span class="sd">    This class extends &#39;Xrayline&#39;</span>
 <span class="sd">    Attributes:</span>
-<span class="sd">        - wave_speed (float, optional): speed of the travelling wave igniting the xray source</span>
+<span class="sd">        wave_speed (float, optional): speed of the travelling wave igniting the xray source</span>
 <span class="sd">                (natural units). Defaults to 1.</span>
+
 <span class="sd">    Overridden Methods:</span>
-<span class="sd">        - gen_xray_seed_line(azimuthal_angle: float) -&gt; list, int:</span>
+<span class="sd">        gen_xray_seed_line(azimuthal_angle: float) -&gt; tuple[list, int(conditional)]:</span>
 <span class="sd">            Initializes the Xray coordinates by seeding each point source along the line</span>
-<span class="sd">            and displacing their mean to for a travelling wave with velocity c.</span>
+<span class="sd">            and displacing their mean to for a travelling wave with a specified velocity.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fwhm</span><span class="p">,</span> <span class="n">line_length</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_samples_angular</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_line_samples</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">wave_speed</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">wave_speed</span> <span class="o">=</span> <span class="n">wave_speed</span>
@@ -110,11 +106,14 @@
 
 <div class="viewcode-block" id="XrayTwave.gen_xray_seed_line">
 <a class="viewcode-back" href="../../core.html#core.xray_line_twave.XrayTwave.gen_xray_seed_line">[docs]</a>
-    <span class="k">def</span> <span class="nf">gen_xray_seed_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">get_total_samples</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generates xray coordinates for a line source</span>
+    <span class="k">def</span> <span class="nf">gen_xray_seed_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">get_total_samples</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generates xray coordinates for a line source generated</span>
+<span class="sd">        by a travelling wave source</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list: array of line source generated xray coordinates</span>
+<span class="sd">            tuple[list, int]: A tuple containing</span>
+<span class="sd">                - list: array of line-source-generated xray coordinates</span>
+<span class="sd">                - int(conditional): the total number of xray points</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">coords</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">n_samples_total</span> <span class="o">=</span> <span class="mi">0</span>
@@ -161,7 +160,7 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Access method for wave_speed</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            float: travelling wave velocity (ms^-1)</span>
+<span class="sd">            float: travelling wave velocity (c)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">wave_speed</span></div>
 </div>
