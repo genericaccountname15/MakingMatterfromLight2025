@@ -27,7 +27,7 @@ Example:
 
 Output:
 
-.. image:: _static/Visualier_example.png
+.. image:: _static/Visualiser_example.png
     :alt: Example of the visualiser
     :width: 600px
 """

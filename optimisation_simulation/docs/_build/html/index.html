@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to Monte Carlo BW Pair Production Simulation Documentation’s documentation! &mdash; Monte Carlo BW Pair Production Simulation Documentation 1.0.0 documentation</title>
+  <title>Monte Carlo BW Pair Production Simulation Documentation &mdash; Monte Carlo BW Pair Production Simulation Documentation 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=86f27845" />
 
@@ -48,7 +48,6 @@
 <li class="toctree-l1"><a class="reference internal" href="analysis.html">analysis package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_analysis.html">data_analysis package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_collection.html">data_collection package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">examples package</a></li>
 </ul>
 
         </div>
@@ -65,7 +64,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Welcome to Monte Carlo BW Pair Production Simulation Documentation’s documentation!</li>
+      <li class="breadcrumb-item active">Monte Carlo BW Pair Production Simulation Documentation</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -75,11 +74,133 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="welcome-to-monte-carlo-bw-pair-production-simulation-documentation-s-documentation">
-<h1>Welcome to Monte Carlo BW Pair Production Simulation Documentation’s documentation!<a class="headerlink" href="#welcome-to-monte-carlo-bw-pair-production-simulation-documentation-s-documentation" title="Link to this heading"></a></h1>
-<p>This module contains some stuff</p>
-<section id="contents">
-<h2>Contents<a class="headerlink" href="#contents" title="Link to this heading"></a></h2>
+  <section id="monte-carlo-bw-pair-production-simulation-documentation">
+<h1>Monte Carlo BW Pair Production Simulation Documentation<a class="headerlink" href="#monte-carlo-bw-pair-production-simulation-documentation" title="Link to this heading"></a></h1>
+<p>A Python package for simulating the number of electron-positron pairs produced
+by a Breit-Wheeler <a class="footnote-reference brackets" href="#id6" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> photon-photon collision using Monte Carlo techniques.</p>
+<section id="background">
+<h2>Background<a class="headerlink" href="#background" title="Link to this heading"></a></h2>
+<p>This package was developed as part of a UROP under Imperial College London’s
+Plasma Physics department. It aims to investigate the timing between the gamma pulse
+and Xray emission, applied to the laser-plasma platform developed by B. Kettle et al. <a class="footnote-reference brackets" href="#id7" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>
+And its effects towards electron-positron pair production. Specific values and formulae
+from the experiment were obtained from <a class="footnote-reference brackets" href="#id8" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id9" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id10" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a> as well as members of the Imperial Plasma
+Physics group.</p>
+</section>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Monte Carlo Simulation engine</p></li>
+<li><dl class="simple">
+<dt>Multiple Xray source models</dt><dd><ul>
+<li><p>Uniform</p></li>
+<li><p>Lambertian</p></li>
+<li><p>Lambertian-Germanium</p></li>
+<li><p>Lambertian-Palladium</p></li>
+<li><p>Line sources</p></li>
+<li><p>Travelling-wave-ignited line sources</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Visualisation tools</p></li>
+<li><p>Analysis tools for post-processing</p></li>
+</ul>
+</section>
+<section id="quickstart-examples">
+<h2>Quickstart Examples<a class="headerlink" href="#quickstart-examples" title="Link to this heading"></a></h2>
+<p>Scripts are written in main.py</p>
+<p>How to run the simulation visualiser:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">core.gamma</span> <span class="kn">import</span> <span class="n">Gamma</span>
+<span class="kn">from</span> <span class="nn">core.xray</span> <span class="kn">import</span> <span class="n">Xray</span>
+<span class="kn">from</span> <span class="nn">visualisation.visualisation</span> <span class="kn">import</span> <span class="n">Visualiser</span>
+<span class="kn">from</span> <span class="nn">data_collection.data_params</span> <span class="kn">import</span> <span class="n">visual</span><span class="p">,</span> <span class="n">quick</span>
+
+<span class="n">xray</span> <span class="o">=</span> <span class="n">Xray</span><span class="p">(</span>
+   <span class="n">fwhm</span> <span class="o">=</span> <span class="n">visual</span><span class="p">[</span><span class="s1">&#39;fwhm&#39;</span><span class="p">],</span>
+   <span class="n">rotation</span> <span class="o">=</span> <span class="n">visual</span><span class="p">[</span><span class="s1">&#39;rotation&#39;</span><span class="p">],</span>
+   <span class="n">n_samples</span> <span class="o">=</span> <span class="n">quick</span><span class="p">[</span><span class="s1">&#39;samples per angle&#39;</span><span class="p">],</span>
+   <span class="n">n_samples_angular</span> <span class="o">=</span> <span class="n">quick</span><span class="p">[</span><span class="s1">&#39;angle samples&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="n">Gamma</span><span class="p">(</span>
+   <span class="n">x_pos</span> <span class="o">=</span> <span class="n">visual</span><span class="p">[</span><span class="s1">&#39;x pos&#39;</span><span class="p">],</span>
+   <span class="n">pulse_length</span> <span class="o">=</span> <span class="n">visual</span><span class="p">[</span><span class="s1">&#39;pulse length&#39;</span><span class="p">],</span>
+   <span class="n">height</span> <span class="o">=</span> <span class="n">visual</span><span class="p">[</span><span class="s1">&#39;pulse height&#39;</span><span class="p">],</span>
+   <span class="n">off_axis_dist</span> <span class="o">=</span> <span class="n">visual</span><span class="p">[</span><span class="s1">&#39;off axis dist&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">vis</span> <span class="o">=</span> <span class="n">Visualiser</span><span class="p">(</span>
+   <span class="n">xray_bath</span> <span class="o">=</span> <span class="n">xray</span><span class="p">,</span>
+   <span class="n">gamma_pulse</span> <span class="o">=</span> <span class="n">gamma</span><span class="p">,</span>
+   <span class="n">bath_vis</span> <span class="o">=</span> <span class="n">visual</span><span class="p">[</span><span class="s1">&#39;bath vis&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+ <span class="n">vis</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/Visualiser_example.png"><img alt="Example gamma pulse visualisation" src="_images/Visualiser_example.png" style="width: 600px;" /></a>
+<p>How to run a simulation to optimise setup angle:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">data_collection.data_collection</span> <span class="kn">import</span> <span class="n">run_data_collection</span>
+<span class="kn">from</span> <span class="nn">data_collection.data_params</span> <span class="kn">import</span> <span class="n">accurate</span><span class="p">,</span> <span class="n">deep</span>
+<span class="kn">from</span> <span class="nn">theory</span> <span class="kn">import</span> <span class="n">values</span>
+
+<span class="n">run_data_collection</span><span class="p">(</span>
+   <span class="n">variables</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">180</span><span class="p">,</span>
+   <span class="n">variable_name</span> <span class="o">=</span> <span class="s1">&#39;angle&#39;</span><span class="p">,</span>
+   <span class="n">variable_parameter_name</span> <span class="o">=</span> <span class="s1">&#39;rotation&#39;</span><span class="p">,</span>
+   <span class="n">units</span> <span class="o">=</span> <span class="s1">&#39;radians&#39;</span><span class="p">,</span>
+   <span class="n">old_value</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">source_angle</span><span class="p">,</span>
+   <span class="n">xray_type</span> <span class="o">=</span> <span class="s1">&#39;lambertian&#39;</span><span class="p">,</span>
+   <span class="n">repeat</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+   <span class="n">additional_label</span> <span class="o">=</span> <span class="s1">&#39;4Aug&#39;</span><span class="p">,</span>
+   <span class="n">sim_params</span> <span class="o">=</span> <span class="n">accurate</span><span class="p">,</span>
+   <span class="n">sample_params</span> <span class="o">=</span> <span class="n">deep</span>
+   <span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/Data_collection_example.png"><img alt="Example plot from data collection" src="_images/Data_collection_example.png" style="width: 600px;" /></a>
+</section>
+<section id="acknowlegements">
+<h2>Acknowlegements<a class="headerlink" href="#acknowlegements" title="Link to this heading"></a></h2>
+<p>First and foremost, I would like to thank my supervisor Stuart for
+supporting me throughout this UROP. I would also like to thank Steven,
+Brendan, and Lawrence for  providing me with their advice, detailed diagrams,
+and datasets from experiments. Lastly, I would like to thank the staff of Imperial
+Plasma Physics, without whom none of this would be possible.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id6" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<ol class="upperalpha simple" start="7">
+<li><p>Breit &amp; J.A. Wheeler 1934. <em>Collision of Two Light Quanta</em>. Phys. Rev. 46, 1087</p></li>
+</ol>
+</aside>
+<aside class="footnote brackets" id="id7" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<ol class="upperalpha simple" start="2">
+<li><p>Kettle et al. 2021. <em>A laser–plasma platform for photon–photon physics:</em> New J. Phys. 23 115006</p></li>
+</ol>
+</aside>
+<aside class="footnote brackets" id="id8" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
+<ol class="upperalpha simple" start="4">
+<li><p>Hollatz 2021. <em>Detection of Positrons from Breit-Wheeler Pair Formation</em> PhD thesis. Friedrich Schiller University Jena.</p></li>
+</ol>
+</aside>
+<aside class="footnote brackets" id="id9" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">4</a><span class="fn-bracket">]</span></span>
+<ol class="upperalpha simple" start="3">
+<li><p>Colgan 2022. <em>Laser-Plasma Interactions as Tools for Studying Processes in Quantum Electrodynamics</em>. PhD thesis. Imperial College London.</p></li>
+</ol>
+</aside>
+<aside class="footnote brackets" id="id10" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">5</a><span class="fn-bracket">]</span></span>
+<ol class="upperalpha simple" start="18">
+<li><p>Watt 2021. <em>Monte Carlo Modelling of QED Interactions in Laser-Plasma Experiments</em></p></li>
+</ol>
+</aside>
+</aside>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
@@ -129,15 +250,6 @@
 <li class="toctree-l2"><a class="reference internal" href="data_collection.html#module-data_collection.data_collection">data_collection.data_collection module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data_collection.html#module-data_collection.data_params">data_collection.data_params module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data_collection.html#module-data_collection.delay_optimise_collection">data_collection.delay_optimise_collection module</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">examples package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#module-examples.example_data_collection">examples.example_data_collection module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#module-examples.example_hitcount">examples.example_hitcount module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#module-examples.example_sim">examples.example_sim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#module-examples.plot_bw_cs">examples.plot_bw_cs module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#module-examples.plot_energy_spectra">examples.plot_energy_spectra module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#module-examples">Module contents</a></li>
 </ul>
 </li>
 </ul>

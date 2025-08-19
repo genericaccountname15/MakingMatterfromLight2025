@@ -43,7 +43,7 @@ Example:
 
 Output:
 
-.. image:: _static/Hit_counter_example.png
+.. image:: _static/Analysis_example.png
     :alt: Example of the hit counter plot
     :width: 600px
 """

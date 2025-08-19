@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 
 class XraySpectra:
     """Xray spectra data set
+    
     Attributes:
         file_dir (string): file directory address containing the pickled xray spectra files.
         file_list (list[str]): list of filenames within the directory specified.
