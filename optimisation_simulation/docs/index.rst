@@ -103,10 +103,10 @@ Plasma Physics, without whom none of this would be possible.
 References
 ----------
 .. [1] G. Breit & J.A. Wheeler 1934. *Collision of Two Light Quanta*. Phys. Rev. 46, 1087
-.. [2] B. Kettle et al. 2021. *A laser–plasma platform for photon–photon physics:* New J. Phys. 23 115006
+.. [2] B. Kettle et al. 2021. *A laser–plasma platform for photon–photon physics* New J. Phys. 23 115006
 .. [3] D. Hollatz 2021. *Detection of Positrons from Breit-Wheeler Pair Formation* PhD thesis. Friedrich Schiller University Jena.
 .. [4] C. Colgan 2022. *Laser-Plasma Interactions as Tools for Studying Processes in Quantum Electrodynamics*. PhD thesis. Imperial College London.
-.. [5] R. Watt 2021. *Monte Carlo Modelling of QED Interactions in Laser-Plasma Experiments*
+.. [5] R. Watt 2021. *Monte Carlo Modelling of QED Interactions in Laser-Plasma Experiments*. PhD thesis. Imperial College London.
 
 .. toctree::
    :maxdepth: 2

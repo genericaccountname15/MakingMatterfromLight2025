@@ -6,6 +6,7 @@ function
 """
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.ticker import ScalarFormatter
 
 def plot_optimised_data(filename: str, variable_name: str, xlabel: str, **kwargs):
     """Plots the optimise data with option to save the figure generated
@@ -30,7 +31,7 @@ def plot_optimised_data(filename: str, variable_name: str, xlabel: str, **kwargs
     data = np.loadtxt(filename, delimiter=',', skiprows=1)
 
     d = data[:,0]
-    npos = data[:,1]
+    npos = data[:,1] 
     npos_err = data[:,2]
 
     _, ax = plt.subplots()
@@ -59,6 +60,10 @@ def plot_optimised_data(filename: str, variable_name: str, xlabel: str, **kwargs
             ymin = 0, ymax = 1,
             label = f'{variable_name} used in 2018', color = 'orange')
 
+    # Force scientific notation with offset (1e5) on the y-axis
+    formatter = ScalarFormatter(useMathText=True)
+    formatter.set_powerlimits((0, 0))  # Always use scientific notation
+    ax.yaxis.set_major_formatter(formatter)
     ax.set_axisbelow(True)
     ax.grid()
     ax.legend()
