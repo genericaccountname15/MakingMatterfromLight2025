@@ -49,18 +49,18 @@ class GammaDetRead:
         """
         fig, ax = plt.subplots()
         ax.set_title('hit map of gamma beam at the interaction point')
-        ax.set_xlabel('x/mrad')
-        ax.set_ylabel('y/mrad')
+        ax.set_xlabel('y/mrad')
+        ax.set_ylabel('x/mrad')
 
         # beam divergence (mrad)
         div_x = np.arctan2(self.get_x(), self.get_det_pos()) * 1000
         div_y = np.arctan2(self.get_y(), self.get_det_pos()) * 1000
 
-        _, _, _ , mappable = ax.hist2d(div_x, div_y, bins=500, cmap='gnuplot')
+        _, _, _ , mappable = ax.hist2d(div_y, div_x, bins=500, cmap='gnuplot')
         fig.colorbar(mappable, ax=ax, label='Counts')
 
-        ax.set_ylim(-6, 4)
-        ax.set_xlim(-5, 5)
+        ax.set_xlim(-6, 4)
+        ax.set_ylim(-5, 5)
 
         plt.show()
 
@@ -239,23 +239,22 @@ class GammaDetRead:
         return self.energy
 
 if __name__ == '__main__':
-    # gbeams = GammaDetRead(
-    #     detdatafile = 'noise_simulation/g4beamlinefiles/gamma_profile_test.txt',
-    #     det_pos = 1420-195
-    # )
-    # print(len(gbeams.get_data()))
-    # gbeams.plot_hitmap()
-    # gbeams.plot_spectra()
-
     gbeams = GammaDetRead(
-        detdatafile = 'noise_simulation/g4beamlinefiles/gamma_spec_LWFA_100mil.txt',
+        detdatafile = 'Gamma_profile_Det_LWFA_killtest.txt',
         det_pos = 1060-195
     )
-    gbeams.gen_beam_objects(
-        nbins=100,
-        n_samples=len(gbeams.get_data())*10,
-        dist_source=195,
-        beam_pos=425.0,
-        binning_range=None,
-        gen_beams_filename='gamma_beams_10x.g4bl'
-        )
+    gbeams.plot_hitmap()
+    gbeams.plot_spectra()
+
+    # gbeams = GammaDetRead(
+    #     detdatafile = 'noise_simulation/g4beamlinefiles/gamma_spec_LWFA_100mil.txt',
+    #     det_pos = 1060-195
+    # )
+    # gbeams.gen_beam_objects(
+    #     nbins=100,
+    #     n_samples=len(gbeams.get_data())*10,
+    #     dist_source=195,
+    #     beam_pos=425.0,
+    #     binning_range=None,
+    #     gen_beams_filename='gamma_beams_10x.g4bl'
+    #     )
